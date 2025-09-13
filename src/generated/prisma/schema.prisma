@@ -1,0 +1,467 @@
+// Postia SaaS Platform - Database Schema
+// Multi-tenant SaaS for marketing agencies with AI content generation
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum UserRole {
+  OWNER
+  MANAGER
+  COLLABORATOR
+}
+
+enum PostStatus {
+  DRAFT
+  APPROVED
+  PUBLISHED
+}
+
+enum CampaignStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum SocialPlatform {
+  FACEBOOK
+  INSTAGRAM
+  LINKEDIN
+}
+
+enum GenerationStep {
+  IDEA
+  COPY_DESIGN
+  COPY_PUBLICATION
+  BASE_IMAGE
+  FINAL_DESIGN
+}
+
+enum JobStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum StepStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum PublicationStatus {
+  PENDING
+  PUBLISHED
+  FAILED
+}
+
+enum SubscriptionPlan {
+  BASIC
+  INTERMEDIATE
+  ADVANCED
+  CUSTOM
+}
+
+enum AssetType {
+  LOGO
+  IMAGE
+  TEMPLATE
+  PALETTE
+}
+
+// Core Models
+
+model Agency {
+  id               String           @id @default(cuid())
+  name             String
+  subscriptionPlan SubscriptionPlan @default(BASIC)
+  tokenBalance     Int              @default(0)
+  stripeCustomerId String?          @unique
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  // Relations
+  users             User[]
+  clients           Client[]
+  userInvitations   UserInvitation[]
+  tokenTransactions TokenTransaction[]
+  auditLogs         AuditLog[]
+
+  @@map("agencies")
+}
+
+model User {
+  id                     String    @id @default(cuid())
+  email                  String    @unique
+  name                   String
+  password               String? // Nullable for OAuth users
+  role                   UserRole
+  emailVerified          DateTime?
+  emailVerificationToken String?
+  passwordResetToken     String?
+  passwordResetExpires   DateTime?
+  agencyId               String
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+
+  // Relations
+  agency            Agency             @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  assignedClients   Client[]           @relation("UserClients")
+  invitationsSent   UserInvitation[]   @relation("InvitationSender")
+  accounts          Account[]
+  sessions          Session[]
+  auditLogs         AuditLog[]
+  tokenTransactions TokenTransaction[]
+
+  @@map("users")
+}
+
+model UserInvitation {
+  id        String    @id @default(cuid())
+  email     String
+  role      UserRole
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  senderId  String
+  agencyId  String
+  clientIds String[] // Array of client IDs to assign
+  createdAt DateTime  @default(now())
+
+  // Relations
+  sender User   @relation("InvitationSender", fields: [senderId], references: [id])
+  agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  @@map("user_invitations")
+}
+
+model Client {
+  id             String   @id @default(cuid())
+  agencyId       String
+  brandName      String
+  brandColors    String[] // JSON array of hex colors
+  typography     Json? // Typography settings
+  description    String?
+  logoUrl        String?
+  whatsappNumber String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  agency           Agency            @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  assignedUsers    User[]            @relation("UserClients")
+  campaigns        Campaign[]
+  brandAssets      BrandAsset[]
+  socialAccounts   SocialAccount[]
+  socialMediaLinks SocialMediaLink[]
+  apiKeys          ApiKey[]
+
+  @@map("clients")
+}
+
+model SocialMediaLink {
+  id       String  @id @default(cuid())
+  clientId String
+  platform String // e.g., "instagram", "facebook", "linkedin", "twitter"
+  url      String
+  username String?
+
+  // Relations
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("social_media_links")
+}
+
+model BrandAsset {
+  id        String    @id @default(cuid())
+  clientId  String
+  type      AssetType
+  name      String
+  url       String
+  metadata  Json? // Additional metadata like dimensions, colors, etc.
+  createdAt DateTime  @default(now())
+
+  // Relations
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("brand_assets")
+}
+
+model Campaign {
+  id                   String         @id @default(cuid())
+  clientId             String
+  name                 String
+  objective            String
+  startDate            DateTime
+  endDate              DateTime
+  brandTone            String
+  publicationFrequency Json // Frequency settings
+  templateIds          String[] // Array of template IDs
+  status               CampaignStatus @default(ACTIVE)
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+
+  // Relations
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  posts  Post[]
+
+  @@map("campaigns")
+}
+
+model Post {
+  id              String     @id @default(cuid())
+  campaignId      String
+  scheduledDate   DateTime
+  status          PostStatus @default(DRAFT)
+  finalImageUrl   String?
+  embeddedText    String?
+  publicationText String?
+  hashtags        String[] // Array of hashtags
+  cta             String? // Call to action
+  generationJobId String?    @unique
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  // Relations
+  campaign           Campaign              @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  generationJob      ContentGenerationJob? @relation(fields: [generationJobId], references: [id])
+  publicationResults PublicationResult[]
+  contentVersions    ContentVersion[]
+
+  @@map("posts")
+}
+
+model ContentGenerationJob {
+  id             String    @id @default(cuid())
+  postId         String?   @unique
+  status         JobStatus @default(PENDING)
+  tokensConsumed Int       @default(0)
+  brandContext   Json // Brand context for generation
+  createdAt      DateTime  @default(now())
+  completedAt    DateTime?
+
+  // Relations
+  post  Post?                  @relation
+  steps GenerationStepResult[]
+
+  @@map("content_generation_jobs")
+}
+
+model GenerationStepResult {
+  id         String         @id @default(cuid())
+  jobId      String
+  step       GenerationStep
+  status     StepStatus     @default(PENDING)
+  input      Json? // Input data for the step
+  output     Json? // Output data from the step
+  tokensUsed Int            @default(0)
+  executedAt DateTime       @default(now())
+  error      String? // Error message if failed
+
+  // Relations
+  job ContentGenerationJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@map("generation_step_results")
+}
+
+model ContentVersion {
+  id              String   @id @default(cuid())
+  postId          String
+  versionNumber   Int
+  finalImageUrl   String?
+  embeddedText    String?
+  publicationText String?
+  hashtags        String[]
+  cta             String?
+  createdAt       DateTime @default(now())
+
+  // Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, versionNumber])
+  @@map("content_versions")
+}
+
+model SocialAccount {
+  id           String         @id @default(cuid())
+  clientId     String
+  platform     SocialPlatform
+  accountId    String // Platform-specific account ID
+  accountName  String? // Display name
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  // Relations
+  client       Client              @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  publications PublicationResult[]
+
+  @@unique([clientId, platform, accountId])
+  @@map("social_accounts")
+}
+
+model PublicationResult {
+  id              String            @id @default(cuid())
+  postId          String
+  socialAccountId String
+  platformPostId  String? // ID from the social platform
+  status          PublicationStatus @default(PENDING)
+  publishedAt     DateTime?
+  error           String?
+  createdAt       DateTime          @default(now())
+
+  // Relations
+  post          Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  socialAccount SocialAccount @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
+
+  @@map("publication_results")
+}
+
+enum TokenTransactionType {
+  CONSUMPTION
+  PURCHASE
+  SUBSCRIPTION_RENEWAL
+  REFUND
+  ADJUSTMENT
+}
+
+model TokenTransaction {
+  id          String               @id @default(cuid())
+  agencyId    String
+  userId      String?
+  amount      Int // Positive for purchases, negative for consumption
+  type        TokenTransactionType @default(CONSUMPTION)
+  description String
+  reference   String? // Reference to related entity (job ID, etc.)
+  metadata    Json? // Additional metadata
+  createdAt   DateTime             @default(now())
+
+  // Relations
+  agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("token_transactions")
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  agencyId   String
+  userId     String?
+  action     String // Action performed
+  resource   String // Resource affected
+  resourceId String? // ID of the affected resource
+  details    Json? // Additional details
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  // Relations
+  agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  user   User?  @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("audit_logs")
+}
+
+model ApiKey {
+  id          String    @id @default(cuid())
+  name        String
+  keyPrefix   String // First 8 characters for identification
+  hashedKey   String    @unique // SHA256 hash of the full key
+  clientId    String
+  permissions String[] // Array of permissions
+  isActive    Boolean   @default(true)
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  client Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  usage  ApiKeyUsage[]
+
+  @@map("api_keys")
+}
+
+model ApiKeyUsage {
+  id             String   @id @default(cuid())
+  apiKeyId       String
+  endpoint       String
+  method         String
+  statusCode     Int
+  tokensConsumed Int?
+  ipAddress      String?
+  userAgent      String?
+  requestBody    Json? // Optional request body for debugging
+  responseTime   Int? // Response time in milliseconds
+  createdAt      DateTime @default(now())
+
+  // Relations
+  apiKey ApiKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+
+  @@map("api_key_usage")
+}
+
+model SystemLog {
+  id        String   @id @default(cuid())
+  level     String // debug, info, warn, error, fatal
+  message   String
+  context   Json? // Additional context data
+  error     Json? // Error details if applicable
+  timestamp DateTime @default(now())
+
+  @@index([level, timestamp])
+  @@index([timestamp])
+  @@map("system_logs")
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}

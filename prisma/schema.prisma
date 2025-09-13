@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Agency {
+  id           String @id @default(cuid())
+  name         String
+  slug         String @unique
+  tokenBalance Int    @default(1000)
+  createdAt    DateTime @default(now())
+  
+  users     User[]
+  clients   Client[]
+  campaigns Campaign[]
+  jobs      ContentJob[]
+}
+
+model User {
+  id        String @id @default(cuid())
+  email     String @unique
+  name      String?
+  role      String @default("USER") // ADMIN, USER, CLIENT
+  agencyId  String
+  createdAt DateTime @default(now())
+  
+  agency Agency @relation(fields: [agencyId], references: [id])
+  jobs   ContentJob[]
+}
+
+model Client {
+  id        String @id @default(cuid())
+  name      String
+  email     String?
+  agencyId  String
+  settings  String? // JSON string
+  createdAt DateTime @default(now())
+  
+  agency    Agency @relation(fields: [agencyId], references: [id])
+  campaigns Campaign[]
+  jobs      ContentJob[]
+}
+
+model Campaign {
+  id          String @id @default(cuid())
+  name        String
+  description String?
+  clientId    String
+  agencyId    String
+  status      String @default("ACTIVE") // ACTIVE, PAUSED, COMPLETED
+  startDate   DateTime?
+  endDate     DateTime?
+  settings    String? // JSON string
+  createdAt   DateTime @default(now())
+  
+  client Client @relation(fields: [clientId], references: [id])
+  agency Agency @relation(fields: [agencyId], references: [id])
+  jobs   ContentJob[]
+}
+
+model ContentJob {
+  id              String @id @default(cuid())
+  agencyId        String
+  userId          String
+  clientId        String?
+  campaignId      String?
+  type            String // CAMPAIGN_CONTENT, DESIGN_GENERATION, etc.
+  status          String @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, FAILED
+  tokensConsumed  Int @default(0)
+  scheduledDate   DateTime?
+  result          String? // JSON string
+  metadata        String? // JSON string
+  createdAt       DateTime @default(now())
+  completedAt     DateTime?
+  
+  agency   Agency @relation(fields: [agencyId], references: [id])
+  user     User @relation(fields: [userId], references: [id])
+  client   Client? @relation(fields: [clientId], references: [id])
+  campaign Campaign? @relation(fields: [campaignId], references: [id])
+}

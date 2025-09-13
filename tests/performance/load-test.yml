@@ -1,0 +1,54 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+    - duration: 120
+      arrivalRate: 10
+      name: "Ramp up load"
+    - duration: 300
+      arrivalRate: 15
+      name: "Sustained load"
+  processor: "./load-test-processor.js"
+
+scenarios:
+  - name: "Homepage and Dashboard Flow"
+    weight: 40
+    flow:
+      - get:
+          url: "/"
+      - think: 2
+      - get:
+          url: "/api/auth/session"
+      - think: 1
+      - get:
+          url: "/dashboard"
+
+  - name: "Content Generation Flow"
+    weight: 30
+    flow:
+      - get:
+          url: "/dashboard/content/generate"
+      - think: 3
+      - post:
+          url: "/api/content/generate"
+          json:
+            prompt: "Create a social media post about technology"
+            platform: "twitter"
+            tone: "professional"
+
+  - name: "Campaign Management"
+    weight: 20
+    flow:
+      - get:
+          url: "/dashboard/campaigns"
+      - think: 2
+      - get:
+          url: "/api/campaigns"
+
+  - name: "API Health Check"
+    weight: 10
+    flow:
+      - get:
+          url: "/api/health"

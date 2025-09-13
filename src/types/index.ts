@@ -1,0 +1,78 @@
+// Core type definitions for the application
+
+export enum UserRole {
+  OWNER = 'OWNER',
+  MANAGER = 'MANAGER',
+  COLLABORATOR = 'COLLABORATOR',
+}
+
+export enum PostStatus {
+  DRAFT = 'DRAFT',
+  APPROVED = 'APPROVED',
+  PUBLISHED = 'PUBLISHED',
+}
+
+export enum CampaignStatus {
+  ACTIVE = 'ACTIVE',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+}
+
+export enum SocialPlatform {
+  FACEBOOK = 'FACEBOOK',
+  INSTAGRAM = 'INSTAGRAM',
+  LINKEDIN = 'LINKEDIN',
+}
+
+export enum GenerationStep {
+  IDEA = 'IDEA',
+  COPY_DESIGN = 'COPY_DESIGN',
+  COPY_PUBLICATION = 'COPY_PUBLICATION',
+  BASE_IMAGE = 'BASE_IMAGE',
+  FINAL_DESIGN = 'FINAL_DESIGN',
+}
+
+export enum JobStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+export enum StepStatus {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+export enum PublicationStatus {
+  PENDING = 'PENDING',
+  PUBLISHED = 'PUBLISHED',
+  FAILED = 'FAILED',
+}
+
+export enum SubscriptionPlan {
+  BASIC = 'BASIC',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
+  CUSTOM = 'CUSTOM',
+}
+
+export enum AssetType {
+  LOGO = 'LOGO',
+  IMAGE = 'IMAGE',
+  TEMPLATE = 'TEMPLATE',
+  PALETTE = 'PALETTE',
+}
+
+export enum ErrorType {
+  AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR',
+  AUTHORIZATION_ERROR = 'AUTHORIZATION_ERROR',
+  VALIDATION_ERROR = 'VALIDATION_ERROR',
+  AI_SERVICE_ERROR = 'AI_SERVICE_ERROR',
+  SOCIAL_MEDIA_ERROR = 'SOCIAL_MEDIA_ERROR',
+  PAYMENT_ERROR = 'PAYMENT_ERROR',
+  RATE_LIMIT_ERROR = 'RATE_LIMIT_ERROR',
+  INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
+}
