@@ -1,0 +1,188 @@
+{
+  "id": "campaign-management-tour",
+  "name": "Campaign Management Mastery",
+  "description": "Comprehensive tour for campaign creation, management, calendar integration, and client switching guidance",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "page_path_contains_campaigns",
+      "delay": 2000,
+      "priority": 2
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "page_path",
+      "operator": "contains",
+      "value": "/campaigns"
+    }
+  ],
+  "steps": [
+    {
+      "element": "div[class*='client-context'], button:has(div:contains('brandName'))",
+      "title": "Contexto de Cliente para Campañas",
+      "description": "Las campañas se crean específicamente para cada cliente. Verifica que tienes seleccionado el cliente correcto, ya que esto determinará la marca, objetivos y recursos disponibles para la campaña.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Verificación de contexto de cliente",
+        "ariaDescription": "Confirma el cliente seleccionado para crear campañas específicas",
+        "announceOnFocus": "Primer paso: verifica que tienes el cliente correcto seleccionado para crear campañas específicas con su marca y objetivos."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Nueva Campaña')), button[class*='create-campaign']",
+      "title": "Crear Nueva Campaña",
+      "description": "Inicia una nueva campaña desde cero. Podrás definir objetivos, audiencia, presupuesto, duración y tipo de contenido que necesitas para alcanzar las metas del cliente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Creación de nueva campaña",
+        "ariaDescription": "Inicia el proceso de creación de campaña personalizada",
+        "announceOnFocus": "Segundo paso: crea una nueva campaña definiendo objetivos, audiencia y estrategia específica para el cliente."
+      }
+    },
+    {
+      "element": "input[name*='campaign-name'], input[placeholder*='nombre']",
+      "title": "Nombre y Descripción Estratégica",
+      "description": "Define un nombre claro y descriptivo que refleje el objetivo de la campaña. Incluye el período, objetivo principal y audiencia objetivo para facilitar la organización.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Definición de nombre y descripción",
+        "ariaDescription": "Establece nombre y descripción estratégica de la campaña",
+        "announceOnFocus": "Tercer paso: define un nombre estratégico que refleje el objetivo, período y audiencia de la campaña."
+      }
+    },
+    {
+      "element": "div[class*='campaign-objectives'], select[name*='objective']",
+      "title": "Objetivos y KPIs",
+      "description": "Selecciona los objetivos principales: awareness, engagement, conversiones, ventas, etc. Esto determinará las métricas de seguimiento y el tipo de contenido sugerido.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Definición de objetivos y KPIs",
+        "ariaDescription": "Establece objetivos medibles para la campaña",
+        "announceOnFocus": "Cuarto paso: define objetivos específicos y KPIs que determinarán las métricas de seguimiento y tipo de contenido."
+      }
+    },
+    {
+      "element": "div[class*='date-range'], input[type='date']",
+      "title": "Planificación Temporal",
+      "description": "Establece las fechas de inicio y fin de la campaña. Considera eventos importantes del cliente, temporadas altas de su negocio y fechas especiales relevantes para su audiencia.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Planificación temporal de campaña",
+        "ariaDescription": "Define fechas estratégicas considerando eventos del cliente",
+        "announceOnFocus": "Quinto paso: establece fechas estratégicas considerando eventos importantes y temporadas del negocio del cliente."
+      }
+    },
+    {
+      "element": "div[class*='audience-targeting'], section:has(span:contains('audiencia'))",
+      "title": "Segmentación de Audiencia",
+      "description": "Define la audiencia objetivo usando los datos del cliente: demografía, intereses, comportamientos y segmentos personalizados basados en su base de clientes actual.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Segmentación de audiencia objetivo",
+        "ariaDescription": "Define audiencia usando datos específicos del cliente",
+        "announceOnFocus": "Sexto paso: segmenta la audiencia objetivo usando datos demográficos y comportamentales específicos del cliente."
+      }
+    },
+    {
+      "element": "div[class*='content-planning'], section:has(span:contains('contenido'))",
+      "title": "Planificación de Contenido",
+      "description": "Planifica los tipos de contenido necesarios: posts promocionales, contenido educativo, testimonios, etc. La IA sugerirá una mezcla óptima basada en los objetivos.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Planificación estratégica de contenido",
+        "ariaDescription": "Planifica tipos de contenido según objetivos de campaña",
+        "announceOnFocus": "Séptimo paso: planifica tipos de contenido estratégico con sugerencias de IA basadas en los objetivos de la campaña."
+      }
+    },
+    {
+      "element": "div[class*='calendar-integration'], button:has(span:contains('calendario'))",
+      "title": "Integración con Calendario",
+      "description": "Conecta la campaña con el calendario editorial del cliente. Visualiza fechas importantes, evita conflictos con otras campañas y programa contenido estratégicamente.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Integración con calendario editorial",
+        "ariaDescription": "Conecta campaña con calendario para programación estratégica",
+        "announceOnFocus": "Octavo paso: integra la campaña con el calendario editorial para evitar conflictos y programar contenido estratégicamente."
+      }
+    },
+    {
+      "element": "div[class*='budget-allocation'], input[name*='budget']",
+      "title": "Asignación de Presupuesto",
+      "description": "Distribuye el presupuesto entre diferentes plataformas y tipos de contenido. Postia sugiere distribuciones óptimas basadas en el rendimiento histórico del cliente.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 9: Asignación estratégica de presupuesto",
+        "ariaDescription": "Distribuye presupuesto según rendimiento histórico del cliente",
+        "announceOnFocus": "Noveno paso: asigna presupuesto estratégicamente con sugerencias basadas en el rendimiento histórico del cliente."
+      }
+    },
+    {
+      "element": "div[class*='team-collaboration'], section:has(span:contains('equipo'))",
+      "title": "Colaboración de Equipo",
+      "description": "Asigna roles y responsabilidades: quién crea contenido, quién aprueba, quién publica. Establece flujos de trabajo claros para el equipo del cliente.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 10: Configuración de colaboración de equipo",
+        "ariaDescription": "Asigna roles y establece flujos de trabajo colaborativos",
+        "announceOnFocus": "Décimo paso: configura la colaboración de equipo asignando roles y estableciendo flujos de trabajo claros."
+      }
+    },
+    {
+      "element": "div[class*='approval-workflow'], section:has(span:contains('aprobación'))",
+      "title": "Flujo de Aprobaciones",
+      "description": "Configura el proceso de aprobación específico del cliente: revisión interna, aprobación del cliente, y publicación final. Automatiza notificaciones y recordatorios.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 11: Configuración de flujo de aprobaciones",
+        "ariaDescription": "Establece proceso de aprobación personalizado del cliente",
+        "announceOnFocus": "Undécimo paso: configura el flujo de aprobaciones específico del cliente con notificaciones automáticas."
+      }
+    },
+    {
+      "element": "div[class*='campaign-dashboard'], section:has(h2:contains('Dashboard'))",
+      "title": "Dashboard de Seguimiento",
+      "description": "Tu centro de control para monitorear el progreso de la campaña: métricas en tiempo real, rendimiento por plataforma, y alertas automáticas sobre el desempeño.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 12: Dashboard de seguimiento de campaña",
+        "ariaDescription": "Centro de control para monitorear progreso y métricas",
+        "announceOnFocus": "Último paso: utiliza el dashboard de seguimiento para monitorear progreso, métricas en tiempo real y recibir alertas automáticas."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 420
+  }
+}

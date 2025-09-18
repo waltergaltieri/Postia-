@@ -1,0 +1,458 @@
+name: Visual Testing & Accessibility Automation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run daily at 2 AM UTC to catch any regressions
+    - cron: '0 2 * * *'
+
+env:
+  NODE_VERSION: '18'
+  PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/ms-playwright
+
+jobs:
+  # Job 1: Setup and Build
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'postia-saas/package-lock.json'
+
+      - name: Generate cache key
+        id: cache-key
+        run: |
+          echo "key=node-modules-${{ hashFiles('postia-saas/package-lock.json') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ steps.cache-key.outputs.key }}
+          restore-keys: |
+            node-modules-
+
+      - name: Install dependencies
+        working-directory: postia-saas
+        run: npm ci
+
+      - name: Build Storybook
+        working-directory: postia-saas
+        run: npm run build-storybook
+
+      - name: Cache Storybook build
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/storybook-static
+          key: storybook-${{ github.sha }}
+
+  # Job 2: Visual Regression Testing
+  visual-testing:
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+        viewport: [desktop, tablet, mobile]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Restore Storybook build
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/storybook-static
+          key: storybook-${{ github.sha }}
+
+      - name: Install Playwright browsers
+        working-directory: postia-saas
+        run: npx playwright install ${{ matrix.browser }} --with-deps
+
+      - name: Run visual regression tests
+        working-directory: postia-saas
+        env:
+          BROWSER: ${{ matrix.browser }}
+          VIEWPORT: ${{ matrix.viewport }}
+          VISUAL_TESTS: 'true'
+        run: |
+          npx playwright test tests/visual-regression-advanced.test.ts \
+            --project=${{ matrix.browser }} \
+            --reporter=json \
+            --output-dir=test-results/visual-${{ matrix.browser }}-${{ matrix.viewport }}
+
+      - name: Upload visual test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: visual-results-${{ matrix.browser }}-${{ matrix.viewport }}
+          path: |
+            postia-saas/test-results/visual-${{ matrix.browser }}-${{ matrix.viewport }}
+            postia-saas/test-results/screenshots
+          retention-days: 30
+
+  # Job 3: Accessibility Testing
+  accessibility-testing:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Restore Storybook build
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/storybook-static
+          key: storybook-${{ github.sha }}
+
+      - name: Install Playwright browsers
+        working-directory: postia-saas
+        run: npx playwright install chromium --with-deps
+
+      - name: Run accessibility tests
+        working-directory: postia-saas
+        env:
+          CI: 'true'
+        run: |
+          npx playwright test tests/accessibility.test.ts \
+            --project=chromium \
+            --reporter=json \
+            --output-dir=test-results/accessibility
+
+      - name: Generate accessibility report
+        working-directory: postia-saas
+        if: always()
+        run: |
+          node -e "
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('test-results/accessibility/results.json', 'utf8'));
+            const report = {
+              timestamp: new Date().toISOString(),
+              summary: {
+                total: results.suites.reduce((sum, suite) => sum + suite.specs.length, 0),
+                passed: results.suites.reduce((sum, suite) => sum + suite.specs.filter(spec => spec.ok).length, 0),
+                failed: results.suites.reduce((sum, suite) => sum + suite.specs.filter(spec => !spec.ok).length, 0)
+              },
+              violations: results.suites.flatMap(suite => 
+                suite.specs.filter(spec => !spec.ok).map(spec => ({
+                  title: spec.title,
+                  error: spec.tests[0]?.results[0]?.error?.message || 'Unknown error'
+                }))
+              )
+            };
+            fs.writeFileSync('test-results/accessibility/accessibility-report.json', JSON.stringify(report, null, 2));
+            console.log('Accessibility Report Generated:', report.summary);
+          "
+
+      - name: Upload accessibility results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: accessibility-results
+          path: postia-saas/test-results/accessibility
+          retention-days: 30
+
+      - name: Comment accessibility results on PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            try {
+              const report = JSON.parse(fs.readFileSync('postia-saas/test-results/accessibility/accessibility-report.json', 'utf8'));
+              const comment = `
+              ## 🔍 Accessibility Test Results
+              
+              **Summary:**
+              - ✅ Passed: ${report.summary.passed}
+              - ❌ Failed: ${report.summary.failed}
+              - 📊 Total: ${report.summary.total}
+              
+              ${report.violations.length > 0 ? `
+              **Violations Found:**
+              ${report.violations.map(v => `- **${v.title}**: ${v.error}`).join('\n')}
+              ` : '🎉 No accessibility violations found!'}
+              
+              _Generated at ${report.timestamp}_
+              `;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } catch (error) {
+              console.log('Could not generate accessibility comment:', error);
+            }
+
+  # Job 4: Performance Testing
+  performance-testing:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Restore Storybook build
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/storybook-static
+          key: storybook-${{ github.sha }}
+
+      - name: Install Playwright browsers
+        working-directory: postia-saas
+        run: npx playwright install chromium --with-deps
+
+      - name: Run performance tests
+        working-directory: postia-saas
+        env:
+          PERFORMANCE_TESTS: 'true'
+        run: |
+          npx playwright test tests/performance.test.ts \
+            --project=chromium \
+            --reporter=json \
+            --output-dir=test-results/performance
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: performance-results
+          path: postia-saas/test-results/performance
+          retention-days: 30
+
+  # Job 5: Comprehensive Automation Suite
+  automation-suite:
+    runs-on: ubuntu-latest
+    needs: setup
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Restore Storybook build
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/storybook-static
+          key: storybook-${{ github.sha }}
+
+      - name: Install Playwright browsers
+        working-directory: postia-saas
+        run: npx playwright install --with-deps
+
+      - name: Run comprehensive automation suite
+        working-directory: postia-saas
+        env:
+          CI: 'true'
+          VISUAL_TESTS: 'true'
+          PERFORMANCE_TESTS: 'true'
+          THEME_TESTS: 'true'
+        run: |
+          npx playwright test tests/automation/test-automation.ts \
+            --reporter=html \
+            --output-dir=test-results/automation
+
+      - name: Upload automation results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: automation-suite-results
+          path: |
+            postia-saas/test-results/automation
+            postia-saas/playwright-report
+          retention-days: 30
+
+      - name: Deploy test report to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: postia-saas/playwright-report
+          destination_dir: test-reports/${{ github.run_number }}
+
+  # Job 6: Storybook Test Runner
+  storybook-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Restore node modules cache
+        uses: actions/cache@v3
+        with:
+          path: postia-saas/node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+
+      - name: Install Playwright browsers
+        working-directory: postia-saas
+        run: npx playwright install --with-deps
+
+      - name: Start Storybook
+        working-directory: postia-saas
+        run: |
+          npm run storybook &
+          npx wait-on http://localhost:6006
+
+      - name: Run Storybook tests
+        working-directory: postia-saas
+        env:
+          VISUAL_TESTS: 'true'
+          PERFORMANCE_TESTS: 'true'
+        run: npm run test:storybook
+
+      - name: Upload Storybook test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: storybook-test-results
+          path: postia-saas/test-results
+          retention-days: 30
+
+  # Job 7: Generate Final Report
+  generate-report:
+    runs-on: ubuntu-latest
+    needs: [visual-testing, accessibility-testing, performance-testing]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all test artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: test-artifacts
+
+      - name: Generate comprehensive report
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            
+            const report = {
+              timestamp: new Date().toISOString(),
+              runId: '${{ github.run_id }}',
+              commit: '${{ github.sha }}',
+              branch: '${{ github.ref_name }}',
+              summary: {
+                visual: { total: 0, passed: 0, failed: 0 },
+                accessibility: { total: 0, passed: 0, failed: 0 },
+                performance: { total: 0, passed: 0, failed: 0 }
+              },
+              details: []
+            };
+            
+            // Process artifacts and generate summary
+            const artifactsDir = 'test-artifacts';
+            if (fs.existsSync(artifactsDir)) {
+              const artifacts = fs.readdirSync(artifactsDir);
+              console.log('Found artifacts:', artifacts);
+              
+              // Add processing logic for each artifact type
+              artifacts.forEach(artifact => {
+                if (artifact.includes('visual-results')) {
+                  report.summary.visual.total++;
+                }
+                if (artifact.includes('accessibility-results')) {
+                  report.summary.accessibility.total++;
+                }
+                if (artifact.includes('performance-results')) {
+                  report.summary.performance.total++;
+                }
+              });
+            }
+            
+            fs.writeFileSync('final-test-report.json', JSON.stringify(report, null, 2));
+            console.log('Final Report Generated:', report.summary);
+          "
+
+      - name: Upload final report
+        uses: actions/upload-artifact@v3
+        with:
+          name: final-test-report
+          path: final-test-report.json
+          retention-days: 90
+
+      - name: Update status check
+        if: always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            try {
+              const report = JSON.parse(fs.readFileSync('final-test-report.json', 'utf8'));
+              const status = report.summary.accessibility.failed === 0 && 
+                           report.summary.performance.failed === 0 ? 'success' : 'failure';
+              
+              github.rest.repos.createCommitStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                sha: context.sha,
+                state: status,
+                target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+                description: `Visual: ${report.summary.visual.total}, A11y: ${report.summary.accessibility.total}, Perf: ${report.summary.performance.total}`,
+                context: 'UI/UX Testing Suite'
+              });
+            } catch (error) {
+              console.log('Could not update status check:', error);
+            }

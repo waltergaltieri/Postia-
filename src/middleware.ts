@@ -1,34 +1,36 @@
 import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequestWithAuth } from 'next-auth/middleware';
+import { UserRole } from '@/generated/prisma';
+import { hasPermission, PERMISSIONS } from '@/lib/permissions';
 
-// Define protected routes and their required permissions
+// Define protected routes with granular permissions instead of simple roles
 const PROTECTED_ROUTES: Record<string, { 
   requireAuth: boolean; 
-  roles?: string[]; 
+  permissions?: string[]; 
   requireEmailVerification?: boolean;
 }> = {
   // Dashboard routes
   '/dashboard': { requireAuth: true },
-  '/dashboard/clients': { requireAuth: true },
-  '/dashboard/campaigns': { requireAuth: true },
-  '/dashboard/content': { requireAuth: true },
-  '/dashboard/analytics': { requireAuth: true },
+  '/dashboard/clients': { requireAuth: true, permissions: [PERMISSIONS.VIEW_ALL_CLIENTS, PERMISSIONS.VIEW_ASSIGNED_CLIENTS] },
+  '/dashboard/campaigns': { requireAuth: true, permissions: [PERMISSIONS.VIEW_ALL_CAMPAIGNS, PERMISSIONS.VIEW_ASSIGNED_CAMPAIGNS] },
+  '/dashboard/content': { requireAuth: true, permissions: [PERMISSIONS.GENERATE_CONTENT] },
+  '/dashboard/analytics': { requireAuth: true, permissions: [PERMISSIONS.VIEW_ANALYTICS] },
   
-  // Admin routes (Owner only)
-  '/dashboard/agency': { requireAuth: true, roles: ['OWNER'], requireEmailVerification: true },
-  '/dashboard/users': { requireAuth: true, roles: ['OWNER', 'MANAGER'], requireEmailVerification: true },
-  '/dashboard/settings': { requireAuth: true, roles: ['OWNER'], requireEmailVerification: true },
+  // Admin routes (require specific permissions)
+  '/dashboard/agency': { requireAuth: true, permissions: [PERMISSIONS.MANAGE_AGENCY], requireEmailVerification: true },
+  '/dashboard/users': { requireAuth: true, permissions: [PERMISSIONS.MANAGE_USERS], requireEmailVerification: true },
+  '/dashboard/settings': { requireAuth: true, permissions: [PERMISSIONS.MANAGE_AGENCY], requireEmailVerification: true },
   
   // API routes
-  '/api/agencies': { requireAuth: true },
-  '/api/clients': { requireAuth: true },
-  '/api/campaigns': { requireAuth: true },
-  '/api/content': { requireAuth: true },
-  '/api/users': { requireAuth: true, roles: ['OWNER', 'MANAGER'], requireEmailVerification: true },
-  '/api/invitations': { requireAuth: true, roles: ['OWNER', 'MANAGER'], requireEmailVerification: true },
+  '/api/agencies': { requireAuth: true, permissions: [PERMISSIONS.MANAGE_AGENCY] },
+  '/api/clients': { requireAuth: true, permissions: [PERMISSIONS.VIEW_ALL_CLIENTS, PERMISSIONS.VIEW_ASSIGNED_CLIENTS] },
+  '/api/campaigns': { requireAuth: true, permissions: [PERMISSIONS.VIEW_ALL_CAMPAIGNS, PERMISSIONS.VIEW_ASSIGNED_CAMPAIGNS] },
+  '/api/content': { requireAuth: true, permissions: [PERMISSIONS.GENERATE_CONTENT] },
+  '/api/users': { requireAuth: true, permissions: [PERMISSIONS.MANAGE_USERS], requireEmailVerification: true },
+  '/api/invitations': { requireAuth: true, permissions: [PERMISSIONS.INVITE_USERS], requireEmailVerification: true },
   
-  // Sensitive operations
+  // Public auth routes
   '/api/auth/forgot-password': { requireAuth: false },
   '/api/auth/reset-password': { requireAuth: false },
   '/api/auth/verify-email': { requireAuth: false },
@@ -40,6 +42,24 @@ export default withAuth(
     const { pathname } = req.nextUrl;
     const token = req.nextauth.token;
 
+    // Allow access to complete registration page ONLY for users who actually need it
+    if (pathname === '/auth/complete-registration' || pathname.startsWith('/api/auth/complete-registration')) {
+      // Verify that user actually needs to complete registration
+      if (token && (!token.isGoogleUser || (token.agencyId && token.role))) {
+        // User doesn't need registration, redirect to dashboard
+        return NextResponse.redirect(new URL('/dashboard', req.url));
+      }
+      return NextResponse.next();
+    }
+
+    // Check if user needs to complete registration (only for new Google OAuth users)
+    if (token && token.sub && (!token.agencyId || !token.role) && token.isGoogleUser) {
+      // Don't redirect if already on auth pages or API routes
+      if (!pathname.startsWith('/auth') && !pathname.startsWith('/api/auth')) {
+        return NextResponse.redirect(new URL('/auth/complete-registration', req.url));
+      }
+    }
+
     // Check if route requires authentication
     const routeConfig = Object.entries(PROTECTED_ROUTES).find(([route]) =>
       pathname.startsWith(route)
@@ -49,9 +69,16 @@ export default withAuth(
       return NextResponse.next();
     }
 
-    // Check if user has required role
-    if (routeConfig.roles && token?.role && !routeConfig.roles.includes(token.role)) {
-      return NextResponse.redirect(new URL('/dashboard/unauthorized', req.url));
+    // Check if user has required permissions
+    if (routeConfig.permissions && token?.role) {
+      const userRole = token.role as UserRole;
+      const hasRequiredPermission = routeConfig.permissions.some(permission => 
+        hasPermission(userRole, permission)
+      );
+      
+      if (!hasRequiredPermission) {
+        return NextResponse.redirect(new URL('/dashboard/unauthorized', req.url));
+      }
     }
 
     // Check email verification for routes that require it

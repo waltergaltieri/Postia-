@@ -11,9 +11,29 @@ export default async function DashboardPage() {
     redirect('/auth/signin')
   }
 
+  // Debug: Log session data
+  console.log('Dashboard session:', JSON.stringify(session, null, 2))
+  
+  // Check if user exists in database
+  const dbUser = await db.user.findUnique({
+    where: { email: session.user.email },
+    select: { id: true, agencyId: true, role: true, email: true }
+  })
+  
+  if (!dbUser) {
+    console.log('User not found in database, redirecting to sign in')
+    redirect('/auth/signin')
+  }
+  
+  // Check if user has agencyId
+  if (!dbUser.agencyId) {
+    console.log('No agencyId found, redirecting to registration')
+    redirect('/auth/complete-registration')
+  }
+
   // Get agency data
   const agency = await db.agency.findUnique({
-    where: { id: session.user.agencyId },
+    where: { id: dbUser.agencyId },
     include: {
       clients: {
         include: {
@@ -46,23 +66,21 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Welcome back, {session.user.name}
-          </h1>
-          <p className="text-gray-600 mt-2">
-            {agency.name} Dashboard
-          </p>
-        </div>
-
-        <DashboardOverview 
-          agency={agency}
-          stats={stats}
-          recentJobs={agency.jobs}
-        />
+    <div className="p-6 space-y-6">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-foreground">
+          Welcome back, {session.user.name}
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          {agency.name} Dashboard
+        </p>
       </div>
+
+      <DashboardOverview 
+        agency={agency}
+        stats={stats}
+        recentJobs={agency.jobs}
+      />
     </div>
   )
 }

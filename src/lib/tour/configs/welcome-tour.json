@@ -1,0 +1,120 @@
+{
+  "id": "welcome-tour",
+  "name": "Welcome Tour",
+  "description": "Comprehensive first-time user tour covering main navigation with role-specific variations",
+  "category": "onboarding",
+  "triggers": [
+    {
+      "type": "auto",
+      "condition": "first_login",
+      "delay": 1000,
+      "priority": 1
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "new_user"
+    }
+  ],
+  "steps": [
+    {
+      "element": "nav[class*='bg-card']",
+      "title": "¡Bienvenido a Postia!",
+      "description": "Esta es tu barra de navegación principal donde puedes acceder a todas las funcionalidades de la plataforma. Desde aquí puedes navegar entre diferentes secciones y gestionar tus proyectos.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Navegación principal",
+        "ariaDescription": "Introducción a la barra de navegación principal de Postia",
+        "announceOnFocus": "Bienvenido al tour de Postia. Este es el primer paso que muestra la navegación principal donde puedes acceder a todas las funcionalidades."
+      }
+    },
+    {
+      "element": "button[class*='justify-start']:has(div:contains('brandName'))",
+      "title": "Selector de Cliente",
+      "description": "Aquí puedes cambiar entre diferentes clientes para gestionar sus campañas y contenido específico. Cada cliente tiene su propia marca, colores y configuraciones personalizadas.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Selector de cliente",
+        "ariaDescription": "Aprende a cambiar entre diferentes clientes y sus configuraciones",
+        "announceOnFocus": "Segundo paso: selector de cliente para cambiar entre diferentes cuentas y acceder a sus configuraciones personalizadas."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Content Generation'))",
+      "title": "Generación de Contenido con IA",
+      "description": "Crea contenido automáticamente usando inteligencia artificial para tus redes sociales. Genera posts, imágenes y copys optimizados para cada plataforma y audiencia.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Generación de contenido",
+        "ariaDescription": "Descubre cómo generar contenido automáticamente con IA",
+        "announceOnFocus": "Tercer paso: generación automática de contenido usando inteligencia artificial para crear posts, imágenes y copys optimizados."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Campaigns'))",
+      "title": "Gestión de Campañas",
+      "description": "Organiza y programa tus campañas de marketing en redes sociales desde un solo lugar. Planifica contenido, programa publicaciones y analiza el rendimiento.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Gestión de campañas",
+        "ariaDescription": "Aprende a gestionar y programar campañas de marketing",
+        "announceOnFocus": "Cuarto paso: gestión y programación de campañas de marketing para planificar y analizar el rendimiento."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Clients'))",
+      "title": "Gestión de Clientes",
+      "description": "Administra todos tus clientes desde esta sección. Configura sus marcas, colores corporativos, y personaliza la experiencia para cada uno.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Gestión de clientes",
+        "ariaDescription": "Aprende a administrar clientes y sus configuraciones",
+        "announceOnFocus": "Quinto paso: gestión de clientes para administrar marcas, colores corporativos y personalización."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Brand Assets'))",
+      "title": "Recursos de Marca",
+      "description": "Gestiona todos los recursos visuales de tus clientes: logos, imágenes, paletas de colores y elementos gráficos para mantener consistencia en todas las publicaciones.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Recursos de marca",
+        "ariaDescription": "Descubre cómo gestionar recursos visuales y elementos de marca",
+        "announceOnFocus": "Sexto paso: gestión de recursos de marca incluyendo logos, imágenes y paletas de colores."
+      }
+    },
+    {
+      "element": "div[class*='border-t']:last-child",
+      "title": "Configuración y Perfil",
+      "description": "Desde aquí puedes acceder a la configuración de tu cuenta, preferencias del sistema y obtener ayuda adicional cuando la necesites.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Configuración y perfil",
+        "ariaDescription": "Ubicación de configuración de cuenta y ayuda",
+        "announceOnFocus": "Último paso: área de configuración de cuenta, preferencias del sistema y acceso a ayuda adicional."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "2.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 210
+  }
+}

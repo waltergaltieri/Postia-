@@ -5,10 +5,17 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
 
 export default function SignInPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [credentialsLoading, setCredentialsLoading] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     // Check if already signed in
@@ -19,7 +26,7 @@ export default function SignInPage() {
     })
   }, [router])
 
-  const handleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     setLoading(true)
     try {
       await signIn('google', { callbackUrl: '/dashboard' })
@@ -27,6 +34,31 @@ export default function SignInPage() {
       console.error('Sign in error:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleCredentialsSignIn = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setCredentialsLoading(true)
+    setError('')
+
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        setError('Invalid email or password')
+      } else {
+        router.push('/dashboard')
+      }
+    } catch (error) {
+      console.error('Sign in error:', error)
+      setError('An error occurred during sign in')
+    } finally {
+      setCredentialsLoading(false)
     }
   }
 
@@ -41,16 +73,81 @@ export default function SignInPage() {
             Sign in to access your AI-powered content generation platform
           </p>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
+          {/* Demo Credentials Info */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="font-semibold text-blue-900 mb-2">Demo Credentials</h3>
+            <div className="text-sm text-blue-800 space-y-1">
+              <p><strong>Admin:</strong> admin@demo.com / password123</p>
+              <p><strong>Manager:</strong> manager@demo.com / password123</p>
+              <p><strong>User:</strong> user@demo.com / password123</p>
+            </div>
+          </div>
+
+          {/* Credentials Form */}
+          <form onSubmit={handleCredentialsSignIn} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            {error && (
+              <div className="text-red-600 text-sm">{error}</div>
+            )}
+            <Button
+              type="submit"
+              disabled={credentialsLoading}
+              className="w-full"
+              size="lg"
+            >
+              {credentialsLoading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Signing in...
+                </>
+              ) : (
+                'Sign In'
+              )}
+            </Button>
+          </form>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <Separator className="w-full" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-2 text-gray-500">Or continue with</span>
+            </div>
+          </div>
+
+          {/* Google Sign In */}
           <Button
-            onClick={handleSignIn}
+            onClick={handleGoogleSignIn}
             disabled={loading}
+            variant="outline"
             className="w-full"
             size="lg"
           >
             {loading ? (
               <>
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 mr-2"></div>
                 Signing in...
               </>
             ) : (

@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { TokenPricingService } from './token-pricing';
 
 export interface TokenConsumption {
   agencyId: string;
@@ -18,8 +19,7 @@ export class TokenConsumptionService {
       where: { id: agencyId },
       select: { tokenBalance: true },
     });
-
-    return (agency?.tokenBalance || 0) >= requiredTokens;
+    return (agency?.tokenBalance ?? 0) >= requiredTokens;
   }
 
   /**
@@ -28,13 +28,21 @@ export class TokenConsumptionService {
   static async consumeTokens(consumption: TokenConsumption): Promise<void> {
     const { agencyId, userId, amount, description, reference, metadata } = consumption;
 
-    // Check if agency has sufficient tokens
-    const hasBalance = await this.checkTokenBalance(agencyId, amount);
-    if (!hasBalance) {
-      throw new Error('Insufficient token balance');
-    }
-
     await db.$transaction(async (tx) => {
+      // Check current balance within transaction to prevent race conditions
+      const agency = await tx.agency.findUnique({
+        where: { id: agencyId },
+        select: { tokenBalance: true },
+      });
+
+      if (!agency) {
+        throw new Error('Agency not found');
+      }
+
+      if (agency.tokenBalance < amount) {
+        throw new Error('Insufficient token balance');
+      }
+
       // Deduct tokens from agency balance
       await tx.agency.update({
         where: { id: agencyId },
@@ -45,7 +53,7 @@ export class TokenConsumptionService {
         },
       });
 
-      // Create consumption record
+      // Record the transaction
       await tx.tokenTransaction.create({
         data: {
           agencyId,
@@ -64,55 +72,14 @@ export class TokenConsumptionService {
    * Get token consumption for specific operation types
    */
   static getTokenCosts() {
-    return {
-      // AI Content Generation
-      IDEA_GENERATION: 50,
-      COPY_DESIGN: 75,
-      COPY_PUBLICATION: 75,
-      BASE_IMAGE: 150,
-      FINAL_DESIGN: 200,
-      
-      // Additional operations
-      CONTENT_REGENERATION: 25,
-      BULK_GENERATION: 300,
-      PREMIUM_TEMPLATES: 100,
-      
-      // Social Media
-      SOCIAL_PUBLISHING: 10,
-      SOCIAL_ANALYTICS: 5,
-    };
+    return TokenPricingService.getAllCosts();
   }
 
   /**
    * Calculate tokens needed for a complete content generation job
    */
   static calculateJobTokens(steps: string[]): number {
-    const costs = this.getTokenCosts();
-    let total = 0;
-
-    for (const step of steps) {
-      switch (step) {
-        case 'IDEA':
-          total += costs.IDEA_GENERATION;
-          break;
-        case 'COPY_DESIGN':
-          total += costs.COPY_DESIGN;
-          break;
-        case 'COPY_PUBLICATION':
-          total += costs.COPY_PUBLICATION;
-          break;
-        case 'BASE_IMAGE':
-          total += costs.BASE_IMAGE;
-          break;
-        case 'FINAL_DESIGN':
-          total += costs.FINAL_DESIGN;
-          break;
-        default:
-          total += 50; // Default cost for unknown steps
-      }
-    }
-
-    return total;
+    return TokenPricingService.calculateJobCost(steps);
   }
 
   /**
@@ -231,18 +198,7 @@ export class TokenConsumptionService {
     includeImages: boolean = true,
     regenerationBuffer: number = 0.2
   ): number {
-    const steps = ['IDEA', 'COPY_DESIGN', 'COPY_PUBLICATION'];
-    if (includeImages) {
-      steps.push('BASE_IMAGE', 'FINAL_DESIGN');
-    }
-
-    const tokensPerPost = this.calculateJobTokens(steps);
-    const baseTokens = postsCount * tokensPerPost;
-    
-    // Add buffer for regenerations and revisions
-    const bufferTokens = baseTokens * regenerationBuffer;
-    
-    return Math.ceil(baseTokens + bufferTokens);
+    return TokenPricingService.estimateCampaignCost(postsCount, includeImages, regenerationBuffer);
   }
 
   /**

@@ -1,0 +1,162 @@
+{
+  "id": "client-switching-tour",
+  "name": "Client Switching & Context Management",
+  "description": "Comprehensive guide for switching between clients, understanding context changes, and maintaining workflow efficiency",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "client_switch_detected",
+      "delay": 1000,
+      "priority": 1
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_property",
+      "operator": "exists",
+      "value": "multiple_clients"
+    }
+  ],
+  "steps": [
+    {
+      "element": "button[class*='justify-start']:has(div:contains('brandName')), div[class*='client-selector']",
+      "title": "Selector de Cliente Inteligente",
+      "description": "Tu punto central para cambiar entre clientes. Cada cliente tiene su propio ecosistema: marca, colores, voz, campañas activas y configuraciones específicas que se aplicarán automáticamente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Selector de cliente inteligente",
+        "ariaDescription": "Comprende cómo cambiar entre contextos de diferentes clientes",
+        "announceOnFocus": "Primer paso: utiliza el selector de cliente para cambiar entre diferentes ecosistemas de marca y configuraciones."
+      }
+    },
+    {
+      "element": "div[class*='client-preview'], div:has(img[alt*='logo'])",
+      "title": "Vista Previa de Contexto",
+      "description": "Antes de cambiar, visualiza el contexto del cliente: logo, colores de marca, campañas activas, y estado actual. Esto te ayuda a prepararte mentalmente para el cambio de contexto.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Vista previa de contexto de cliente",
+        "ariaDescription": "Revisa información clave antes de cambiar de cliente",
+        "announceOnFocus": "Segundo paso: revisa la vista previa del contexto del cliente incluyendo marca, campañas activas y estado actual."
+      }
+    },
+    {
+      "element": "div[class*='brand-transition'], div[class*='theme-change']",
+      "title": "Transición de Marca Automática",
+      "description": "Al cambiar de cliente, la interfaz se adapta automáticamente: colores de marca, tipografías, elementos visuales y configuraciones específicas se aplican instantáneamente.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Transición automática de marca",
+        "ariaDescription": "Observa cómo la interfaz se adapta al nuevo cliente",
+        "announceOnFocus": "Tercer paso: observa cómo la interfaz se adapta automáticamente con colores, tipografías y elementos del nuevo cliente."
+      }
+    },
+    {
+      "element": "div[class*='context-summary'], section:has(h3:contains('Resumen'))",
+      "title": "Resumen de Contexto Actual",
+      "description": "Después del cambio, revisa el resumen: campañas activas, contenido pendiente, próximas fechas importantes y tareas urgentes específicas de este cliente.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Resumen de contexto del cliente actual",
+        "ariaDescription": "Revisa información clave del cliente recién seleccionado",
+        "announceOnFocus": "Cuarto paso: revisa el resumen de contexto con campañas activas, contenido pendiente y tareas urgentes del cliente."
+      }
+    },
+    {
+      "element": "div[class*='brand-guidelines'], section:has(span:contains('directrices'))",
+      "title": "Directrices de Marca Activas",
+      "description": "Accede rápidamente a las directrices específicas del cliente: voz de marca, tono de comunicación, palabras clave, elementos prohibidos y estilo visual preferido.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Directrices de marca del cliente activo",
+        "ariaDescription": "Accede a las directrices específicas de comunicación y estilo",
+        "announceOnFocus": "Quinto paso: revisa las directrices de marca específicas incluyendo voz, tono y elementos visuales del cliente."
+      }
+    },
+    {
+      "element": "div[class*='recent-activity'], section:has(span:contains('actividad reciente'))",
+      "title": "Actividad Reciente del Cliente",
+      "description": "Mantente al día con la actividad reciente: último contenido creado, campañas modificadas, aprobaciones pendientes y interacciones del equipo del cliente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Actividad reciente del cliente",
+        "ariaDescription": "Revisa las últimas acciones y cambios del cliente",
+        "announceOnFocus": "Sexto paso: revisa la actividad reciente incluyendo contenido creado, campañas modificadas y aprobaciones pendientes."
+      }
+    },
+    {
+      "element": "div[class*='quick-actions'], section:has(button:contains('Rápido'))",
+      "title": "Acciones Rápidas Contextuales",
+      "description": "Accede a acciones específicas del cliente: crear contenido con su marca, revisar campañas activas, acceder a su biblioteca de recursos, o contactar a su equipo.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Acciones rápidas contextuales",
+        "ariaDescription": "Utiliza acciones específicas optimizadas para el cliente actual",
+        "announceOnFocus": "Séptimo paso: utiliza acciones rápidas contextuales optimizadas para el flujo de trabajo específico del cliente."
+      }
+    },
+    {
+      "element": "div[class*='notification-center'], button:has(span:contains('notificaciones'))",
+      "title": "Notificaciones Específicas del Cliente",
+      "description": "Las notificaciones se filtran automáticamente por cliente: solo verás alertas, aprobaciones pendientes y actualizaciones relevantes para el cliente actualmente seleccionado.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Notificaciones filtradas por cliente",
+        "ariaDescription": "Revisa notificaciones específicas del cliente activo",
+        "announceOnFocus": "Octavo paso: revisa notificaciones filtradas automáticamente para mostrar solo información relevante del cliente activo."
+      }
+    },
+    {
+      "element": "div[class*='workspace-state'], div:has(span:contains('estado de trabajo'))",
+      "title": "Estado de Workspace Personalizado",
+      "description": "Tu workspace se adapta al cliente: herramientas frecuentes, plantillas favoritas, configuraciones de IA y preferencias específicas se cargan automáticamente.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 9: Estado de workspace personalizado",
+        "ariaDescription": "Comprende cómo se personaliza el workspace por cliente",
+        "announceOnFocus": "Noveno paso: observa cómo el workspace se personaliza con herramientas, plantillas y configuraciones específicas del cliente."
+      }
+    },
+    {
+      "element": "div[class*='multi-client-view'], button:has(span:contains('vista múltiple'))",
+      "title": "Vista Multi-Cliente (Avanzado)",
+      "description": "Para usuarios avanzados: activa la vista multi-cliente para comparar métricas, coordinar campañas cruzadas o gestionar múltiples cuentas simultáneamente.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 10: Vista multi-cliente avanzada",
+        "ariaDescription": "Accede a funciones avanzadas de gestión multi-cliente",
+        "announceOnFocus": "Último paso: utiliza la vista multi-cliente para gestión avanzada, comparar métricas y coordinar campañas entre clientes."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 280
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "id": "welcome-tour-editor",
+  "name": "Welcome Tour - Content Editor",
+  "description": "Focused onboarding tour for content editors emphasizing creation tools and workflow optimization",
+  "category": "onboarding",
+  "triggers": [
+    {
+      "type": "auto",
+      "condition": "first_login",
+      "delay": 1000,
+      "priority": 1
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_role",
+      "operator": "equals",
+      "value": "editor"
+    },
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "new_user"
+    }
+  ],
+  "steps": [
+    {
+      "element": "nav[class*='bg-card']",
+      "title": "¡Bienvenido, Editor de Contenido!",
+      "description": "Como editor, tu enfoque principal será crear contenido excepcional. Esta navegación te da acceso a todas las herramientas creativas y de gestión de contenido que necesitas.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Navegación para editores de contenido",
+        "ariaDescription": "Introducción a las herramientas de creación de contenido",
+        "announceOnFocus": "Bienvenido al tour de editor de contenido. Tienes acceso a todas las herramientas creativas para generar contenido excepcional."
+      }
+    },
+    {
+      "element": "button[class*='justify-start']:has(div:contains('brandName'))",
+      "title": "Contexto del Cliente",
+      "description": "Selecciona el cliente para el que vas a crear contenido. Cada cliente tiene su propia voz de marca, estilo visual y directrices específicas que debes seguir.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Contexto del cliente",
+        "ariaDescription": "Selección de cliente y comprensión de su marca",
+        "announceOnFocus": "Segundo paso: selección de cliente para entender su voz de marca, estilo visual y directrices específicas."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Content Generation'))",
+      "title": "Tu Herramienta Principal: IA Creativa",
+      "description": "Esta es tu herramienta más poderosa. Genera contenido optimizado usando IA, crea variaciones, adapta el tono y estilo según las necesidades de cada cliente y plataforma.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Herramientas de IA creativa",
+        "ariaDescription": "Generación de contenido optimizado con inteligencia artificial",
+        "announceOnFocus": "Tercer paso: herramientas de IA creativa para generar contenido optimizado y adaptado a cada cliente y plataforma."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Campaigns'))",
+      "title": "Planificación de Contenido",
+      "description": "Organiza tu contenido en campañas coherentes. Planifica publicaciones, mantén consistencia temática y coordina con el calendario editorial del cliente.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Planificación de contenido",
+        "ariaDescription": "Organización de contenido en campañas coherentes",
+        "announceOnFocus": "Cuarto paso: planificación de contenido en campañas coherentes con calendario editorial coordinado."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Brand Assets'))",
+      "title": "Recursos Creativos",
+      "description": "Accede a todos los recursos visuales del cliente: logos, imágenes de marca, paletas de colores y elementos gráficos para crear contenido consistente con su identidad.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Recursos creativos",
+        "ariaDescription": "Acceso a recursos visuales y elementos de marca",
+        "announceOnFocus": "Quinto paso: acceso a recursos creativos incluyendo logos, imágenes y elementos gráficos del cliente."
+      }
+    },
+    {
+      "element": "button:has(span:contains('UI Demos'))",
+      "title": "Inspiración y Ejemplos",
+      "description": "Explora ejemplos y demos de diferentes tipos de contenido. Encuentra inspiración, aprende mejores prácticas y descubre nuevas formas de presentar ideas creativas.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Inspiración y ejemplos",
+        "ariaDescription": "Galería de ejemplos y mejores prácticas creativas",
+        "announceOnFocus": "Sexto paso: galería de inspiración con ejemplos y mejores prácticas para ideas creativas."
+      }
+    },
+    {
+      "element": "div[class*='border-t']:last-child",
+      "title": "Tu Espacio Creativo",
+      "description": "Tu perfil personal donde puedes guardar borradores, acceder a tus plantillas favoritas, revisar tu historial creativo y configurar tus preferencias de trabajo.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Espacio creativo personal",
+        "ariaDescription": "Área personal para borradores y preferencias creativas",
+        "announceOnFocus": "Último paso: tu espacio creativo personal para borradores, plantillas favoritas y configuración de preferencias."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 240
+  }
+}

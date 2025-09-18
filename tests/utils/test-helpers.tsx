@@ -321,10 +321,10 @@ export const generateTestData = {
 };
 
 // Performance testing helpers
-export const measurePerformance = async <T>(
+export const measurePerformance = async function<T>(
   operation: () => Promise<T>,
   label: string = 'Operation'
-): Promise<{ result: T; duration: number }> => {
+): Promise<{ result: T; duration: number }> {
   const startTime = performance.now();
   const result = await operation();
   const duration = performance.now() - startTime;

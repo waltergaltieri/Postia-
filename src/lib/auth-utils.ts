@@ -346,9 +346,9 @@ export async function isEmailInUse(email: string): Promise<boolean> {
 }
 
 /**
- * Get user with permissions
+ * Get user with permissions (with agency isolation)
  */
-export async function getUserWithPermissions(userId: string) {
+export async function getUserWithPermissions(userId: string, requestingAgencyId?: string) {
   const user = await db.user.findUnique({
     where: { id: userId },
     include: {
@@ -364,6 +364,11 @@ export async function getUserWithPermissions(userId: string) {
 
   if (!user) {
     throw new Error('User not found');
+  }
+
+  // Verify agency isolation if requestingAgencyId is provided
+  if (requestingAgencyId && user.agencyId !== requestingAgencyId) {
+    throw new Error('Access denied: User belongs to different agency');
   }
 
   return user;

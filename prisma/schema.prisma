@@ -21,15 +21,23 @@ model Agency {
 }
 
 model User {
-  id        String @id @default(cuid())
-  email     String @unique
-  name      String?
-  role      String @default("USER") // ADMIN, USER, CLIENT
-  agencyId  String
-  createdAt DateTime @default(now())
+  id                     String    @id @default(cuid())
+  email                  String    @unique
+  name                   String
+  password               String? // Nullable for OAuth users
+  role                   String? // Nullable for OAuth users until they complete registration (OWNER, MANAGER, EDITOR, VIEWER)
+  emailVerified          DateTime?
+  emailVerificationToken String?
+  passwordResetToken     String?
+  passwordResetExpires   DateTime?
+  agencyId               String? // Nullable for OAuth users until they complete registration
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
   
-  agency Agency @relation(fields: [agencyId], references: [id])
-  jobs   ContentJob[]
+  agency   Agency? @relation(fields: [agencyId], references: [id])
+  jobs     ContentJob[]
+  accounts Account[]
+  sessions Session[]
 }
 
 model Client {
@@ -81,4 +89,40 @@ model ContentJob {
   user     User @relation(fields: [userId], references: [id])
   client   Client? @relation(fields: [clientId], references: [id])
   campaign Campaign? @relation(fields: [campaignId], references: [id])
+}
+
+// NextAuth.js required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

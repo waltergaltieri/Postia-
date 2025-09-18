@@ -30,7 +30,7 @@ import {
 import { toast } from 'sonner';
 
 interface GenerationStep {
-  step: 'IDEA' | 'COPY_DESIGN' | 'COPY_PUBLICATION' | 'BASE_IMAGE' | 'FINAL_DESIGN';
+  step: 'IDEA_GENERATION' | 'COPY_DESIGN' | 'COPY_PUBLICATION' | 'BASE_IMAGE' | 'FINAL_DESIGN';
   status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'FAILED';
   output?: any;
   tokensUsed: number;
@@ -214,6 +214,7 @@ export default function AIContentGenerationInterface() {
 
   const getStepIcon = (step: string) => {
     switch (step) {
+      case 'IDEA_GENERATION':
       case 'IDEA':
         return <Lightbulb className="h-4 w-4" />;
       case 'COPY_DESIGN':
@@ -229,6 +230,7 @@ export default function AIContentGenerationInterface() {
 
   const getStepTitle = (step: string) => {
     switch (step) {
+      case 'IDEA_GENERATION':
       case 'IDEA':
         return 'Content Idea';
       case 'COPY_DESIGN':

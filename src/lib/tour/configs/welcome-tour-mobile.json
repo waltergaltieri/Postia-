@@ -1,0 +1,125 @@
+{
+  "id": "welcome-tour-mobile",
+  "name": "Welcome Tour - Mobile",
+  "description": "Mobile-optimized onboarding tour with touch-friendly interactions and simplified navigation flow",
+  "category": "onboarding",
+  "triggers": [
+    {
+      "type": "auto",
+      "condition": "first_login_mobile",
+      "delay": 1500,
+      "priority": 1
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "new_user"
+    },
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "mobile_device"
+    }
+  ],
+  "steps": [
+    {
+      "element": "header[class*='fixed']",
+      "title": "¡Bienvenido a Postia Móvil!",
+      "description": "Tu header móvil contiene todo lo esencial: menú de navegación, selector de cliente y notificaciones. Toca cualquier elemento para explorarlo.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Header móvil",
+        "ariaDescription": "Introducción al header móvil con navegación esencial",
+        "announceOnFocus": "Bienvenido a Postia móvil. El header contiene navegación esencial, selector de cliente y notificaciones."
+      }
+    },
+    {
+      "element": "button:has(svg[class*='Menu'])",
+      "title": "Menú Principal",
+      "description": "Toca este ícono para abrir el menú principal. Desde aquí puedes navegar a todas las secciones de la aplicación de forma rápida y sencilla.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Menú principal móvil",
+        "ariaDescription": "Acceso al menú de navegación principal",
+        "announceOnFocus": "Segundo paso: menú principal móvil para navegar rápidamente a todas las secciones de la aplicación."
+      }
+    },
+    {
+      "element": "button[class*='flex-1']:has(div:contains('brandName'))",
+      "title": "Cambio Rápido de Cliente",
+      "description": "Toca aquí para cambiar entre clientes. En móvil, el cambio es más rápido y visual, mostrando los colores de marca de cada cliente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Cambio rápido de cliente",
+        "ariaDescription": "Selector de cliente optimizado para móvil",
+        "announceOnFocus": "Tercer paso: cambio rápido de cliente con interfaz visual optimizada para dispositivos móviles."
+      }
+    },
+    {
+      "element": "button:has(svg[class*='Search'])",
+      "title": "Búsqueda Rápida",
+      "description": "Busca contenido, campañas o clientes de forma instantánea. La búsqueda móvil está optimizada para encontrar lo que necesitas con pocos toques.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Búsqueda rápida",
+        "ariaDescription": "Función de búsqueda optimizada para móvil",
+        "announceOnFocus": "Cuarto paso: búsqueda rápida optimizada para encontrar contenido, campañas y clientes fácilmente."
+      }
+    },
+    {
+      "element": "button:has(svg[class*='Bell'])",
+      "title": "Notificaciones Inteligentes",
+      "description": "Mantente al día con notificaciones sobre aprobaciones pendientes, campañas programadas y actualizaciones importantes de tus clientes.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Notificaciones inteligentes",
+        "ariaDescription": "Centro de notificaciones para actualizaciones importantes",
+        "announceOnFocus": "Quinto paso: notificaciones inteligentes para mantenerte informado sobre aprobaciones y actualizaciones."
+      }
+    },
+    {
+      "element": "main[class*='flex-1']",
+      "title": "Área de Trabajo Principal",
+      "description": "Esta es tu área de trabajo principal donde verás el contenido de cada sección. Está optimizada para navegación táctil y gestos intuitivos.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Área de trabajo principal",
+        "ariaDescription": "Espacio principal optimizado para interacción táctil",
+        "announceOnFocus": "Sexto paso: área de trabajo principal optimizada para navegación táctil y gestos intuitivos."
+      }
+    },
+    {
+      "element": "nav[class*='fixed'][class*='bottom']",
+      "title": "Navegación Inferior",
+      "description": "Tu navegación principal está en la parte inferior para fácil acceso con el pulgar. Accede rápidamente a Dashboard, Contenido, Campañas y más.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Navegación inferior",
+        "ariaDescription": "Barra de navegación inferior para acceso rápido",
+        "announceOnFocus": "Último paso: navegación inferior para acceso rápido a las secciones principales con el pulgar."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 180
+  }
+}

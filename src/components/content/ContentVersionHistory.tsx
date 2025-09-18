@@ -13,7 +13,7 @@ import {
   RotateCcw, 
   Eye, 
   Download, 
-  Compare,
+  ArrowLeftRight,
   Clock,
   User,
   GitBranch,
@@ -372,7 +372,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
 
           {selectedVersions.length === 2 && (
             <Button variant="outline" onClick={handleCompareVersions}>
-              <Compare className="h-4 w-4 mr-2" />
+              <ArrowLeftRight className="h-4 w-4 mr-2" />
               Compare Selected
             </Button>
           )}

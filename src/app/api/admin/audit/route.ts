@@ -82,4 +82,5 @@ async function GET(request: NextRequest) {
   }
 }
 
-export { withErrorHandler(GET) as GET };
+export const GET_HANDLER = withErrorHandler(GET);
+export { GET_HANDLER as GET };

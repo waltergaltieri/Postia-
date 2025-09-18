@@ -63,12 +63,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { packageKey } = await request.json();
+    // Validate request body
+    let body;
+    try {
+      body = await request.json();
+    } catch (error) {
+      return NextResponse.json(
+        { error: { message: 'Invalid JSON in request body' } },
+        { status: 400 }
+      );
+    }
 
-    // Validate package
-    if (!packageKey || !TOKEN_PACKAGES[packageKey as keyof typeof TOKEN_PACKAGES]) {
+    const { packageKey } = body;
+
+    // Validate package key
+    if (!packageKey || typeof packageKey !== 'string') {
+      return NextResponse.json(
+        { error: { message: 'Package key is required and must be a string' } },
+        { status: 400 }
+      );
+    }
+
+    if (!TOKEN_PACKAGES[packageKey as keyof typeof TOKEN_PACKAGES]) {
       return NextResponse.json(
         { error: { message: 'Invalid token package' } },
+        { status: 400 }
+      );
+    }
+
+    // Validate user has agency
+    if (!session.user.agencyId) {
+      return NextResponse.json(
+        { error: { message: 'User must be associated with an agency' } },
         { status: 400 }
       );
     }

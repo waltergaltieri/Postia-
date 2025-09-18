@@ -1,0 +1,195 @@
+{
+  "id": "responsive-welcome-tour",
+  "name": "Tour de Bienvenida Responsivo",
+  "description": "Tour de bienvenida que se adapta a diferentes tamaños de pantalla",
+  "category": "onboarding",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "element": "[data-tour='main-header']",
+      "title": "Bienvenido a Postia SaaS",
+      "description": "Esta es la barra de navegación principal donde encontrarás todas las herramientas importantes.",
+      "position": "bottom",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Bienvenido",
+      "mobileDescription": "Barra de navegación principal con herramientas importantes.",
+      "mobilePosition": "bottom",
+      "mobileElement": "[data-tour='mobile-header']",
+      "tabletTitle": "Bienvenido a Postia",
+      "tabletDescription": "Esta es la barra de navegación principal con todas las herramientas importantes.",
+      "tabletPosition": "bottom",
+      "desktopTitle": "Bienvenido a Postia SaaS",
+      "desktopDescription": "Esta es la barra de navegación principal donde encontrarás todas las herramientas importantes para gestionar tu contenido.",
+      "desktopPosition": "bottom",
+      "touchInstructions": "Toca para continuar o desliza hacia la izquierda",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Barra de navegación principal",
+        "ariaDescription": "Introducción a la barra de navegación principal de Postia SaaS"
+      }
+    },
+    {
+      "element": "[data-tour='sidebar-menu']",
+      "title": "Menú de Navegación",
+      "description": "Usa este menú lateral para navegar entre las diferentes secciones de la aplicación.",
+      "position": "right",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Menú",
+      "mobileDescription": "Menú para navegar entre secciones.",
+      "mobilePosition": "center",
+      "mobileElement": "[data-tour='mobile-menu-button']",
+      "tabletTitle": "Menú Lateral",
+      "tabletDescription": "Usa este menú para navegar entre las secciones de la aplicación.",
+      "tabletPosition": "right",
+      "desktopTitle": "Menú de Navegación Lateral",
+      "desktopDescription": "Utiliza este menú lateral para navegar fácilmente entre las diferentes secciones y funcionalidades de la aplicación.",
+      "desktopPosition": "right",
+      "touchInstructions": "Toca el ícono del menú para abrir",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Menú de navegación lateral",
+        "ariaDescription": "Cómo usar el menú lateral para navegar por la aplicación"
+      }
+    },
+    {
+      "element": "[data-tour='content-area']",
+      "title": "Área de Contenido Principal",
+      "description": "Aquí se muestra el contenido principal de cada sección. Es donde realizarás la mayoría de tu trabajo.",
+      "position": "top",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Contenido",
+      "mobileDescription": "Área principal donde trabajarás.",
+      "mobilePosition": "top",
+      "tabletTitle": "Área Principal",
+      "tabletDescription": "Aquí se muestra el contenido principal donde realizarás tu trabajo.",
+      "tabletPosition": "top",
+      "desktopTitle": "Área de Contenido Principal",
+      "desktopDescription": "Esta es el área de contenido principal donde se muestra toda la información relevante y donde realizarás la mayoría de tu trabajo diario.",
+      "desktopPosition": "top",
+      "touchInstructions": "Desliza para explorar el contenido",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Área de contenido principal",
+        "ariaDescription": "Introducción al área de trabajo principal de la aplicación"
+      }
+    },
+    {
+      "element": "[data-tour='action-buttons']",
+      "title": "Botones de Acción",
+      "description": "Estos botones te permiten realizar acciones rápidas como crear nuevo contenido o acceder a configuraciones.",
+      "position": "left",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Acciones",
+      "mobileDescription": "Botones para acciones rápidas.",
+      "mobilePosition": "bottom",
+      "mobileElement": "[data-tour='mobile-fab']",
+      "tabletTitle": "Botones de Acción",
+      "tabletDescription": "Botones para realizar acciones rápidas como crear contenido.",
+      "tabletPosition": "left",
+      "desktopTitle": "Botones de Acción Rápida",
+      "desktopDescription": "Estos botones te permiten realizar acciones rápidas y frecuentes como crear nuevo contenido, acceder a configuraciones o gestionar tu cuenta.",
+      "desktopPosition": "left",
+      "touchInstructions": "Toca los botones para realizar acciones",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Botones de acción rápida",
+        "ariaDescription": "Cómo usar los botones para realizar acciones rápidas"
+      }
+    },
+    {
+      "element": "[data-tour='user-profile']",
+      "title": "Perfil de Usuario",
+      "description": "Accede a tu perfil, configuraciones de cuenta y opciones de personalización desde aquí.",
+      "position": "bottom",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Perfil",
+      "mobileDescription": "Tu perfil y configuraciones.",
+      "mobilePosition": "bottom",
+      "tabletTitle": "Tu Perfil",
+      "tabletDescription": "Accede a tu perfil y configuraciones de cuenta.",
+      "tabletPosition": "bottom",
+      "desktopTitle": "Perfil y Configuraciones",
+      "desktopDescription": "Desde aquí puedes acceder a tu perfil de usuario, configuraciones de cuenta, preferencias de personalización y opciones de seguridad.",
+      "desktopPosition": "bottom",
+      "touchInstructions": "Toca para acceder a tu perfil",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Perfil de usuario y configuraciones",
+        "ariaDescription": "Cómo acceder a tu perfil y configuraciones de cuenta"
+      }
+    },
+    {
+      "element": "[data-tour='help-center']",
+      "title": "Centro de Ayuda",
+      "description": "¿Necesitas ayuda? Aquí encontrarás documentación, tutoriales y podrás contactar con soporte.",
+      "position": "top",
+      "showButtons": true,
+      "showProgress": true,
+      "mobileTitle": "Ayuda",
+      "mobileDescription": "Documentación y soporte.",
+      "mobilePosition": "center",
+      "tabletTitle": "Centro de Ayuda",
+      "tabletDescription": "Documentación, tutoriales y contacto con soporte.",
+      "tabletPosition": "top",
+      "desktopTitle": "Centro de Ayuda y Soporte",
+      "desktopDescription": "Aquí encontrarás toda la documentación necesaria, tutoriales paso a paso, preguntas frecuentes y podrás contactar directamente con nuestro equipo de soporte técnico.",
+      "desktopPosition": "top",
+      "touchInstructions": "Toca para acceder a la ayuda",
+      "showOnMobile": true,
+      "showOnTablet": true,
+      "showOnDesktop": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Centro de ayuda y soporte",
+        "ariaDescription": "Cómo acceder a la documentación y soporte técnico"
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "type": "manual",
+      "priority": 1
+    },
+    {
+      "type": "auto",
+      "condition": "first_visit",
+      "delay": 1000,
+      "priority": 2
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_role",
+      "operator": "exists",
+      "value": true
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15",
+    "estimatedDuration": 180,
+    "supportedDevices": ["mobile", "tablet", "desktop"],
+    "languages": ["es"],
+    "accessibility": {
+      "screenReaderSupport": true,
+      "keyboardNavigation": true,
+      "highContrast": true,
+      "reducedMotion": true
+    }
+  }
+}

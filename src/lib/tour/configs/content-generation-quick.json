@@ -1,0 +1,102 @@
+{
+  "id": "content-generation-quick",
+  "name": "Quick Content Generation",
+  "description": "Streamlined content generation tour for experienced users focusing on efficiency and advanced features",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "experienced_user_quick_mode",
+      "delay": 1000,
+      "priority": 1
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "page_path",
+      "operator": "contains",
+      "value": "/content"
+    },
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "experienced_user"
+    }
+  ],
+  "steps": [
+    {
+      "element": "div[class*='quick-actions'], section:has(button:contains('Rápido'))",
+      "title": "Modo Generación Rápida",
+      "description": "Para usuarios experimentados: utiliza plantillas predefinidas del cliente, configuraciones guardadas y generación en lote para crear contenido múltiple eficientemente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Modo de generación rápida",
+        "ariaDescription": "Acceso a herramientas avanzadas para generación eficiente",
+        "announceOnFocus": "Primer paso: utiliza el modo de generación rápida con plantillas predefinidas y configuraciones guardadas del cliente."
+      }
+    },
+    {
+      "element": "div[class*='batch-generation'], button:has(span:contains('lote'))",
+      "title": "Generación en Lote",
+      "description": "Crea múltiples piezas de contenido simultáneamente. Ideal para campañas completas, series de posts o contenido semanal con variaciones automáticas.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Generación en lote de contenido",
+        "ariaDescription": "Crea múltiples piezas de contenido simultáneamente",
+        "announceOnFocus": "Segundo paso: utiliza la generación en lote para crear múltiples piezas de contenido simultáneamente para campañas completas."
+      }
+    },
+    {
+      "element": "div[class*='ai-suggestions'], section:has(span:contains('sugerencias IA'))",
+      "title": "Sugerencias IA Proactivas",
+      "description": "La IA analiza tendencias actuales, eventos del cliente y performance histórico para sugerir proactivamente temas y enfoques de contenido relevantes.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Sugerencias proactivas de IA",
+        "ariaDescription": "Recibe sugerencias automáticas basadas en tendencias y datos del cliente",
+        "announceOnFocus": "Tercer paso: aprovecha las sugerencias proactivas de IA basadas en tendencias actuales y performance del cliente."
+      }
+    },
+    {
+      "element": "div[class*='auto-scheduling'], button:has(span:contains('programación automática'))",
+      "title": "Programación Inteligente",
+      "description": "Programa automáticamente el contenido en los momentos óptimos según los datos de audiencia del cliente, evitando conflictos y maximizando alcance.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Programación automática inteligente",
+        "ariaDescription": "Programa contenido automáticamente en momentos óptimos",
+        "announceOnFocus": "Cuarto paso: utiliza la programación inteligente para publicar automáticamente en momentos óptimos según datos de audiencia."
+      }
+    },
+    {
+      "element": "div[class*='brand-templates'], section:has(span:contains('plantillas de marca'))",
+      "title": "Plantillas de Marca Personalizadas",
+      "description": "Accede a plantillas específicas del cliente con su voz de marca, colores y elementos visuales preconfigurados para generación instantánea y consistente.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Plantillas de marca personalizadas",
+        "ariaDescription": "Utiliza plantillas preconfiguradas con elementos de marca del cliente",
+        "announceOnFocus": "Último paso: utiliza plantillas personalizadas del cliente con voz de marca y elementos visuales preconfigurados."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 120
+  }
+}

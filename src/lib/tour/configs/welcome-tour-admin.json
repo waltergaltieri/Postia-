@@ -1,0 +1,138 @@
+{
+  "id": "welcome-tour-admin",
+  "name": "Welcome Tour - Administrator",
+  "description": "Comprehensive onboarding tour for administrators with advanced features and client management focus",
+  "category": "onboarding",
+  "triggers": [
+    {
+      "type": "auto",
+      "condition": "first_login",
+      "delay": 1000,
+      "priority": 1
+    }
+  ],
+  "conditions": [
+    {
+      "type": "user_role",
+      "operator": "equals",
+      "value": "admin"
+    },
+    {
+      "type": "user_property",
+      "operator": "equals",
+      "value": "new_user"
+    }
+  ],
+  "steps": [
+    {
+      "element": "nav[class*='bg-card']",
+      "title": "¡Bienvenido, Administrador!",
+      "description": "Como administrador, tienes acceso completo a todas las funcionalidades de Postia. Esta barra de navegación te permite gestionar clientes, configurar el sistema y supervisar todas las operaciones.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Navegación principal para administradores",
+        "ariaDescription": "Introducción a la navegación con privilegios de administrador",
+        "announceOnFocus": "Bienvenido al tour de administrador de Postia. Tienes acceso completo a todas las funcionalidades del sistema."
+      }
+    },
+    {
+      "element": "button[class*='justify-start']:has(div:contains('brandName'))",
+      "title": "Gestión Multi-Cliente",
+      "description": "Como administrador, puedes cambiar entre todos los clientes de la agencia. Cada cliente tiene configuraciones independientes que puedes personalizar y gestionar.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Gestión multi-cliente",
+        "ariaDescription": "Capacidades de administración para múltiples clientes",
+        "announceOnFocus": "Segundo paso: gestión multi-cliente con capacidades de administración para personalizar configuraciones independientes."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Clients'))",
+      "title": "Administración de Clientes",
+      "description": "Esta es una de tus secciones más importantes. Aquí puedes crear nuevos clientes, configurar sus marcas, asignar usuarios y gestionar permisos específicos para cada cuenta.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Administración de clientes",
+        "ariaDescription": "Funciones avanzadas de administración de clientes",
+        "announceOnFocus": "Tercer paso: administración completa de clientes incluyendo creación, configuración de marcas y gestión de permisos."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Content Generation'))",
+      "title": "Supervisión de Contenido",
+      "description": "Supervisa y revisa todo el contenido generado por tu equipo. Puedes establecer flujos de aprobación, plantillas corporativas y estándares de calidad para todos los clientes.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Supervisión de contenido",
+        "ariaDescription": "Herramientas de supervisión y control de calidad",
+        "announceOnFocus": "Cuarto paso: supervisión de contenido con flujos de aprobación y control de calidad para todos los clientes."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Campaigns'))",
+      "title": "Gestión Global de Campañas",
+      "description": "Visualiza y gestiona todas las campañas de todos los clientes desde una vista unificada. Analiza rendimiento, coordina recursos y optimiza estrategias a nivel de agencia.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Gestión global de campañas",
+        "ariaDescription": "Vista unificada de todas las campañas de la agencia",
+        "announceOnFocus": "Quinto paso: gestión global de campañas con vista unificada para analizar rendimiento y coordinar recursos."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Brand Assets'))",
+      "title": "Biblioteca Central de Recursos",
+      "description": "Gestiona la biblioteca central de recursos de todos los clientes. Establece estándares de marca, organiza assets compartidos y mantén la consistencia visual en toda la agencia.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Biblioteca central de recursos",
+        "ariaDescription": "Gestión centralizada de recursos de marca",
+        "announceOnFocus": "Sexto paso: biblioteca central de recursos para gestionar assets de todos los clientes y mantener consistencia visual."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Settings'))",
+      "title": "Configuración del Sistema",
+      "description": "Accede a la configuración avanzada del sistema: gestión de usuarios, configuración de IA, integraciones con terceros, facturación y configuraciones de seguridad.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Configuración del sistema",
+        "ariaDescription": "Acceso a configuraciones avanzadas de administrador",
+        "announceOnFocus": "Séptimo paso: configuración avanzada del sistema incluyendo gestión de usuarios, IA e integraciones."
+      }
+    },
+    {
+      "element": "div[class*='border-t']:last-child",
+      "title": "Panel de Administrador",
+      "description": "Tu panel de administrador te da acceso a estadísticas globales, reportes de uso, gestión de licencias y herramientas de soporte técnico para toda la agencia.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Panel de administrador",
+        "ariaDescription": "Herramientas específicas de administración y soporte",
+        "announceOnFocus": "Último paso: panel de administrador con estadísticas globales, reportes y herramientas de soporte técnico."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 280
+  }
+}

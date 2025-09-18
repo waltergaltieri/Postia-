@@ -1,0 +1,162 @@
+{
+  "id": "campaign-calendar-tour",
+  "name": "Campaign Calendar Integration",
+  "description": "Specialized tour focusing on calendar integration, scheduling optimization, and timeline management for campaigns",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "page_path_contains_calendar",
+      "delay": 1500,
+      "priority": 2
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "page_path",
+      "operator": "contains",
+      "value": "/calendar"
+    }
+  ],
+  "steps": [
+    {
+      "element": "div[class*='calendar-view'], div[class*='month-view']",
+      "title": "Vista de Calendario Unificada",
+      "description": "Tu calendario central muestra todas las campañas activas del cliente seleccionado. Cada color representa una campaña diferente, facilitando la visualización de la carga de trabajo y evitando solapamientos.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Vista de calendario unificada",
+        "ariaDescription": "Comprende la organización visual de campañas en el calendario",
+        "announceOnFocus": "Primer paso: explora la vista de calendario unificada donde cada color representa campañas diferentes del cliente seleccionado."
+      }
+    },
+    {
+      "element": "div[class*='campaign-timeline'], div[class*='gantt-view']",
+      "title": "Timeline de Campañas",
+      "description": "Visualiza la duración completa de cada campaña, identifica períodos de alta actividad y planifica recursos. Arrastra para ajustar fechas y evitar conflictos entre campañas.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Timeline visual de campañas",
+        "ariaDescription": "Gestiona duración y recursos de campañas visualmente",
+        "announceOnFocus": "Segundo paso: utiliza el timeline visual para gestionar la duración de campañas y planificar recursos eficientemente."
+      }
+    },
+    {
+      "element": "div[class*='content-scheduling'], button:has(span:contains('programar'))",
+      "title": "Programación Inteligente de Contenido",
+      "description": "Programa contenido específico en fechas estratégicas. La IA sugiere los mejores momentos basándose en la actividad de la audiencia del cliente y eventos importantes de su sector.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Programación inteligente de contenido",
+        "ariaDescription": "Programa contenido en momentos óptimos según datos de audiencia",
+        "announceOnFocus": "Tercer paso: programa contenido inteligentemente usando datos de audiencia del cliente y eventos sectoriales importantes."
+      }
+    },
+    {
+      "element": "div[class*='milestone-markers'], div:has(span:contains('hito'))",
+      "title": "Hitos y Fechas Clave",
+      "description": "Marca fechas importantes del cliente: lanzamientos de productos, eventos, temporadas altas, etc. Estos hitos guían la planificación de contenido y timing de campañas.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Gestión de hitos y fechas clave",
+        "ariaDescription": "Marca eventos importantes del cliente para planificación estratégica",
+        "announceOnFocus": "Cuarto paso: marca hitos importantes del cliente como lanzamientos y eventos para guiar la planificación estratégica."
+      }
+    },
+    {
+      "element": "div[class*='resource-allocation'], section:has(span:contains('recursos'))",
+      "title": "Asignación de Recursos",
+      "description": "Visualiza la carga de trabajo del equipo, identifica períodos de alta demanda y redistribuye tareas. Evita sobrecarga y asegura calidad consistente en todas las campañas.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Asignación y gestión de recursos de equipo",
+        "ariaDescription": "Gestiona carga de trabajo y redistribuye tareas eficientemente",
+        "announceOnFocus": "Quinto paso: gestiona la asignación de recursos del equipo para evitar sobrecarga y mantener calidad consistente."
+      }
+    },
+    {
+      "element": "div[class*='cross-campaign'], section:has(span:contains('coordinación'))",
+      "title": "Coordinación Entre Campañas",
+      "description": "Coordina mensajes entre diferentes campañas del mismo cliente para mantener coherencia. Evita mensajes contradictorios y maximiza el impacto conjunto de todas las iniciativas.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Coordinación entre múltiples campañas",
+        "ariaDescription": "Mantén coherencia de mensajes entre campañas simultáneas",
+        "announceOnFocus": "Sexto paso: coordina mensajes entre campañas simultáneas para mantener coherencia y maximizar impacto conjunto."
+      }
+    },
+    {
+      "element": "div[class*='seasonal-planning'], div:has(span:contains('estacional'))",
+      "title": "Planificación Estacional",
+      "description": "Anticipa y planifica para temporadas importantes del negocio del cliente: Black Friday, Navidad, temporadas altas específicas del sector, etc.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Planificación estacional estratégica",
+        "ariaDescription": "Anticipa temporadas importantes del negocio del cliente",
+        "announceOnFocus": "Séptimo paso: planifica estratégicamente para temporadas importantes y eventos clave del sector del cliente."
+      }
+    },
+    {
+      "element": "div[class*='approval-deadlines'], div:has(span:contains('fecha límite'))",
+      "title": "Gestión de Fechas Límite",
+      "description": "Establece y monitorea fechas límite para aprobaciones, creación de contenido y revisiones. Recibe alertas automáticas para mantener las campañas en cronograma.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Gestión de fechas límite y aprobaciones",
+        "ariaDescription": "Monitorea deadlines y recibe alertas automáticas",
+        "announceOnFocus": "Octavo paso: gestiona fechas límite de aprobaciones y recibe alertas automáticas para mantener cronogramas."
+      }
+    },
+    {
+      "element": "div[class*='calendar-sync'], button:has(span:contains('sincronizar'))",
+      "title": "Sincronización Externa",
+      "description": "Sincroniza con calendarios externos del cliente (Google Calendar, Outlook) para considerar sus eventos internos, reuniones importantes y disponibilidad del equipo.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 9: Sincronización con calendarios externos",
+        "ariaDescription": "Integra eventos del cliente desde calendarios externos",
+        "announceOnFocus": "Noveno paso: sincroniza con calendarios externos del cliente para considerar eventos internos y disponibilidad del equipo."
+      }
+    },
+    {
+      "element": "div[class*='performance-overlay'], div:has(span:contains('rendimiento'))",
+      "title": "Overlay de Rendimiento",
+      "description": "Visualiza métricas de rendimiento directamente en el calendario: días de mayor engagement, períodos de mejor conversión, y patrones de audiencia del cliente.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 10: Overlay de métricas de rendimiento",
+        "ariaDescription": "Visualiza patrones de rendimiento directamente en calendario",
+        "announceOnFocus": "Último paso: utiliza el overlay de rendimiento para visualizar patrones de engagement y optimizar timing futuro."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 300
+  }
+}

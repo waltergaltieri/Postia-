@@ -130,8 +130,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Estimate token cost
-    const steps = ['IDEA', 'COPY_DESIGN', 'COPY_PUBLICATION'];
+    // Estimate token cost using standardized step names
+    const steps = ['IDEA_GENERATION', 'COPY_DESIGN', 'COPY_PUBLICATION'];
     if (includeImages) {
       steps.push('BASE_IMAGE', 'FINAL_DESIGN');
     }

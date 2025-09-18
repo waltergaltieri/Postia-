@@ -1,0 +1,167 @@
+{
+  "id": "content-optimization-tour",
+  "name": "Content Optimization Mastery",
+  "description": "Advanced tour focusing on content optimization techniques, A/B testing, and performance enhancement with client-specific branding",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "advanced_user_content_generation",
+      "delay": 3000,
+      "priority": 3
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "page_path",
+      "operator": "contains",
+      "value": "/content"
+    },
+    {
+      "type": "user_property",
+      "operator": "not_equals",
+      "value": "new_user"
+    }
+  ],
+  "steps": [
+    {
+      "element": "div[class*='analytics-panel'], section:has(h3:contains('Rendimiento'))",
+      "title": "Análisis de Rendimiento Previo",
+      "description": "Antes de crear nuevo contenido, revisa qué ha funcionado mejor para este cliente. Analiza métricas de engagement, alcance y conversiones para replicar el éxito.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Análisis de rendimiento histórico",
+        "ariaDescription": "Revisa métricas de contenido previo para optimizar nuevas creaciones",
+        "announceOnFocus": "Primer paso: analiza el rendimiento histórico del cliente para optimizar el nuevo contenido basándote en datos reales."
+      }
+    },
+    {
+      "element": "div[class*='audience-insights'], section:has(span:contains('audiencia'))",
+      "title": "Insights de Audiencia",
+      "description": "Utiliza los datos de audiencia del cliente para personalizar el contenido. Considera demografía, intereses, horarios de actividad y preferencias de formato.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Insights de audiencia del cliente",
+        "ariaDescription": "Personaliza contenido basado en datos de audiencia específicos",
+        "announceOnFocus": "Segundo paso: utiliza los insights de audiencia del cliente para personalizar contenido según demografía e intereses."
+      }
+    },
+    {
+      "element": "div[class*='competitor-analysis'], button:has(span:contains('competencia'))",
+      "title": "Análisis Competitivo",
+      "description": "Revisa qué está funcionando en el sector del cliente. Identifica tendencias, gaps de contenido y oportunidades para diferenciarte de la competencia.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Análisis competitivo del sector",
+        "ariaDescription": "Identifica oportunidades basándote en el análisis de competencia",
+        "announceOnFocus": "Tercer paso: analiza la competencia del cliente para identificar tendencias y oportunidades de diferenciación."
+      }
+    },
+    {
+      "element": "div[class*='ab-testing'], section:has(h4:contains('A/B'))",
+      "title": "Configuración de A/B Testing",
+      "description": "Crea múltiples variaciones del mismo contenido para probar qué funciona mejor. Varía elementos como headlines, CTAs, imágenes o tono para optimizar resultados.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Configuración de pruebas A/B",
+        "ariaDescription": "Aprende a crear variaciones para testing de rendimiento",
+        "announceOnFocus": "Cuarto paso: configura pruebas A/B creando variaciones para optimizar elementos como headlines y CTAs."
+      }
+    },
+    {
+      "element": "div[class*='seo-optimization'], input[placeholder*='keywords']",
+      "title": "Optimización SEO y Keywords",
+      "description": "Integra keywords relevantes para el cliente y su industria. La IA sugiere términos de búsqueda populares y hashtags trending específicos del sector.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Optimización SEO y keywords",
+        "ariaDescription": "Integra keywords y hashtags relevantes para el sector del cliente",
+        "announceOnFocus": "Quinto paso: optimiza el contenido con keywords y hashtags relevantes sugeridos por IA para el sector del cliente."
+      }
+    },
+    {
+      "element": "div[class*='timing-optimizer'], section:has(span:contains('mejor momento'))",
+      "title": "Optimización de Timing",
+      "description": "Basándose en los datos del cliente, Postia sugiere los mejores momentos para publicar según la actividad de su audiencia específica y zona horaria.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Optimización de timing de publicación",
+        "ariaDescription": "Programa contenido en momentos óptimos según datos de audiencia",
+        "announceOnFocus": "Sexto paso: programa el contenido en los momentos óptimos basándote en la actividad de la audiencia del cliente."
+      }
+    },
+    {
+      "element": "div[class*='brand-consistency'], div:has(span:contains('consistencia'))",
+      "title": "Verificación de Consistencia de Marca",
+      "description": "Postia verifica automáticamente que el contenido mantiene la voz de marca, colores corporativos y directrices específicas del cliente antes de la publicación.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Verificación de consistencia de marca",
+        "ariaDescription": "Asegura que el contenido mantiene las directrices de marca del cliente",
+        "announceOnFocus": "Séptimo paso: verifica automáticamente que el contenido mantiene la consistencia de marca y directrices del cliente."
+      }
+    },
+    {
+      "element": "div[class*='performance-prediction'], section:has(span:contains('predicción'))",
+      "title": "Predicción de Rendimiento",
+      "description": "Basándose en contenido histórico similar, Postia predice el rendimiento esperado: engagement estimado, alcance potencial y probabilidad de viralización.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Predicción de rendimiento del contenido",
+        "ariaDescription": "Revisa las predicciones de rendimiento basadas en datos históricos",
+        "announceOnFocus": "Octavo paso: revisa las predicciones de rendimiento basadas en el análisis de contenido histórico similar."
+      }
+    },
+    {
+      "element": "div[class*='cross-platform'], section:has(span:contains('multiplataforma'))",
+      "title": "Adaptación Multiplataforma",
+      "description": "Adapta automáticamente el contenido para múltiples plataformas manteniendo el mensaje core pero optimizando formato, longitud y estilo para cada red social.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 9: Adaptación multiplataforma automática",
+        "ariaDescription": "Adapta contenido para múltiples redes sociales simultáneamente",
+        "announceOnFocus": "Noveno paso: adapta automáticamente el contenido para múltiples plataformas optimizando formato y estilo específico."
+      }
+    },
+    {
+      "element": "div[class*='campaign-integration'], button:has(span:contains('campaña'))",
+      "title": "Integración con Campañas",
+      "description": "Conecta este contenido con campañas existentes del cliente para mantener coherencia temática y maximizar el impacto del mensaje conjunto.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 10: Integración con campañas existentes",
+        "ariaDescription": "Conecta el contenido con campañas para coherencia temática",
+        "announceOnFocus": "Décimo paso: integra el contenido con campañas existentes del cliente para mantener coherencia temática y maximizar impacto."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 380
+  }
+}

@@ -20,15 +20,52 @@ async function main() {
     },
   });
 
-  // Create demo admin user
+  // Create demo admin user with password
+  const hashedPassword = await hash('password123', 12);
   const adminUser = await prisma.user.upsert({
     where: { email: 'admin@demo.com' },
-    update: {},
+    update: {
+      password: hashedPassword,
+    },
     create: {
       email: 'admin@demo.com',
       name: 'Demo Admin',
       role: 'ADMIN',
       agencyId: agency.id,
+      password: hashedPassword,
+      emailVerified: new Date(),
+    },
+  });
+
+  // Create demo manager user
+  const managerUser = await prisma.user.upsert({
+    where: { email: 'manager@demo.com' },
+    update: {
+      password: hashedPassword,
+    },
+    create: {
+      email: 'manager@demo.com',
+      name: 'Demo Manager',
+      role: 'MANAGER',
+      agencyId: agency.id,
+      password: hashedPassword,
+      emailVerified: new Date(),
+    },
+  });
+
+  // Create demo user
+  const demoUser = await prisma.user.upsert({
+    where: { email: 'user@demo.com' },
+    update: {
+      password: hashedPassword,
+    },
+    create: {
+      email: 'user@demo.com',
+      name: 'Demo User',
+      role: 'USER',
+      agencyId: agency.id,
+      password: hashedPassword,
+      emailVerified: new Date(),
     },
   });
 

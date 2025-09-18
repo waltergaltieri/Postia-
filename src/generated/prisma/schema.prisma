@@ -104,17 +104,17 @@ model User {
   email                  String    @unique
   name                   String
   password               String? // Nullable for OAuth users
-  role                   UserRole
+  role                   UserRole? // Nullable for OAuth users until they complete registration
   emailVerified          DateTime?
   emailVerificationToken String?
   passwordResetToken     String?
   passwordResetExpires   DateTime?
-  agencyId               String
+  agencyId               String? // Nullable for OAuth users until they complete registration
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 
   // Relations
-  agency            Agency             @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  agency            Agency?            @relation(fields: [agencyId], references: [id], onDelete: Cascade)
   assignedClients   Client[]           @relation("UserClients")
   invitationsSent   UserInvitation[]   @relation("InvitationSender")
   accounts          Account[]

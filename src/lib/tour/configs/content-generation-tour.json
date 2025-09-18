@@ -1,0 +1,175 @@
+{
+  "id": "content-generation-tour",
+  "name": "Content Generation Mastery Tour",
+  "description": "Comprehensive step-by-step guide for AI content generation workflow with optimization tips and client branding integration",
+  "category": "feature",
+  "triggers": [
+    {
+      "type": "conditional",
+      "condition": "page_path_contains_content_generation",
+      "delay": 2000,
+      "priority": 2
+    },
+    {
+      "type": "manual"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "page_path",
+      "operator": "contains",
+      "value": "/content"
+    }
+  ],
+  "steps": [
+    {
+      "element": "div[class*='client-brand-indicator'], button:has(div:contains('brandName'))",
+      "title": "Contexto de Marca Activo",
+      "description": "Antes de generar contenido, verifica que tienes seleccionado el cliente correcto. La IA utilizará automáticamente la voz de marca, colores corporativos y directrices específicas de este cliente.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 1: Verificación de contexto de marca",
+        "ariaDescription": "Confirma el cliente seleccionado para aplicar su marca",
+        "announceOnFocus": "Primer paso: verifica que tienes el cliente correcto seleccionado para aplicar su voz de marca y directrices."
+      }
+    },
+    {
+      "element": "select[name*='content-type'], div[role='combobox']:has(span:contains('tipo')), button:has(span:contains('Instagram')), button:has(span:contains('LinkedIn'))",
+      "title": "Selecciona el Tipo de Contenido",
+      "description": "Elige la plataforma y formato específico. Cada tipo tiene optimizaciones automáticas: Instagram favorece contenido visual, LinkedIn prefiere tono profesional, Twitter requiere brevedad.",
+      "position": "bottom",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 2: Selector de tipo de contenido",
+        "ariaDescription": "Aprende a seleccionar el tipo de contenido optimizado por plataforma",
+        "announceOnFocus": "Segundo paso: selecciona el tipo de contenido. Cada plataforma tiene optimizaciones automáticas específicas."
+      }
+    },
+    {
+      "element": "textarea[placeholder*='describe'], input[placeholder*='contenido'], div[contenteditable='true']",
+      "title": "Prompt Inteligente",
+      "description": "Describe tu idea con detalle. Incluye: objetivo del post, audiencia objetivo, mensaje clave y call-to-action deseado. Ejemplo: 'Post sobre beneficios del producto X para empresas medianas, destacando ahorro de tiempo, con CTA para demo gratuita'.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 3: Campo de prompt inteligente",
+        "ariaDescription": "Aprende a escribir prompts efectivos con estructura optimizada",
+        "announceOnFocus": "Tercer paso: escribe un prompt detallado incluyendo objetivo, audiencia, mensaje clave y call-to-action."
+      }
+    },
+    {
+      "element": "select[name*='tone'], div[role='combobox']:has(span:contains('tono')), button:has(span:contains('profesional'))",
+      "title": "Tono de Marca Personalizado",
+      "description": "El tono se ajusta automáticamente según las directrices del cliente seleccionado. Puedes refinarlo según el contexto específico: formal para anuncios corporativos, casual para engagement, inspiracional para motivación.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 4: Selector de tono personalizado",
+        "ariaDescription": "Configura el tono basado en las directrices del cliente",
+        "announceOnFocus": "Cuarto paso: ajusta el tono según las directrices del cliente y el contexto específico del contenido."
+      }
+    },
+    {
+      "element": "div[class*='advanced-options'], button:has(span:contains('Avanzado')), details:has(summary:contains('opciones'))",
+      "title": "Opciones Avanzadas (Opcional)",
+      "description": "Configura parámetros adicionales: longitud del texto, inclusión de hashtags, menciones específicas, emojis, y referencias a productos o servicios del cliente.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 5: Opciones avanzadas de generación",
+        "ariaDescription": "Configura parámetros adicionales para personalización avanzada",
+        "announceOnFocus": "Quinto paso: configura opciones avanzadas como longitud, hashtags y referencias específicas del cliente."
+      }
+    },
+    {
+      "element": "button[type='submit'], button:has(span:contains('Generar')), button[class*='generate']",
+      "title": "Generar Contenido Inteligente",
+      "description": "La IA creará múltiples variaciones optimizadas usando la voz de marca del cliente. El proceso toma 5-15 segundos y genera opciones adaptadas al tono y plataforma seleccionados.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 6: Botón de generación inteligente",
+        "ariaDescription": "Inicia la generación de múltiples variaciones optimizadas",
+        "announceOnFocus": "Sexto paso: genera múltiples variaciones de contenido optimizadas con la voz de marca del cliente."
+      }
+    },
+    {
+      "element": "div[class*='content-preview'], div[class*='generated-content'], article[class*='preview']",
+      "title": "Vista Previa con Branding",
+      "description": "Revisa las opciones generadas. Cada variación mantiene la consistencia de marca del cliente. Puedes editar directamente el texto, ajustar el formato y ver cómo se verá en la plataforma seleccionada.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 7: Vista previa con branding aplicado",
+        "ariaDescription": "Revisa y edita las variaciones generadas con branding del cliente",
+        "announceOnFocus": "Séptimo paso: revisa las variaciones generadas con branding del cliente aplicado y edita según necesites."
+      }
+    },
+    {
+      "element": "div[class*='optimization-tips'], aside[class*='suggestions']",
+      "title": "Sugerencias de Optimización",
+      "description": "Postia analiza tu contenido y sugiere mejoras automáticas: hashtags trending, mejor momento de publicación, ajustes de tono y optimizaciones SEO específicas para la plataforma.",
+      "position": "right",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 8: Sugerencias de optimización automática",
+        "ariaDescription": "Revisa las sugerencias de mejora generadas por IA",
+        "announceOnFocus": "Octavo paso: revisa las sugerencias de optimización automática para mejorar el rendimiento del contenido."
+      }
+    },
+    {
+      "element": "button:has(span:contains('Regenerar')), button[class*='regenerate']",
+      "title": "Regenerar Variaciones",
+      "description": "¿No te convence el resultado? Regenera con un clic manteniendo los mismos parámetros, o ajusta el prompt para obtener variaciones diferentes. Cada regeneración es gratuita.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 9: Regeneración de variaciones",
+        "ariaDescription": "Aprende a regenerar contenido con ajustes",
+        "announceOnFocus": "Noveno paso: regenera variaciones manteniendo parámetros o ajustando el prompt para diferentes resultados."
+      }
+    },
+    {
+      "element": "div[class*='visual-assets'], section:has(img), div[class*='image-suggestions']",
+      "title": "Recursos Visuales Sugeridos",
+      "description": "Basándose en tu contenido, Postia sugiere imágenes de la biblioteca del cliente, iconos de marca y elementos visuales que complementan perfectamente el mensaje.",
+      "position": "left",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 10: Recursos visuales sugeridos",
+        "ariaDescription": "Explora las sugerencias de recursos visuales del cliente",
+        "announceOnFocus": "Décimo paso: explora los recursos visuales sugeridos de la biblioteca del cliente para complementar tu contenido."
+      }
+    },
+    {
+      "element": "div[class*='save-options'], div:has(button:contains('Guardar')), div:has(button:contains('Programar'))",
+      "title": "Guardar y Programar",
+      "description": "Guarda como borrador para revisar después, programa para publicación automática, o añade directamente a una campaña existente. Todas las opciones mantienen el branding del cliente.",
+      "position": "top",
+      "showProgress": true,
+      "showButtons": true,
+      "accessibility": {
+        "ariaLabel": "Paso 11: Opciones de guardado y programación",
+        "ariaDescription": "Aprende las diferentes opciones para guardar y programar contenido",
+        "announceOnFocus": "Último paso: elige cómo guardar tu contenido: borrador, programación automática o añadir a campaña existente."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "2.0.0",
+    "author": "Postia Team",
+    "lastUpdated": "2024-01-15T10:00:00.000Z",
+    "estimatedDuration": 320
+  }
+}
