@@ -1,30 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { useSSRSafeMediaQuery, safeBrowserExecution, safeWindow } from './ssr-utils'
+import type { ReducedMotionHookReturn, AccessibilityError } from './types'
 
 /**
- * Hook to detect user's reduced motion preference
+ * Enhanced hook to detect user's reduced motion preference with error handling and SSR safety
  */
-export function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+export function useReducedMotion(): ReducedMotionHookReturn {
+  const { matches, isLoading, error } = useSSRSafeMediaQuery('(prefers-reduced-motion: reduce)', false)
 
-  useEffect(() => {
-    // Check initial preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setPrefersReducedMotion(mediaQuery.matches)
+  return {
+    prefersReducedMotion: matches,
+    isLoading,
+    error
+  }
+}
 
-    // Listen for changes
-    const handleChange = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches)
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
-
+/**
+ * Legacy hook for backward compatibility (simplified return type)
+ */
+export function useReducedMotionLegacy(): boolean {
+  const { prefersReducedMotion } = useReducedMotion()
   return prefersReducedMotion
 }
 
@@ -224,62 +221,112 @@ export function motionSafe(styles: Record<string, any>) {
 }
 
 /**
- * Create scroll behavior that respects motion preferences
+ * Create scroll behavior that respects motion preferences with SSR safety
  */
 export function createMotionSafeScrollBehavior(): ScrollBehavior {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  return prefersReducedMotion ? 'auto' : 'smooth'
+  const result = safeBrowserExecution(
+    () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      return prefersReducedMotion ? 'auto' : 'smooth'
+    },
+    'auto' // Safe fallback for SSR
+  )
+  
+  return result.data || 'auto'
 }
 
 /**
- * Utility to conditionally apply animations
+ * Utility to conditionally apply animations with SSR safety
  */
 export function conditionalAnimation<T>(
   animatedValue: T,
   staticValue: T,
   prefersReducedMotion?: boolean
 ): T {
-  const shouldReduce = prefersReducedMotion ?? 
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (prefersReducedMotion !== undefined) {
+    return prefersReducedMotion ? staticValue : animatedValue
+  }
+
+  const result = safeBrowserExecution(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    true // Safe fallback - assume reduced motion for SSR
+  )
   
+  const shouldReduce = result.data ?? true
   return shouldReduce ? staticValue : animatedValue
 }
 
 /**
- * Create intersection observer with motion-safe options
+ * Create intersection observer with motion-safe options and error handling
  */
 export function createMotionSafeIntersectionObserver(
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit
-): IntersectionObserver {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  
-  const defaultOptions: IntersectionObserverInit = {
-    threshold: prefersReducedMotion ? 0 : 0.1,
-    rootMargin: prefersReducedMotion ? '0px' : '50px',
-    ...options
+): IntersectionObserver | null {
+  const result = safeBrowserExecution(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    
+    const defaultOptions: IntersectionObserverInit = {
+      threshold: prefersReducedMotion ? 0 : 0.1,
+      rootMargin: prefersReducedMotion ? '0px' : '50px',
+      ...options
+    }
+
+    return new IntersectionObserver(callback, defaultOptions)
+  })
+
+  if (!result.success) {
+    console.warn('Failed to create motion-safe intersection observer:', result.error)
+    return null
   }
 
-  return new IntersectionObserver(callback, defaultOptions)
+  return result.data || null
 }
 
 /**
- * Debounced scroll handler that respects motion preferences
+ * Debounced scroll handler that respects motion preferences with error handling
  */
 export function createMotionSafeScrollHandler(
   handler: () => void,
   delay: number = 100
 ): () => void {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const result = safeBrowserExecution(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    true // Assume reduced motion for safety
+  )
+  
+  const prefersReducedMotion = result.data ?? true
   
   if (prefersReducedMotion) {
     // No debouncing for reduced motion users
-    return handler
+    return () => {
+      try {
+        handler()
+      } catch (error) {
+        console.warn('Motion-safe scroll handler failed:', error)
+      }
+    }
   }
 
   let timeoutId: NodeJS.Timeout
   return () => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(handler, delay)
+    try {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        try {
+          handler()
+        } catch (error) {
+          console.warn('Debounced scroll handler failed:', error)
+        }
+      }, delay)
+    } catch (error) {
+      console.warn('Failed to setup debounced scroll handler:', error)
+      // Fallback to immediate execution
+      try {
+        handler()
+      } catch (handlerError) {
+        console.warn('Fallback handler execution failed:', handlerError)
+      }
+    }
   }
 }

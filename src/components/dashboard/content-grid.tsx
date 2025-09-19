@@ -832,21 +832,4 @@ export function ContentGrid({
       </div>
     </div>
   )
-}iv>
-                ) : (
-                  <Button
-                    variant="outline"
-                    onClick={loadMore}
-                    className="px-8"
-                  >
-                    Cargar más
-                  </Button>
-                )}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
-  )
 }

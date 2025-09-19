@@ -29,14 +29,14 @@ export async function GET(
       where: {
         id: campaignId,
         client: {
-          agencyId: session.user.agencyId,
+          agencyId: session.user.agencyId || '',
         },
       },
       include: {
         client: {
           select: {
             id: true,
-            brandName: true,
+            name: true,
             assignedUsers: {
               select: {
                 id: true,

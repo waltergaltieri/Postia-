@@ -33,7 +33,7 @@
       }
     },
     {
-      "element": "button[class*='justify-start']:has(div:contains('brandName'))",
+      "element": "[data-testid='client-selector'], button[class*='justify-start']",
       "title": "Selector de Cliente",
       "description": "Aquí puedes cambiar entre diferentes clientes para gestionar sus campañas y contenido específico. Cada cliente tiene su propia marca, colores y configuraciones personalizadas.",
       "position": "bottom",
@@ -46,7 +46,7 @@
       }
     },
     {
-      "element": "button:has(span:contains('Content Generation'))",
+      "element": "[data-testid='content-generation'], button[href*='content'], nav a[href*='content']",
       "title": "Generación de Contenido con IA",
       "description": "Crea contenido automáticamente usando inteligencia artificial para tus redes sociales. Genera posts, imágenes y copys optimizados para cada plataforma y audiencia.",
       "position": "right",
@@ -59,7 +59,7 @@
       }
     },
     {
-      "element": "button:has(span:contains('Campaigns'))",
+      "element": "[data-testid='campaigns'], button[href*='campaign'], nav a[href*='campaign']",
       "title": "Gestión de Campañas",
       "description": "Organiza y programa tus campañas de marketing en redes sociales desde un solo lugar. Planifica contenido, programa publicaciones y analiza el rendimiento.",
       "position": "right",
@@ -72,7 +72,7 @@
       }
     },
     {
-      "element": "button:has(span:contains('Clients'))",
+      "element": "[data-testid='clients'], button[href*='client'], nav a[href*='client']",
       "title": "Gestión de Clientes",
       "description": "Administra todos tus clientes desde esta sección. Configura sus marcas, colores corporativos, y personaliza la experiencia para cada uno.",
       "position": "right",
@@ -85,7 +85,7 @@
       }
     },
     {
-      "element": "button:has(span:contains('Brand Assets'))",
+      "element": "[data-testid='brand-assets'], button[href*='brand'], nav a[href*='brand']",
       "title": "Recursos de Marca",
       "description": "Gestiona todos los recursos visuales de tus clientes: logos, imágenes, paletas de colores y elementos gráficos para mantener consistencia en todas las publicaciones.",
       "position": "right",

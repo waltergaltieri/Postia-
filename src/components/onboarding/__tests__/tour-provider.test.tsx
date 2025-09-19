@@ -12,11 +12,8 @@ vi.mock('@/lib/tour/tour-config', () => ({
   }
 }))
 
-vi.mock('@/lib/accessibility/screen-reader', () => ({
-  announceToScreenReader: vi.fn()
-}))
-
-vi.mock('@/lib/accessibility/focus-trap', () => ({
+vi.mock('@/lib/accessibility', () => ({
+  announceToScreenReader: vi.fn(),
   createFocusTrap: vi.fn(() => ({
     activate: vi.fn(),
     deactivate: vi.fn()
@@ -248,7 +245,7 @@ describe('TourProvider', () => {
 
   describe('Accessibility Features', () => {
     it('should announce tour start to screen readers', async () => {
-      const { announceToScreenReader } = await import('@/lib/accessibility/screen-reader')
+      const { announceToScreenReader } = await import('@/lib/accessibility')
       const { TourConfigLoader } = await import('@/lib/tour/tour-config')
       vi.mocked(TourConfigLoader.loadTourConfig).mockResolvedValue(mockTourDefinition)
 
@@ -268,7 +265,7 @@ describe('TourProvider', () => {
     })
 
     it('should manage focus trap during active tour', async () => {
-      const { createFocusTrap } = await import('@/lib/accessibility/focus-trap')
+      const { createFocusTrap } = await import('@/lib/accessibility')
       const mockFocusTrap = {
         activate: vi.fn(),
         deactivate: vi.fn()

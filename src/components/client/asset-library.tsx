@@ -2,13 +2,13 @@
 
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Search, 
-  Filter, 
-  Upload, 
-  Image, 
-  FileText, 
-  Video, 
+import {
+  Search,
+  Filter,
+  Upload,
+  Image,
+  FileText,
+  Video,
   Music,
   Download,
   Trash2,
@@ -187,10 +187,10 @@ export default function AssetLibrary({
   const filteredAssets = assets
     .filter(asset => {
       const matchesSearch = asset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           asset.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        asset.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       const matchesCategory = selectedCategory === 'All' || asset.category === selectedCategory
       const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => asset.tags.includes(tag))
-      
+
       return matchesSearch && matchesCategory && matchesTags
     })
     .sort((a, b) => {
@@ -240,7 +240,7 @@ export default function AssetLibrary({
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault()
     setIsDragOver(false)
-    
+
     const files = e.dataTransfer.files
     if (files.length > 0 && onAssetUpload) {
       onAssetUpload(files)
@@ -270,8 +270,8 @@ export default function AssetLibrary({
   }
 
   const toggleTag = (tag: string) => {
-    setSelectedTags(prev => 
-      prev.includes(tag) 
+    setSelectedTags(prev =>
+      prev.includes(tag)
         ? prev.filter(t => t !== tag)
         : [...prev, tag]
     )
@@ -298,8 +298,8 @@ export default function AssetLibrary({
         {/* Thumbnail */}
         <div className="aspect-square bg-muted relative overflow-hidden">
           {asset.thumbnailUrl ? (
-            <img 
-              src={asset.thumbnailUrl} 
+            <img
+              src={asset.thumbnailUrl}
               alt={asset.name}
               className="w-full h-full object-cover"
             />
@@ -308,10 +308,10 @@ export default function AssetLibrary({
               <IconComponent className="w-12 h-12 text-muted-foreground" />
             </div>
           )}
-          
+
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200" />
-          
+
           {/* Quick Actions */}
           <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <div className="flex space-x-1">
@@ -332,8 +332,8 @@ export default function AssetLibrary({
             <div className="absolute top-2 left-2">
               <div className={cn(
                 "w-5 h-5 rounded border-2 flex items-center justify-center transition-colors",
-                isSelected 
-                  ? "bg-primary border-primary text-primary-foreground" 
+                isSelected
+                  ? "bg-primary border-primary text-primary-foreground"
                   : "bg-background/80 border-border"
               )}>
                 {isSelected && <div className="w-2 h-2 bg-current rounded-full" />}
@@ -355,7 +355,7 @@ export default function AssetLibrary({
           <h3 className="font-medium text-sm text-foreground truncate mb-1">
             {asset.name}
           </h3>
-          
+
           <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
             <span>{formatFileSize(asset.size)}</span>
             {asset.dimensions && (
@@ -415,8 +415,8 @@ export default function AssetLibrary({
         {allowMultiSelect && (
           <div className={cn(
             "w-4 h-4 rounded border-2 flex items-center justify-center transition-colors",
-            isSelected 
-              ? "bg-primary border-primary text-primary-foreground" 
+            isSelected
+              ? "bg-primary border-primary text-primary-foreground"
               : "bg-background border-border"
           )}>
             {isSelected && <div className="w-2 h-2 bg-current rounded-full" />}
@@ -426,8 +426,8 @@ export default function AssetLibrary({
         {/* Thumbnail */}
         <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center flex-shrink-0">
           {asset.thumbnailUrl ? (
-            <img 
-              src={asset.thumbnailUrl} 
+            <img
+              src={asset.thumbnailUrl}
               alt={asset.name}
               className="w-full h-full object-cover rounded-lg"
             />
@@ -493,7 +493,7 @@ export default function AssetLibrary({
             {filteredAssets.length} of {assets.length} assets
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
@@ -504,7 +504,7 @@ export default function AssetLibrary({
             <Filter className="w-4 h-4 mr-2" />
             Filters
           </Button>
-          
+
           <Button
             variant="outline"
             size="sm"
@@ -516,7 +516,7 @@ export default function AssetLibrary({
               <Grid3X3 className="w-4 h-4" />
             )}
           </Button>
-          
+
           <Button onClick={handleFileSelect}>
             <Upload className="w-4 h-4 mr-2" />
             Upload Assets
@@ -632,7 +632,7 @@ export default function AssetLibrary({
       <div className="space-y-4">
         {filteredAssets.length > 0 ? (
           viewMode === 'grid' ? (
-            <motion.div 
+            <motion.div
               layout
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"
             >
@@ -674,6 +674,8 @@ export default function AssetLibrary({
         accept="image/*,video/*,audio/*,.pdf,.doc,.docx"
         onChange={handleFileChange}
         className="hidden"
+        aria-label="Upload asset files"
+        title="Upload asset files"
       />
     </div>
   )

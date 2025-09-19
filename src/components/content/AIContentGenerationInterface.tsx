@@ -10,11 +10,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Zap, 
-  Lightbulb, 
-  FileText, 
-  Image, 
+import {
+  Zap,
+  Lightbulb,
+  FileText,
+  Image,
   Sparkles,
   CheckCircle,
   Clock,
@@ -106,7 +106,7 @@ export default function AIContentGenerationInterface() {
     try {
       const response = await fetch('/api/clients');
       const result = await response.json();
-      
+
       if (result.success) {
         setClients(result.data.clients);
       }
@@ -119,7 +119,7 @@ export default function AIContentGenerationInterface() {
     try {
       const response = await fetch(`/api/clients/${clientId}/campaigns`);
       const result = await response.json();
-      
+
       if (result.success) {
         setCampaigns(result.data.campaigns);
       }
@@ -135,7 +135,7 @@ export default function AIContentGenerationInterface() {
     }
 
     setLoading(true);
-    
+
     try {
       const response = await fetch('/api/content/generate', {
         method: 'POST',
@@ -168,11 +168,11 @@ export default function AIContentGenerationInterface() {
 
         if (result.success) {
           setCurrentJob(result.data.job);
-          
+
           if (result.data.job.status === 'COMPLETED' || result.data.job.status === 'FAILED') {
             clearInterval(interval);
             setJobPolling(null);
-            
+
             if (result.data.job.status === 'COMPLETED') {
               toast.success('Content generation completed!');
             } else {
@@ -261,7 +261,7 @@ export default function AIContentGenerationInterface() {
 
   const calculateProgress = () => {
     if (!currentJob) return 0;
-    
+
     const completedSteps = currentJob.steps.filter(step => step.status === 'COMPLETED').length;
     return (completedSteps / currentJob.steps.length) * 100;
   };
@@ -369,8 +369,8 @@ export default function AIContentGenerationInterface() {
                 <Select
                   value={generationForm.aiProvider}
                   onValueChange={(value) => {
-                    setGenerationForm({ 
-                      ...generationForm, 
+                    setGenerationForm({
+                      ...generationForm,
                       aiProvider: value,
                       model: value === 'openai' ? 'gpt-3.5-turbo' : 'gemini-pro'
                     });
@@ -459,8 +459,13 @@ export default function AIContentGenerationInterface() {
                 checked={generationForm.includeImages}
                 onChange={(e) => setGenerationForm({ ...generationForm, includeImages: e.target.checked })}
                 className="rounded"
+                title="Include AI-generated images with the content"
+                aria-describedby="includeImages-desc"
               />
               <Label htmlFor="includeImages">Generate images</Label>
+              <span id="includeImages-desc" className="sr-only">
+                Check this option to include AI-generated images along with the text content
+              </span>
             </div>
 
             {selectedClient && (

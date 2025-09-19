@@ -1,6 +1,8 @@
+"use client"
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion, HTMLMotionProps } from "framer-motion"
+// import { motion, HTMLMotionProps } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { cardHoverVariants } from "@/components/animations/micro-interactions"
 
@@ -70,7 +72,7 @@ const cardVariants = cva(
 )
 
 export interface CardProps
-  extends HTMLMotionProps<"div">,
+  extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
   interactive?: boolean
   animate?: boolean
@@ -91,16 +93,13 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     }
 
     return (
-      <motion.div
+      <div
         ref={ref}
         className={cn(cardVariants({ variant, size, className }))}
-        variants={cardHoverVariants}
-        initial="rest"
-        whileHover={interactive || variant === "interactive" ? "hover" : "rest"}
         {...props}
       >
         {children}
-      </motion.div>
+      </div>
     )
   }
 )

@@ -11,7 +11,7 @@ import WorkflowIntegration from '@/components/integration/workflow-integration'
 import { ContextAwarePage, StaggeredChildren, StaggeredItem } from '@/components/integration/page-transitions'
 import { ContentGrid } from '@/components/dashboard/content-grid'
 import AIGenerationWorkflow from '@/components/content/AIGenerationWorkflow'
-import CalendarView from '@/components/calendar/calendar-view'
+import { CalendarView } from '@/components/calendar/calendar-view'
 import ClientBrandSwitcher from '@/components/client/client-brand-switcher'
 import { 
   Sparkles, 
@@ -333,7 +333,7 @@ export default function IntegrationDemoPage() {
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <span className="text-sm">Component Load Time</span>
-                        <Badge variant="secondary">< 100ms</Badge>
+                        <Badge variant="secondary">&lt; 100ms</Badge>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-sm">Navigation Smoothness</span>

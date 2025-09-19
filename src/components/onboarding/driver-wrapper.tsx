@@ -15,12 +15,13 @@ import {
 } from '@/lib/accessibility'
 import { useTourBranding } from '@/hooks/use-tour-branding'
 import { applyBrandingStyles, removeBrandingStyles } from '@/lib/tour/client-branding-integration'
+import { TourElementValidator, findTourElement } from '@/lib/tour/element-validator'
 import type { 
   TourStep, 
   ClientBranding, 
-  ThemedTourConfig,
-  TourError 
+  ThemedTourConfig
 } from '@/types/tour'
+import { TourError } from '@/types/tour'
 
 // Import Driver.js CSS
 import 'driver.js/dist/driver.css'
@@ -145,7 +146,9 @@ export function DriverWrapper({
   // Convert TourStep to DriveStep
   const convertSteps = useCallback((tourSteps: TourStep[]): DriveStep[] => {
     return tourSteps.map((step, index) => ({
-      element: step.element,
+      element: typeof step.element === 'string' ? 
+        TourElementValidator.generateFallbackSelectors(step.element).join(', ') : 
+        step.element,
       popover: {
         title: updateBrandedContent(step.title || ''),
         description: updateBrandedContent(step.description || ''),

@@ -188,11 +188,10 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className={`h-4 w-4 ${
-                    star <= report.overallMetrics.userSatisfactionScore
+                  className={`h-4 w-4 ${star <= report.overallMetrics.userSatisfactionScore
                       ? 'text-yellow-500 fill-current'
                       : 'text-gray-300'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
@@ -212,11 +211,10 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                   key={star}
-                  className={`h-4 w-4 ${
-                    star <= report.overallMetrics.aestheticRating
+                  className={`h-4 w-4 ${star <= report.overallMetrics.aestheticRating
                       ? 'text-purple-500 fill-current'
                       : 'text-gray-300'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
@@ -232,8 +230,8 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
             <div className="text-2xl font-bold">
               {report.overallMetrics.errorRate.toFixed(1)}%
             </div>
-            <Progress 
-              value={100 - report.overallMetrics.errorRate} 
+            <Progress
+              value={100 - report.overallMetrics.errorRate}
               className="mt-2"
             />
           </CardContent>
@@ -333,11 +331,13 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
             </CardHeader>
             <CardContent className="flex gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Type</label>
+                <label htmlFor="feedback-type-filter" className="block text-sm font-medium mb-1">Type</label>
                 <select
+                  id="feedback-type-filter"
                   value={selectedFilter}
                   onChange={(e) => setSelectedFilter(e.target.value as any)}
                   className="p-2 border rounded-md"
+                  aria-label="Filter feedback by type"
                 >
                   <option value="all">All Types</option>
                   <option value="aesthetic">Aesthetic</option>
@@ -347,11 +347,13 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Priority</label>
+                <label htmlFor="feedback-priority-filter" className="block text-sm font-medium mb-1">Priority</label>
                 <select
+                  id="feedback-priority-filter"
                   value={selectedPriority}
                   onChange={(e) => setSelectedPriority(e.target.value as any)}
                   className="p-2 border rounded-md"
+                  aria-label="Filter feedback by priority level"
                 >
                   <option value="all">All Priorities</option>
                   <option value="critical">Critical</option>
@@ -403,11 +405,10 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                           {[1, 2, 3, 4, 5].map((star) => (
                             <Star
                               key={star}
-                              className={`h-4 w-4 ${
-                                star <= feedback.rating
+                              className={`h-4 w-4 ${star <= feedback.rating
                                   ? 'text-yellow-500 fill-current'
                                   : 'text-gray-300'
-                              }`}
+                                }`}
                             />
                           ))}
                         </div>

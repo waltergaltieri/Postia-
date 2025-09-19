@@ -3,27 +3,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigation } from '@/components/navigation/navigation-context'
 import { TourConfigLoader } from '@/lib/tour/tour-config'
-import { announceToScreenReader } from '@/lib/accessibility/screen-reader'
+import { announceToScreenReader } from '@/lib/accessibility'
 import type { 
   TourDefinition, 
   TourOptions, 
   UserTourProgress,
-  TourEvent,
-  TourError as TourErrorType
+  TourEvent
 } from '@/types/tour'
-
-// Create TourError class since it can't be imported as value
-class TourError extends Error {
-  constructor(
-    message: string,
-    public tourId: string,
-    public stepIndex?: number,
-    public cause?: Error
-  ) {
-    super(message)
-    this.name = 'TourError'
-  }
-}
+import { TourError } from '@/types/tour'
 
 interface TourState {
   currentTour: string | null
@@ -235,7 +222,7 @@ export function useTour(config: UseTourConfig = {}) {
       }
 
       // Check tour conditions
-      if (tourDefinition.conditions) {
+      if (tourDefinition.conditions && tourDefinition.conditions.length > 0) {
         const conditionsMet = await evaluateTourConditions(tourDefinition.conditions)
         if (!conditionsMet) {
           console.log(`Tour conditions not met for: ${tourId}`)
@@ -559,7 +546,7 @@ export function useTour(config: UseTourConfig = {}) {
   }
 
   const generateSessionId = (): string => {
-    return `tour_session_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+    return `tour_session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
   }
 
   return {

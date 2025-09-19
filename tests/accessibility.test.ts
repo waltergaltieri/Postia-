@@ -369,8 +369,7 @@ test.describe('Dark Mode Accessibility', () => {
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 });
-// T
-ests de accesibilidad avanzados
+// Tests de accesibilidad avanzados
 test.describe('Advanced Accessibility Features', () => {
   test('High contrast mode compatibility', async ({ page }) => {
     // Simular modo de alto contraste

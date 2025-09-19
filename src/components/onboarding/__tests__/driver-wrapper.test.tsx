@@ -29,11 +29,8 @@ vi.mock('framer-motion', () => ({
 }))
 
 // Mock accessibility utilities
-vi.mock('@/lib/accessibility/screen-reader', () => ({
-  announceToScreenReader: vi.fn()
-}))
-
-vi.mock('@/lib/accessibility/reduced-motion', () => ({
+vi.mock('@/lib/accessibility', () => ({
+  announceToScreenReader: vi.fn(),
   prefersReducedMotion: vi.fn(() => false)
 }))
 
@@ -170,7 +167,7 @@ describe('DriverWrapper', () => {
 
   describe('Accessibility Features', () => {
     it('should respect reduced motion preferences', async () => {
-      const { prefersReducedMotion } = await import('@/lib/accessibility/reduced-motion')
+      const { prefersReducedMotion } = await import('@/lib/accessibility')
       vi.mocked(prefersReducedMotion).mockReturnValue(true)
 
       render(
@@ -185,7 +182,7 @@ describe('DriverWrapper', () => {
     })
 
     it('should announce step changes to screen readers', async () => {
-      const { announceToScreenReader } = await import('@/lib/accessibility/screen-reader')
+      const { announceToScreenReader } = await import('@/lib/accessibility')
       const onStepChange = vi.fn()
 
       render(

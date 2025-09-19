@@ -6,16 +6,16 @@ import { TourConfigLoader } from '@/lib/tour/tour-config'
 import { 
   announceToScreenReader, 
   useTourProgressAnnouncements,
-  useTourAccessibility 
+  useTourAccessibility
 } from '@/lib/accessibility'
 import type { 
   TourContextValue, 
   TourOptions, 
   TourDefinition, 
   UserTourProgress,
-  TourEvent,
-  TourError 
+  TourEvent
 } from '@/types/tour'
+import { TourError } from '@/types/tour'
 
 interface TourProviderProps {
   children: ReactNode
@@ -147,11 +147,11 @@ export function TourProvider({
       }
 
       // Check tour conditions
-      if (tourDefinition.conditions) {
+      if (tourDefinition.conditions && tourDefinition.conditions.length > 0) {
         const conditionsMet = await evaluateTourConditions(tourDefinition.conditions)
         if (!conditionsMet) {
           console.log(`Tour conditions not met for: ${tourId}`)
-          return
+          return false
         }
       }
 
@@ -195,9 +195,12 @@ export function TourProvider({
       // Track event
       trackEvent({
         type: 'tour_started',
-        tourId,
-        userId,
-        sessionId: progress.metadata.sessionId
+        stepIndex: 0,
+        metadata: {
+          tourId,
+          userId,
+          sessionId: progress.metadata.sessionId
+        }
       })
 
       // Announce tour start to screen readers
@@ -239,10 +242,12 @@ export function TourProvider({
       // Track event
       trackEvent({
         type: 'tour_skipped',
-        tourId: tourState.currentTour!,
-        userId: updatedProgress.userId,
-        sessionId: updatedProgress.metadata.sessionId,
-        stepIndex: tourState.currentStep
+        stepIndex: tourState.currentStep,
+        metadata: {
+          tourId: tourState.currentTour!,
+          userId: updatedProgress.userId,
+          sessionId: updatedProgress.metadata.sessionId
+        }
       })
 
       // Announce tour skip
@@ -290,9 +295,12 @@ export function TourProvider({
 
       trackEvent({
         type: 'tour_completed',
-        tourId: tourState.currentTour!,
-        userId: updatedProgress.userId,
-        sessionId: updatedProgress.metadata.sessionId
+        stepIndex: tourState.currentStep,
+        metadata: {
+          tourId: tourState.currentTour!,
+          userId: updatedProgress.userId,
+          sessionId: updatedProgress.metadata.sessionId
+        }
       })
 
       // Announce tour completion
@@ -332,18 +340,22 @@ export function TourProvider({
 
     trackEvent({
       type: 'step_completed',
-      tourId: tourState.currentTour!,
-      userId: updatedProgress.userId,
-      sessionId: updatedProgress.metadata.sessionId,
-      stepIndex: tourState.currentStep
+      stepIndex: tourState.currentStep,
+      metadata: {
+        tourId: tourState.currentTour!,
+        userId: updatedProgress.userId,
+        sessionId: updatedProgress.metadata.sessionId
+      }
     })
 
     trackEvent({
       type: 'step_viewed',
-      tourId: tourState.currentTour!,
-      userId: updatedProgress.userId,
-      sessionId: updatedProgress.metadata.sessionId,
-      stepIndex: nextStepIndex
+      stepIndex: nextStepIndex,
+      metadata: {
+        tourId: tourState.currentTour!,
+        userId: updatedProgress.userId,
+        sessionId: updatedProgress.metadata.sessionId
+      }
     })
   }, [tourState, saveProgress, trackEvent, onTourComplete])
 
@@ -369,10 +381,12 @@ export function TourProvider({
 
     trackEvent({
       type: 'step_viewed',
-      tourId: tourState.currentTour!,
-      userId: updatedProgress.userId,
-      sessionId: updatedProgress.metadata.sessionId,
-      stepIndex: prevStepIndex
+      stepIndex: prevStepIndex,
+      metadata: {
+        tourId: tourState.currentTour!,
+        userId: updatedProgress.userId,
+        sessionId: updatedProgress.metadata.sessionId
+      }
     })
   }, [tourState, saveProgress, trackEvent])
 
@@ -422,7 +436,7 @@ export function TourProvider({
   }
 
   const generateSessionId = (): string => {
-    return `tour_session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `tour_session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
   }
 
   // Context value

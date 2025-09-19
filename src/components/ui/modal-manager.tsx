@@ -2,21 +2,21 @@
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from "react"
 import { AnimatePresence } from "framer-motion"
-import { 
-  Modal, 
-  ModalContent, 
-  ModalHeader, 
-  ModalBody, 
-  ModalFooter, 
-  ModalTitle, 
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalTitle,
   ModalDescription,
   ConfirmationModal,
   type ModalSize,
-  type ModalType 
+  type ModalType
 } from "./modal"
-import { 
+import {
   QuickAlert,
-  type AlertType 
+  type AlertType
 } from "./alert-dialog"
 
 // Modal configuration types
@@ -85,7 +85,7 @@ interface ModalManagerContextType {
   openModal: (config: ModalConfig) => void
   closeModal: (id: string) => void
   closeAllModals: () => void
-  updateModal: (id: string, updates: Partial<ModalConfig>) => void
+  updateModal: (id: string, updates: Partial<Omit<ModalConfig, 'variant' | 'id'>>) => void
   isModalOpen: (id: string) => boolean
   getModalData: (id: string) => any
 }
@@ -98,22 +98,22 @@ interface ModalManagerProviderProps {
   maxModals?: number
 }
 
-export function ModalManagerProvider({ 
-  children, 
-  maxModals = 5 
+export function ModalManagerProvider({
+  children,
+  maxModals = 5
 }: ModalManagerProviderProps) {
   const [modals, setModals] = useState<Map<string, ModalConfig & { open: boolean; data?: any }>>(new Map())
 
   const openModal = useCallback((config: ModalConfig) => {
     setModals(prev => {
       const newModals = new Map(prev)
-      
+
       // Close oldest modal if we exceed the limit
       if (newModals.size >= maxModals) {
         const oldestId = Array.from(newModals.keys())[0]
         newModals.delete(oldestId)
       }
-      
+
       newModals.set(config.id, { ...config, open: true })
       return newModals
     })
@@ -144,22 +144,22 @@ export function ModalManagerProvider({
       prev.forEach((modal, id) => {
         newModals.set(id, { ...modal, open: false })
       })
-      
+
       // Remove all after animation completes
       setTimeout(() => {
         setModals(new Map())
       }, 300)
-      
+
       return newModals
     })
   }, [])
 
-  const updateModal = useCallback((id: string, updates: Partial<ModalConfig>) => {
+  const updateModal = useCallback((id: string, updates: Partial<Omit<ModalConfig, 'variant' | 'id'>>) => {
     setModals(prev => {
       const newModals = new Map(prev)
       const modal = newModals.get(id)
       if (modal) {
-        newModals.set(id, { ...modal, ...updates })
+        newModals.set(id, { ...modal, ...updates } as typeof modal)
       }
       return newModals
     })
@@ -198,7 +198,7 @@ interface ModalRendererProps {
 
 function ModalRenderer({ modals, onClose }: ModalRendererProps) {
   return (
-    <AnimatePresence mode="multiple">
+    <AnimatePresence>
       {Array.from(modals.entries()).map(([id, modal]) => {
         if (!modal.open) return null
 
@@ -206,8 +206,8 @@ function ModalRenderer({ modals, onClose }: ModalRendererProps) {
           case "custom":
             return (
               <Modal key={id} open={modal.open} onOpenChange={(open) => !open && onClose(id)}>
-                <ModalContent 
-                  size={modal.size} 
+                <ModalContent
+                  size={modal.size}
                   type={modal.type}
                   showCloseButton={modal.showCloseButton}
                 >
@@ -293,7 +293,7 @@ function FormModal({ modal, onClose }: FormModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Validate form
     const newErrors: Record<string, string> = {}
     modal.fields.forEach(field => {
@@ -340,28 +340,32 @@ function FormModal({ modal, onClose }: FormModalProps) {
               <ModalDescription>{modal.description}</ModalDescription>
             )}
           </ModalHeader>
-          
+
           <ModalBody className="space-y-4">
             {modal.fields.map(field => (
               <div key={field.name} className="space-y-2">
-                <label className="text-sm font-medium text-neutral-700">
+                <label htmlFor={`field-${field.name}`} className="text-sm font-medium text-neutral-700">
                   {field.label}
                   {field.required && <span className="text-error-500 ml-1">*</span>}
                 </label>
-                
+
                 {field.type === "textarea" ? (
                   <textarea
+                    id={`field-${field.name}`}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder={field.placeholder}
                     value={formData[field.name] || ""}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
                     rows={3}
+                    aria-describedby={errors[field.name] ? `error-${field.name}` : undefined}
                   />
                 ) : field.type === "select" ? (
                   <select
+                    id={`field-${field.name}`}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     value={formData[field.name] || ""}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                    aria-describedby={errors[field.name] ? `error-${field.name}` : undefined}
                   >
                     <option value="">Select {field.label}</option>
                     {field.options?.map(option => (
@@ -373,30 +377,34 @@ function FormModal({ modal, onClose }: FormModalProps) {
                 ) : field.type === "checkbox" ? (
                   <label className="flex items-center space-x-2">
                     <input
+                      id={`field-${field.name}`}
                       type="checkbox"
                       checked={formData[field.name] || false}
                       onChange={(e) => handleFieldChange(field.name, e.target.checked)}
                       className="rounded border-neutral-300 focus:ring-2 focus:ring-primary-500"
+                      aria-describedby={errors[field.name] ? `error-${field.name}` : undefined}
                     />
                     <span className="text-sm text-neutral-600">{field.placeholder}</span>
                   </label>
                 ) : (
                   <input
+                    id={`field-${field.name}`}
                     type={field.type}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder={field.placeholder}
                     value={formData[field.name] || ""}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
+                    aria-describedby={errors[field.name] ? `error-${field.name}` : undefined}
                   />
                 )}
-                
+
                 {errors[field.name] && (
-                  <p className="text-sm text-error-600">{errors[field.name]}</p>
+                  <p id={`error-${field.name}`} className="text-sm text-error-600">{errors[field.name]}</p>
                 )}
               </div>
             ))}
           </ModalBody>
-          
+
           <ModalFooter>
             <button
               type="button"
@@ -432,7 +440,7 @@ export function useModalManager() {
 // Convenience hooks for specific modal types
 export function useConfirmationDialog() {
   const { openModal, closeModal } = useModalManager()
-  
+
   return useCallback((config: Omit<ConfirmationModalConfig, "variant" | "id">) => {
     const id = `confirmation-${Date.now()}`
     return new Promise<boolean>((resolve) => {
@@ -461,7 +469,7 @@ export function useConfirmationDialog() {
 
 export function useAlertDialog() {
   const { openModal, closeModal } = useModalManager()
-  
+
   return useCallback((config: Omit<AlertModalConfig, "variant" | "id">) => {
     const id = `alert-${Date.now()}`
     openModal({

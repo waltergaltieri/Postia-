@@ -46,7 +46,7 @@ const mobilePopoverVariants = {
     y: 0,
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   },
   exit: {
@@ -55,7 +55,7 @@ const mobilePopoverVariants = {
     y: 50,
     transition: {
       duration: 0.2,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 }
@@ -66,7 +66,7 @@ const fullscreenVariants = {
     borderRadius: '12px',
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   },
   fullscreen: {
@@ -74,7 +74,7 @@ const fullscreenVariants = {
     borderRadius: '0px',
     transition: {
       duration: 0.3,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   }
 }
@@ -85,7 +85,7 @@ const progressVariants = {
     width: `${progress}%`,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: [0.25, 0.46, 0.45, 0.94] as const
     }
   })
 }
@@ -158,12 +158,19 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
     }, [currentStep, totalSteps, title, isVisible])
 
     // Keyboard navigation
-    const handleKeyDown = useKeyboardNavigation({
+    const keyboardHandler = useKeyboardNavigation({
       onEscape: onClose,
       onArrowLeft: !isFirstStep ? onPrevious : undefined,
       onArrowRight: !isLastStep ? onNext : undefined,
       onEnter: !isLastStep ? onNext : onClose
     })
+
+    // Wrapper to convert React.KeyboardEvent to KeyboardEvent
+    const handleKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Convert React event to native event for the keyboard handler
+      const nativeEvent = e.nativeEvent
+      keyboardHandler(nativeEvent)
+    }, [keyboardHandler])
 
     // Button click handlers with announcements
     const handleNext = React.useCallback(() => {
@@ -251,8 +258,8 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
               variants={prefersReducedMotion ? undefined : fullscreenVariants}
               animate={isFullscreen ? 'fullscreen' : 'normal'}
             >
-              <Card 
-                variant="elevated" 
+              <Card
+                variant="elevated"
                 className={cn(
                   'shadow-elevation-4 border-primary-200/50 overflow-hidden',
                   isFullscreen && 'h-full flex flex-col'
@@ -265,7 +272,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                 )}>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
-                      <CardTitle 
+                      <CardTitle
                         id={titleId}
                         className={cn(
                           'font-semibold text-foreground pr-2',
@@ -280,13 +287,16 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                             <span>Paso {currentStep} de {totalSteps}</span>
                             <span>{Math.round(progress)}% completado</span>
                           </div>
-                          <div 
+                          <div
                             className="h-2 bg-muted rounded-full overflow-hidden"
                             role="progressbar"
-                            aria-valuenow={currentStep}
-                            aria-valuemin={1}
-                            aria-valuemax={totalSteps}
-                            aria-labelledby={progressId}
+                            {...({
+                              'aria-valuenow': String(currentStep),
+                              'aria-valuemin': '1',
+                              'aria-valuemax': String(totalSteps),
+                              'aria-valuetext': `Paso ${currentStep} de ${totalSteps}`,
+                              'aria-labelledby': progressId
+                            } as any)}
                           >
                             <motion.div
                               className="h-full bg-gradient-primary rounded-full"
@@ -302,7 +312,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                         </div>
                       )}
                     </div>
-                    
+
                     <div className="flex items-center gap-1">
                       {onToggleFullscreen && (
                         <Button
@@ -315,7 +325,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                           <Maximize2 className="h-4 w-4" />
                         </Button>
                       )}
-                      
+
                       {onClose && (
                         <Button
                           variant="ghost"
@@ -338,7 +348,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                   <div className={cn(
                     isFullscreen && 'flex-1 flex items-center'
                   )}>
-                    <p 
+                    <p
                       id={descriptionId}
                       className={cn(
                         'text-muted-foreground leading-relaxed mb-6',
@@ -368,7 +378,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                             Anterior
                           </Button>
                         )}
-                        
+
                         {!isLastStep && onNext && (
                           <Button
                             variant="default"
@@ -402,7 +412,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                             Desliza para navegar
                           </p>
                         )}
-                        
+
                         {onSkip && !isLastStep && (
                           <Button
                             variant="ghost"
@@ -423,9 +433,9 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
             </motion.div>
 
             {/* Screen reader only live region for announcements */}
-            <div 
-              aria-live="polite" 
-              aria-atomic="true" 
+            <div
+              aria-live="polite"
+              aria-atomic="true"
               className="sr-only"
               id={`mobile-tour-announcements-${titleId}`}
             />

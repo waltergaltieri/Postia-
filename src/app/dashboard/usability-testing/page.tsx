@@ -375,10 +375,10 @@ export default function UsabilityTestingPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-gray-600">
-                <p>• Task completion rate > 90%</p>
-                <p>• User satisfaction score > 4/5</p>
-                <p>• Aesthetic rating > 4/5</p>
-                <p>• Error rate < 10%</p>
+                <p>• Task completion rate &gt; 90%</p>
+                <p>• User satisfaction score &gt; 4/5</p>
+                <p>• Aesthetic rating &gt; 4/5</p>
+                <p>• Error rate &lt; 10%</p>
                 <p>• Average task time within expected range</p>
               </CardContent>
             </Card>

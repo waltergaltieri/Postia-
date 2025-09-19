@@ -1,11 +1,14 @@
+'use client'
+
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2 } from "lucide-react"
-import { motion, HTMLMotionProps } from "framer-motion"
+// import { motion } from "framer-motion"
+// import type { HTMLMotionProps } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { buttonHoverVariants, LoadingSpinner } from "@/components/animations"
-import { useKeyboardNavigation, useReducedMotion, announceToScreenReader } from "@/lib/accessibility"
+import { announceToScreenReader, useReducedMotion } from "@/lib/accessibility"
 
 const buttonVariants = cva(
   "relative inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 overflow-hidden transform-gpu touch-target",
@@ -90,7 +93,7 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-  extends Omit<HTMLMotionProps<"button">, "size">,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size">,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   loading?: boolean
@@ -125,7 +128,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props 
   }, ref) => {
     const isDisabled = disabled || loading
-    const prefersReducedMotion = useReducedMotion()
+    // Fallback implementation to handle potential import issues
+    let prefersReducedMotion = false
+    try {
+      prefersReducedMotion = useReducedMotion()
+    } catch (error) {
+      console.warn('useReducedMotion failed, using fallback:', error)
+      prefersReducedMotion = false
+    }
     const shouldAnimate = animate && !prefersReducedMotion
 
     // Enhanced click handler with accessibility announcements
@@ -137,20 +147,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }, [onClick, announceOnClick])
 
     // Keyboard navigation handler
-    const handleKeyDown = useKeyboardNavigation({
-      onEnter: () => {
-        if (!isDisabled && onClick) {
-          const syntheticEvent = new MouseEvent('click', { bubbles: true }) as any
-          handleClick(syntheticEvent)
-        }
-      },
-      onSpace: () => {
-        if (!isDisabled && onClick) {
+    const handleKeyDown = React.useCallback((event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (isDisabled) return
+
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        if (onClick) {
           const syntheticEvent = new MouseEvent('click', { bubbles: true }) as any
           handleClick(syntheticEvent)
         }
       }
-    })
+    }, [isDisabled, onClick, handleClick])
 
     const content = loading ? (
       <>
@@ -204,20 +211,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <motion.button
+      <button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         disabled={isDisabled}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        variants={buttonHoverVariants}
-        initial="rest"
-        whileHover={isDisabled ? "rest" : "hover"}
-        whileTap={isDisabled ? "rest" : "tap"}
         {...accessibilityProps}
       >
         {content}
-      </motion.button>
+      </button>
     )
   }
 )

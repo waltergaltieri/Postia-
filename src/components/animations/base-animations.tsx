@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, HTMLMotionProps, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
+import type { HTMLMotionProps, Variants } from 'framer-motion'
 import { forwardRef } from 'react'
 
 // Animation variants for common patterns

@@ -10,12 +10,12 @@ import { AccessibilityAudit } from "@/components/dev/accessibility-audit"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { 
-  Eye, 
-  Keyboard, 
-  MousePointer, 
-  Volume2, 
-  Contrast, 
+import {
+  Eye,
+  Keyboard,
+  MousePointer,
+  Volume2,
+  Contrast,
   Zap,
   CheckCircle,
   AlertTriangle,
@@ -85,8 +85,8 @@ export default function AccessibilityDemoPage() {
   return (
     <div className="container mx-auto p-6 space-y-8">
       {/* Skip Link */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
       >
         Saltar al contenido principal
@@ -105,7 +105,7 @@ export default function AccessibilityDemoPage() {
         <h2 id="features-heading" className="text-2xl font-semibold mb-4">
           Características de Accesibilidad Implementadas
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           <Card className="p-4">
             <div className="flex items-center gap-3 mb-2">
@@ -195,13 +195,14 @@ export default function AccessibilityDemoPage() {
                   Usa palabras clave para filtrar el contenido
                 </p>
               </div>
-              
+
               <div>
                 <Label htmlFor="category-select">Categoría</Label>
-                <select 
+                <select
                   id="category-select"
                   className="mt-1 w-full px-3 py-2 border border-border rounded-md bg-background"
                   aria-describedby="category-help"
+                  title="Seleccionar categoría de contenido"
                 >
                   <option value="">Todas las categorías</option>
                   <option value="image">Imágenes</option>
@@ -213,13 +214,13 @@ export default function AccessibilityDemoPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </Card>
 
           {/* Button Examples */}
           <Card className="p-6 mb-6">
             <h3 className="text-lg font-medium mb-4">Botones Accesibles</h3>
             <div className="flex flex-wrap gap-4">
-              <Button 
+              <Button
                 variant="default"
                 announceOnClick="Acción principal ejecutada"
                 aria-describedby="primary-btn-desc"
@@ -230,7 +231,7 @@ export default function AccessibilityDemoPage() {
                 Ejecuta la acción principal del formulario
               </p>
 
-              <Button 
+              <Button
                 variant="secondary"
                 loading
                 loadingText="Guardando..."
@@ -242,7 +243,7 @@ export default function AccessibilityDemoPage() {
                 Guarda los cambios actuales
               </p>
 
-              <Button 
+              <Button
                 variant="outline"
                 size="sm"
                 aria-label="Eliminar elemento seleccionado"
@@ -251,7 +252,7 @@ export default function AccessibilityDemoPage() {
                 Eliminar
               </Button>
 
-              <Button 
+              <Button
                 variant="ghost"
                 size="icon"
                 aria-label="Más opciones"
@@ -300,7 +301,7 @@ export default function AccessibilityDemoPage() {
                   lazy={true}
                 />
               </div>
-              
+
               <div>
                 <h4 className="font-medium mb-2">Prioridad Alta</h4>
                 <OptimizedImage
@@ -312,7 +313,7 @@ export default function AccessibilityDemoPage() {
                   priority={true}
                 />
               </div>
-              
+
               <div>
                 <h4 className="font-medium mb-2">Con Fallback</h4>
                 <OptimizedImage
@@ -366,7 +367,7 @@ export default function AccessibilityDemoPage() {
         <h2 id="testing-heading" className="text-2xl font-semibold mb-4">
           Herramientas de Testing
         </h2>
-        
+
         <Card className="p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium">Auditoría de Accesibilidad</h3>
@@ -379,15 +380,15 @@ export default function AccessibilityDemoPage() {
               {showAudit ? 'Ocultar' : 'Mostrar'} Auditoría
             </Button>
           </div>
-          
+
           <p className="text-sm text-muted-foreground mb-4">
-            Herramienta de desarrollo que analiza la página en tiempo real para detectar 
+            Herramienta de desarrollo que analiza la página en tiempo real para detectar
             problemas de accesibilidad y proporcionar sugerencias de mejora.
           </p>
-          
+
           {showAudit && (
             <div id="accessibility-audit">
-              <AccessibilityAudit 
+              <AccessibilityAudit
                 targetSelector="main"
                 showOnlyInDev={false}
                 className="relative bottom-auto right-auto w-full max-h-none"
@@ -398,9 +399,9 @@ export default function AccessibilityDemoPage() {
       </section>
 
       {/* Live Region for Announcements */}
-      <div 
-        aria-live="polite" 
-        aria-atomic="true" 
+      <div
+        aria-live="polite"
+        aria-atomic="true"
         className="sr-only"
         id="live-announcements"
       >

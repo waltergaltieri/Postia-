@@ -11,11 +11,8 @@ vi.mock('framer-motion', () => ({
 }))
 
 // Mock accessibility utilities
-vi.mock('@/lib/accessibility/keyboard-navigation', () => ({
-  handleKeyboardNavigation: vi.fn()
-}))
-
-vi.mock('@/lib/accessibility/screen-reader', () => ({
+vi.mock('@/lib/accessibility', () => ({
+  handleKeyboardNavigation: vi.fn(),
   announceToScreenReader: vi.fn()
 }))
 
@@ -108,7 +105,7 @@ describe('TourControls', () => {
 
   describe('Keyboard Navigation', () => {
     it('should handle keyboard navigation', async () => {
-      const { handleKeyboardNavigation } = await import('@/lib/accessibility/keyboard-navigation')
+      const { handleKeyboardNavigation } = await import('@/lib/accessibility')
       
       render(<TourControls {...defaultProps} />)
 
@@ -174,7 +171,7 @@ describe('TourControls', () => {
     })
 
     it('should announce step changes to screen readers', async () => {
-      const { announceToScreenReader } = await import('@/lib/accessibility/screen-reader')
+      const { announceToScreenReader } = await import('@/lib/accessibility')
       
       const { rerender } = render(<TourControls {...defaultProps} currentStep={0} />)
 

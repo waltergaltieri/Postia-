@@ -2,6 +2,8 @@
  * TypeScript definitions for the Driver.js onboarding system
  */
 
+import React from 'react'
+
 export interface TourStep {
   element: string | HTMLElement
   title: string

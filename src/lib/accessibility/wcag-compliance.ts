@@ -1,6 +1,7 @@
 'use client'
 
-import { getContrastRatio, meetsWCAGAA, meetsWCAGAAA } from './high-contrast'
+import { getContrastRatio } from './color-contrast'
+import { meetsWCAGAA, meetsWCAGAAA } from './high-contrast'
 
 export interface WCAGComplianceResult {
   level: 'AA' | 'AAA' | 'fail'
@@ -460,4 +461,100 @@ export function generateAccessibilityReport(result: WCAGComplianceResult): strin
   }
 
   return report
+}
+
+/**
+ * Audit accessibility of an element
+ * @param element - Element to audit
+ * @returns Audit result with issues and score
+ */
+export function auditAccessibility(element: HTMLElement): {
+  issues: Array<{
+    type: string
+    severity: 'error' | 'warning'
+    message: string
+    element: HTMLElement
+  }>
+  score: number
+} {
+  const issues: Array<{
+    type: string
+    severity: 'error' | 'warning'
+    message: string
+    element: HTMLElement
+  }> = []
+
+  // Check for missing alt text on images
+  const images = element.querySelectorAll('img')
+  images.forEach(img => {
+    if (!img.alt && !img.getAttribute('aria-label')) {
+      issues.push({
+        type: 'missing-alt-text',
+        severity: 'error',
+        message: 'Image missing alt text or aria-label',
+        element: img
+      })
+    }
+  })
+
+  // Check for missing form labels
+  const inputs = element.querySelectorAll('input, select, textarea')
+  inputs.forEach(input => {
+    const hasLabel = input.getAttribute('aria-label') || 
+                    input.getAttribute('aria-labelledby') ||
+                    element.querySelector(`label[for="${input.id}"]`)
+    
+    if (!hasLabel) {
+      issues.push({
+        type: 'missing-form-label',
+        severity: 'error',
+        message: 'Form control missing label',
+        element: input as HTMLElement
+      })
+    }
+  })
+
+  // Check for proper heading hierarchy
+  const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6')
+  let lastLevel = 0
+  headings.forEach(heading => {
+    const level = parseInt(heading.tagName.charAt(1))
+    if (level > lastLevel + 1) {
+      issues.push({
+        type: 'heading-hierarchy',
+        severity: 'warning',
+        message: `Heading level ${level} follows level ${lastLevel}, skipping levels`,
+        element: heading as HTMLElement
+      })
+    }
+    lastLevel = level
+  })
+
+  // Check for interactive elements without proper roles
+  const interactiveElements = element.querySelectorAll('[onclick], [onkeydown]')
+  interactiveElements.forEach(el => {
+    const hasRole = el.getAttribute('role')
+    const isButton = el.tagName === 'BUTTON'
+    const isLink = el.tagName === 'A'
+    
+    if (!hasRole && !isButton && !isLink) {
+      issues.push({
+        type: 'missing-role',
+        severity: 'warning',
+        message: 'Interactive element missing proper role',
+        element: el as HTMLElement
+      })
+    }
+  })
+
+  // Calculate accessibility score
+  const totalChecks = images.length + inputs.length + headings.length + interactiveElements.length
+  const errorCount = issues.filter(issue => issue.severity === 'error').length
+  const warningCount = issues.filter(issue => issue.severity === 'warning').length
+  
+  const score = totalChecks > 0 
+    ? Math.max(0, 100 - (errorCount * 10) - (warningCount * 5))
+    : 100
+
+  return { issues, score }
 }

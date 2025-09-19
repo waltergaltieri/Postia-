@@ -78,8 +78,7 @@ export default defineConfig({
     timeout: 10 * 1000,
     /* Threshold for screenshot comparisons */
     toHaveScreenshot: { 
-      threshold: 0.2,
-      mode: 'strict'
+      threshold: 0.2
     },
     /* Threshold for visual comparisons */
     toMatchSnapshot: { 

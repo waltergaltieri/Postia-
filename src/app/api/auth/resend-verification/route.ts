@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
         email: user.email,
         name: user.name,
         token: verificationToken,
-        agencyName: user.agency.name,
+        agencyName: user.agency?.name || '',
       });
     } catch (emailError) {
       console.error('Failed to send verification email:', emailError);
@@ -81,20 +81,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create audit log
-    await db.auditLog.create({
-      data: {
-        agencyId: user.agencyId,
-        userId: user.id,
-        action: 'RESEND_VERIFICATION',
-        resource: 'USER',
-        resourceId: user.id,
-        details: {
-          email: user.email,
-          resentAt: new Date().toISOString(),
-        },
-      },
-    });
+    // TODO: Create audit log when AuditLog model is available
+    // await db.auditLog.create({
+    //   data: {
+    //     agencyId: user.agencyId,
+    //     userId: user.id,
+    //     action: 'RESEND_VERIFICATION',
+    //     resource: 'USER',
+    //     resourceId: user.id,
+    //     details: {
+    //       email: user.email,
+    //       resentAt: new Date().toISOString(),
+    //     },
+    //   },
+    // });
 
     return NextResponse.json({
       success: true,

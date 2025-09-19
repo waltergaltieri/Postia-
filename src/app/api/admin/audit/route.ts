@@ -18,7 +18,7 @@ async function GET(request: NextRequest) {
 
   // Check permissions based on role
   const canViewAllAudits = hasPermission(session.user.role as UserRole, PERMISSIONS.MANAGE_AGENCY);
-  const canViewOwnAudits = hasPermission(session.user.role as UserRole, PERMISSIONS.VIEW_CAMPAIGNS);
+  const canViewOwnAudits = hasPermission(session.user.role as UserRole, PERMISSIONS.VIEW_ALL_CAMPAIGNS);
 
   if (!canViewAllAudits && !canViewOwnAudits) {
     return NextResponse.json(
@@ -40,9 +40,9 @@ async function GET(request: NextRequest) {
   try {
     // Get audit trail
     const auditResult = await AuditTrailService.getAuditTrail(
-      session.user.agencyId,
+      session.user.agencyId || '',
       resource as any,
-      resourceId,
+      resourceId || undefined,
       limit,
       offset
     );
@@ -54,7 +54,7 @@ async function GET(request: NextRequest) {
       const end = endDate ? new Date(endDate) : undefined;
       
       statistics = await AuditTrailService.getAuditStatistics(
-        session.user.agencyId,
+        session.user.agencyId || '',
         start,
         end
       );
@@ -82,5 +82,4 @@ async function GET(request: NextRequest) {
   }
 }
 
-export const GET_HANDLER = withErrorHandler(GET);
-export { GET_HANDLER as GET };
+export { GET };

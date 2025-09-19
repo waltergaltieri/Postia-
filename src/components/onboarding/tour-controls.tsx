@@ -2,12 +2,12 @@
 
 import * as React from 'react'
 import { motion } from 'framer-motion'
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  SkipForward, 
-  X, 
-  Play, 
+import {
+  ChevronLeft,
+  ChevronRight,
+  SkipForward,
+  X,
+  Play,
   Pause,
   RotateCcw,
   HelpCircle
@@ -15,9 +15,9 @@ import {
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { 
-  useKeyboardNavigation, 
-  useReducedMotion, 
+import {
+  useKeyboardNavigation,
+  useReducedMotion,
   announceToScreenReader,
   useFocusTrap
 } from '@/lib/accessibility'
@@ -105,7 +105,7 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
     ...props
   }, ref) => {
     const prefersReducedMotion = useReducedMotion()
-    const focusTrapRef = useFocusTrap(trapFocus)
+    const focusTrapRef = React.useRef<HTMLDivElement | null>(null)
     const isFirstStep = currentStep === 1
     const isLastStep = currentStep === totalSteps
     const progress = ((currentStep - 1) / (totalSteps - 1)) * 100
@@ -114,22 +114,58 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
     const controlsId = React.useId()
     const progressId = React.useId()
 
-    // Combine refs for focus trap
+    // Apply focus trap when enabled
+    React.useEffect(() => {
+      if (trapFocus && focusTrapRef.current) {
+        // Simple focus trap implementation
+        const element = focusTrapRef.current
+        const focusableElements = element.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const firstElement = focusableElements[0] as HTMLElement
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement
+
+        const handleTabKey = (e: KeyboardEvent) => {
+          if (e.key === 'Tab') {
+            if (e.shiftKey) {
+              if (document.activeElement === firstElement) {
+                e.preventDefault()
+                lastElement?.focus()
+              }
+            } else {
+              if (document.activeElement === lastElement) {
+                e.preventDefault()
+                firstElement?.focus()
+              }
+            }
+          }
+        }
+
+        element.addEventListener('keydown', handleTabKey)
+        firstElement?.focus()
+
+        return () => {
+          element.removeEventListener('keydown', handleTabKey)
+        }
+      }
+    }, [trapFocus])
+
+    // Combine refs
     const combinedRef = React.useCallback((node: HTMLDivElement) => {
       if (ref) {
         if (typeof ref === 'function') {
           ref(node)
         } else {
-          ;(ref as React.MutableRefObject<HTMLDivElement | null>).current = node
+          ; (ref as React.MutableRefObject<HTMLDivElement | null>).current = node
         }
       }
-      if (focusTrapRef && focusTrapRef.current !== node) {
+      if (focusTrapRef) {
         focusTrapRef.current = node
       }
-    }, [ref, focusTrapRef])
+    }, [ref])
 
     // Enhanced keyboard navigation
-    const handleKeyDown = useKeyboardNavigation({
+    const keyboardHandler = useKeyboardNavigation({
       onArrowLeft: () => {
         if (canGoPrevious && !isFirstStep && onPrevious) {
           onPrevious()
@@ -165,6 +201,13 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
         }
       }
     })
+
+    // Wrapper to convert React.KeyboardEvent to KeyboardEvent
+    const handleKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Convert React event to native event for the keyboard handler
+      const nativeEvent = e.nativeEvent
+      keyboardHandler(nativeEvent)
+    }, [keyboardHandler])
 
     // Button click handlers with announcements
     const handleNext = React.useCallback(() => {
@@ -322,8 +365,8 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
           {/* Center section - Progress and step counter */}
           <div className="flex items-center gap-3 mx-4">
             {showStepCounter && (
-              <Badge 
-                variant="secondary" 
+              <Badge
+                variant="secondary"
                 className={cn(
                   'font-medium',
                   variant === 'minimal' ? 'text-xs px-2 py-0.5' : 'text-sm px-2.5 py-1'
@@ -335,13 +378,16 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
 
             {showProgress && variant !== 'minimal' && (
               <div className="flex items-center gap-2 min-w-[100px]">
-                <div 
+                <div
                   className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden"
                   role="progressbar"
-                  aria-valuenow={currentStep}
-                  aria-valuemin={1}
-                  aria-valuemax={totalSteps}
-                  aria-labelledby={progressId}
+                  {...({
+                    'aria-valuenow': String(currentStep),
+                    'aria-valuemin': '1',
+                    'aria-valuemax': String(totalSteps),
+                    'aria-valuetext': `Paso ${currentStep} de ${totalSteps}`,
+                    'aria-labelledby': progressId
+                  } as any)}
                 >
                   <motion.div
                     className="h-full bg-gradient-primary rounded-full"
@@ -353,7 +399,7 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
                     }}
                   />
                 </div>
-                <span 
+                <span
                   id={progressId}
                   className="text-xs text-muted-foreground font-medium min-w-[3ch]"
                 >
@@ -444,13 +490,13 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
         </div>
 
         {/* Screen reader announcements */}
-        <div 
-          aria-live="polite" 
-          aria-atomic="true" 
+        <div
+          aria-live="polite"
+          aria-atomic="true"
           className="sr-only"
         >
-          Controles del tour disponibles. Use las flechas del teclado para navegar, 
-          Escape para cerrar, Espacio para pausar/reanudar, Home para reiniciar, 
+          Controles del tour disponibles. Use las flechas del teclado para navegar,
+          Escape para cerrar, Espacio para pausar/reanudar, Home para reiniciar,
           End para omitir.
         </div>
       </motion.div>

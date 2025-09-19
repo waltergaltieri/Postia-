@@ -131,7 +131,6 @@ class HealthChecker {
       url: redisUrl,
       socket: {
         connectTimeout: 5000,
-        commandTimeout: 5000,
       }
     });
     
@@ -363,7 +362,7 @@ class HealthChecker {
     }
   }
 
-  printSummary(): void {
+  printSummary(): boolean {
     console.log('\n📊 Health Check Summary');
     console.log('========================');
     

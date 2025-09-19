@@ -105,12 +105,19 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
     }, [currentStep, totalSteps, title, isVisible])
 
     // Keyboard navigation
-    const handleKeyDown = useKeyboardNavigation({
+    const keyboardHandler = useKeyboardNavigation({
       onEscape: onClose,
       onArrowLeft: !isFirstStep ? onPrevious : undefined,
       onArrowRight: !isLastStep ? onNext : undefined,
       onEnter: !isLastStep ? onNext : onClose
     })
+
+    // Wrapper to convert React.KeyboardEvent to KeyboardEvent
+    const handleKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Convert React event to native event for the keyboard handler
+      const nativeEvent = e.nativeEvent
+      keyboardHandler(nativeEvent)
+    }, [keyboardHandler])
 
     // Handle button clicks with announcements
     const handleNext = React.useCallback(() => {
@@ -165,15 +172,15 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
             tabIndex={-1}
             {...props}
           >
-            <Card 
-              variant="elevated" 
+            <Card
+              variant="elevated"
               className="shadow-elevation-3 border-primary-200/50"
               animate={!prefersReducedMotion}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex-1 min-w-0">
-                    <CardTitle 
+                    <CardTitle
                       id={titleId}
                       className="text-lg font-semibold text-foreground pr-2"
                     >
@@ -185,13 +192,16 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
                           <span>Paso {currentStep} de {totalSteps}</span>
                           <span>{Math.round(progress)}% completado</span>
                         </div>
-                        <div 
+                        <div
                           className="h-1.5 bg-muted rounded-full overflow-hidden"
                           role="progressbar"
-                          aria-valuenow={currentStep}
-                          aria-valuemin={1}
-                          aria-valuemax={totalSteps}
-                          aria-labelledby={progressId}
+                          {...({
+                            'aria-valuenow': String(currentStep),
+                            'aria-valuemin': '1',
+                            'aria-valuemax': String(totalSteps),
+                            'aria-valuetext': `Paso ${currentStep} de ${totalSteps}`,
+                            'aria-labelledby': progressId
+                          } as any)}
                         >
                           <motion.div
                             className="h-full bg-gradient-primary rounded-full"
@@ -207,7 +217,7 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
                       </div>
                     )}
                   </div>
-                  
+
                   {onClose && (
                     <Button
                       variant="ghost"
@@ -223,7 +233,7 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
               </CardHeader>
 
               <CardContent className="pt-0">
-                <p 
+                <p
                   id={descriptionId}
                   className="text-sm text-muted-foreground leading-relaxed mb-4"
                 >
@@ -245,7 +255,7 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
                           Anterior
                         </Button>
                       )}
-                      
+
                       {!isLastStep && onNext && (
                         <Button
                           variant="default"
@@ -289,9 +299,9 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
             </Card>
 
             {/* Screen reader only live region for announcements */}
-            <div 
-              aria-live="polite" 
-              aria-atomic="true" 
+            <div
+              aria-live="polite"
+              aria-atomic="true"
               className="sr-only"
               id={`tour-announcements-${titleId}`}
             />

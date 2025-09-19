@@ -119,56 +119,7 @@ const navigationItems: NavigationItem[] = [
     icon: Palette,
     href: '/dashboard/brand-assets'
   },
-  {
-    id: 'demos',
-    label: 'UI Demos',
-    icon: Sparkles,
-    href: '/dashboard/demos',
-    children: [
-      {
-        id: 'animations-demo',
-        label: 'Animations',
-        icon: Zap,
-        href: '/dashboard/animations-demo'
-      },
-      {
-        id: 'content-grid-demo',
-        label: 'Content Grid',
-        icon: FileText,
-        href: '/dashboard/content-grid-demo'
-      },
-      {
-        id: 'ai-generation-demo',
-        label: 'AI Generation',
-        icon: Sparkles,
-        href: '/dashboard/ai-generation-demo'
-      },
-      {
-        id: 'calendar-demo',
-        label: 'Calendar',
-        icon: Calendar,
-        href: '/dashboard/calendar-demo'
-      },
-      {
-        id: 'client-brand-demo',
-        label: 'Client Branding',
-        icon: Palette,
-        href: '/dashboard/client-brand-demo'
-      },
-      {
-        id: 'asset-library-demo',
-        label: 'Asset Library',
-        icon: Image,
-        href: '/dashboard/asset-library-demo'
-      },
-      {
-        id: 'integration-demo',
-        label: 'Integration Demo',
-        icon: Zap,
-        href: '/dashboard/integration-demo'
-      }
-    ]
-  },
+
   {
     id: 'settings',
     label: 'Settings',

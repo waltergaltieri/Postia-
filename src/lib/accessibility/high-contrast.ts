@@ -1,30 +1,28 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { getContrastRatio } from './color-contrast'
+import { useSSRSafeMediaQuery, safeBrowserExecution, safeDocument } from './ssr-utils'
+import type { HighContrastHookReturn, AccessibilityError } from './types'
 
 /**
- * Hook to detect user's high contrast preference
+ * Enhanced hook to detect user's high contrast preference with error handling and SSR safety
  */
-export function useHighContrast(): boolean {
-  const [prefersHighContrast, setPrefersHighContrast] = useState(false)
+export function useHighContrast(): HighContrastHookReturn {
+  const { matches, isLoading, error } = useSSRSafeMediaQuery('(prefers-contrast: high)', false)
 
-  useEffect(() => {
-    // Check initial preference
-    const mediaQuery = window.matchMedia('(prefers-contrast: high)')
-    setPrefersHighContrast(mediaQuery.matches)
+  return {
+    prefersHighContrast: matches,
+    isLoading,
+    error
+  }
+}
 
-    // Listen for changes
-    const handleChange = (event: MediaQueryListEvent) => {
-      setPrefersHighContrast(event.matches)
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
-
+/**
+ * Legacy hook for backward compatibility (simplified return type)
+ */
+export function useHighContrastLegacy(): boolean {
+  const { prefersHighContrast } = useHighContrast()
   return prefersHighContrast
 }
 
@@ -282,62 +280,49 @@ export function generateHighContrastCSS(isDark: boolean = false) {
 }
 
 /**
- * Inject high contrast CSS into document
+ * Inject high contrast CSS into document with error handling
  */
-export function injectHighContrastCSS(isDark: boolean = false) {
-  const existingStyle = document.getElementById('high-contrast-tour-styles')
-  if (existingStyle) {
-    document.head.removeChild(existingStyle)
-  }
-
-  const styleElement = document.createElement('style')
-  styleElement.id = 'high-contrast-tour-styles'
-  styleElement.textContent = generateHighContrastCSS(isDark)
-  document.head.appendChild(styleElement)
-
-  return () => {
-    const style = document.getElementById('high-contrast-tour-styles')
-    if (style) {
-      document.head.removeChild(style)
+export function injectHighContrastCSS(isDark: boolean = false): (() => void) | null {
+  const result = safeBrowserExecution(() => {
+    const existingStyle = document.getElementById('high-contrast-tour-styles')
+    if (existingStyle) {
+      document.head.removeChild(existingStyle)
     }
+
+    const styleElement = document.createElement('style')
+    styleElement.id = 'high-contrast-tour-styles'
+    styleElement.textContent = generateHighContrastCSS(isDark)
+    document.head.appendChild(styleElement)
+
+    return () => {
+      const style = document.getElementById('high-contrast-tour-styles')
+      if (style && style.parentNode) {
+        style.parentNode.removeChild(style)
+      }
+    }
+  })
+
+  if (!result.success) {
+    console.warn('Failed to inject high contrast CSS:', result.error)
+    return null
   }
+
+  return result.data || null
 }
 
 /**
- * Check if system is in high contrast mode
+ * Check if system is in high contrast mode with SSR safety
  */
 export function isHighContrastMode(): boolean {
-  return window.matchMedia('(prefers-contrast: high)').matches
+  const result = safeBrowserExecution(
+    () => window.matchMedia('(prefers-contrast: high)').matches,
+    false
+  )
+  
+  return result.data ?? false
 }
 
-/**
- * Get WCAG compliant contrast ratio
- */
-export function getContrastRatio(color1: string, color2: string): number {
-  // Simplified contrast ratio calculation
-  // In a real implementation, you'd want a more robust color parsing library
-  
-  const getLuminance = (color: string): number => {
-    // This is a simplified version - use a proper color library in production
-    const hex = color.replace('#', '')
-    const r = parseInt(hex.substr(0, 2), 16) / 255
-    const g = parseInt(hex.substr(2, 2), 16) / 255
-    const b = parseInt(hex.substr(4, 2), 16) / 255
-    
-    const sRGB = [r, g, b].map(c => {
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
-    })
-    
-    return 0.2126 * sRGB[0] + 0.7152 * sRGB[1] + 0.0722 * sRGB[2]
-  }
 
-  const lum1 = getLuminance(color1)
-  const lum2 = getLuminance(color2)
-  const brightest = Math.max(lum1, lum2)
-  const darkest = Math.min(lum1, lum2)
-  
-  return (brightest + 0.05) / (darkest + 0.05)
-}
 
 /**
  * Check if color combination meets WCAG AA standards
@@ -353,4 +338,17 @@ export function meetsWCAGAA(foreground: string, background: string): boolean {
 export function meetsWCAGAAA(foreground: string, background: string): boolean {
   const ratio = getContrastRatio(foreground, background)
   return ratio >= 7 // WCAG AAA standard for normal text
+}
+
+/**
+ * Check if user prefers high contrast with enhanced error handling
+ * @returns True if user prefers high contrast
+ */
+export function prefersHighContrast(): boolean {
+  const result = safeBrowserExecution(
+    () => window.matchMedia('(prefers-contrast: high)').matches,
+    false
+  )
+  
+  return result.data ?? false
 }

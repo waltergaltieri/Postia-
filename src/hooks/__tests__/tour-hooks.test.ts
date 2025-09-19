@@ -17,7 +17,7 @@ jest.mock('@/lib/tour/tour-config', () => ({
   }
 }))
 
-jest.mock('@/lib/accessibility/screen-reader', () => ({
+jest.mock('@/lib/accessibility', () => ({
   announceToScreenReader: jest.fn()
 }))
 

@@ -262,5 +262,4 @@ function formatActivityDescription(action: string, resource: string, details: an
   }
 }
 
-export const GET_HANDLER = withErrorHandler(GET);
-export { GET_HANDLER as GET };
+export { GET };

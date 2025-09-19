@@ -74,20 +74,20 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Create audit log
-    await db.auditLog.create({
-      data: {
-        agencyId: user.agencyId,
-        userId: user.id,
-        action: 'VERIFY_EMAIL',
-        resource: 'USER',
-        resourceId: user.id,
-        details: {
-          email: user.email,
-          verifiedAt: new Date().toISOString(),
-        },
-      },
-    });
+    // TODO: Create audit log when AuditLog model is available
+    // await db.auditLog.create({
+    //   data: {
+    //     agencyId: user.agencyId,
+    //     userId: user.id,
+    //     action: 'VERIFY_EMAIL',
+    //     resource: 'USER',
+    //     resourceId: user.id,
+    //     details: {
+    //       email: user.email,
+    //       verifiedAt: new Date().toISOString(),
+    //     },
+    //   },
+    // });
 
     return NextResponse.json({
       success: true,

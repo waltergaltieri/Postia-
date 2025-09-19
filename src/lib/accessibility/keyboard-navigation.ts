@@ -1,5 +1,6 @@
 'use client'
 
+import * as React from 'react'
 import { useCallback, useEffect } from 'react'
 
 export interface KeyboardNavigationOptions {
@@ -178,8 +179,8 @@ export function useKeyboardShortcuts() {
     ]
   }
 
-  const getShortcutText = useCallback((shortcuts: typeof shortcuts.navigation) => {
-    return shortcuts.map(s => `${s.key}: ${s.description}`).join(', ')
+  const getShortcutText = useCallback((shortcutList: Array<{ key: string; description: string }>) => {
+    return shortcutList.map(s => `${s.key}: ${s.description}`).join(', ')
   }, [])
 
   return {
@@ -272,4 +273,85 @@ export function restoreFocus(element: HTMLElement | null) {
  */
 export function saveFocus(): HTMLElement | null {
   return document.activeElement as HTMLElement | null
+}
+
+/**
+ * Create keyboard event handler with multiple key bindings
+ * @param handlers - Object mapping keys to handler functions
+ * @returns Keyboard event handler function
+ */
+export function createKeyboardHandler(handlers: {
+  onEnter?: () => void
+  onSpace?: () => void
+  onEscape?: () => void
+  onArrowUp?: () => void
+  onArrowDown?: () => void
+  onArrowLeft?: () => void
+  onArrowRight?: () => void
+  onTab?: () => void
+  onHome?: () => void
+  onEnd?: () => void
+}) {
+  return (event: React.KeyboardEvent) => {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault()
+        handlers.onEnter?.()
+        break
+      case ' ':
+        event.preventDefault()
+        handlers.onSpace?.()
+        break
+      case 'Escape':
+        event.preventDefault()
+        handlers.onEscape?.()
+        break
+      case 'ArrowUp':
+        event.preventDefault()
+        handlers.onArrowUp?.()
+        break
+      case 'ArrowDown':
+        event.preventDefault()
+        handlers.onArrowDown?.()
+        break
+      case 'ArrowLeft':
+        event.preventDefault()
+        handlers.onArrowLeft?.()
+        break
+      case 'ArrowRight':
+        event.preventDefault()
+        handlers.onArrowRight?.()
+        break
+      case 'Tab':
+        handlers.onTab?.()
+        break
+      case 'Home':
+        event.preventDefault()
+        handlers.onHome?.()
+        break
+      case 'End':
+        event.preventDefault()
+        handlers.onEnd?.()
+        break
+    }
+  }
+}
+
+/**
+ * Hook for creating keyboard navigation handlers
+ * @param handlers - Keyboard handler configuration
+ * @returns Memoized keyboard event handler
+ */
+export function useKeyboardNavigationHandler(handlers: Parameters<typeof createKeyboardHandler>[0]) {
+  return React.useCallback(createKeyboardHandler(handlers), [handlers])
+}
+
+/**
+ * Legacy hook for keyboard navigation (for backward compatibility)
+ * @param handlers - Keyboard handler configuration
+ * @returns Memoized keyboard event handler
+ * @deprecated Use useKeyboardNavigationHandler instead
+ */
+export function useKeyboardNavigationLegacy(handlers: Parameters<typeof createKeyboardHandler>[0]) {
+  return React.useCallback(createKeyboardHandler(handlers), [handlers])
 }

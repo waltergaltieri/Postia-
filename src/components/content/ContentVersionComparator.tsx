@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { 
+import {
   ArrowLeftRight,
   RotateCcw,
   Eye,
@@ -161,7 +161,7 @@ export default function ContentVersionComparator({
 
   const calculateDifferences = (version1: ContentVersion, version2: ContentVersion) => {
     const differences = [];
-    
+
     if (version1.publicationText !== version2.publicationText) {
       differences.push('Publication Text');
     }
@@ -174,7 +174,7 @@ export default function ContentVersionComparator({
     if (version1.finalImageUrl !== version2.finalImageUrl) {
       differences.push('Image');
     }
-    
+
     return differences;
   };
 
@@ -198,7 +198,7 @@ export default function ContentVersionComparator({
 
   const buildVersionTree = () => {
     const tree: { [key: string]: ContentVersion[] } = {};
-    
+
     versions.forEach(version => {
       const parentId = version.parentVersionId || 'root';
       if (!tree[parentId]) {
@@ -206,7 +206,7 @@ export default function ContentVersionComparator({
       }
       tree[parentId].push(version);
     });
-    
+
     return tree;
   };
 
@@ -235,7 +235,7 @@ export default function ContentVersionComparator({
             <span className="ml-1">{version.generationMethod}</span>
           </Badge>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Button variant="ghost" size="sm">
             <Eye className="h-3 w-3 mr-1" />
@@ -246,8 +246,8 @@ export default function ContentVersionComparator({
             Export
           </Button>
           {!version.isActive && onRestoreVersion && (
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               onClick={() => onRestoreVersion(version.id)}
             >
@@ -497,11 +497,10 @@ export default function ContentVersionComparator({
       </AnimatePresence>
 
       {/* Comparison Grid */}
-      <div className={`grid gap-6 ${
-        compareVersions.length === 2 ? 'grid-cols-1 lg:grid-cols-2' :
-        compareVersions.length === 3 ? 'grid-cols-1 lg:grid-cols-3' :
-        'grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'
-      }`}>
+      <div className={`grid gap-6 ${compareVersions.length === 2 ? 'grid-cols-1 lg:grid-cols-2' :
+          compareVersions.length === 3 ? 'grid-cols-1 lg:grid-cols-3' :
+            'grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'
+        }`}>
         {compareVersions.map((version, index) => (
           <Card key={version.id} className="border-2 border-primary-200">
             <CardContent className="p-6">
@@ -550,14 +549,17 @@ export default function ContentVersionComparator({
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label>Regeneration Scope</Label>
+              <Label htmlFor="regeneration-scope">Regeneration Scope</Label>
               <select
+                id="regeneration-scope"
                 value={regenerationForm.step}
-                onChange={(e) => setRegenerationForm({ 
-                  ...regenerationForm, 
+                onChange={(e) => setRegenerationForm({
+                  ...regenerationForm,
                   step: e.target.value as RegenerationOptions['step']
                 })}
                 className="w-full border border-neutral-300 rounded-md px-3 py-2"
+                aria-label="Select regeneration scope"
+                title="Select which part of the content to regenerate"
               >
                 <option value="ALL">Complete Content</option>
                 <option value="IDEA">Content Idea Only</option>

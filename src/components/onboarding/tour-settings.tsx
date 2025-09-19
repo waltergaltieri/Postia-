@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
+import {
   Settings,
   RotateCcw,
   Trash2,
@@ -93,7 +93,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
   const [saving, setSaving] = useState(false)
   const [activeTab, setActiveTab] = useState<'preferences' | 'history' | 'data'>('preferences')
 
-  const { getAllProgress, resetTour, updateTourProgress } = useTourProgress()
+  const { loadAllProgress, resetProgress, updateProgress, progressData } = useTourProgress({ enablePersistence: true })
 
   // Load preferences and tour history
   useEffect(() => {
@@ -107,20 +107,20 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
         }
 
         // Load tour history
-        const allProgress = getAllProgress()
+        await loadAllProgress()
         const registry = getTourRegistry()
         const history = []
 
-        for (const [tourId, progress] of Object.entries(allProgress)) {
+        for (const progressItem of progressData) {
           try {
-            const tour = await registry.loadTour(tourId)
-            history.push({ tourId, tour, progress })
+            const tour = await registry.loadTour(progressItem.tourId)
+            history.push({ tourId: progressItem.tourId, tour, progress: progressItem })
           } catch (error) {
-            console.warn(`Failed to load tour ${tourId} for history:`, error)
+            console.warn(`Failed to load tour ${progressItem.tourId} for history:`, error)
           }
         }
 
-        setTourHistory(history.sort((a, b) => 
+        setTourHistory(history.sort((a, b) =>
           new Date(b.progress.lastInteractionAt).getTime() - new Date(a.progress.lastInteractionAt).getTime()
         ))
       } catch (error) {
@@ -131,13 +131,13 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
     }
 
     loadData()
-  }, [getAllProgress])
+  }, [loadAllProgress, progressData])
 
   const savePreferences = async () => {
     setSaving(true)
     try {
       localStorage.setItem('tour-preferences', JSON.stringify(preferences))
-      
+
       // Apply accessibility preferences immediately
       if (preferences.accessibility.highContrast) {
         document.documentElement.classList.add('high-contrast')
@@ -160,22 +160,26 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
   }
 
   const resetTourProgress = (tourId: string) => {
-    resetTour(tourId)
-    setTourHistory(prev => prev.filter(item => item.tourId !== tourId))
+    const progressItem = tourHistory.find(item => item.tourId === tourId)
+    if (progressItem) {
+      resetProgress(progressItem.progress.userId, tourId)
+      setTourHistory(prev => prev.filter(item => item.tourId !== tourId))
+    }
   }
 
   const resetAllProgress = () => {
-    tourHistory.forEach(item => resetTour(item.tourId))
+    tourHistory.forEach(item => resetProgress(item.progress.userId, item.tourId))
     setTourHistory([])
   }
 
-  const exportData = () => {
+  const exportData = async () => {
+    const allProgress = await loadAllProgress()
     const data = {
       preferences,
-      tourHistory: getAllProgress(),
+      tourHistory: allProgress,
       exportDate: new Date().toISOString()
     }
-    
+
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -195,17 +199,20 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
     reader.onload = (e) => {
       try {
         const data = JSON.parse(e.target?.result as string)
-        
+
         if (data.preferences) {
           setPreferences({ ...defaultPreferences, ...data.preferences })
         }
-        
+
         if (data.tourHistory) {
           Object.entries(data.tourHistory).forEach(([tourId, progress]) => {
-            updateTourProgress(tourId, progress as any)
+            const progressData = progress as any
+            if (progressData.userId) {
+              updateProgress(progressData.userId, tourId, progressData)
+            }
           })
         }
-        
+
         // Reload tour history
         window.location.reload()
       } catch (error) {
@@ -270,7 +277,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
             Customize your tour experience and manage your progress
           </p>
         </div>
-        
+
         {onClose && (
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="w-4 h-4" />
@@ -312,7 +319,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
             {/* General Preferences */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">General Preferences</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -403,7 +410,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
             {/* Tour Frequency */}
             <Card className="p-6">
               <h3 className="text-lg font-semibold mb-4">Tour Frequency</h3>
-              
+
               <div className="space-y-3">
                 {frequencyOptions.map((option) => (
                   <div
@@ -439,7 +446,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
               <p className="text-sm text-muted-foreground mb-4">
                 Select categories you're most interested in for personalized recommendations
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {tourCategories.map((category) => (
                   <div
@@ -486,7 +493,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
                 <Accessibility className="w-5 h-5 mr-2" />
                 Accessibility
               </h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -596,7 +603,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
                   {tourHistory.length} tours in your history
                 </p>
               </div>
-              
+
               {tourHistory.length > 0 && (
                 <Button
                   variant="outline"
@@ -637,7 +644,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-2">
                         {getStatusBadge(item.progress.status)}
                         <Button
@@ -702,6 +709,8 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
                     accept=".json"
                     onChange={importData}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    aria-label="Import tour data from JSON file"
+                    title="Select a JSON file to import tour data"
                   />
                   <Button variant="outline" className="w-full">
                     <Upload className="w-4 h-4 mr-2" />

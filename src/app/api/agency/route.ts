@@ -18,11 +18,10 @@ export async function GET() {
 
     // Get agency information
     const agency = await db.agency.findUnique({
-      where: { id: session.user.agencyId },
+      where: { id: session.user.agencyId || '' },
       select: {
         id: true,
         name: true,
-        subscriptionPlan: true,
         tokenBalance: true,
         createdAt: true,
         _count: {
@@ -89,31 +88,30 @@ export async function PATCH(request: NextRequest) {
 
     // Update agency
     const updatedAgency = await db.agency.update({
-      where: { id: session.user.agencyId },
+      where: { id: session.user.agencyId || '' },
       data: { name: name.trim() },
       select: {
         id: true,
         name: true,
-        subscriptionPlan: true,
         tokenBalance: true,
         createdAt: true,
       },
     });
 
-    // Create audit log
-    await db.auditLog.create({
-      data: {
-        agencyId: session.user.agencyId,
-        userId: session.user.id,
-        action: 'UPDATE',
-        resource: 'AGENCY',
-        resourceId: session.user.agencyId,
-        details: {
-          updatedFields: ['name'],
-          newName: name.trim(),
-        },
-      },
-    });
+    // TODO: Create audit log when AuditLog model is available
+    // await db.auditLog.create({
+    //   data: {
+    //     agencyId: session.user.agencyId || '',
+    //     userId: session.user.id,
+    //     action: 'UPDATE',
+    //     resource: 'AGENCY',
+    //     resourceId: session.user.agencyId || '',
+    //     details: {
+    //       updatedFields: ['name'],
+    //       newName: name.trim(),
+    //     },
+    //   },
+    // });
 
     return NextResponse.json({
       success: true,

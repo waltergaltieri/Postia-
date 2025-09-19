@@ -7,7 +7,8 @@ import {
   createAriaAttributes,
   generateScreenReaderDescription 
 } from './screen-reader'
-import { useFocusTrap, saveFocus, restoreFocus } from './focus-trap'
+import { useFocusTrap } from './focus-trap'
+import { saveFocus, restoreFocus } from './keyboard-navigation'
 import { useKeyboardNavigation } from './keyboard-navigation'
 import { useReducedMotion } from './reduced-motion'
 import { useHighContrast, highContrastClasses } from './high-contrast'

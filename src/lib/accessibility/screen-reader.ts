@@ -1,55 +1,78 @@
 'use client'
 
+import * as React from 'react'
 import { useCallback, useRef } from 'react'
-
-export type AnnouncementPriority = 'polite' | 'assertive'
+import { safeBrowserExecution, safeDocument } from './ssr-utils'
+import type { AnnouncementPriority, AccessibilityError } from './types'
 
 /**
- * Announce messages to screen readers using live regions
+ * Announce messages to screen readers using live regions with error handling
  */
 export function announceToScreenReader(
   message: string, 
   priority: AnnouncementPriority = 'polite'
 ): void {
-  // Create or get existing live region
-  let liveRegion = document.getElementById(`sr-live-region-${priority}`)
-  
-  if (!liveRegion) {
-    liveRegion = document.createElement('div')
-    liveRegion.id = `sr-live-region-${priority}`
-    liveRegion.setAttribute('aria-live', priority)
-    liveRegion.setAttribute('aria-atomic', 'true')
-    liveRegion.className = 'sr-only'
-    liveRegion.style.cssText = `
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    `
-    document.body.appendChild(liveRegion)
+  const result = safeBrowserExecution(() => {
+    // Validate inputs
+    if (!message || typeof message !== 'string') {
+      throw new Error('Invalid message provided to announceToScreenReader')
+    }
+
+    if (priority !== 'polite' && priority !== 'assertive') {
+      throw new Error('Invalid priority provided to announceToScreenReader')
+    }
+
+    // Create or get existing live region
+    let liveRegion = document.getElementById(`sr-live-region-${priority}`)
+    
+    if (!liveRegion) {
+      liveRegion = document.createElement('div')
+      liveRegion.id = `sr-live-region-${priority}`
+      liveRegion.setAttribute('aria-live', priority)
+      liveRegion.setAttribute('aria-atomic', 'true')
+      liveRegion.className = 'sr-only'
+      liveRegion.style.cssText = `
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      `
+      
+      if (!document.body) {
+        throw new Error('Document body not available for screen reader announcement')
+      }
+      
+      document.body.appendChild(liveRegion)
+    }
+
+    // Clear previous content and set new message
+    liveRegion.textContent = ''
+    
+    // Use setTimeout to ensure the change is detected by screen readers
+    const announceTimeout = setTimeout(() => {
+      if (liveRegion && document.contains(liveRegion)) {
+        liveRegion.textContent = message
+      }
+    }, 100)
+
+    // Clear the message after it's been announced
+    const clearTimeout = setTimeout(() => {
+      if (liveRegion && document.contains(liveRegion)) {
+        liveRegion.textContent = ''
+      }
+    }, 1000)
+
+    return { announceTimeout, clearTimeout }
+  })
+
+  if (!result.success) {
+    console.warn('Failed to announce to screen reader:', result.error)
   }
-
-  // Clear previous content and set new message
-  liveRegion.textContent = ''
-  
-  // Use setTimeout to ensure the change is detected by screen readers
-  setTimeout(() => {
-    if (liveRegion) {
-      liveRegion.textContent = message
-    }
-  }, 100)
-
-  // Clear the message after it's been announced
-  setTimeout(() => {
-    if (liveRegion) {
-      liveRegion.textContent = ''
-    }
-  }, 1000)
 }
 
 /**
@@ -249,28 +272,52 @@ export function removeLiveRegion(id: string): void {
 }
 
 /**
- * Check if screen reader is likely being used
+ * Check if screen reader is likely being used with enhanced error handling
  */
 export function isScreenReaderActive(): boolean {
-  // Check for common screen reader indicators
-  const indicators = [
-    // NVDA
-    () => 'speechSynthesis' in window && window.speechSynthesis.getVoices().length > 0,
-    // JAWS, NVDA, others
-    () => navigator.userAgent.includes('JAWS') || navigator.userAgent.includes('NVDA'),
-    // Check for reduced motion preference (often used by screen reader users)
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-    // Check for high contrast preference
-    () => window.matchMedia('(prefers-contrast: high)').matches
-  ]
+  const result = safeBrowserExecution(() => {
+    // Check for common screen reader indicators
+    const indicators = [
+      // Speech synthesis API
+      () => 'speechSynthesis' in window && window.speechSynthesis.getVoices().length > 0,
+      // User agent strings
+      () => navigator.userAgent.includes('JAWS') || navigator.userAgent.includes('NVDA'),
+      // Accessibility preferences (often used by screen reader users)
+      () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      () => window.matchMedia('(prefers-contrast: high)').matches,
+      // Check for screen reader specific CSS
+      () => {
+        const testElement = document.createElement('div')
+        testElement.className = 'sr-only'
+        testElement.style.cssText = `
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        `
+        document.body.appendChild(testElement)
+        const isHidden = window.getComputedStyle(testElement).position === 'absolute'
+        document.body.removeChild(testElement)
+        return isHidden
+      }
+    ]
 
-  return indicators.some(check => {
-    try {
-      return check()
-    } catch {
-      return false
-    }
-  })
+    return indicators.some(check => {
+      try {
+        return check()
+      } catch (error) {
+        console.warn('Screen reader detection check failed:', error)
+        return false
+      }
+    })
+  }, false)
+
+  return result.data ?? false
 }
 
 /**
@@ -306,4 +353,36 @@ export function createEnhancedAriaAttributes(
   }
 
   return enhancedAttributes
+}
+
+/**
+ * Generate unique ID for accessibility attributes
+ * @param prefix - Prefix for the ID
+ * @returns Unique ID string
+ */
+export function generateId(prefix: string = 'element'): string {
+  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`
+}
+
+/**
+ * Screen reader only styles for visually hidden content
+ */
+export const srOnlyStyles = {
+  position: 'absolute' as const,
+  width: '1px',
+  height: '1px',
+  padding: '0',
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap' as const,
+  border: '0'
+}
+
+/**
+ * Hook for screen reader announcements with simplified API
+ * @returns Function to make announcements
+ */
+export function useAnnouncement() {
+  return React.useCallback(announceToScreenReader, [])
 }

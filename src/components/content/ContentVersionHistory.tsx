@@ -9,10 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { 
-  RotateCcw, 
-  Eye, 
-  Download, 
+import {
+  RotateCcw,
+  Eye,
+  Download,
   ArrowLeftRight,
   Clock,
   User,
@@ -89,7 +89,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
     try {
       const response = await fetch(`/api/posts/${postId}/versions`);
       const result = await response.json();
-      
+
       if (result.success) {
         setPost(result.data.post);
       }
@@ -103,7 +103,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
 
   const handleRegenerateContent = async () => {
     setRegenerating(true);
-    
+
     try {
       const response = await fetch(`/api/posts/${postId}/regenerate`, {
         method: 'POST',
@@ -116,7 +116,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
       if (result.success) {
         toast.success('Content regeneration started');
         setShowRegenerateDialog(false);
-        
+
         // Poll for completion
         const jobId = result.data.jobId;
         pollRegenerationStatus(jobId);
@@ -139,7 +139,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
 
         if (result.success) {
           const job = result.data.job;
-          
+
           if (job.status === 'COMPLETED') {
             clearInterval(interval);
             toast.success('Content regenerated successfully');
@@ -290,14 +290,17 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label>Regeneration Scope</Label>
+                  <Label htmlFor="regeneration-scope-select">Regeneration Scope</Label>
                   <select
+                    id="regeneration-scope-select"
                     value={regenerationForm.step}
-                    onChange={(e) => setRegenerationForm({ 
-                      ...regenerationForm, 
+                    onChange={(e) => setRegenerationForm({
+                      ...regenerationForm,
                       step: e.target.value as RegenerationOptions['step']
                     })}
                     className="w-full border border-gray-300 rounded-md px-3 py-2"
+                    aria-label="Select regeneration scope"
+                    title="Choose which part of the content to regenerate"
                   >
                     <option value="ALL">Complete Content</option>
                     <option value="IDEA">Content Idea Only</option>
@@ -489,6 +492,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                       <div className="flex items-center space-x-3">
                         <input
                           type="checkbox"
+                          id={`version-${version.id}`}
                           checked={selectedVersions.includes(version.id)}
                           onChange={(e) => {
                             if (e.target.checked) {
@@ -498,6 +502,8 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                             }
                           }}
                           className="rounded"
+                          aria-label={`Select version ${version.versionNumber} for comparison`}
+                          title={`Select version ${version.versionNumber} for comparison`}
                         />
                         <div>
                           <div className="flex items-center space-x-2">
@@ -524,7 +530,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex space-x-2">
                         <Button variant="ghost" size="sm">
                           <Eye className="h-3 w-3 mr-1" />
@@ -568,7 +574,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                           />
                         </div>
                       )}
-                      
+
                       <div className="md:col-span-2">
                         <div className="space-y-2">
                           <div>
@@ -577,7 +583,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                               {version.publicationText || 'No publication text'}
                             </p>
                           </div>
-                          
+
                           {version.hashtags.length > 0 && (
                             <div>
                               <Label className="text-xs">Hashtags</Label>
@@ -641,7 +647,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                       {version.generationMethod}
                     </Badge>
                   </div>
-                  
+
                   {version.finalImageUrl && (
                     <div className="aspect-square bg-muted rounded overflow-hidden">
                       <img
@@ -651,14 +657,14 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                       />
                     </div>
                   )}
-                  
+
                   <div>
                     <Label className="text-xs">Publication Text</Label>
                     <div className="mt-1 p-2 bg-muted rounded text-sm">
                       {version.publicationText || 'No publication text'}
                     </div>
                   </div>
-                  
+
                   {version.hashtags.length > 0 && (
                     <div>
                       <Label className="text-xs">Hashtags</Label>
