@@ -226,24 +226,24 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />
+        return <CheckCircle className="w-4 h-4 text-success-600" />
       case 'in_progress':
-        return <Clock className="w-4 h-4 text-blue-500" />
+        return <Clock className="w-4 h-4 text-info-600" />
       case 'skipped':
-        return <AlertCircle className="w-4 h-4 text-yellow-500" />
+        return <AlertCircle className="w-4 h-4 text-warning-600" />
       default:
-        return <Info className="w-4 h-4 text-gray-500" />
+        return <Info className="w-4 h-4 text-muted-foreground" />
     }
   }
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge className="bg-green-100 text-green-800">Completed</Badge>
+        return <Badge className="bg-success-100 text-success-800">Completed</Badge>
       case 'in_progress':
-        return <Badge className="bg-blue-100 text-blue-800">In Progress</Badge>
+        return <Badge className="bg-info-100 text-info-800">In Progress</Badge>
       case 'skipped':
-        return <Badge className="bg-yellow-100 text-yellow-800">Skipped</Badge>
+        return <Badge className="bg-warning-100 text-warning-800">Skipped</Badge>
       default:
         return <Badge variant="outline">Not Started</Badge>
     }
@@ -619,7 +619,7 @@ export default function TourSettings({ className, onClose }: TourSettingsProps) 
 
             {tourHistory.length === 0 ? (
               <Card className="p-8 text-center">
-                <Clock className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <Clock className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-medium mb-2">No tour history</h3>
                 <p className="text-muted-foreground">
                   Start taking tours to see your progress here
