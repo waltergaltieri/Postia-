@@ -47,7 +47,7 @@ const statusColors = {
 
 // Type color mapping
 const typeColors = {
-  post: 'bg-blue-500',
+  post: 'bg-info-500',
   story: 'bg-purple-500',
   reel: 'bg-pink-500',
   campaign: 'bg-orange-500',
@@ -623,17 +623,14 @@ function DayView({
         
         {events.length === 0 && (
           <div className="text-center py-12 text-neutral-500">
-            <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <Calendar className="h-8 w-8 mx-auto mb-4 opacity-50" />
             <p>No hay eventos programados para este día</p>
             <Button
               variant="outline"
               size="sm"
               className="mt-4"
-              onClick={() => onDateClick?.(date)}
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Agregar evento
-            </Button>
+              onClick={() => <span>onDateClick?.(date)}
+            ></span><Plus className="h-4 w-4 mr-2" /> <span>Agregar evento</span></Button>
           </div>
         )}
       </div>

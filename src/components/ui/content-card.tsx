@@ -199,12 +199,12 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
       >
         {/* Selection checkbox */}
         {onSelect && (
-          <div className="absolute top-3 left-3 z-20">
+          <div className="absolute top-3 left-3 z-20 responsive-container">
             <input
               type="checkbox"
               checked={selected}
               onChange={handleSelectChange}
-              className="w-4 h-4 rounded border-2 border-white/80 bg-black/20 backdrop-blur-sm text-primary-600 focus:ring-primary-500 focus:ring-offset-0"
+              className="w-4 h-4 rounded border-2 border-white/80 bg-black/20 backdrop-blur-sm text-primary-600 focus:ring-primary-500 focus:ring-offset-0 responsive-container"
               aria-label={`Seleccionar ${title}`}
             />
           </div>
@@ -219,25 +219,25 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
             statusInfo.color,
             "border"
           )}>
-            <StatusIcon className="w-3 h-3" />
+            <StatusIcon className="w-3 h-3 responsive-container" />
             {statusInfo.label}
           </div>
         )}
 
         {/* Loading overlay */}
         {loading && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/20 backdrop-blur-sm">
-            <div className="flex items-center gap-2 px-3 py-2 bg-white/90 rounded-lg text-sm font-medium">
-              <Loader2 className="w-4 h-4 animate-spin" />
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/20 backdrop-blur-sm responsive-container">
+            <div className="flex items-center gap-2 px-3 py-2 bg-white/90 rounded-lg text-sm font-medium responsive-container">
+              <Loader2 className="w-4 h-4 animate-spin responsive-container" />
               Procesando...
             </div>
           </div>
         )}
 
         {/* Content area */}
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full responsive-container">
           {/* Thumbnail or content preview */}
-          <div className="w-full h-full bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 rounded-lg overflow-hidden">
+          <div className="w-full h-full bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900 rounded-lg overflow-hidden responsive-container">
             {thumbnail ? (
               <OptimizedImage
                 src={thumbnail}
@@ -246,19 +246,19 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
                 objectFit="cover"
                 quality={80}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="rounded-lg"
+                className="rounded-lg responsive-container"
                 lazy={true}
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
-                    {contentType === 'image' && <Eye className="w-6 h-6 text-primary-600" />}
-                    {contentType === 'video' && <Calendar className="w-6 h-6 text-primary-600" />}
-                    {contentType === 'text' && <Edit3 className="w-6 h-6 text-primary-600" />}
-                    {contentType === 'carousel' && <Copy className="w-6 h-6 text-primary-600" />}
+              <div className="w-full h-full flex items-center justify-center responsive-container">
+                <div className="text-center p-4 responsive-container">
+                  <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center responsive-container">
+                    {contentType === 'image' && <Eye className="w-6 h-6 text-primary-600 responsive-container" />}
+                    {contentType === 'video' && <Calendar className="w-6 h-6 text-primary-600 responsive-container" />}
+                    {contentType === 'text' && <Edit3 className="w-6 h-6 text-primary-600 responsive-container" />}
+                    {contentType === 'carousel' && <Copy className="w-6 h-6 text-primary-600 responsive-container" />}
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground">
+                  <p className="text-sm font-medium text-muted-foreground responsive-container">
                     {contentType === 'image' && 'Imagen'}
                     {contentType === 'video' && 'Video'}
                     {contentType === 'text' && 'Texto'}
@@ -291,14 +291,13 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
                       key={index}
                       size="icon-sm"
                       variant={action.variant || "secondary"}
-                      className="bg-white/90 hover:bg-white text-neutral-900 shadow-lg backdrop-blur-sm"
-                      onClick={(e) => {
+                      className="bg-white/90 hover:bg-white text-neutral-900 shadow-lg backdrop-blur-sm responsive-container"
+                      onClick={(e) => <span>{
                         e.stopPropagation()
                         action.onClick()
                       }}
                       disabled={action.disabled}
-                    >
-                      <ActionIcon className="w-4 h-4" />
+                    ></span><ActionIcon className="w-4 h-4 responsive-container" />
                     </Button>
                   )
                 })}
@@ -307,10 +306,9 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
                   <Button
                     size="icon-sm"
                     variant="secondary"
-                    className="bg-white/90 hover:bg-white text-neutral-900 shadow-lg backdrop-blur-sm"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <MoreHorizontal className="w-4 h-4" />
+                    className="bg-white/90 hover:bg-white text-neutral-900 shadow-lg backdrop-blur-sm responsive-container"
+                    onClick={(e) => <span>e.stopPropagation()}
+                  ></span><MoreHorizontal className="w-4 h-4 responsive-container" />
                   </Button>
                 )}
               </div>
@@ -322,15 +320,15 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
                   isHovered ? actionButtonClasses.visible : actionButtonClasses.hidden
                 )}
               >
-                <h3 className="font-semibold text-sm mb-1 line-clamp-2">{title}</h3>
+                <h3 className="font-semibold text-sm mb-1 line-clamp-2 responsive-container">{title}</h3>
                 {description && (
-                  <p className="text-xs text-white/80 line-clamp-2 mb-2">{description}</p>
+                  <p className="text-xs text-white/80 line-clamp-2 mb-2 responsive-container">{description}</p>
                 )}
                 
                 {showMetadata && (
-                  <div className="flex items-center gap-3 text-xs text-white/70">
+                  <div className="flex items-center gap-3 text-xs text-white/70 responsive-container">
                     {platform && (
-                      <span className="px-2 py-1 bg-white/20 rounded-full">
+                      <span className="px-2 py-1 bg-white/20 rounded-full responsive-container">
                         {platform}
                       </span>
                     )}
@@ -340,8 +338,8 @@ const ContentCard = React.forwardRef<HTMLDivElement, ContentCardProps>(
                       </span>
                     )}
                     {scheduledAt && (
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
+                      <span className="flex items-center gap-1 responsive-container">
+                        <Calendar className="w-3 h-3 responsive-container" />
                         {scheduledAt.toLocaleDateString()}
                       </span>
                     )}

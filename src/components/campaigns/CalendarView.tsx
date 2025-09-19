@@ -89,11 +89,11 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
   const getStatusColor = (status: PostStatus) => {
     switch (status) {
       case PostStatus.DRAFT:
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning-100 text-warning-800';
       case PostStatus.APPROVED:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       case PostStatus.PUBLISHED:
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -150,14 +150,14 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info-600"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+      <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
         {error}
       </div>
     );
@@ -165,7 +165,7 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
 
   if (!calendarData) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-muted-foreground">
         No calendar data available
       </div>
     );
@@ -235,20 +235,20 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
         {/* Summary Stats */}
         <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{calendarData.summary.totalPosts}</div>
-            <div className="text-sm text-gray-500">Total Posts</div>
+            <div className="text-2xl font-bold text-info-600">{calendarData.summary.totalPosts}</div>
+            <div className="text-sm text-muted-foreground">Total Posts</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-600">{calendarData.summary.statusCounts.draft}</div>
-            <div className="text-sm text-gray-500">Drafts</div>
+            <div className="text-2xl font-bold text-warning-600">{calendarData.summary.statusCounts.draft}</div>
+            <div className="text-sm text-muted-foreground">Drafts</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{calendarData.summary.statusCounts.approved}</div>
-            <div className="text-sm text-gray-500">Approved</div>
+            <div className="text-2xl font-bold text-info-600">{calendarData.summary.statusCounts.approved}</div>
+            <div className="text-sm text-muted-foreground">Approved</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">{calendarData.summary.statusCounts.published}</div>
-            <div className="text-sm text-gray-500">Published</div>
+            <div className="text-2xl font-bold text-success-600">{calendarData.summary.statusCounts.published}</div>
+            <div className="text-sm text-muted-foreground">Published</div>
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
         {/* Day Headers */}
         <div className="grid grid-cols-7 gap-1 mb-2">
           {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-            <div key={day} className="p-2 text-center text-sm font-medium text-gray-500">
+            <div key={day} className="p-2 text-center text-sm font-medium text-muted-foreground">
               {day}
             </div>
           ))}
@@ -277,8 +277,8 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
               {day && (
                 <>
                   <div className={`text-sm font-medium mb-2 ${
-                    isToday(day.date) ? 'text-blue-600' : 
-                    isCurrentMonth(day.date) ? 'text-gray-900' : 'text-gray-400'
+                    isToday(day.date) ? 'text-info-600' : 
+                    isCurrentMonth(day.date) ? 'text-gray-900' : 'text-muted-foreground'
                   }`}>
                     {formatDate(day.date)}
                   </div>
@@ -308,7 +308,7 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
                       ))}
                       
                       {day.posts.length > 3 && (
-                        <div className="text-xs text-gray-500 text-center">
+                        <div className="text-xs text-muted-foreground text-center">
                           +{day.posts.length - 3} more
                         </div>
                       )}
@@ -316,7 +316,7 @@ export default function CalendarView({ campaignId, onPostClick, onDateClick }: C
                   )}
                   
                   {day.postCount === 0 && (
-                    <div className="text-xs text-gray-400 text-center mt-8">
+                    <div className="text-xs text-muted-foreground text-center mt-8">
                       No posts
                     </div>
                   )}

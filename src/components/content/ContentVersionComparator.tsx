@@ -238,22 +238,15 @@ export default function ContentVersionComparator({
 
         <div className="flex items-center space-x-2">
           <Button variant="ghost" size="sm">
-            <Eye className="h-3 w-3 mr-1" />
-            Preview
-          </Button>
+            <Eye className="h-3 w-3 mr-1" /> <span>Preview</span></Button>
           <Button variant="ghost" size="sm">
-            <Download className="h-3 w-3 mr-1" />
-            Export
-          </Button>
+            <Download className="h-3 w-3 mr-1" /> <span>Export</span></Button>
           {!version.isActive && onRestoreVersion && (
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => onRestoreVersion(version.id)}
-            >
-              <RotateCcw className="h-3 w-3 mr-1" />
-              Restore
-            </Button>
+              onClick={() => <span>onRestoreVersion(version.id)}
+            ></span><RotateCcw className="h-3 w-3 mr-1" /> <span>Restore</span></Button>
           )}
         </div>
       </div>
@@ -345,11 +338,8 @@ export default function ContentVersionComparator({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleRegenerateStep(version.id, step.step)}
-                  >
-                    <RotateCcw className="h-3 w-3 mr-1" />
-                    Regenerate
-                  </Button>
+                    onClick={() => <span>handleRegenerateStep(version.id, step.step)}
+                  ></span><RotateCcw className="h-3 w-3 mr-1" /> <span>Regenerate</span></Button>
                 </div>
               ))}
             </div>
@@ -420,18 +410,16 @@ export default function ContentVersionComparator({
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setShowChangeHistory(!showChangeHistory)}
-              >
-                <GitBranch className="h-3 w-3 mr-1" />
+                onClick={() => <span>setShowChangeHistory(!showChangeHistory)}
+              ></span><GitBranch className="h-3 w-3 mr-1" />
                 {showChangeHistory ? 'Hide' : 'Show'} History
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setIsFullscreen(!isFullscreen)}
+                onClick={() => <span>setIsFullscreen(!isFullscreen)}
               >
-                {isFullscreen ? (
-                  <Minimize2 className="h-3 w-3 mr-1" />
+                {isFullscreen ? (</span><Minimize2 className="h-3 w-3 mr-1" />
                 ) : (
                   <Maximize2 className="h-3 w-3 mr-1" />
                 )}
@@ -621,13 +609,10 @@ export default function ContentVersionComparator({
             </div>
 
             <div className="flex justify-end space-x-2">
-              <Button variant="outline" onClick={() => setShowRegenerateDialog(false)}>
-                Cancel
-              </Button>
+              <Button variant="outline" onClick={() => <span>setShowRegenerateDialog(false)}>
+                Cancel</span></Button>
               <Button onClick={handleSubmitRegeneration}>
-                <RefreshCw className="h-3 w-3 mr-1" />
-                Start Regeneration
-              </Button>
+                <RefreshCw className="h-3 w-3 mr-1" /> <span>Start Regeneration</span></Button>
             </div>
           </div>
         </DialogContent>

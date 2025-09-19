@@ -92,13 +92,9 @@ export function TourUIDemo() {
           </p>
           
           {!isActive ? (
-            <Button onClick={startTour} size="lg">
-              Iniciar Tour Demo
-            </Button>
+            <Button onClick={startTour} size="lg"> <span>Iniciar Tour Demo</span></Button>
           ) : (
-            <Button onClick={stopTour} variant="outline">
-              Detener Tour
-            </Button>
+            <Button onClick={stopTour} variant="outline"> <span>Detener Tour</span></Button>
           )}
         </div>
 
@@ -118,9 +114,7 @@ export function TourUIDemo() {
             </CardHeader>
             <CardContent>
               <p>Este elemento será destacado durante el paso 2 del tour.</p>
-              <Button variant="outline" className="mt-4">
-                Botón de Ejemplo
-              </Button>
+              <Button variant="outline" className="mt-4"> <span>Botón de Ejemplo</span></Button>
             </CardContent>
           </Card>
         </div>

@@ -45,19 +45,19 @@ const EventIcon: React.FC<{ eventType: TourEvent['type'] }> = ({ eventType }) =>
   
   switch (eventType) {
     case 'tour_started':
-      return <Zap {...iconProps} className="h-4 w-4 text-green-600" />
+      return <Zap {...iconProps} className="h-4 w-4 text-success-600" />
     case 'step_viewed':
-      return <Eye {...iconProps} className="h-4 w-4 text-blue-600" />
+      return <Eye {...iconProps} className="h-4 w-4 text-info-600" />
     case 'step_completed':
-      return <CheckCircle {...iconProps} className="h-4 w-4 text-green-600" />
+      return <CheckCircle {...iconProps} className="h-4 w-4 text-success-600" />
     case 'tour_completed':
-      return <CheckCircle {...iconProps} className="h-4 w-4 text-emerald-600" />
+      return <CheckCircle {...iconProps} className="h-4 w-4 text-success-600" />
     case 'tour_skipped':
-      return <XCircle {...iconProps} className="h-4 w-4 text-red-600" />
+      return <XCircle {...iconProps} className="h-4 w-4 text-error-600" />
     case 'help_requested':
       return <HelpCircle {...iconProps} className="h-4 w-4 text-orange-600" />
     default:
-      return <Activity {...iconProps} />
+      return <Activity className="h-4 w-4" {...iconProps} />
   }
 }
 
@@ -140,7 +140,7 @@ const LiveMetricsCard: React.FC<{ metrics: LiveMetrics }> = ({ metrics }) => {
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-blue-600" />
+            <Users className="h-4 w-4 text-info-600" />
             <div>
               <div className="text-2xl font-bold">{metrics.activeUsers}</div>
               <div className="text-xs text-muted-foreground">Usuarios activos</div>
@@ -152,7 +152,7 @@ const LiveMetricsCard: React.FC<{ metrics: LiveMetrics }> = ({ metrics }) => {
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
-            <Activity className="h-4 w-4 text-green-600" />
+            <Activity className="h-4 w-4 text-success-600" />
             <div>
               <div className="text-2xl font-bold">{metrics.eventsPerMinute}</div>
               <div className="text-xs text-muted-foreground">Eventos/min</div>
@@ -164,7 +164,7 @@ const LiveMetricsCard: React.FC<{ metrics: LiveMetrics }> = ({ metrics }) => {
       <Card>
         <CardContent className="p-4">
           <div className="flex items-center gap-2">
-            <CheckCircle className="h-4 w-4 text-emerald-600" />
+            <CheckCircle className="h-4 w-4 text-success-600" />
             <div>
               <div className="text-2xl font-bold">{metrics.completionRate.toFixed(1)}%</div>
               <div className="text-xs text-muted-foreground">Completación</div>
@@ -301,7 +301,7 @@ export const RealTimeAnalytics: React.FC<RealTimeAnalyticsProps> = ({
         <div className="flex items-center gap-2">
           <div className={cn(
             'h-2 w-2 rounded-full',
-            isConnected ? 'bg-green-500' : 'bg-gray-400'
+            isConnected ? 'bg-success-500' : 'bg-gray-400'
           )} />
           <span className="text-sm text-muted-foreground">
             {isConnected ? 'Conectado' : 'Desconectado'}

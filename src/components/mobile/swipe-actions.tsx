@@ -22,11 +22,11 @@ interface SwipeActionsProps {
 }
 
 const actionColors = {
-  destructive: 'bg-red-500 text-white',
-  primary: 'bg-blue-500 text-white',
+  destructive: 'bg-error-500 text-white',
+  primary: 'bg-info-500 text-white',
   secondary: 'bg-gray-500 text-white',
-  success: 'bg-green-500 text-white',
-  warning: 'bg-yellow-500 text-white'
+  success: 'bg-success-500 text-white',
+  warning: 'bg-warning-500 text-white'
 }
 
 export default function SwipeActions({

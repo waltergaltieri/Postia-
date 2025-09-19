@@ -268,7 +268,7 @@ export default function AdvancedDesignGenerator() {
                           key={template.id}
                           className={`cursor-pointer transition-all ${
                             selectedTemplate === template.id
-                              ? 'ring-2 ring-blue-500 bg-blue-50'
+                              ? 'ring-2 ring-blue-500 bg-info-50'
                               : 'hover:bg-gray-50'
                           }`}
                           onClick={() => setSelectedTemplate(template.id)}
@@ -312,7 +312,7 @@ export default function AdvancedDesignGenerator() {
                     placeholder="Main message for your design"
                     maxLength={50}
                   />
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {designForm.content.headline.length}/50 characters
                   </p>
                 </div>
@@ -415,7 +415,7 @@ export default function AdvancedDesignGenerator() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <Template className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                    <Template className="h-8 w-8 mx-auto text-muted-foreground mb-4" />
                     <p className="text-gray-600">Ready to generate your design</p>
                   </div>
                 )}
@@ -432,18 +432,14 @@ export default function AdvancedDesignGenerator() {
                   disabled={loading || !designForm.content.headline}
                   className="w-full"
                 >
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Generate Design
-                </Button>
+                  <Sparkles className="h-4 w-4 mr-2" /> <span>Generate Design</span></Button>
                 
                 <Button
                   variant="outline"
                   onClick={resetForm}
                   disabled={loading}
                   className="w-full"
-                >
-                  Reset Form
-                </Button>
+                > <span>Reset Form</span></Button>
               </CardContent>
             </Card>
           </div>
@@ -453,7 +449,7 @@ export default function AdvancedDesignGenerator() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-success-600" />
               <span>Design Generated Successfully!</span>
             </CardTitle>
           </CardHeader>
@@ -474,13 +470,9 @@ export default function AdvancedDesignGenerator() {
                   />
                   <div className="mt-4 space-x-2">
                     <Button>
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
+                      <Download className="h-4 w-4 mr-2" /> <span>Download</span></Button>
                     <Button variant="outline">
-                      <Eye className="h-4 w-4 mr-2" />
-                      Preview
-                    </Button>
+                      <Eye className="h-4 w-4 mr-2" /> <span>Preview</span></Button>
                   </div>
                 </div>
               </TabsContent>
@@ -528,7 +520,7 @@ export default function AdvancedDesignGenerator() {
                   <div className="space-y-1 mt-2">
                     {result.metadata.stepsCompleted.map((step, index) => (
                       <div key={index} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-success-600" />
                         <span className="text-sm">{step.replace('_', ' ')}</span>
                       </div>
                     ))}
@@ -538,9 +530,7 @@ export default function AdvancedDesignGenerator() {
             </Tabs>
             
             <div className="mt-6 flex justify-center">
-              <Button onClick={resetForm}>
-                Generate Another Design
-              </Button>
+              <Button onClick={resetForm}> <span>Generate Another Design</span></Button>
             </div>
           </CardContent>
         </Card>

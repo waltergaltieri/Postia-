@@ -110,16 +110,10 @@ export default function AssetLibraryDemo() {
                   
                   <div className="space-y-2">
                     <Button variant="outline" size="sm" className="w-full">
-                      <Upload className="w-4 h-4 mr-2" />
-                      Bulk Download
-                    </Button>
+                      <Upload className="w-4 h-4 mr-2" /> <span>Bulk Download</span></Button>
                     <Button variant="outline" size="sm" className="w-full">
-                      <Tag className="w-4 h-4 mr-2" />
-                      Add Tags
-                    </Button>
-                    <Button variant="destructive" size="sm" className="w-full">
-                      Delete Selected
-                    </Button>
+                      <Tag className="w-4 h-4 mr-2" /> <span>Add Tags</span></Button>
+                    <Button variant="destructive" size="sm" className="w-full"> <span>Delete Selected</span></Button>
                   </div>
                 </div>
               ) : (
@@ -153,7 +147,7 @@ export default function AssetLibraryDemo() {
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <Image className="w-12 h-12 text-muted-foreground" />
+                          <Image className="w-8 h-8 text-muted-foreground" />
                         </div>
                       )}
                     </div>
@@ -211,15 +205,9 @@ export default function AssetLibraryDemo() {
 
                     {/* Actions */}
                     <div className="space-y-2">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Download
-                      </Button>
-                      <Button variant="outline" size="sm" className="w-full">
-                        Edit Details
-                      </Button>
-                      <Button variant="outline" size="sm" className="w-full">
-                        Share
-                      </Button>
+                      <Button variant="outline" size="sm" className="w-full"> <span>Download</span></Button>
+                      <Button variant="outline" size="sm" className="w-full"> <span>Edit Details</span></Button>
+                      <Button variant="outline" size="sm" className="w-full"> <span>Share</span></Button>
                     </div>
                   </div>
                 </Card>

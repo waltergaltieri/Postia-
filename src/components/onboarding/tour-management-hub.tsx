@@ -32,14 +32,14 @@ const views = [
     name: 'Tour Library',
     description: 'Browse and start available tours',
     icon: BookOpen,
-    color: 'bg-blue-500'
+    color: 'bg-info-500'
   },
   {
     id: 'settings' as const,
     name: 'Settings',
     description: 'Customize your tour experience',
     icon: Settings,
-    color: 'bg-green-500'
+    color: 'bg-success-500'
   },
   {
     id: 'replay' as const,

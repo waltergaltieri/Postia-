@@ -277,11 +277,11 @@ export default function PostApprovalWorkflow() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'DRAFT':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning-100 text-warning-800';
       case 'APPROVED':
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       case 'PUBLISHED':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -391,9 +391,7 @@ export default function PostApprovalWorkflow() {
 
             <div className="flex items-end">
               <Button onClick={fetchPosts} variant="outline">
-                <Filter className="h-4 w-4 mr-2" />
-                Apply Filters
-              </Button>
+                <Filter className="h-4 w-4 mr-2" /> <span>Apply Filters</span></Button>
             </div>
           </div>
         </CardContent>
@@ -562,9 +560,7 @@ export default function PostApprovalWorkflow() {
                       <Dialog open={showCommentDialog} onOpenChange={setShowCommentDialog}>
                         <DialogTrigger asChild>
                           <Button size="sm">
-                            <MessageSquare className="h-4 w-4 mr-1" />
-                            Add Comment
-                          </Button>
+                            <MessageSquare className="h-4 w-4 mr-1" /> <span>Add Comment</span></Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
@@ -581,12 +577,10 @@ export default function PostApprovalWorkflow() {
                               rows={4}
                             />
                             <div className="flex justify-end space-x-2">
-                              <Button variant="outline" onClick={() => setShowCommentDialog(false)}>
-                                Cancel
-                              </Button>
-                              <Button onClick={() => handleAddComment(selectedPost.id)}>
-                                Add Comment
-                              </Button>
+                              <Button variant="outline" onClick={() => <span>setShowCommentDialog(false)}>
+                                Cancel</span></Button>
+                              <Button onClick={() => <span>handleAddComment(selectedPost.id)}>
+                                Add Comment</span></Button>
                             </div>
                           </div>
                         </DialogContent>
@@ -641,13 +635,9 @@ export default function PostApprovalWorkflow() {
                           </div>
                           <div className="flex space-x-2">
                             <Button variant="ghost" size="sm">
-                              <Eye className="h-3 w-3 mr-1" />
-                              View
-                            </Button>
+                              <Eye className="h-3 w-3 mr-1" /> <span>View</span></Button>
                             <Button variant="ghost" size="sm">
-                              <RotateCcw className="h-3 w-3 mr-1" />
-                              Restore
-                            </Button>
+                              <RotateCcw className="h-3 w-3 mr-1" /> <span>Restore</span></Button>
                           </div>
                         </div>
                       ))}
@@ -676,20 +666,18 @@ export default function PostApprovalWorkflow() {
                     {selectedPost.status === 'DRAFT' && (
                       <div className="flex space-x-2">
                         <Button
-                          onClick={() => handleApprovePost(selectedPost.id)}
+                          onClick={() => <span>handleApprovePost(selectedPost.id)}
                           disabled={actionLoading === `approve-${selectedPost.id}`}
                           className="flex-1"
-                        >
-                          <CheckCircle className="h-4 w-4 mr-2" />
+                        ></span><CheckCircle className="h-4 w-4 mr-2" />
                           Approve Post
                         </Button>
                         <Button
                           variant="destructive"
-                          onClick={() => handleRejectPost(selectedPost.id, 'Needs revision')}
+                          onClick={() => <span>handleRejectPost(selectedPost.id, 'Needs revision')}
                           disabled={actionLoading === `reject-${selectedPost.id}`}
                           className="flex-1"
-                        >
-                          <XCircle className="h-4 w-4 mr-2" />
+                        ></span><XCircle className="h-4 w-4 mr-2" />
                           Request Changes
                         </Button>
                       </div>
@@ -700,9 +688,7 @@ export default function PostApprovalWorkflow() {
                       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
                         <DialogTrigger asChild>
                           <Button variant="outline" className="w-full">
-                            <Edit className="h-4 w-4 mr-2" />
-                            Edit Content
-                          </Button>
+                            <Edit className="h-4 w-4 mr-2" /> <span>Edit Content</span></Button>
                         </DialogTrigger>
                         <DialogContent className="max-w-2xl">
                           <DialogHeader>
@@ -734,21 +720,17 @@ export default function PostApprovalWorkflow() {
                               />
                             </div>
                             <div className="flex justify-end space-x-2">
-                              <Button variant="outline" onClick={() => setShowEditDialog(false)}>
-                                Cancel
-                              </Button>
-                              <Button onClick={() => handleEditPost(selectedPost.id)}>
-                                Save Changes
-                              </Button>
+                              <Button variant="outline" onClick={() => <span>setShowEditDialog(false)}>
+                                Cancel</span></Button>
+                              <Button onClick={() => <span>handleEditPost(selectedPost.id)}>
+                                Save Changes</span></Button>
                             </div>
                           </div>
                         </DialogContent>
                       </Dialog>
 
                       <Button variant="outline">
-                        <RotateCcw className="h-4 w-4 mr-2" />
-                        Regenerate
-                      </Button>
+                        <RotateCcw className="h-4 w-4 mr-2" /> <span>Regenerate</span></Button>
                     </div>
 
                     {/* Scheduling */}
@@ -756,9 +738,7 @@ export default function PostApprovalWorkflow() {
                       <Dialog open={showScheduleDialog} onOpenChange={setShowScheduleDialog}>
                         <DialogTrigger asChild>
                           <Button className="w-full">
-                            <Calendar className="h-4 w-4 mr-2" />
-                            Schedule Publication
-                          </Button>
+                            <Calendar className="h-4 w-4 mr-2" /> <span>Schedule Publication</span></Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
@@ -797,12 +777,10 @@ export default function PostApprovalWorkflow() {
                               </div>
                             </div>
                             <div className="flex justify-end space-x-2">
-                              <Button variant="outline" onClick={() => setShowScheduleDialog(false)}>
-                                Cancel
-                              </Button>
-                              <Button onClick={() => handleSchedulePost(selectedPost.id)}>
-                                Schedule Post
-                              </Button>
+                              <Button variant="outline" onClick={() => <span>setShowScheduleDialog(false)}>
+                                Cancel</span></Button>
+                              <Button onClick={() => <span>handleSchedulePost(selectedPost.id)}>
+                                Schedule Post</span></Button>
                             </div>
                           </div>
                         </DialogContent>
@@ -812,13 +790,9 @@ export default function PostApprovalWorkflow() {
                     {/* Export Actions */}
                     <div className="grid grid-cols-2 gap-2 pt-4 border-t">
                       <Button variant="outline">
-                        <Download className="h-4 w-4 mr-2" />
-                        Export
-                      </Button>
+                        <Download className="h-4 w-4 mr-2" /> <span>Export</span></Button>
                       <Button variant="outline">
-                        <Upload className="h-4 w-4 mr-2" />
-                        Share
-                      </Button>
+                        <Upload className="h-4 w-4 mr-2" /> <span>Share</span></Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -828,7 +802,7 @@ export default function PostApprovalWorkflow() {
             <Card>
               <CardContent className="flex items-center justify-center h-64">
                 <div className="text-center text-muted-foreground">
-                  <Eye className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <Eye className="h-8 w-8 mx-auto mb-4 opacity-50" />
                   <p>Select a post to view details</p>
                 </div>
               </CardContent>

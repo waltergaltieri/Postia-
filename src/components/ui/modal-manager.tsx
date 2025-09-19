@@ -212,7 +212,7 @@ function ModalRenderer({ modals, onClose }: ModalRendererProps) {
                   showCloseButton={modal.showCloseButton}
                 >
                   <ModalHeader>
-                    <ModalTitle>{modal.title}</ModalTitle>
+                    <ModalTitle> <span>{modal.title}</span></ModalTitle>
                     {modal.description && (
                       <ModalDescription>{modal.description}</ModalDescription>
                     )}
@@ -335,7 +335,7 @@ function FormModal({ modal, onClose }: FormModalProps) {
       <ModalContent size={modal.size} type={modal.type}>
         <form onSubmit={handleSubmit}>
           <ModalHeader>
-            <ModalTitle>{modal.title}</ModalTitle>
+            <ModalTitle> <span>{modal.title}</span></ModalTitle>
             {modal.description && (
               <ModalDescription>{modal.description}</ModalDescription>
             )}

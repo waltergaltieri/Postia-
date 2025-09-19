@@ -81,7 +81,7 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-green-600">✅ Campaign Generated Successfully!</CardTitle>
+            <CardTitle className="text-success-600">✅ Campaign Generated Successfully!</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -109,14 +109,14 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
                 <div key={pub.id} className="border rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center space-x-2">
-                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                      <span className="bg-info-100 text-info-800 px-2 py-1 rounded text-sm">
                         {pub.platform}
                       </span>
                       <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">
                         {pub.contentType.replace('_', ' ')}
                       </span>
                     </div>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-muted-foreground">
                       {new Date(pub.scheduledDate).toLocaleDateString()}
                     </span>
                   </div>
@@ -124,7 +124,7 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
                   {pub.content.hashtags && (
                     <div className="flex flex-wrap gap-1">
                       {pub.content.hashtags.map((tag: string, i: number) => (
-                        <span key={i} className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded">
+                        <span key={i} className="text-xs bg-info-50 text-info-600 px-2 py-1 rounded">
                           {tag}
                         </span>
                       ))}
@@ -135,12 +135,9 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
             </div>
 
             <div className="mt-6 flex space-x-4">
-              <Button onClick={() => setResult(null)}>
-                Generate Another Campaign
-              </Button>
-              <Button variant="outline">
-                View Full Calendar
-              </Button>
+              <Button onClick={() => <span>setResult(null)}>
+                Generate Another Campaign</span></Button>
+              <Button variant="outline"> <span>View Full Calendar</span></Button>
             </div>
           </CardContent>
         </Card>
@@ -318,7 +315,7 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
           </div>
 
           {/* Estimation */}
-          <div className="bg-blue-50 p-4 rounded-lg">
+          <div className="bg-info-50 p-4 rounded-lg">
             <h4 className="font-medium mb-2">Estimation:</h4>
             <div className="text-sm space-y-1">
               <p>📊 Posts: <strong>{config.contentCount}</strong></p>
@@ -333,9 +330,7 @@ export default function CampaignGenerator({ clients, agencyId, userId }: Campaig
             disabled={loading || !config.clientId}
             className="w-full"
             size="lg"
-          >
-            {loading ? (
-              <>
+          > <span>{loading ? (</span><>
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                 Generating Campaign with AI...
               </>

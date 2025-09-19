@@ -144,9 +144,7 @@ const CustomToast = React.forwardRef<
                 onClick={cancel.onClick}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-neutral-600 bg-neutral-100 hover:bg-neutral-200 rounded-lg transition-colors"
               >
-                <Undo2 className="h-3 w-3" />
-                {cancel.label}
-              </motion.button>
+                <Undo2 className="h-3 w-3" /> <span>{cancel.label}</span></motion.button>
             )}
           </div>
         )}

@@ -501,9 +501,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     disabled={!canGoNext}
                                     className="flex-1 flex items-center justify-center gap-2 h-12 text-base"
                                     aria-label="Siguiente paso"
-                                >
-                                    Siguiente
-                                    <ChevronRight className="h-5 w-5" />
+                                > <span>Siguiente</span><ChevronRight className="h-5 w-5" />
                                 </Button>
                             )}
 
@@ -514,9 +512,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     onClick={handleClose}
                                     className="flex-1 h-12 text-base"
                                     aria-label="Finalizar tour"
-                                >
-                                    Finalizar
-                                </Button>
+                                > <span>Finalizar</span></Button>
                             )}
                         </div>
 
@@ -554,9 +550,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                         size="icon"
                                         onClick={handlePlayPause}
                                         aria-label={isPlaying ? 'Pausar tour' : 'Reproducir tour'}
-                                    >
-                                        {isPlaying ? (
-                                            <Pause className="h-4 w-4" />
+                                    > <span>{isPlaying ? (</span><Pause className="h-4 w-4" />
                                         ) : (
                                             <Play className="h-4 w-4" />
                                         )}
@@ -569,9 +563,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                         size="icon"
                                         onClick={handleToggleFullscreen}
                                         aria-label={isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}
-                                    >
-                                        {isFullscreen ? (
-                                            <Minimize2 className="h-4 w-4" />
+                                    > <span>{isFullscreen ? (</span><Minimize2 className="h-4 w-4" />
                                         ) : (
                                             <Maximize2 className="h-4 w-4" />
                                         )}
@@ -635,9 +627,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     size="icon-sm"
                                     onClick={handlePlayPause}
                                     aria-label={isPlaying ? 'Pausar tour' : 'Reproducir tour'}
-                                >
-                                    {isPlaying ? (
-                                        <Pause className="h-4 w-4" />
+                                > <span>{isPlaying ? (</span><Pause className="h-4 w-4" />
                                     ) : (
                                         <Play className="h-4 w-4" />
                                     )}
@@ -707,9 +697,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     disabled={!canGoNext}
                                     className="flex items-center gap-1"
                                     aria-label="Siguiente paso"
-                                >
-                                    {variant !== 'compact' && 'Siguiente'}
-                                    <ChevronRight className="h-3.5 w-3.5" />
+                                > <span>{variant !== 'compact' && 'Siguiente'}</span><ChevronRight className="h-3.5 w-3.5" />
                                 </Button>
                             )}
 
@@ -719,9 +707,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     size="sm"
                                     onClick={handleClose}
                                     aria-label="Finalizar tour"
-                                >
-                                    Finalizar
-                                </Button>
+                                > <span>Finalizar</span></Button>
                             )}
 
                             {onToggleFullscreen && (
@@ -730,9 +716,7 @@ export const MobileTourControls = React.forwardRef<HTMLDivElement, MobileTourCon
                                     size="icon-sm"
                                     onClick={handleToggleFullscreen}
                                     aria-label={isFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}
-                                >
-                                    {isFullscreen ? (
-                                        <Minimize2 className="h-3.5 w-3.5" />
+                                > <span>{isFullscreen ? (</span><Minimize2 className="h-3.5 w-3.5" />
                                     ) : (
                                         <Maximize2 className="h-3.5 w-3.5" />
                                     )}

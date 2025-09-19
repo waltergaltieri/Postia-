@@ -1,0 +1,1686 @@
+{
+  "score": 71,
+  "timestamp": "2025-09-19T02:09:19.681Z",
+  "results": {
+    "notificationSystemImplemented": true,
+    "messageSystemCSSIncluded": true,
+    "toastSystemUpdated": true,
+    "alertSystemUpdated": true,
+    "colorStandardization": 812,
+    "positioningConsistency": 16,
+    "accessibilityCompliance": 111,
+    "totalMessagesAnalyzed": 2361,
+    "files": [
+      {
+        "path": "app\\api\\admin\\audit\\route.ts",
+        "messages": 3,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\admin\\logs\\route.ts",
+        "messages": 4,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\agency\\route.ts",
+        "messages": 7,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\accept-invitation\\route.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\complete-registration\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\forgot-password\\route.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\resend-verification\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\reset-password\\route.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\signup\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\auth\\verify-email\\route.ts",
+        "messages": 10,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\estimate-cost\\route.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\route.ts",
+        "messages": 11,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\[campaignId]\\calendar\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\[campaignId]\\generate-content\\route.ts",
+        "messages": 6,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\[campaignId]\\jobs\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\[campaignId]\\posts\\route.ts",
+        "messages": 13,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\campaigns\\[campaignId]\\route.ts",
+        "messages": 18,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\[clientId]\\api-keys\\route.ts",
+        "messages": 13,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\[clientId]\\api-keys\\[keyId]\\route.ts",
+        "messages": 20,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\[clientId]\\assets\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\[clientId]\\assets\\[assetId]\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\clients\\[clientId]\\route.ts",
+        "messages": 17,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\generate\\route.ts",
+        "messages": 10,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\jobs\\[jobId]\\regenerate\\route.ts",
+        "messages": 10,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\jobs\\[jobId]\\route.ts",
+        "messages": 17,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\jobs\\[jobId]\\versions\\compare\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\jobs\\[jobId]\\versions\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\content\\jobs\\[jobId]\\versions\\[versionId]\\route.ts",
+        "messages": 15,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\dashboard\\overview\\route.ts",
+        "messages": 4,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\demo\\generate-campaign\\route.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\design\\generate\\route.ts",
+        "messages": 9,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\external\\bot\\client\\route.ts",
+        "messages": 5,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\external\\bot\\docs\\route.ts",
+        "messages": 5,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\external\\bot\\generate\\route.ts",
+        "messages": 9,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\external\\bot\\jobs\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\external\\bot\\jobs\\[jobId]\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\health\\route.ts",
+        "messages": 18,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\invitations\\route.ts",
+        "messages": 13,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\invitations\\verify\\route.ts",
+        "messages": 3,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\invitations\\[invitationId]\\route.ts",
+        "messages": 12,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\social\\accounts\\route.ts",
+        "messages": 12,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\social\\accounts\\[accountId]\\route.ts",
+        "messages": 15,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\social\\oauth\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\social\\publications\\[postId]\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\social\\publish\\route.ts",
+        "messages": 10,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\subscriptions\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\tokens\\analytics\\route.ts",
+        "messages": 3,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\tokens\\balance\\route.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\tokens\\purchase\\route.ts",
+        "messages": 11,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\tokens\\transactions\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\upload\\route.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\users\\invite\\route.ts",
+        "messages": 9,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\users\\route.ts",
+        "messages": 11,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\users\\[userId]\\route.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\api\\webhooks\\stripe\\route.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\accept-invitation\\page.tsx",
+        "messages": 4,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\complete-registration\\page.tsx",
+        "messages": 2,
+        "standardColors": 7,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\error\\page.tsx",
+        "messages": 6,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\forgot-password\\page.tsx",
+        "messages": 2,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\reset-password\\page.tsx",
+        "messages": 2,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\signup\\page.tsx",
+        "messages": 2,
+        "standardColors": 8,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\auth\\verify-email\\page.tsx",
+        "messages": 2,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\accessibility-demo\\page.tsx",
+        "messages": 3,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 11,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\agency\\page.tsx",
+        "messages": 4,
+        "standardColors": 12,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\ai-generation-demo\\page.tsx",
+        "messages": 1,
+        "standardColors": 8,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\animations-demo\\page.tsx",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\campaigns\\page.tsx",
+        "messages": 6,
+        "standardColors": 15,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\campaigns\\[campaignId]\\calendar\\page.tsx",
+        "messages": 4,
+        "standardColors": 15,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\clients\\[clientId]\\page.tsx",
+        "messages": 8,
+        "standardColors": 15,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\content-grid-demo\\page.tsx",
+        "messages": 15,
+        "standardColors": 6,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\modal-demo\\page.tsx",
+        "messages": 72,
+        "standardColors": 16,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\toast-demo\\page.tsx",
+        "messages": 3,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\usability-testing\\page.tsx",
+        "messages": 4,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\users\\page.tsx",
+        "messages": 11,
+        "standardColors": 15,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\admin\\ErrorMonitoringDashboard.tsx",
+        "messages": 8,
+        "standardColors": 12,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\animations\\micro-interactions.tsx",
+        "messages": 1,
+        "standardColors": 0,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\auth\\EmailVerificationRequired.tsx",
+        "messages": 8,
+        "standardColors": 14,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\billing\\BillingDashboard.tsx",
+        "messages": 7,
+        "standardColors": 7,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\calendar\\context-menu.tsx",
+        "messages": 2,
+        "standardColors": 7,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\calendar\\status-indicator.tsx",
+        "messages": 2,
+        "standardColors": 12,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\campaigns\\CalendarView.tsx",
+        "messages": 2,
+        "standardColors": 14,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\campaigns\\CampaignContentCalendar.tsx",
+        "messages": 1,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\campaigns\\CampaignGenerator.tsx",
+        "messages": 4,
+        "standardColors": 6,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\clients\\ClientManagementInterface.tsx",
+        "messages": 2,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\AIContentGenerationInterface.tsx",
+        "messages": 4,
+        "standardColors": 6,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\AIGenerationWorkflow.tsx",
+        "messages": 3,
+        "standardColors": 13,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\ContentVersionComparator.tsx",
+        "messages": 4,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\ContentVersionHistory.tsx",
+        "messages": 3,
+        "standardColors": 7,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\PostApprovalWorkflow.tsx",
+        "messages": 11,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\PublicationScheduler.tsx",
+        "messages": 8,
+        "standardColors": 12,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\dashboard\\AgencyOverview.tsx",
+        "messages": 1,
+        "standardColors": 5,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\dashboard\\bulk-selection-system.tsx",
+        "messages": 9,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\design\\AdvancedDesignGenerator.tsx",
+        "messages": 5,
+        "standardColors": 5,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\dev\\accessibility-audit.tsx",
+        "messages": 5,
+        "standardColors": 15,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\integration\\workflow-integration.tsx",
+        "messages": 2,
+        "standardColors": 6,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\analytics\\ab-testing-dashboard.tsx",
+        "messages": 9,
+        "standardColors": 8,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\analytics\\tour-metrics-dashboard.tsx",
+        "messages": 3,
+        "standardColors": 16,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\branded-tour-demo.tsx",
+        "messages": 6,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\driver-wrapper.tsx",
+        "messages": 6,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 3,
+        "issues": [
+          "Custom positioning: bottom: 8px"
+        ]
+      },
+      {
+        "path": "components\\onboarding\\feature-discovery-panel.tsx",
+        "messages": 9,
+        "standardColors": 12,
+        "consistentPositioning": 4,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-accessibility-test.tsx",
+        "messages": 9,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-live-region.tsx",
+        "messages": 13,
+        "standardColors": 0,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-replay-manager.tsx",
+        "messages": 2,
+        "standardColors": 7,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-settings.tsx",
+        "messages": 10,
+        "standardColors": 10,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\social\\SocialAccountManager.tsx",
+        "messages": 8,
+        "standardColors": 11,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\testing\\feedback-dashboard.tsx",
+        "messages": 8,
+        "standardColors": 16,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\testing\\usability-testing-interface.tsx",
+        "messages": 4,
+        "standardColors": 16,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\alert-dialog.tsx",
+        "messages": 126,
+        "standardColors": 16,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\card.stories.tsx",
+        "messages": 4,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\content-card.tsx",
+        "messages": 2,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\icon.tsx",
+        "messages": 8,
+        "standardColors": 8,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\modal-manager.tsx",
+        "messages": 14,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\modal.tsx",
+        "messages": 4,
+        "standardColors": 13,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\notification-system.tsx",
+        "messages": 127,
+        "standardColors": 16,
+        "consistentPositioning": 6,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\toast.tsx",
+        "messages": 2,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\__tests__\\accessibility.test.tsx",
+        "messages": 8,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\__tests__\\AgencyOverview.test.tsx",
+        "messages": 2,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\__tests__\\modal.test.tsx",
+        "messages": 69,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 3,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\edge.js",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\index-browser.js",
+        "messages": 7,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\index.d.ts",
+        "messages": 30,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\index.js",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\query_engine_bg.js",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\edge-esm.js",
+        "messages": 57,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\edge.js",
+        "messages": 57,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\library.d.ts",
+        "messages": 27,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\library.js",
+        "messages": 87,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\react-native.js",
+        "messages": 63,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\wasm-compiler-edge.js",
+        "messages": 80,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\wasm-engine-edge.js",
+        "messages": 56,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\runtime\\wasm.js",
+        "messages": 54,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "generated\\prisma\\wasm.js",
+        "messages": 7,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-behavior-based-tours.ts",
+        "messages": 4,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-contextual-tours.ts",
+        "messages": 7,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-feature-discovery.ts",
+        "messages": 3,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-toast.ts",
+        "messages": 15,
+        "standardColors": 4,
+        "consistentPositioning": 6,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-tour-branding.ts",
+        "messages": 21,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\use-tour-preferences.ts",
+        "messages": 2,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "hooks\\__tests__\\use-behavior-based-tours.test.ts",
+        "messages": 2,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\error-boundary.tsx",
+        "messages": 8,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 3,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\error-utils.ts",
+        "messages": 4,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\focus-trap.ts",
+        "messages": 5,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\screen-reader.ts",
+        "messages": 18,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 6,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\ssr-utils.ts",
+        "messages": 4,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\types.ts",
+        "messages": 5,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\usage-example.tsx",
+        "messages": 3,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\wcag-compliance.ts",
+        "messages": 6,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 11,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\__tests__\\error-handling.test.ts",
+        "messages": 3,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\accessibility\\__tests__\\screen-reader.test.ts",
+        "messages": 31,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 24,
+        "issues": []
+      },
+      {
+        "path": "lib\\deployment\\tour-deployment-config.ts",
+        "messages": 8,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\errors\\index.ts",
+        "messages": 26,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\logging\\logger.ts",
+        "messages": 44,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\middleware\\error-handler.ts",
+        "messages": 18,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\monitoring\\tour-monitoring.ts",
+        "messages": 46,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\audit-trail.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\bananabanana.ts",
+        "messages": 6,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\campaign-content-generator.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\error-recovery.ts",
+        "messages": 24,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\gemini.ts",
+        "messages": 2,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\job-queue.ts",
+        "messages": 3,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\openai.ts",
+        "messages": 15,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\prompt-templates.ts",
+        "messages": 6,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\social-media.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\template-engine.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\services\\workflow-engine.ts",
+        "messages": 4,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\client-branding-integration.ts",
+        "messages": 5,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\deployment-validator.ts",
+        "messages": 30,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\discovery\\feature-discovery-engine.ts",
+        "messages": 21,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\discovery\\__tests__\\feature-discovery-engine.test.ts",
+        "messages": 5,
+        "standardColors": 0,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\dynamic-tour-loader.ts",
+        "messages": 3,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\element-validator.ts",
+        "messages": 43,
+        "standardColors": 4,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 20,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\error-handling-integration.ts",
+        "messages": 2,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\error-handling.ts",
+        "messages": 12,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\error-reporter.ts",
+        "messages": 6,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\lazy-tour-loader.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\performance-tour-manager.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\recovery-strategies.ts",
+        "messages": 14,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-bundle-manager.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-config.ts",
+        "messages": 11,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-error-manager.ts",
+        "messages": 2,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-health-check.ts",
+        "messages": 21,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-performance-monitor.ts",
+        "messages": 47,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-registry.ts",
+        "messages": 2,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\tour-validation.ts",
+        "messages": 7,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\triggers\\behavior-trigger-engine.ts",
+        "messages": 13,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\triggers\\contextual-suggestion-engine.ts",
+        "messages": 13,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\triggers\\__tests__\\behavior-trigger-engine.test.ts",
+        "messages": 4,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\triggers\\__tests__\\smart-timing-engine.test.ts",
+        "messages": 2,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\validate-setup.ts",
+        "messages": 2,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\comprehensive-unit-tests.test.ts",
+        "messages": 9,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\cross-browser-compatibility.test.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 2,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\deployment-validator.test.ts",
+        "messages": 8,
+        "standardColors": 3,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\error-handling-core.test.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\error-handling-validation.test.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\error-handling.test.ts",
+        "messages": 5,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\integration-real-dom-scenarios.test.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 4,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\selector-validation-fixes.test.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\tour-health-check.test.ts",
+        "messages": 2,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\tour-validation.test.ts",
+        "messages": 3,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 1,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\unit-tests-all-fixes.test.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "lib\\tour\\__tests__\\validation-integration-test.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "middleware.ts",
+        "messages": 1,
+        "standardColors": 1,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "types\\dashboard.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "types\\database.ts",
+        "messages": 1,
+        "standardColors": 2,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      },
+      {
+        "path": "types\\tour.ts",
+        "messages": 2,
+        "standardColors": 0,
+        "consistentPositioning": 0,
+        "accessibilityFeatures": 0,
+        "issues": []
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "category": "styling",
+      "description": "Standardize message colors",
+      "action": "Replace non-standard color classes with semantic color classes"
+    },
+    {
+      "priority": "high",
+      "category": "accessibility",
+      "description": "Improve message accessibility",
+      "action": "Add ARIA attributes, roles, and screen reader support to all messages"
+    },
+    {
+      "priority": "low",
+      "category": "enhancement",
+      "description": "Implement consistent animations",
+      "action": "Use standardized animation durations and easing functions for all messages"
+    }
+  ]
+}

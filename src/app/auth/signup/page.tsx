@@ -89,7 +89,7 @@ export default function SignUpPage() {
             Or{' '}
             <Link
               href="/auth/signin"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-info-600 hover:text-info-600"
             >
               sign in to your existing account
             </Link>
@@ -98,7 +98,7 @@ export default function SignUpPage() {
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
@@ -115,7 +115,7 @@ export default function SignUpPage() {
                 required
                 value={formData.agencyName}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your agency name"
               />
             </div>
@@ -131,7 +131,7 @@ export default function SignUpPage() {
                 required
                 value={formData.ownerName}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your full name"
               />
             </div>
@@ -148,7 +148,7 @@ export default function SignUpPage() {
                 required
                 value={formData.ownerEmail}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your email address"
               />
             </div>
@@ -165,11 +165,11 @@ export default function SignUpPage() {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Create a strong password"
               />
               {passwordErrors.length > 0 && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="mt-2 text-sm text-error-600">
                   <ul className="list-disc list-inside space-y-1">
                     {passwordErrors.map((error, index) => (
                       <li key={index}>{error}</li>
@@ -191,11 +191,11 @@ export default function SignUpPage() {
                 required
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm your password"
               />
               {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                <p className="mt-2 text-sm text-red-600">Passwords do not match</p>
+                <p className="mt-2 text-sm text-error-600">Passwords do not match</p>
               )}
             </div>
           </div>
@@ -204,19 +204,19 @@ export default function SignUpPage() {
             <button
               type="submit"
               disabled={isLoading || passwordErrors.length > 0}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Creating account...' : 'Create agency account'}
             </button>
           </div>
 
-          <div className="text-xs text-gray-500 text-center">
+          <div className="text-xs text-muted-foreground text-center">
             By creating an account, you agree to our{' '}
-            <Link href="/terms" className="text-blue-600 hover:text-blue-500">
+            <Link href="/terms" className="text-info-600 hover:text-info-600">
               Terms of Service
             </Link>{' '}
             and{' '}
-            <Link href="/privacy" className="text-blue-600 hover:text-blue-500">
+            <Link href="/privacy" className="text-info-600 hover:text-info-600">
               Privacy Policy
             </Link>
           </div>

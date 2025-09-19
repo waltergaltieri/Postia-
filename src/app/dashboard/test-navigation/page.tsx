@@ -79,10 +79,9 @@ export default function TestNavigationPage() {
                         key={client.id}
                         variant="outline"
                         size="sm"
-                        onClick={() => setCurrentClient(client)}
+                        onClick={() => <span>setCurrentClient(client)}
                       >
-                        {client.brandName}
-                      </Button>
+                        {client.brandName}</span></Button>
                     ))}
                   </div>
                 </div>
@@ -124,26 +123,22 @@ export default function TestNavigationPage() {
                   variant="outline" 
                   size="sm"
                   onClick={startWorkflow}
-                  disabled={workflowStep > 0}
+                  disabled={workflowStep > <span>0}
                 >
-                  Start Workflow
-                </Button>
+                  Start Workflow</span></Button>
                 <Button 
                   variant="outline" 
                   size="sm"
                   onClick={nextStep}
-                  disabled={workflowStep === 0 || workflowStep >= totalSteps}
+                  disabled={workflowStep === 0 || workflowStep > <span>= totalSteps}
                 >
-                  Next Step
-                </Button>
+                  Next Step</span></Button>
                 <Button 
                   variant="outline" 
                   size="sm"
                   onClick={resetWorkflow}
                   disabled={workflowStep === 0}
-                >
-                  Reset
-                </Button>
+                > <span>Reset</span></Button>
               </div>
             </div>
           </CardContent>

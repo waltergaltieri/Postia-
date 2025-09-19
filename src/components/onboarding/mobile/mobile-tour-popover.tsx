@@ -386,9 +386,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                             onClick={handleNext}
                             className="flex-1 flex items-center justify-center gap-2 h-12 text-base"
                             aria-label="Siguiente paso"
-                          >
-                            Siguiente
-                            <ChevronRight className="h-4 w-4" />
+                          > <span>Siguiente</span><ChevronRight className="h-4 w-4" />
                           </Button>
                         )}
 
@@ -399,9 +397,7 @@ export const MobileTourPopover = React.forwardRef<HTMLDivElement, MobileTourPopo
                             onClick={handleClose}
                             className="flex-1 h-12 text-base"
                             aria-label="Finalizar tour"
-                          >
-                            Finalizar
-                          </Button>
+                          > <span>Finalizar</span></Button>
                         )}
                       </div>
 

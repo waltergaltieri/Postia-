@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-09-19T01:24:51.043Z",
+  "summary": {
+    "validationsPassed": 17,
+    "validationsFailed": 0,
+    "warningsCount": 3,
+    "errorsCount": 0,
+    "successRate": "100.0"
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "type": "Missing Accessibility",
+      "message": "card should include aria-disabled and focus-visible support",
+      "file": "src/components/ui/card.tsx",
+      "severity": "medium"
+    },
+    {
+      "type": "Missing Accessibility",
+      "message": "badge should include aria-disabled and focus-visible support",
+      "file": "src/components/ui/badge.tsx",
+      "severity": "medium"
+    },
+    {
+      "type": "Missing Accessibility",
+      "message": "navigation-sidebar should include aria-disabled and focus-visible support",
+      "file": "src/components/navigation/navigation-sidebar.tsx",
+      "severity": "medium"
+    }
+  ],
+  "recommendations": [
+    {
+      "title": "Test Across Devices",
+      "description": "Validate hover states work correctly on desktop, tablet, and mobile devices.",
+      "action": "Test hover effects on different screen sizes and input methods"
+    },
+    {
+      "title": "Performance Optimization",
+      "description": "Ensure hover animations are performant and do not cause layout shifts.",
+      "action": "Use transform and opacity for animations, avoid changing layout properties"
+    }
+  ]
+}

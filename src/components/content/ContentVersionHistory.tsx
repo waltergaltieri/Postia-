@@ -218,22 +218,22 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
   const getMethodIcon = (method: string) => {
     switch (method) {
       case 'AI':
-        return <Zap className="h-4 w-4 text-blue-500" />;
+        return <Zap className="h-4 w-4 text-info-600" />;
       case 'MANUAL':
-        return <User className="h-4 w-4 text-green-500" />;
+        return <User className="h-4 w-4 text-success-600" />;
       case 'TEMPLATE':
         return <Copy className="h-4 w-4 text-purple-500" />;
       default:
-        return <GitBranch className="h-4 w-4 text-gray-500" />;
+        return <GitBranch className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
   const getMethodColor = (method: string) => {
     switch (method) {
       case 'AI':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       case 'MANUAL':
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       case 'TEMPLATE':
         return 'bg-purple-100 text-purple-800';
       default:
@@ -277,9 +277,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
           <Dialog open={showRegenerateDialog} onOpenChange={setShowRegenerateDialog}>
             <DialogTrigger asChild>
               <Button>
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Regenerate Content
-              </Button>
+                <RotateCcw className="h-4 w-4 mr-2" /> <span>Regenerate Content</span></Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
@@ -362,12 +360,9 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
                 </div>
 
                 <div className="flex justify-end space-x-2">
-                  <Button variant="outline" onClick={() => setShowRegenerateDialog(false)}>
-                    Cancel
-                  </Button>
-                  <Button onClick={handleRegenerateContent} disabled={regenerating}>
-                    {regenerating ? 'Regenerating...' : 'Start Regeneration'}
-                  </Button>
+                  <Button variant="outline" onClick={() => <span>setShowRegenerateDialog(false)}>
+                    Cancel</span></Button>
+                  <Button onClick={handleRegenerateContent} disabled={regenerating}> <span>{regenerating ? 'Regenerating...' : 'Start Regeneration'}</span></Button>
                 </div>
               </div>
             </DialogContent>
@@ -375,9 +370,7 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
 
           {selectedVersions.length === 2 && (
             <Button variant="outline" onClick={handleCompareVersions}>
-              <ArrowLeftRight className="h-4 w-4 mr-2" />
-              Compare Selected
-            </Button>
+              <ArrowLeftRight className="h-4 w-4 mr-2" /> <span>Compare Selected</span></Button>
           )}
         </div>
       </div>
@@ -533,30 +526,24 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
 
                       <div className="flex space-x-2">
                         <Button variant="ghost" size="sm">
-                          <Eye className="h-3 w-3 mr-1" />
-                          Preview
-                        </Button>
+                          <Eye className="h-3 w-3 mr-1" /> <span>Preview</span></Button>
                         {!version.isActive && (
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => handleRestoreVersion(version.id)}
-                          >
-                            <RotateCcw className="h-3 w-3 mr-1" />
+                            onClick={() => <span>handleRestoreVersion(version.id)}
+                          ></span><RotateCcw className="h-3 w-3 mr-1" />
                             Restore
                           </Button>
                         )}
                         <Button variant="ghost" size="sm">
-                          <Download className="h-3 w-3 mr-1" />
-                          Export
-                        </Button>
+                          <Download className="h-3 w-3 mr-1" /> <span>Export</span></Button>
                         {!version.isActive && (
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => handleDeleteVersion(version.id)}
-                          >
-                            <Trash2 className="h-3 w-3 mr-1" />
+                            onClick={() => <span>handleDeleteVersion(version.id)}
+                          ></span><Trash2 className="h-3 w-3 mr-1" />
                             Delete
                           </Button>
                         )}
@@ -682,9 +669,8 @@ export default function ContentVersionHistory({ postId }: { postId: string }) {
             })}
           </div>
           <div className="flex justify-end">
-            <Button onClick={() => setShowCompareDialog(false)}>
-              Close Comparison
-            </Button>
+            <Button onClick={() => <span>setShowCompareDialog(false)}>
+              Close Comparison</span></Button>
           </div>
         </DialogContent>
       </Dialog>

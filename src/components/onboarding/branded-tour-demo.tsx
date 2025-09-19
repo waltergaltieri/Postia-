@@ -242,11 +242,10 @@ export default function BrandedTourDemo({ className }: BrandedTourDemoProps) {
         <CardContent>
           <div className="flex items-center space-x-4">
             <Button
-              onClick={() => handleStartTour(selectedDemo)}
+              onClick={() => <span>handleStartTour(selectedDemo)}
               disabled={isActive}
               className="flex items-center space-x-2"
-            >
-              <Play className="h-4 w-4" />
+            ></span><Play className="h-4 w-4" />
               <span>Iniciar Tour</span>
             </Button>
 
@@ -262,14 +261,13 @@ export default function BrandedTourDemo({ className }: BrandedTourDemoProps) {
 
             <Button
               variant="ghost"
-              onClick={() => {
+              onClick={() => <span>{
                 handleStopTour()
                 setTimeout(() => handleStartTour(selectedDemo), 100)
               }}
               disabled={!isActive}
               className="flex items-center space-x-2"
-            >
-              <RotateCcw className="h-4 w-4" />
+            ></span><RotateCcw className="h-4 w-4" />
               <span>Reiniciar</span>
             </Button>
           </div>
@@ -277,7 +275,7 @@ export default function BrandedTourDemo({ className }: BrandedTourDemoProps) {
           {isActive && (
             <div className="mt-4 p-4 bg-muted/50 rounded-lg">
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-success-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium text-foreground">
                   Tour activo: {demoTours.find(t => t.id === currentTour)?.name}
                 </span>

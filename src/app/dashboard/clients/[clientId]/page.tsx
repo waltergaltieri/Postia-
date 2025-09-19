@@ -253,7 +253,7 @@ export default function ClientDetailsPage() {
         return (
             <ProtectedRoute>
                 <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
                 </div>
             </ProtectedRoute>
         );
@@ -267,7 +267,7 @@ export default function ClientDetailsPage() {
                         <h2 className="text-2xl font-bold text-gray-900 mb-4">Client not found</h2>
                         <Link
                             href="/dashboard/clients"
-                            className="text-blue-600 hover:text-blue-800"
+                            className="text-info-600 hover:text-info-800"
                         >
                             Back to Clients
                         </Link>
@@ -288,7 +288,7 @@ export default function ClientDetailsPage() {
                                 <div className="flex items-center space-x-4 mb-2">
                                     <Link
                                         href="/dashboard/clients"
-                                        className="text-blue-600 hover:text-blue-800"
+                                        className="text-info-600 hover:text-info-800"
                                     >
                                         ← Back to Clients
                                     </Link>
@@ -303,13 +303,13 @@ export default function ClientDetailsPage() {
                                 <div className="flex space-x-3">
                                     <button
                                         onClick={() => setIsEditing(!isEditing)}
-                                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     >
                                         {isEditing ? 'Cancel Edit' : 'Edit Client'}
                                     </button>
                                     <button
                                         onClick={() => setShowAssetModal(true)}
-                                        className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        className="bg-success-600 text-white px-4 py-2 rounded-md hover:bg-success-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                                     >
                                         Add Asset
                                     </button>
@@ -318,13 +318,13 @@ export default function ClientDetailsPage() {
                         </div>
 
                         {error && (
-                            <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+                            <div className="mb-6 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                                 {error}
                             </div>
                         )}
 
                         {success && (
-                            <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+                            <div className="mb-6 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                                 {success}
                             </div>
                         )}
@@ -335,8 +335,8 @@ export default function ClientDetailsPage() {
                                 <button
                                     onClick={() => setActiveTab('overview')}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'overview'
-                                        ? 'border-blue-500 text-blue-600'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        ? 'border-info-500 text-info-600'
+                                        : 'border-transparent text-muted-foreground hover:text-gray-700 hover:border-gray-300'
                                         }`}
                                 >
                                     Overview
@@ -344,8 +344,8 @@ export default function ClientDetailsPage() {
                                 <button
                                     onClick={() => setActiveTab('assets')}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'assets'
-                                        ? 'border-blue-500 text-blue-600'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        ? 'border-info-500 text-info-600'
+                                        : 'border-transparent text-muted-foreground hover:text-gray-700 hover:border-gray-300'
                                         }`}
                                 >
                                     Brand Assets ({client.brandAssets.length})
@@ -353,8 +353,8 @@ export default function ClientDetailsPage() {
                                 <button
                                     onClick={() => setActiveTab('campaigns')}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === 'campaigns'
-                                        ? 'border-blue-500 text-blue-600'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                        ? 'border-info-500 text-info-600'
+                                        : 'border-transparent text-muted-foreground hover:text-gray-700 hover:border-gray-300'
                                         }`}
                                 >
                                     Campaigns ({client._count.campaigns})
@@ -381,7 +381,7 @@ export default function ClientDetailsPage() {
                                                         required
                                                         value={editForm.brandName}
                                                         onChange={(e) => setEditForm({ ...editForm, brandName: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
 
@@ -394,7 +394,7 @@ export default function ClientDetailsPage() {
                                                         required
                                                         value={editForm.contactName}
                                                         onChange={(e) => setEditForm({ ...editForm, contactName: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
 
@@ -407,7 +407,7 @@ export default function ClientDetailsPage() {
                                                         required
                                                         value={editForm.contactEmail}
                                                         onChange={(e) => setEditForm({ ...editForm, contactEmail: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
 
@@ -419,7 +419,7 @@ export default function ClientDetailsPage() {
                                                         type="tel"
                                                         value={editForm.contactPhone}
                                                         onChange={(e) => setEditForm({ ...editForm, contactPhone: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
 
@@ -431,7 +431,7 @@ export default function ClientDetailsPage() {
                                                         type="text"
                                                         value={editForm.industry}
                                                         onChange={(e) => setEditForm({ ...editForm, industry: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
 
@@ -443,7 +443,7 @@ export default function ClientDetailsPage() {
                                                         type="url"
                                                         value={editForm.website}
                                                         onChange={(e) => setEditForm({ ...editForm, website: e.target.value })}
-                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                        className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     />
                                                 </div>
                                             </div>
@@ -456,7 +456,7 @@ export default function ClientDetailsPage() {
                                                     value={editForm.description}
                                                     onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
                                                     rows={3}
-                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                 />
                                             </div>
 
@@ -472,7 +472,7 @@ export default function ClientDetailsPage() {
                                                                     type="checkbox"
                                                                     checked={editForm.assignedUserIds.includes(teamUser.id)}
                                                                     onChange={(e) => handleUserSelection(teamUser.id, e.target.checked)}
-                                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                                    className="rounded border-gray-300 text-info-600 focus:ring-blue-500"
                                                                 />
                                                                 <span className="text-sm text-gray-700">
                                                                     {teamUser.name} ({teamUser.email})
@@ -493,7 +493,7 @@ export default function ClientDetailsPage() {
                                                 </button>
                                                 <button
                                                     type="submit"
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                                    className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
                                                 >
                                                     Update Client
                                                 </button>
@@ -510,34 +510,34 @@ export default function ClientDetailsPage() {
 
                                                 <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Brand Name</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Brand Name</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.brandName}</dd>
                                                     </div>
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Contact Name</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Contact Name</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.contactName}</dd>
                                                     </div>
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Contact Email</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Contact Email</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.contactEmail}</dd>
                                                     </div>
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Contact Phone</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Contact Phone</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.contactPhone || 'Not provided'}</dd>
                                                     </div>
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Industry</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Industry</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.industry || 'Not specified'}</dd>
                                                     </div>
                                                     <div>
-                                                        <dt className="text-sm font-medium text-gray-500">Website</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Website</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">
                                                             {client.website ? (
                                                                 <a
                                                                     href={client.website}
                                                                     target="_blank"
                                                                     rel="noopener noreferrer"
-                                                                    className="text-blue-600 hover:text-blue-800"
+                                                                    className="text-info-600 hover:text-info-800"
                                                                 >
                                                                     {client.website}
                                                                 </a>
@@ -550,7 +550,7 @@ export default function ClientDetailsPage() {
 
                                                 {client.description && (
                                                     <div className="mt-6">
-                                                        <dt className="text-sm font-medium text-gray-500">Description</dt>
+                                                        <dt className="text-sm font-medium text-muted-foreground">Description</dt>
                                                         <dd className="mt-1 text-sm text-gray-900">{client.description}</dd>
                                                     </div>
                                                 )}
@@ -562,7 +562,7 @@ export default function ClientDetailsPage() {
                                                     <h3 className="text-lg font-medium text-gray-900">Recent Campaigns</h3>
                                                     <Link
                                                         href={`/dashboard/campaigns?client=${clientId}`}
-                                                        className="text-blue-600 hover:text-blue-800 text-sm"
+                                                        className="text-info-600 hover:text-info-800 text-sm"
                                                     >
                                                         View all campaigns
                                                     </Link>
@@ -574,12 +574,12 @@ export default function ClientDetailsPage() {
                                                             <div key={campaign.id} className="flex justify-between items-center p-3 bg-gray-50 rounded-md">
                                                                 <div>
                                                                     <h4 className="font-medium text-gray-900">{campaign.name}</h4>
-                                                                    <p className="text-sm text-gray-500">
+                                                                    <p className="text-sm text-muted-foreground">
                                                                         Created {new Date(campaign.createdAt).toLocaleDateString()}
                                                                     </p>
                                                                 </div>
-                                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${campaign.status === 'ACTIVE' ? 'bg-green-100 text-green-800' :
-                                                                    campaign.status === 'DRAFT' ? 'bg-yellow-100 text-yellow-800' :
+                                                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${campaign.status === 'ACTIVE' ? 'bg-success-100 text-success-800' :
+                                                                    campaign.status === 'DRAFT' ? 'bg-warning-100 text-warning-800' :
                                                                         'bg-gray-100 text-gray-800'
                                                                     }`}>
                                                                     {campaign.status}
@@ -588,7 +588,7 @@ export default function ClientDetailsPage() {
                                                         ))}
                                                     </div>
                                                 ) : (
-                                                    <p className="text-gray-500 text-center py-4">No campaigns yet</p>
+                                                    <p className="text-muted-foreground text-center py-4">No campaigns yet</p>
                                                 )}
                                             </div>
                                         </div>
@@ -601,19 +601,19 @@ export default function ClientDetailsPage() {
 
                                                 <div className="space-y-4">
                                                     <div className="flex justify-between">
-                                                        <span className="text-sm text-gray-500">Total Campaigns</span>
+                                                        <span className="text-sm text-muted-foreground">Total Campaigns</span>
                                                         <span className="text-sm font-medium text-gray-900">{client._count.campaigns}</span>
                                                     </div>
                                                     <div className="flex justify-between">
-                                                        <span className="text-sm text-gray-500">Total Posts</span>
+                                                        <span className="text-sm text-muted-foreground">Total Posts</span>
                                                         <span className="text-sm font-medium text-gray-900">{client._count.posts}</span>
                                                     </div>
                                                     <div className="flex justify-between">
-                                                        <span className="text-sm text-gray-500">Brand Assets</span>
+                                                        <span className="text-sm text-muted-foreground">Brand Assets</span>
                                                         <span className="text-sm font-medium text-gray-900">{client.brandAssets.length}</span>
                                                     </div>
                                                     <div className="flex justify-between">
-                                                        <span className="text-sm text-gray-500">Client Since</span>
+                                                        <span className="text-sm text-muted-foreground">Client Since</span>
                                                         <span className="text-sm font-medium text-gray-900">
                                                             {new Date(client.createdAt).toLocaleDateString()}
                                                         </span>
@@ -629,20 +629,20 @@ export default function ClientDetailsPage() {
                                                     <div className="space-y-3">
                                                         {client.assignedUsers.map((assignedUser) => (
                                                             <div key={assignedUser.id} className="flex items-center space-x-3">
-                                                                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                                                    <span className="text-sm font-medium text-blue-600">
+                                                                <div className="w-8 h-8 bg-info-100 rounded-full flex items-center justify-center">
+                                                                    <span className="text-sm font-medium text-info-600">
                                                                         {assignedUser.name.charAt(0).toUpperCase()}
                                                                     </span>
                                                                 </div>
                                                                 <div>
                                                                     <p className="text-sm font-medium text-gray-900">{assignedUser.name}</p>
-                                                                    <p className="text-xs text-gray-500">{assignedUser.role}</p>
+                                                                    <p className="text-xs text-muted-foreground">{assignedUser.role}</p>
                                                                 </div>
                                                             </div>
                                                         ))}
                                                     </div>
                                                 ) : (
-                                                    <p className="text-gray-500 text-sm">No team members assigned</p>
+                                                    <p className="text-muted-foreground text-sm">No team members assigned</p>
                                                 )}
                                             </div>
                                         </div>
@@ -663,14 +663,14 @@ export default function ClientDetailsPage() {
                                                             <span className="text-2xl">{getAssetTypeIcon(asset.type)}</span>
                                                             <div>
                                                                 <h4 className="font-medium text-gray-900">{asset.name}</h4>
-                                                                <p className="text-sm text-gray-500">{asset.type}</p>
+                                                                <p className="text-sm text-muted-foreground">{asset.type}</p>
                                                             </div>
                                                         </div>
 
                                                         {checkPermission(PERMISSIONS.EDIT_CLIENTS) && (
                                                             <button
                                                                 onClick={() => handleDeleteAsset(asset.id, asset.name)}
-                                                                className="text-red-600 hover:text-red-800 text-sm"
+                                                                className="text-error-600 hover:text-error-800 text-sm"
                                                             >
                                                                 Delete
                                                             </button>
@@ -682,13 +682,13 @@ export default function ClientDetailsPage() {
                                                             href={asset.url}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="text-blue-600 hover:text-blue-800 text-sm break-all"
+                                                            className="text-info-600 hover:text-info-800 text-sm break-all"
                                                         >
                                                             View Asset
                                                         </a>
                                                     </div>
 
-                                                    <p className="text-xs text-gray-500">
+                                                    <p className="text-xs text-muted-foreground">
                                                         Added {new Date(asset.createdAt).toLocaleDateString()}
                                                     </p>
                                                 </div>
@@ -697,19 +697,19 @@ export default function ClientDetailsPage() {
                                     </div>
                                 ) : (
                                     <div className="text-center py-12">
-                                        <div className="text-gray-400 mb-4">
+                                        <div className="text-muted-foreground mb-4">
                                             <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a4 4 0 004-4V5z" />
                                             </svg>
                                         </div>
                                         <h3 className="text-lg font-medium text-gray-900 mb-2">No brand assets</h3>
-                                        <p className="text-gray-500 mb-4">
+                                        <p className="text-muted-foreground mb-4">
                                             Start building the brand identity by adding logos, colors, fonts, and other assets.
                                         </p>
                                         {checkPermission(PERMISSIONS.EDIT_CLIENTS) && (
                                             <button
                                                 onClick={() => setShowAssetModal(true)}
-                                                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                                                className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700"
                                             >
                                                 Add First Asset
                                             </button>
@@ -732,20 +732,20 @@ export default function ClientDetailsPage() {
                                                     <div className="flex justify-between items-center">
                                                         <div>
                                                             <h4 className="font-medium text-gray-900">{campaign.name}</h4>
-                                                            <p className="text-sm text-gray-500">
+                                                            <p className="text-sm text-muted-foreground">
                                                                 Created {new Date(campaign.createdAt).toLocaleDateString()}
                                                             </p>
                                                         </div>
                                                         <div className="flex items-center space-x-4">
-                                                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${campaign.status === 'ACTIVE' ? 'bg-green-100 text-green-800' :
-                                                                campaign.status === 'DRAFT' ? 'bg-yellow-100 text-yellow-800' :
+                                                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${campaign.status === 'ACTIVE' ? 'bg-success-100 text-success-800' :
+                                                                campaign.status === 'DRAFT' ? 'bg-warning-100 text-warning-800' :
                                                                     'bg-gray-100 text-gray-800'
                                                                 }`}>
                                                                 {campaign.status}
                                                             </span>
                                                             <Link
                                                                 href={`/dashboard/campaigns/${campaign.id}`}
-                                                                className="text-blue-600 hover:text-blue-800 text-sm"
+                                                                className="text-info-600 hover:text-info-800 text-sm"
                                                             >
                                                                 View
                                                             </Link>
@@ -757,18 +757,18 @@ export default function ClientDetailsPage() {
                                     </div>
                                 ) : (
                                     <div className="text-center py-12">
-                                        <div className="text-gray-400 mb-4">
+                                        <div className="text-muted-foreground mb-4">
                                             <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                             </svg>
                                         </div>
                                         <h3 className="text-lg font-medium text-gray-900 mb-2">No campaigns</h3>
-                                        <p className="text-gray-500 mb-4">
+                                        <p className="text-muted-foreground mb-4">
                                             Create your first campaign for this client to start managing their social media presence.
                                         </p>
                                         <Link
                                             href={`/dashboard/campaigns/create?client=${clientId}`}
-                                            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                                            className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700"
                                         >
                                             Create Campaign
                                         </Link>
@@ -795,7 +795,7 @@ export default function ClientDetailsPage() {
                                                     required
                                                     value={assetForm.type}
                                                     onChange={(e) => setAssetForm({ ...assetForm, type: e.target.value as AssetType })}
-                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                 >
                                                     {Object.values(AssetType).map((type) => (
                                                         <option key={type} value={type}>
@@ -814,7 +814,7 @@ export default function ClientDetailsPage() {
                                                     required
                                                     value={assetForm.name}
                                                     onChange={(e) => setAssetForm({ ...assetForm, name: e.target.value })}
-                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     placeholder="Enter asset name"
                                                 />
                                             </div>
@@ -828,7 +828,7 @@ export default function ClientDetailsPage() {
                                                     required
                                                     value={assetForm.url}
                                                     onChange={(e) => setAssetForm({ ...assetForm, url: e.target.value })}
-                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                                                     placeholder="https://example.com/asset.png"
                                                 />
                                             </div>
@@ -843,7 +843,7 @@ export default function ClientDetailsPage() {
                                                 </button>
                                                 <button
                                                     type="submit"
-                                                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                                    className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
                                                 >
                                                     Add Asset
                                                 </button>

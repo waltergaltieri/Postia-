@@ -34,10 +34,16 @@ model User {
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
   
-  agency   Agency? @relation(fields: [agencyId], references: [id])
-  jobs     ContentJob[]
-  accounts Account[]
-  sessions Session[]
+  // New fields for client access control
+  assignedClients        String?  @default("[]") // JSON array of client IDs user can access
+  lastSelectedClient     String?  // For session persistence
+  clientPermissions      String?  // JSON string for client-specific permissions
+  
+  agency         Agency? @relation(fields: [agencyId], references: [id])
+  jobs           ContentJob[]
+  accounts       Account[]
+  sessions       Session[]
+  clientSessions ClientSession[]
 }
 
 model Client {
@@ -48,9 +54,17 @@ model Client {
   settings  String? // JSON string
   createdAt DateTime @default(now())
   
-  agency    Agency @relation(fields: [agencyId], references: [id])
-  campaigns Campaign[]
-  jobs      ContentJob[]
+  // New fields for enhanced client management
+  brandColors       String?  @default("[\"#3b82f6\"]") // JSON array of client brand colors
+  logoUrl           String?  // Client logo URL
+  themeSettings     String?  // JSON string for client-specific UI theming
+  isActive          Boolean  @default(true) // Client active status
+  workspaceSettings String?  // JSON string for client workspace configuration
+  
+  agency         Agency @relation(fields: [agencyId], references: [id])
+  campaigns      Campaign[]
+  jobs           ContentJob[]
+  clientSessions ClientSession[]
 }
 
 model Campaign {
@@ -117,6 +131,19 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ClientSession {
+  id           String   @id @default(cuid())
+  userId       String
+  clientId     String
+  lastAccessed DateTime @default(now())
+  sessionData  String?  // JSON string for client-specific session data
+  
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, clientId])
 }
 
 model VerificationToken {

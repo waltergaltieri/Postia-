@@ -11,64 +11,64 @@ import { buttonHoverVariants, LoadingSpinner } from "@/components/animations"
 import { announceToScreenReader, useReducedMotion } from "@/lib/accessibility"
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 overflow-hidden transform-gpu touch-target",
+  "relative inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 overflow-hidden transform-gpu touch-target interactive-element",
   {
     variants: {
       variant: {
         // Premium primary with gradient and glow
         default: [
-          "bg-gradient-primary text-white shadow-elevation-2",
+          "bg-gradient-primary text-white shadow-elevation-2 btn-primary-hover btn-hover-enhanced",
           "hover:shadow-elevation-3 hover:shadow-primary/20 hover:scale-[1.02]",
           "active:shadow-elevation-1 active:scale-[0.98]",
           "before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/0 before:via-white/10 before:to-white/0",
           "before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-500"
         ],
-        
+
         // Premium secondary with subtle elevation
         secondary: [
-          "bg-secondary text-secondary-foreground border border-border shadow-elevation-1",
+          "bg-secondary text-secondary-foreground border border-border shadow-elevation-1 btn-secondary-hover",
           "hover:bg-accent hover:text-accent-foreground hover:shadow-elevation-2 hover:scale-[1.01]",
           "active:shadow-none active:scale-[0.99]"
         ],
-        
+
         // Destructive with error styling
         destructive: [
-          "bg-error-500 text-white shadow-elevation-2",
+          "bg-error-500 text-white shadow-elevation-2 hover-glow-error",
           "hover:bg-error-600 hover:shadow-elevation-3 hover:shadow-error-500/20 hover:scale-[1.02]",
           "active:bg-error-700 active:shadow-elevation-1 active:scale-[0.98]"
         ],
-        
+
         // Success variant with success colors
         success: [
-          "bg-success-500 text-white shadow-elevation-2",
+          "bg-success-500 text-white shadow-elevation-2 hover-glow-success",
           "hover:bg-success-600 hover:shadow-elevation-3 hover:shadow-success-500/20 hover:scale-[1.02]",
           "active:bg-success-700 active:shadow-elevation-1 active:scale-[0.98]"
         ],
-        
+
         // Outline with premium border
         outline: [
-          "border-2 border-border bg-background text-foreground shadow-elevation-1",
+          "border-2 border-border bg-background text-foreground shadow-elevation-1 hover-normal",
           "hover:bg-accent hover:text-accent-foreground hover:border-primary-300 hover:shadow-elevation-2 hover:scale-[1.01]",
           "active:shadow-none active:scale-[0.99]"
         ],
-        
+
         // Ghost with subtle hover
         ghost: [
-          "text-foreground",
+          "text-foreground btn-ghost-hover",
           "hover:bg-accent hover:text-accent-foreground hover:scale-[1.01]",
           "active:bg-accent/80 active:scale-[0.99]"
         ],
-        
+
         // Link style
         link: [
-          "text-primary-600 underline-offset-4",
+          "text-primary-600 underline-offset-4 link-hover",
           "hover:underline hover:text-primary-700",
           "active:text-primary-800"
         ],
-        
+
         // Premium gradient variant
         premium: [
-          "bg-gradient-premium text-white shadow-elevation-3",
+          "bg-gradient-premium text-white shadow-elevation-3 hover-prominent btn-hover-enhanced",
           "hover:shadow-elevation-4 hover:shadow-primary/30 hover:scale-[1.02]",
           "active:shadow-elevation-2 active:scale-[0.98]",
           "before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0",
@@ -76,10 +76,10 @@ const buttonVariants = cva(
         ]
       },
       size: {
-        sm: "h-9 px-3 text-xs rounded-md min-w-[44px]", // Ensure minimum touch target
-        default: "h-10 px-4 py-2 min-w-[44px]",
-        lg: "h-12 px-6 text-base rounded-xl min-w-[48px]",
-        xl: "h-14 px-8 text-lg rounded-xl min-w-[56px]",
+        sm: "h-9 spacing-px-sm text-xs rounded-md min-w-[44px]", // Ensure minimum touch target
+        default: "h-10 spacing-px-md spacing-py-sm min-w-[44px]",
+        lg: "h-12 spacing-px-lg text-base rounded-xl min-w-[48px]",
+        xl: "h-14 spacing-px-xl text-lg rounded-xl min-w-[56px]",
         icon: "h-10 w-10 min-w-[44px] min-h-[44px]", // WCAG AA touch target
         "icon-sm": "h-9 w-9 min-w-[44px] min-h-[44px]",
         "icon-lg": "h-12 w-12 min-w-[48px] min-h-[48px]"
@@ -94,13 +94,14 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size">,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
   loading?: boolean
   loadingText?: string
   icon?: React.ReactNode
   rightIcon?: React.ReactNode
   animate?: boolean
+  selected?: boolean
   // Accessibility props
   "aria-label"?: string
   "aria-describedby"?: string
@@ -111,11 +112,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    className, 
-    variant, 
-    size, 
-    asChild = false, 
+  ({
+    className,
+    variant,
+    size,
+    asChild = false,
     loading = false,
     loadingText,
     icon,
@@ -123,15 +124,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     children,
     disabled,
     animate = true,
+    selected = false,
     announceOnClick,
     onClick,
-    ...props 
+    ...props
   }, ref) => {
     const isDisabled = disabled || loading
     // Fallback implementation to handle potential import issues
     let prefersReducedMotion = false
     try {
-      prefersReducedMotion = useReducedMotion()
+      const { prefersReducedMotion: reducedMotion } = useReducedMotion()
+      prefersReducedMotion = reducedMotion
     } catch (error) {
       console.warn('useReducedMotion failed, using fallback:', error)
       prefersReducedMotion = false
@@ -173,10 +176,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       </>
     )
 
+    // Enhanced className with state classes
+    const enhancedClassName = cn(
+      buttonVariants({ variant, size, className }),
+      {
+        'btn-loading': loading,
+        'btn-disabled': isDisabled && !loading,
+        'disabled-enhanced': isDisabled && !loading,
+        'selected': selected,
+        'interactive-selected': selected
+      }
+    )
+
     // Common accessibility props
     const accessibilityProps = {
       'aria-disabled': isDisabled,
       'aria-busy': loading,
+      'aria-selected': selected,
       tabIndex: isDisabled ? -1 : 0,
       ...props
     }
@@ -184,7 +200,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (asChild) {
       return (
         <Slot
-          className={cn(buttonVariants({ variant, size, className }))}
+          className={enhancedClassName}
           ref={ref}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
@@ -198,7 +214,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (!shouldAnimate) {
       return (
         <button
-          className={cn(buttonVariants({ variant, size, className }))}
+          className={enhancedClassName}
           ref={ref}
           disabled={isDisabled}
           onClick={handleClick}
@@ -212,7 +228,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={enhancedClassName}
         ref={ref}
         disabled={isDisabled}
         onClick={handleClick}

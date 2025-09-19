@@ -1,0 +1,445 @@
+/**
+ * Icon System Styles
+ * Standardized icon sizing, colors, and alignment patterns
+ */
+
+/* ===== ICON SIZE SYSTEM ===== */
+:root {
+  /* Standard icon sizes - based on 4px grid system */
+  --icon-xs: 0.75rem;   /* 12px - h-3 w-3 */
+  --icon-sm: 1rem;      /* 16px - h-4 w-4 */
+  --icon-md: 1.25rem;   /* 20px - h-5 w-5 */
+  --icon-lg: 1.5rem;    /* 24px - h-6 w-6 */
+  --icon-xl: 2rem;      /* 32px - h-8 w-8 */
+  
+  /* Icon spacing and alignment */
+  --icon-gap-xs: 0.25rem;  /* 4px */
+  --icon-gap-sm: 0.5rem;   /* 8px */
+  --icon-gap-md: 0.75rem;  /* 12px */
+  --icon-gap-lg: 1rem;     /* 16px */
+}
+
+/* ===== ICON ALIGNMENT UTILITIES ===== */
+
+/* Icon with text alignment - ensures perfect vertical alignment */
+.icon-text-container {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-gap-sm);
+}
+
+.icon-text-container--xs { gap: var(--icon-gap-xs); }
+.icon-text-container--sm { gap: var(--icon-gap-sm); }
+.icon-text-container--md { gap: var(--icon-gap-md); }
+.icon-text-container--lg { gap: var(--icon-gap-lg); }
+
+/* Icon alignment within buttons */
+.btn-icon-left {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-gap-sm);
+}
+
+.btn-icon-left > svg:first-child {
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.btn-icon-right {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-gap-sm);
+  flex-direction: row-reverse;
+}
+
+.btn-icon-right > svg:last-child {
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+.btn-icon-only {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
+
+/* ===== CONTEXT-SPECIFIC ICON STYLES ===== */
+
+/* Navigation Icons */
+.nav-icon {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.nav-icon--sidebar {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.nav-icon--breadcrumb {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.nav-icon--tabs {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.nav-icon--dropdown {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+/* Button Icons */
+.btn-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-icon--xs {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+}
+
+.btn-icon--sm {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.btn-icon--md {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.btn-icon--lg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+/* Status Icons */
+.status-icon {
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.status-icon--success {
+  color: rgb(34 197 94); /* green-500 */
+}
+
+.status-icon--error {
+  color: rgb(239 68 68); /* red-500 */
+}
+
+.status-icon--warning {
+  color: rgb(245 158 11); /* amber-500 */
+}
+
+.status-icon--info {
+  color: rgb(59 130 246); /* blue-500 */
+}
+
+.status-icon--muted {
+  color: rgb(107 114 128); /* gray-500 */
+}
+
+/* Dark mode status colors */
+@media (prefers-color-scheme: dark) {
+  .status-icon--success {
+    color: rgb(74 222 128); /* green-400 */
+  }
+  
+  .status-icon--error {
+    color: rgb(248 113 113); /* red-400 */
+  }
+  
+  .status-icon--warning {
+    color: rgb(251 191 36); /* amber-400 */
+  }
+  
+  .status-icon--info {
+    color: rgb(96 165 250); /* blue-400 */
+  }
+  
+  .status-icon--muted {
+    color: rgb(156 163 175); /* gray-400 */
+  }
+}
+
+/* ===== ICON STATES ===== */
+
+/* Hover states */
+.icon-hover {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-hover:hover {
+  opacity: 0.8;
+}
+
+.icon-interactive {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-interactive:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.icon-interactive:active {
+  transform: scale(0.95);
+}
+
+/* Loading state */
+.icon-loading {
+  animation: icon-spin 1s linear infinite;
+}
+
+@keyframes icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Disabled state */
+.icon-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===== ICON CONTAINERS ===== */
+
+/* Icon list items */
+.icon-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--icon-gap-sm);
+}
+
+.icon-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--icon-gap-md);
+  padding: var(--icon-gap-sm);
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+}
+
+.icon-list-item:hover {
+  background-color: rgb(243 244 246); /* gray-100 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-list-item:hover {
+    background-color: rgb(31 41 55); /* gray-800 */
+  }
+}
+
+.icon-list-item__icon {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.icon-list-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Icon grid */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+  gap: var(--icon-gap-md);
+}
+
+.icon-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--icon-gap-xs);
+  padding: var(--icon-gap-sm);
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.icon-grid-item:hover {
+  background-color: rgb(243 244 246); /* gray-100 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-grid-item:hover {
+    background-color: rgb(31 41 55); /* gray-800 */
+  }
+}
+
+.icon-grid-item__icon {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.icon-grid-item__label {
+  font-size: 0.75rem;
+  text-align: center;
+  color: rgb(107 114 128); /* gray-500 */
+}
+
+/* ===== RESPONSIVE ICON ADJUSTMENTS ===== */
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  :root {
+    /* Slightly larger icons on mobile for better touch targets */
+    --icon-xs: 0.875rem;  /* 14px */
+    --icon-sm: 1.125rem;  /* 18px */
+    --icon-md: 1.375rem;  /* 22px */
+    --icon-lg: 1.625rem;  /* 26px */
+    --icon-xl: 2.25rem;   /* 36px */
+  }
+  
+  .btn-icon-only {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+}
+
+/* ===== ICON ACCESSIBILITY ===== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .status-icon--success {
+    color: rgb(0 128 0); /* High contrast green */
+  }
+  
+  .status-icon--error {
+    color: rgb(220 20 60); /* High contrast red */
+  }
+  
+  .status-icon--warning {
+    color: rgb(255 140 0); /* High contrast orange */
+  }
+  
+  .status-icon--info {
+    color: rgb(0 100 200); /* High contrast blue */
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .icon-hover,
+  .icon-interactive,
+  .btn-icon {
+    transition: none;
+  }
+  
+  .icon-loading {
+    animation: none;
+  }
+  
+  .icon-interactive:hover {
+    transform: none;
+  }
+  
+  .icon-interactive:active {
+    transform: none;
+  }
+}
+
+/* ===== ICON FIXES FOR EXISTING COMPONENTS ===== */
+
+/* Fix icon alignment in existing buttons */
+.btn-primary svg,
+.btn-secondary svg,
+.btn-outline svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Fix icon alignment in navigation items */
+.sidebar-nav-item svg,
+.nav-item svg {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* Fix icon alignment in form elements */
+.form-input-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: rgb(107 114 128); /* gray-500 */
+  pointer-events: none;
+}
+
+.form-input-icon--right {
+  left: auto;
+  right: 0.75rem;
+}
+
+/* Fix icon alignment in cards */
+.card-header-icon {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  flex-shrink: 0;
+  margin-right: var(--icon-gap-sm);
+}
+
+/* Fix icon alignment in badges */
+.badge svg {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  flex-shrink: 0;
+}
+
+/* Fix icon alignment in alerts */
+.alert-icon {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  flex-shrink: 0;
+  margin-right: var(--icon-gap-md);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Icon size utilities */
+.icon-xs { width: var(--icon-xs); height: var(--icon-xs); }
+.icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+.icon-md { width: var(--icon-md); height: var(--icon-md); }
+.icon-lg { width: var(--icon-lg); height: var(--icon-lg); }
+.icon-xl { width: var(--icon-xl); height: var(--icon-xl); }
+
+/* Icon color utilities */
+.icon-primary { color: rgb(59 130 246); } /* blue-500 */
+.icon-secondary { color: rgb(107 114 128); } /* gray-500 */
+.icon-success { color: rgb(34 197 94); } /* green-500 */
+.icon-error { color: rgb(239 68 68); } /* red-500 */
+.icon-warning { color: rgb(245 158 11); } /* amber-500 */
+.icon-info { color: rgb(59 130 246); } /* blue-500 */
+.icon-muted { color: rgb(156 163 175); } /* gray-400 */
+.icon-white { color: rgb(255 255 255); }
+.icon-inherit { color: inherit; }
+
+/* Icon spacing utilities */
+.icon-mr-xs { margin-right: var(--icon-gap-xs); }
+.icon-mr-sm { margin-right: var(--icon-gap-sm); }
+.icon-mr-md { margin-right: var(--icon-gap-md); }
+.icon-mr-lg { margin-right: var(--icon-gap-lg); }
+
+.icon-ml-xs { margin-left: var(--icon-gap-xs); }
+.icon-ml-sm { margin-left: var(--icon-gap-sm); }
+.icon-ml-md { margin-left: var(--icon-gap-md); }
+.icon-ml-lg { margin-left: var(--icon-gap-lg); }

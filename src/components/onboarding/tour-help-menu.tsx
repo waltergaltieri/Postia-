@@ -45,14 +45,14 @@ const tourCategories: TourCategory[] = [
     name: 'Getting Started',
     description: 'Essential tours for new users',
     icon: Users,
-    color: 'bg-blue-500'
+    color: 'bg-info-500'
   },
   {
     id: TOUR_CATEGORIES.FEATURE,
     name: 'Features',
     description: 'Learn specific functionality',
     icon: Zap,
-    color: 'bg-green-500'
+    color: 'bg-success-500'
   },
   {
     id: TOUR_CATEGORIES.CONTEXTUAL,
@@ -157,9 +157,9 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />
+        return <CheckCircle className="w-4 h-4 text-success-600" />
       case 'in_progress':
-        return <Play className="w-4 h-4 text-blue-500" />
+        return <Play className="w-4 h-4 text-info-600" />
       default:
         return <Play className="w-4 h-4 text-muted-foreground" />
     }
@@ -168,9 +168,9 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge variant="secondary" className="text-green-700 bg-green-100">Completed</Badge>
+        return <Badge variant="secondary" className="text-success-700 bg-success-100">Completed</Badge>
       case 'in_progress':
-        return <Badge variant="secondary" className="text-blue-700 bg-blue-100">In Progress</Badge>
+        return <Badge variant="secondary" className="text-info-700 bg-info-100">In Progress</Badge>
       default:
         return null
     }
@@ -182,20 +182,17 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => setIsOpen(true)}
+        onClick={() => <span>setIsOpen(true)}
         className={cn(
           "h-9 w-9 p-0 hover:bg-muted/50 transition-colors",
           className
         )}
         aria-label="Open tour help menu"
-      >
-        <HelpCircle className="h-4 w-4" />
+      ></span><HelpCircle className="h-4 w-4" />
       </Button>
 
       {/* Help Menu Modal */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
+      <AnimatePresence> <span>{isOpen && (</span><>
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -231,10 +228,9 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => <span>setIsOpen(false)}
                   className="h-8 w-8 p-0"
-                >
-                  <X className="h-4 w-4" />
+                ></span><X className="h-4 w-4" />
                 </Button>
               </div>
 
@@ -245,9 +241,8 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
                     <Button
                       variant={selectedCategory === null ? "secondary" : "ghost"}
                       className="w-full justify-start h-auto p-3"
-                      onClick={() => setSelectedCategory(null)}
-                    >
-                      <div className="flex items-center space-x-3">
+                      onClick={() => <span>setSelectedCategory(null)}
+                    ></span><div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
                           <Star className="w-4 h-4 text-primary-foreground" />
                         </div>
@@ -260,22 +255,18 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
                       </div>
                     </Button>
 
-                    <Separator className="my-3" />
-
-                    {tourCategories.map((category) => {
+                    <Separator className="my-3" /> <span>{tourCategories.map((category) => {
                       const categoryTours = availableTours.filter(tour => tour.category === category.id)
                       const completedCount = categoryTours.filter(tour => 
                         getTourStatus(tour.id) === 'completed'
                       ).length
 
-                      return (
-                        <Button
+                      return (</span><Button
                           key={category.id}
                           variant={selectedCategory === category.id ? "secondary" : "ghost"}
                           className="w-full justify-start h-auto p-3"
-                          onClick={() => setSelectedCategory(category.id)}
-                        >
-                          <div className="flex items-center space-x-3">
+                          onClick={() => <span>setSelectedCategory(category.id)}
+                        ></span><div className="flex items-center space-x-3">
                             <div className={cn(
                               "w-8 h-8 rounded-lg flex items-center justify-center",
                               category.color
@@ -311,10 +302,9 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => setSelectedCategory(null)}
+                          onClick={() => <span>setSelectedCategory(null)}
                           className="absolute right-2 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0"
-                        >
-                          <X className="h-3 w-3" />
+                        ></span><X className="h-3 w-3" />
                         </Button>
                       )}
                     </div>
@@ -374,11 +364,10 @@ export default function TourHelpMenu({ className }: TourHelpMenuProps) {
                                 
                                 <Button
                                   size="sm"
-                                  onClick={() => handleStartTour(tour.id)}
+                                  onClick={() => <span>handleStartTour(tour.id)}
                                   className="h-8"
                                 >
-                                  {status === 'completed' ? 'Replay' : status === 'in_progress' ? 'Continue' : 'Start'}
-                                  <ChevronRight className="w-3 h-3 ml-1" />
+                                  {status === 'completed' ? 'Replay' : status === 'in_progress' ? 'Continue' : 'Start'}</span><ChevronRight className="w-3 h-3 ml-1" />
                                 </Button>
                               </div>
                             </Card>

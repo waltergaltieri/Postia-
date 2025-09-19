@@ -226,9 +226,7 @@ export default function ClientManagementInterface() {
         <Dialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog}>
           <DialogTrigger asChild>
             <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add Client
-            </Button>
+              <Plus className="h-4 w-4 mr-2" /> <span>Add Client</span></Button>
           </DialogTrigger>
           <DialogContent className="max-w-md">
             <DialogHeader>
@@ -266,12 +264,9 @@ export default function ClientManagementInterface() {
                 />
               </div>
               <div className="flex justify-end space-x-2">
-                <Button variant="outline" onClick={() => setShowNewClientDialog(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={handleCreateClient}>
-                  Create Client
-                </Button>
+                <Button variant="outline" onClick={() => <span>setShowNewClientDialog(false)}>
+                  Cancel</span></Button>
+                <Button onClick={handleCreateClient}> <span>Create Client</span></Button>
               </div>
             </div>
           </DialogContent>
@@ -349,13 +344,9 @@ export default function ClientManagementInterface() {
                     <CardTitle className="flex items-center justify-between">
                       {selectedClient.brandName}
                       <Button variant="outline" size="sm">
-                        <Edit className="h-4 w-4 mr-1" />
-                        Edit
-                      </Button>
+                        <Edit className="h-4 w-4 mr-1" /> <span>Edit</span></Button>
                     </CardTitle>
-                    <CardDescription>
-                      Client overview and brand information
-                    </CardDescription>
+                    <CardDescription> <span>Client overview and brand information</span></CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
@@ -410,9 +401,7 @@ export default function ClientManagementInterface() {
                       <Dialog open={showAssetUploadDialog} onOpenChange={setShowAssetUploadDialog}>
                         <DialogTrigger asChild>
                           <Button size="sm">
-                            <Upload className="h-4 w-4 mr-1" />
-                            Upload Asset
-                          </Button>
+                            <Upload className="h-4 w-4 mr-1" /> <span>Upload Asset</span></Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
@@ -430,7 +419,7 @@ export default function ClientManagementInterface() {
                                     key={type}
                                     variant="outline"
                                     className="justify-start"
-                                    onClick={() => {
+                                    onClick={() => <span>{
                                       const input = document.createElement('input');
                                       input.type = 'file';
                                       input.accept = type === 'PALETTE' ? '.json,.txt' : 'image/*';
@@ -443,8 +432,7 @@ export default function ClientManagementInterface() {
                                       input.click();
                                     }}
                                   >
-                                    {getAssetIcon(type)}
-                                    <span className="ml-2">{type}</span>
+                                    {getAssetIcon(type)}</span><span className="ml-2">{type}</span>
                                   </Button>
                                 ))}
                               </div>
@@ -504,10 +492,9 @@ export default function ClientManagementInterface() {
                             variant="outline"
                             size="sm"
                             className="mt-2"
-                            onClick={() => setShowAssetUploadDialog(true)}
+                            onClick={() => <span>setShowAssetUploadDialog(true)}
                           >
-                            Upload First Asset
-                          </Button>
+                            Upload First Asset</span></Button>
                         </div>
                       )}
                     </div>
@@ -552,9 +539,7 @@ export default function ClientManagementInterface() {
                           <ExternalLink className="h-8 w-8 mx-auto mb-2 opacity-50" />
                           <p>No social media links added</p>
                           <Button variant="outline" size="sm" className="mt-2">
-                            <Plus className="h-4 w-4 mr-1" />
-                            Add Social Link
-                          </Button>
+                            <Plus className="h-4 w-4 mr-1" /> <span>Add Social Link</span></Button>
                         </div>
                       )}
                     </div>
@@ -578,9 +563,7 @@ export default function ClientManagementInterface() {
                           Generate API keys for external integrations
                         </p>
                         <Button variant="outline" size="sm">
-                          <Plus className="h-4 w-4 mr-1" />
-                          Generate API Key
-                        </Button>
+                          <Plus className="h-4 w-4 mr-1" /> <span>Generate API Key</span></Button>
                       </div>
                       
                       <div>
@@ -589,20 +572,16 @@ export default function ClientManagementInterface() {
                           Export client data and assets
                         </p>
                         <Button variant="outline" size="sm">
-                          <Download className="h-4 w-4 mr-1" />
-                          Export Data
-                        </Button>
+                          <Download className="h-4 w-4 mr-1" /> <span>Export Data</span></Button>
                       </div>
                       
                       <div className="pt-4 border-t">
-                        <Label className="text-red-600">Danger Zone</Label>
+                        <Label className="text-error-600">Danger Zone</Label>
                         <p className="text-sm text-muted-foreground mb-2">
                           Permanently delete this client and all associated data
                         </p>
                         <Button variant="destructive" size="sm">
-                          <Trash2 className="h-4 w-4 mr-1" />
-                          Delete Client
-                        </Button>
+                          <Trash2 className="h-4 w-4 mr-1" /> <span>Delete Client</span></Button>
                       </div>
                     </div>
                   </CardContent>

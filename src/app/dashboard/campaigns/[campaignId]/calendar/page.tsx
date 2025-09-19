@@ -144,11 +144,11 @@ export default function CampaignCalendarPage() {
   const getStatusColor = (status: PostStatus) => {
     switch (status) {
       case PostStatus.DRAFT:
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning-100 text-warning-800';
       case PostStatus.APPROVED:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       case PostStatus.PUBLISHED:
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -171,7 +171,7 @@ export default function CampaignCalendarPage() {
     return (
       <ProtectedRoute>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
         </div>
       </ProtectedRoute>
     );
@@ -186,7 +186,7 @@ export default function CampaignCalendarPage() {
             <p className="text-gray-600 mb-6">{error}</p>
             <Link
               href="/dashboard/campaigns"
-              className="text-blue-600 hover:text-blue-800"
+              className="text-info-600 hover:text-info-800"
             >
               Back to Campaigns
             </Link>
@@ -204,7 +204,7 @@ export default function CampaignCalendarPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Campaign not found</h2>
             <Link
               href="/dashboard/campaigns"
-              className="text-blue-600 hover:text-blue-800"
+              className="text-info-600 hover:text-info-800"
             >
               Back to Campaigns
             </Link>
@@ -225,14 +225,14 @@ export default function CampaignCalendarPage() {
                 <div className="flex items-center space-x-4 mb-2">
                   <Link
                     href="/dashboard/campaigns"
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-info-600 hover:text-info-800"
                   >
                     ← Back to Campaigns
                   </Link>
-                  <span className="text-gray-400">|</span>
+                  <span className="text-muted-foreground">|</span>
                   <Link
                     href={`/dashboard/campaigns/${campaignId}`}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-info-600 hover:text-info-800"
                   >
                     Campaign Details
                   </Link>
@@ -245,13 +245,13 @@ export default function CampaignCalendarPage() {
             </div>
 
             {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                 {error}
               </div>
             )}
 
             {success && (
-              <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                 {success}
               </div>
             )}
@@ -274,7 +274,7 @@ export default function CampaignCalendarPage() {
                       </h3>
                       <button
                         onClick={() => setShowPostModal(false)}
-                        className="text-gray-400 hover:text-gray-600"
+                        className="text-muted-foreground hover:text-gray-600"
                       >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -347,10 +347,8 @@ export default function CampaignCalendarPage() {
                       </button>
                       <Link
                         href={`/dashboard/campaigns/${campaignId}/posts/${selectedPost.id}`}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                      >
-                        Edit Post
-                      </Link>
+                        className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
+                      > <span>Edit Post</span></Link>
                     </div>
                   </div>
                 </div>
@@ -376,7 +374,7 @@ export default function CampaignCalendarPage() {
                           value={createForm.content}
                           onChange={(e) => setCreateForm({ ...createForm, content: e.target.value })}
                           rows={4}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           placeholder="Enter post content..."
                         />
                       </div>
@@ -390,7 +388,7 @@ export default function CampaignCalendarPage() {
                           required
                           value={createForm.scheduledFor}
                           onChange={(e) => setCreateForm({ ...createForm, scheduledFor: e.target.value })}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                         />
                       </div>
 
@@ -405,7 +403,7 @@ export default function CampaignCalendarPage() {
                                 type="checkbox"
                                 checked={createForm.platforms.includes(platform)}
                                 onChange={() => handlePlatformToggle(platform)}
-                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                className="rounded border-gray-300 text-info-600 focus:ring-blue-500"
                               />
                               <span className="text-sm text-gray-700">{platform}</span>
                             </label>
@@ -421,7 +419,7 @@ export default function CampaignCalendarPage() {
                           type="url"
                           value={createForm.imageUrl}
                           onChange={(e) => setCreateForm({ ...createForm, imageUrl: e.target.value })}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           placeholder="https://example.com/image.jpg"
                         />
                       </div>
@@ -436,7 +434,7 @@ export default function CampaignCalendarPage() {
                         </button>
                         <button
                           type="submit"
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                          className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
                         >
                           Create Post
                         </button>

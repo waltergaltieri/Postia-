@@ -1,0 +1,87 @@
+{
+  "timestamp": "2025-09-19T00:47:24.468Z",
+  "summary": {
+    "totalIssues": 5,
+    "criticalIssues": 4,
+    "majorIssues": 1
+  },
+  "issues": [
+    {
+      "fg": "#9ca3af",
+      "bg": "#ffffff",
+      "context": "Input placeholder (gray-400 on white)",
+      "file": "src/components/ui/input.tsx",
+      "ratio": "2.54",
+      "passes": false,
+      "severity": "critical"
+    },
+    {
+      "fg": "#ffffff",
+      "bg": "#f3f4f6",
+      "context": "White text on light gray background",
+      "file": "Various components",
+      "ratio": "1.10",
+      "passes": false,
+      "severity": "critical"
+    },
+    {
+      "fg": "#d1d5db",
+      "bg": "#f9fafb",
+      "context": "Light gray text on lighter gray background",
+      "file": "Various components",
+      "ratio": "1.41",
+      "passes": false,
+      "severity": "critical"
+    },
+    {
+      "fg": "#ffffff",
+      "bg": "#ffffff",
+      "context": "White text on white background (potential issue)",
+      "file": "Various components",
+      "ratio": "1.00",
+      "passes": false,
+      "severity": "critical"
+    },
+    {
+      "fg": "#ffffff",
+      "bg": "#3b82f6",
+      "context": "White text on primary blue (should be good)",
+      "file": "Button components",
+      "ratio": "3.68",
+      "passes": false,
+      "severity": "major"
+    }
+  ],
+  "fixes": [
+    {
+      "issue": "Input placeholder (gray-400 on white)",
+      "file": "src/components/ui/input.tsx",
+      "currentRatio": "2.54",
+      "suggestedFix": "\n/* Fix placeholder contrast */\n.placeholder\\:text-gray-400::placeholder {\n  color: #6b7280; /* gray-500 for better contrast */\n}\n\n/* Alternative: Use CSS custom property */\n:root {\n  --placeholder-color: #6b7280; /* Ensures 4.5:1 contrast on white */\n}\n\n.input-field::placeholder {\n  color: var(--placeholder-color);\n}"
+    },
+    {
+      "issue": "White text on light gray background",
+      "file": "Various components",
+      "currentRatio": "1.10",
+      "suggestedFix": ""
+    },
+    {
+      "issue": "Light gray text on lighter gray background",
+      "file": "Various components",
+      "currentRatio": "1.41",
+      "suggestedFix": ""
+    },
+    {
+      "issue": "White text on white background (potential issue)",
+      "file": "Various components",
+      "currentRatio": "1.00",
+      "suggestedFix": "\n/* Fix white on white text */\n.text-white-on-white-fix {\n  color: #1f2937; /* gray-800 for high contrast */\n  background-color: #ffffff;\n}\n\n/* Or use theme-aware colors */\n.text-foreground {\n  color: hsl(var(--foreground));\n}"
+    },
+    {
+      "issue": "White text on primary blue (should be good)",
+      "file": "Button components",
+      "currentRatio": "3.68",
+      "suggestedFix": ""
+    }
+  ]
+}

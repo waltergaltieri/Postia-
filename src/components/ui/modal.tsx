@@ -337,7 +337,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     <Modal open={open} onOpenChange={onOpenChange}>
       <ModalContent size="sm" type={type} showCloseButton={false}>
         <ModalHeader type={type}>
-          <ModalTitle>{title}</ModalTitle>
+          <ModalTitle> <span>{title}</span></ModalTitle>
           <ModalDescription>{description}</ModalDescription>
         </ModalHeader>
         
@@ -346,9 +346,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             variant="outline"
             onClick={handleCancel}
             disabled={loading}
-          >
-            {cancelText}
-          </Button>
+          > <span>{cancelText}</span></Button>
           <Button
             variant={type === "destructive" ? "destructive" : "default"}
             onClick={handleConfirm}
@@ -356,9 +354,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             className={cn(
               type === "warning" && "bg-warning-600 hover:bg-warning-700 text-white"
             )}
-          >
-            {loading ? "Loading..." : confirmText}
-          </Button>
+          > <span>{loading ? "Loading..." : confirmText}</span></Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useNavigation, useClientManagement } from '@/components/navigation/navigation-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -63,7 +64,9 @@ interface Campaign {
 }
 
 export default function AIContentGenerationInterface() {
-  const [clients, setClients] = useState<Client[]>([]);
+  const { currentClient, clients } = useNavigation();
+  const { selectedClientId, clientWorkspaceMode, isClientDataIsolated } = useClientManagement();
+  
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [currentJob, setCurrentJob] = useState<ContentJob | null>(null);
   const [loading, setLoading] = useState(false);
@@ -71,7 +74,7 @@ export default function AIContentGenerationInterface() {
 
   // Generation form state
   const [generationForm, setGenerationForm] = useState({
-    clientId: '',
+    clientId: isClientDataIsolated && selectedClientId ? selectedClientId : '',
     campaignId: '',
     prompt: '',
     contentType: 'social_post',
@@ -85,14 +88,17 @@ export default function AIContentGenerationInterface() {
   });
 
   useEffect(() => {
-    fetchClients();
-  }, []);
-
-  useEffect(() => {
     if (generationForm.clientId) {
       fetchCampaigns(generationForm.clientId);
     }
   }, [generationForm.clientId]);
+
+  // Auto-set client when in client workspace mode
+  useEffect(() => {
+    if (isClientDataIsolated && selectedClientId && generationForm.clientId !== selectedClientId) {
+      setGenerationForm(prev => ({ ...prev, clientId: selectedClientId }));
+    }
+  }, [selectedClientId, isClientDataIsolated]);
 
   useEffect(() => {
     return () => {
@@ -102,22 +108,16 @@ export default function AIContentGenerationInterface() {
     };
   }, [jobPolling]);
 
-  const fetchClients = async () => {
-    try {
-      const response = await fetch('/api/clients');
-      const result = await response.json();
 
-      if (result.success) {
-        setClients(result.data.clients);
-      }
-    } catch (error) {
-      console.error('Error fetching clients:', error);
-    }
-  };
 
   const fetchCampaigns = async (clientId: string) => {
     try {
-      const response = await fetch(`/api/clients/${clientId}/campaigns`);
+      const response = await fetch(`/api/clients/${clientId}/campaigns`, {
+        headers: {
+          // Add client context header for API isolation
+          ...(selectedClientId && { 'x-client-id': selectedClientId })
+        }
+      });
       const result = await response.json();
 
       if (result.success) {
@@ -139,7 +139,11 @@ export default function AIContentGenerationInterface() {
     try {
       const response = await fetch('/api/content/generate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          // Add client context header for API isolation
+          ...(selectedClientId && { 'x-client-id': selectedClientId })
+        },
         body: JSON.stringify(generationForm),
       });
 
@@ -249,13 +253,13 @@ export default function AIContentGenerationInterface() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'COMPLETED':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-success-600" />;
       case 'IN_PROGRESS':
-        return <Clock className="h-4 w-4 text-blue-500 animate-spin" />;
+        return <Clock className="h-4 w-4 text-info-600 animate-spin" />;
       case 'FAILED':
-        return <AlertCircle className="h-4 w-4 text-red-500" />;
+        return <AlertCircle className="h-4 w-4 text-error-600" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-400" />;
+        return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
@@ -266,16 +270,26 @@ export default function AIContentGenerationInterface() {
     return (completedSteps / currentJob.steps.length) * 100;
   };
 
-  const selectedClient = clients.find(c => c.id === generationForm.clientId);
+  const selectedClient = isClientDataIsolated && currentClient 
+    ? currentClient 
+    : clients.find(c => c.id === generationForm.clientId);
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">AI Content Generation</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            {isClientDataIsolated && currentClient 
+              ? `${currentClient.brandName} - AI Content Generation`
+              : 'AI Content Generation'
+            }
+          </h1>
           <p className="text-muted-foreground">
-            Create engaging content with AI-powered generation
+            {isClientDataIsolated && currentClient
+              ? `Create engaging content for ${currentClient.brandName} with AI-powered generation`
+              : 'Create engaging content with AI-powered generation'
+            }
           </p>
         </div>
       </div>
@@ -294,24 +308,51 @@ export default function AIContentGenerationInterface() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="client">Client</Label>
-                <Select
-                  value={generationForm.clientId}
-                  onValueChange={(value) => setGenerationForm({ ...generationForm, clientId: value })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select client" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {clients.map((client) => (
-                      <SelectItem key={client.id} value={client.id}>
-                        {client.brandName}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {/* Only show client selector in admin mode */}
+              {!isClientDataIsolated && (
+                <div>
+                  <Label htmlFor="client">Client</Label>
+                  <Select
+                    value={generationForm.clientId}
+                    onValueChange={(value) => setGenerationForm({ ...generationForm, clientId: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select client" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {clients.map((client) => (
+                        <SelectItem key={client.id} value={client.id}>
+                          {client.brandName}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {/* Show selected client in client mode */}
+              {isClientDataIsolated && currentClient && (
+                <div>
+                  <Label htmlFor="client">Client</Label>
+                  <div className="flex items-center space-x-2 p-2 border rounded-md bg-muted/50">
+                    {currentClient.logoUrl ? (
+                      <img 
+                        src={currentClient.logoUrl} 
+                        alt={`${currentClient.brandName} logo`}
+                        className="w-6 h-6 rounded object-cover"
+                      />
+                    ) : (
+                      <div 
+                        className="w-6 h-6 rounded flex items-center justify-center text-white font-bold text-xs"
+                        style={{ backgroundColor: currentClient.brandColors[0] }}
+                      >
+                        {currentClient.brandName.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <span className="font-medium">{currentClient.brandName}</span>
+                  </div>
+                </div>
+              )}
 
               <div>
                 <Label htmlFor="campaign">Campaign (Optional)</Label>
@@ -490,9 +531,7 @@ export default function AIContentGenerationInterface() {
               onClick={startGeneration}
               disabled={loading || !generationForm.clientId || !generationForm.prompt}
               className="w-full"
-            >
-              {loading ? (
-                <>
+            > <span>{loading ? (</span><>
                   <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
                   Starting Generation...
                 </>
@@ -546,7 +585,7 @@ export default function AIContentGenerationInterface() {
                           <p className="text-xs text-muted-foreground">
                             {step.tokensUsed > 0 && `${step.tokensUsed} tokens used`}
                             {step.error && (
-                              <span className="text-red-500 ml-2">{step.error}</span>
+                              <span className="text-error-600 ml-2">{step.error}</span>
                             )}
                           </p>
                         </div>
@@ -557,9 +596,8 @@ export default function AIContentGenerationInterface() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => regenerateStep(step.step)}
-                          >
-                            <RotateCcw className="h-3 w-3" />
+                            onClick={() => <span>regenerateStep(step.step)}
+                          ></span><RotateCcw className="h-3 w-3" />
                           </Button>
                         )}
                       </div>
@@ -602,17 +640,11 @@ export default function AIContentGenerationInterface() {
               Generated Content
               <div className="flex space-x-2">
                 <Button variant="outline" size="sm">
-                  <Eye className="h-4 w-4 mr-1" />
-                  Preview
-                </Button>
+                  <Eye className="h-4 w-4 mr-1" /> <span>Preview</span></Button>
                 <Button variant="outline" size="sm">
-                  <Edit className="h-4 w-4 mr-1" />
-                  Edit
-                </Button>
+                  <Edit className="h-4 w-4 mr-1" /> <span>Edit</span></Button>
                 <Button variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-1" />
-                  Download
-                </Button>
+                  <Download className="h-4 w-4 mr-1" /> <span>Download</span></Button>
               </div>
             </CardTitle>
           </CardHeader>
@@ -633,9 +665,8 @@ export default function AIContentGenerationInterface() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => regenerateStep(step.step)}
-                        >
-                          <RotateCcw className="h-3 w-3 mr-1" />
+                          onClick={() => <span>regenerateStep(step.step)}
+                        ></span><RotateCcw className="h-3 w-3 mr-1" />
                           Regenerate
                         </Button>
                       </div>
@@ -667,7 +698,7 @@ export default function AIContentGenerationInterface() {
                               className="w-full h-full object-cover"
                             />
                           ) : (
-                            <Image className="h-12 w-12 text-muted-foreground" />
+                            <Image className="h-8 w-8 text-muted-foreground" />
                           )}
                         </div>
                         <div className="p-3">

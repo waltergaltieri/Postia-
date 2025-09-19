@@ -52,7 +52,7 @@ export default function VerifyEmailPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 text-center">
           <div>
-            <div className="mx-auto h-12 w-12 text-green-600">
+            <div className="mx-auto h-12 w-12 text-success-600">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -73,7 +73,7 @@ export default function VerifyEmailPage() {
           <div>
             <Link
               href="/auth/signin"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Sign In
             </Link>
@@ -87,7 +87,7 @@ export default function VerifyEmailPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 text-center">
         <div>
-          <div className="mx-auto h-12 w-12 text-blue-600">
+          <div className="mx-auto h-12 w-12 text-info-600">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
@@ -112,13 +112,13 @@ export default function VerifyEmailPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
             {error}
           </div>
         )}
 
         {isVerifying && (
-          <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded">
+          <div className="bg-info-50 border border-info-200 text-info-700 px-4 py-3 rounded">
             Verifying your email...
           </div>
         )}
@@ -132,7 +132,7 @@ export default function VerifyEmailPage() {
           <div className="text-sm">
             <Link
               href="/auth/signin"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-info-600 hover:text-info-600"
             >
               Back to sign in
             </Link>

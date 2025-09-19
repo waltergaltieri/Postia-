@@ -1,0 +1,190 @@
+{
+  "timestamp": "2025-09-19T02:16:31.435Z",
+  "summary": {
+    "totalViolations": 1,
+    "totalPasses": 16,
+    "criticalViolations": 0,
+    "seriousViolations": 0,
+    "moderateViolations": 1,
+    "minorViolations": 0
+  },
+  "testResults": [
+    {
+      "page": "Página principal",
+      "url": "/",
+      "component": "main-layout",
+      "timestamp": "2025-09-19T02:16:31.428Z",
+      "violations": {
+        "critical": [],
+        "serious": [],
+        "moderate": [
+          {
+            "id": "landmark-one-main",
+            "impact": "moderate",
+            "description": "Ensure the page has only one main landmark",
+            "help": "Page must have one main landmark",
+            "nodes": []
+          }
+        ],
+        "minor": []
+      },
+      "passes": [
+        {
+          "id": "color-contrast",
+          "description": "Elements must have sufficient color contrast"
+        },
+        {
+          "id": "focus-order-semantics",
+          "description": "Elements in the focus order need a role appropriate for interactive content"
+        },
+        {
+          "id": "keyboard",
+          "description": "Elements must be keyboard accessible"
+        }
+      ],
+      "summary": {
+        "totalViolations": 1,
+        "totalPasses": 3
+      }
+    },
+    {
+      "page": "Formularios",
+      "url": "/forms",
+      "component": "form-components",
+      "timestamp": "2025-09-19T02:16:31.431Z",
+      "violations": {
+        "critical": [],
+        "serious": [],
+        "moderate": [],
+        "minor": []
+      },
+      "passes": [
+        {
+          "id": "color-contrast",
+          "description": "Elements must have sufficient color contrast"
+        },
+        {
+          "id": "label",
+          "description": "Form elements must have labels"
+        },
+        {
+          "id": "placeholder",
+          "description": "Placeholder text must have sufficient contrast"
+        }
+      ],
+      "summary": {
+        "totalViolations": 0,
+        "totalPasses": 3
+      }
+    },
+    {
+      "page": "Navegación",
+      "url": "/navigation",
+      "component": "sidebar-navigation",
+      "timestamp": "2025-09-19T02:16:31.433Z",
+      "violations": {
+        "critical": [],
+        "serious": [],
+        "moderate": [],
+        "minor": []
+      },
+      "passes": [
+        {
+          "id": "focus-order-semantics",
+          "description": "Elements in the focus order need a role appropriate for interactive content"
+        },
+        {
+          "id": "keyboard",
+          "description": "Elements must be keyboard accessible"
+        },
+        {
+          "id": "color-contrast",
+          "description": "Elements must have sufficient color contrast"
+        }
+      ],
+      "summary": {
+        "totalViolations": 0,
+        "totalPasses": 3
+      }
+    },
+    {
+      "page": "Modales",
+      "url": "/modals",
+      "component": "modal-components",
+      "timestamp": "2025-09-19T02:16:31.434Z",
+      "violations": {
+        "critical": [],
+        "serious": [],
+        "moderate": [],
+        "minor": []
+      },
+      "passes": [
+        {
+          "id": "focus-trap",
+          "description": "Modal dialogs must trap focus"
+        },
+        {
+          "id": "keyboard",
+          "description": "Elements must be keyboard accessible"
+        },
+        {
+          "id": "color-contrast",
+          "description": "Elements must have sufficient color contrast"
+        }
+      ],
+      "summary": {
+        "totalViolations": 0,
+        "totalPasses": 3
+      }
+    },
+    {
+      "page": "Botones e interacciones",
+      "url": "/interactions",
+      "component": "interactive-elements",
+      "timestamp": "2025-09-19T02:16:31.434Z",
+      "violations": {
+        "critical": [],
+        "serious": [],
+        "moderate": [],
+        "minor": []
+      },
+      "passes": [
+        {
+          "id": "focus-order-semantics",
+          "description": "Elements in the focus order need a role appropriate for interactive content"
+        },
+        {
+          "id": "keyboard",
+          "description": "Elements must be keyboard accessible"
+        },
+        {
+          "id": "color-contrast",
+          "description": "Elements must have sufficient color contrast"
+        },
+        {
+          "id": "interactive-controls-focus",
+          "description": "Interactive controls must have focus states"
+        }
+      ],
+      "summary": {
+        "totalViolations": 0,
+        "totalPasses": 4
+      }
+    }
+  ],
+  "wcagLevel": "AA",
+  "axeVersion": "4.8.0",
+  "testConfiguration": {
+    "rules": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21aa"
+    ],
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21aa",
+      "best-practice"
+    ]
+  }
+}

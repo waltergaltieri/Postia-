@@ -174,11 +174,11 @@ export default function ErrorMonitoringDashboard() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'healthy':
-        return 'text-green-600 bg-green-100';
+        return 'text-success-600 bg-success-100';
       case 'degraded':
-        return 'text-yellow-600 bg-yellow-100';
+        return 'text-warning-600 bg-warning-100';
       case 'unhealthy':
-        return 'text-red-600 bg-red-100';
+        return 'text-error-600 bg-error-100';
       default:
         return 'text-gray-600 bg-gray-100';
     }
@@ -188,11 +188,11 @@ export default function ErrorMonitoringDashboard() {
     switch (level.toLowerCase()) {
       case 'error':
       case 'fatal':
-        return 'text-red-600 bg-red-100';
+        return 'text-error-600 bg-error-100';
       case 'warn':
-        return 'text-yellow-600 bg-yellow-100';
+        return 'text-warning-600 bg-warning-100';
       case 'info':
-        return 'text-blue-600 bg-blue-100';
+        return 'text-info-600 bg-info-100';
       case 'debug':
         return 'text-gray-600 bg-gray-100';
       default:
@@ -228,9 +228,7 @@ export default function ErrorMonitoringDashboard() {
           </p>
         </div>
         <Button onClick={handleRefresh} disabled={refreshing}>
-          <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-          Refresh
-        </Button>
+          <RefreshCw className={`h-4 w-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} /> <span>Refresh</span></Button>
       </div>
 
       {/* Health Status Overview */}
@@ -259,7 +257,7 @@ export default function ErrorMonitoringDashboard() {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-2xl font-bold text-success-600">
                 {healthStatus.summary.healthy}
               </div>
               <p className="text-xs text-muted-foreground">
@@ -274,7 +272,7 @@ export default function ErrorMonitoringDashboard() {
               <AlertTriangle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-yellow-600">
+              <div className="text-2xl font-bold text-warning-600">
                 {healthStatus.summary.degraded}
               </div>
               <p className="text-xs text-muted-foreground">
@@ -289,7 +287,7 @@ export default function ErrorMonitoringDashboard() {
               <AlertTriangle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-600">
+              <div className="text-2xl font-bold text-error-600">
                 {healthStatus.summary.unhealthy}
               </div>
               <p className="text-xs text-muted-foreground">
@@ -407,9 +405,9 @@ export default function ErrorMonitoringDashboard() {
                           </div>
                         )}
                         {log.error && (
-                          <div className="mt-2 p-2 bg-red-50 rounded text-sm">
-                            <p className="font-medium text-red-800">Error Details:</p>
-                            <pre className="text-red-700 whitespace-pre-wrap">
+                          <div className="mt-2 p-2 bg-error-50 rounded text-sm">
+                            <p className="font-medium text-error-800">Error Details:</p>
+                            <pre className="text-error-700 whitespace-pre-wrap">
                               {JSON.stringify(log.error, null, 2)}
                             </pre>
                           </div>

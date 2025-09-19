@@ -112,7 +112,7 @@ export default function AcceptInvitationPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 text-center">
           <div>
-            <div className="mx-auto h-12 w-12 text-red-600">
+            <div className="mx-auto h-12 w-12 text-error-600">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -133,7 +133,7 @@ export default function AcceptInvitationPage() {
           <div>
             <Link
               href="/auth/signin"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Go to Sign In
             </Link>
@@ -148,7 +148,7 @@ export default function AcceptInvitationPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 text-center">
           <div>
-            <div className="mx-auto h-12 w-12 text-green-600">
+            <div className="mx-auto h-12 w-12 text-success-600">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -169,7 +169,7 @@ export default function AcceptInvitationPage() {
           <div>
             <Link
               href="/auth/signin"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Sign In
             </Link>
@@ -182,7 +182,7 @@ export default function AcceptInvitationPage() {
   if (!invitation) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
       </div>
     );
   }
@@ -197,14 +197,14 @@ export default function AcceptInvitationPage() {
           <p className="mt-2 text-center text-sm text-gray-600">
             You've been invited to join as a <span className="font-medium">{invitation.role.toLowerCase()}</span>
           </p>
-          <p className="mt-1 text-center text-xs text-gray-500">
+          <p className="mt-1 text-center text-xs text-muted-foreground">
             Invited by: {invitation.sender.name} ({invitation.sender.email})
           </p>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
@@ -221,7 +221,7 @@ export default function AcceptInvitationPage() {
                 required
                 value={formData.name}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Enter your full name"
               />
             </div>
@@ -238,11 +238,11 @@ export default function AcceptInvitationPage() {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Create a strong password"
               />
               {passwordErrors.length > 0 && (
-                <div className="mt-2 text-sm text-red-600">
+                <div className="mt-2 text-sm text-error-600">
                   <ul className="list-disc list-inside space-y-1">
                     {passwordErrors.map((error, index) => (
                       <li key={index}>{error}</li>
@@ -264,11 +264,11 @@ export default function AcceptInvitationPage() {
                 required
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm your password"
               />
               {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                <p className="mt-2 text-sm text-red-600">Passwords do not match</p>
+                <p className="mt-2 text-sm text-error-600">Passwords do not match</p>
               )}
             </div>
           </div>
@@ -277,7 +277,7 @@ export default function AcceptInvitationPage() {
             <button
               type="submit"
               disabled={isLoading || passwordErrors.length > 0}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? 'Creating account...' : 'Accept invitation'}
             </button>
@@ -286,10 +286,8 @@ export default function AcceptInvitationPage() {
           <div className="text-center">
             <Link
               href="/auth/signin"
-              className="text-sm text-blue-600 hover:text-blue-500"
-            >
-              Already have an account? Sign in
-            </Link>
+              className="text-sm text-info-600 hover:text-info-600"
+            > <span>Already have an account? Sign in</span></Link>
           </div>
         </form>
       </div>

@@ -32,7 +32,7 @@ describe('TourControls', () => {
 
   describe('Rendering', () => {
     it('should render all control buttons', () => {
-      render(<TourControls {...defaultProps} />)
+      render(<TourControls {...defaultProps} /> <span>)
 
       expect(screen.getByRole('button', { name: /previous/i })).toBeInTheDocument()
       expect(screen.getByRole('button', { name: /next/i })).toBeInTheDocument()
@@ -41,20 +41,20 @@ describe('TourControls', () => {
     })
 
     it('should show progress indicator', () => {
-      render(<TourControls {...defaultProps} />)
+      render(</span><TourControls {...defaultProps} />)
 
       expect(screen.getByText('1 of 3')).toBeInTheDocument()
     })
 
     it('should disable previous button on first step', () => {
-      render(<TourControls {...defaultProps} currentStep={0} />)
+      render(<TourControls {...defaultProps} currentStep={0} /> <span>)
 
       const previousButton = screen.getByRole('button', { name: /previous/i })
       expect(previousButton).toBeDisabled()
     })
 
     it('should show "Finish" instead of "Next" on last step', () => {
-      render(<TourControls {...defaultProps} currentStep={2} />)
+      render(</span><TourControls {...defaultProps} currentStep={2} /> <span>)
 
       expect(screen.getByRole('button', { name: /finish/i })).toBeInTheDocument()
       expect(screen.queryByRole('button', { name: /next/i })).not.toBeInTheDocument()
@@ -64,7 +64,7 @@ describe('TourControls', () => {
   describe('Button Interactions', () => {
     it('should call onNext when next button is clicked', () => {
       const onNext = vi.fn()
-      render(<TourControls {...defaultProps} onNext={onNext} />)
+      render(</span><TourControls {...defaultProps} onNext={onNext} /> <span>)
 
       fireEvent.click(screen.getByRole('button', { name: /next/i }))
       expect(onNext).toHaveBeenCalledTimes(1)
@@ -72,7 +72,7 @@ describe('TourControls', () => {
 
     it('should call onPrevious when previous button is clicked', () => {
       const onPrevious = vi.fn()
-      render(<TourControls {...defaultProps} currentStep={1} onPrevious={onPrevious} />)
+      render(</span><TourControls {...defaultProps} currentStep={1} onPrevious={onPrevious} /> <span>)
 
       fireEvent.click(screen.getByRole('button', { name: /previous/i }))
       expect(onPrevious).toHaveBeenCalledTimes(1)
@@ -80,7 +80,7 @@ describe('TourControls', () => {
 
     it('should call onSkip when skip button is clicked', () => {
       const onSkip = vi.fn()
-      render(<TourControls {...defaultProps} onSkip={onSkip} />)
+      render(</span><TourControls {...defaultProps} onSkip={onSkip} /> <span>)
 
       fireEvent.click(screen.getByRole('button', { name: /skip/i }))
       expect(onSkip).toHaveBeenCalledTimes(1)
@@ -88,7 +88,7 @@ describe('TourControls', () => {
 
     it('should call onClose when close button is clicked', () => {
       const onClose = vi.fn()
-      render(<TourControls {...defaultProps} onClose={onClose} />)
+      render(</span><TourControls {...defaultProps} onClose={onClose} /> <span>)
 
       fireEvent.click(screen.getByRole('button', { name: /close/i }))
       expect(onClose).toHaveBeenCalledTimes(1)
@@ -96,7 +96,7 @@ describe('TourControls', () => {
 
     it('should call onNext when finish button is clicked on last step', () => {
       const onNext = vi.fn()
-      render(<TourControls {...defaultProps} currentStep={2} onNext={onNext} />)
+      render(</span><TourControls {...defaultProps} currentStep={2} onNext={onNext} /> <span>)
 
       fireEvent.click(screen.getByRole('button', { name: /finish/i }))
       expect(onNext).toHaveBeenCalledTimes(1)
@@ -107,7 +107,7 @@ describe('TourControls', () => {
     it('should handle keyboard navigation', async () => {
       const { handleKeyboardNavigation } = await import('@/lib/accessibility')
       
-      render(<TourControls {...defaultProps} />)
+      render(</span><TourControls {...defaultProps} />)
 
       const controlsContainer = screen.getByTestId('tour-controls')
       fireEvent.keyDown(controlsContainer, { key: 'Tab' })
@@ -117,7 +117,7 @@ describe('TourControls', () => {
 
     it('should handle Enter key on focused button', () => {
       const onNext = vi.fn()
-      render(<TourControls {...defaultProps} onNext={onNext} />)
+      render(<TourControls {...defaultProps} onNext={onNext} /> <span>)
 
       const nextButton = screen.getByRole('button', { name: /next/i })
       nextButton.focus()
@@ -128,7 +128,7 @@ describe('TourControls', () => {
 
     it('should handle Space key on focused button', () => {
       const onNext = vi.fn()
-      render(<TourControls {...defaultProps} onNext={onNext} />)
+      render(</span><TourControls {...defaultProps} onNext={onNext} /> <span>)
 
       const nextButton = screen.getByRole('button', { name: /next/i })
       nextButton.focus()
@@ -139,7 +139,7 @@ describe('TourControls', () => {
 
     it('should handle Escape key to close tour', () => {
       const onClose = vi.fn()
-      render(<TourControls {...defaultProps} onClose={onClose} />)
+      render(</span><TourControls {...defaultProps} onClose={onClose} />)
 
       const controlsContainer = screen.getByTestId('tour-controls')
       fireEvent.keyDown(controlsContainer, { key: 'Escape' })
@@ -150,7 +150,7 @@ describe('TourControls', () => {
 
   describe('Accessibility', () => {
     it('should have proper ARIA labels', () => {
-      render(<TourControls {...defaultProps} />)
+      render(<TourControls {...defaultProps} /> <span>)
 
       expect(screen.getByRole('button', { name: /previous/i })).toHaveAttribute(
         'aria-label',
@@ -173,7 +173,7 @@ describe('TourControls', () => {
     it('should announce step changes to screen readers', async () => {
       const { announceToScreenReader } = await import('@/lib/accessibility')
       
-      const { rerender } = render(<TourControls {...defaultProps} currentStep={0} />)
+      const { rerender } = render(</span><TourControls {...defaultProps} currentStep={0} />)
 
       rerender(<TourControls {...defaultProps} currentStep={1} />)
 
@@ -185,7 +185,7 @@ describe('TourControls', () => {
     })
 
     it('should have proper focus management', () => {
-      render(<TourControls {...defaultProps} />)
+      render(<TourControls {...defaultProps} /> <span>)
 
       const nextButton = screen.getByRole('button', { name: /next/i })
       nextButton.focus()
@@ -194,7 +194,7 @@ describe('TourControls', () => {
     })
 
     it('should support high contrast mode', () => {
-      render(<TourControls {...defaultProps} highContrast={true} />)
+      render(</span><TourControls {...defaultProps} highContrast={true} /> <span>)
 
       const controlsContainer = screen.getByTestId('tour-controls')
       expect(controlsContainer).toHaveClass('high-contrast')
@@ -203,7 +203,7 @@ describe('TourControls', () => {
 
   describe('Progress Indicator', () => {
     it('should show correct progress for different steps', () => {
-      const { rerender } = render(<TourControls {...defaultProps} currentStep={0} totalSteps={5} />)
+      const { rerender } = render(</span><TourControls {...defaultProps} currentStep={0} totalSteps={5} />)
       expect(screen.getByText('1 of 5')).toBeInTheDocument()
 
       rerender(<TourControls {...defaultProps} currentStep={2} totalSteps={5} />)
@@ -240,7 +240,7 @@ describe('TourControls', () => {
         finish: 'Complete'
       }
 
-      render(<TourControls {...defaultProps} labels={customLabels} />)
+      render(<TourControls {...defaultProps} labels={customLabels} /> <span>)
 
       expect(screen.getByRole('button', { name: /go back/i })).toBeInTheDocument()
       expect(screen.getByRole('button', { name: /continue/i })).toBeInTheDocument()
@@ -249,20 +249,18 @@ describe('TourControls', () => {
     })
 
     it('should hide buttons when specified', () => {
-      render(
-        <TourControls 
+      render(</span><TourControls 
           {...defaultProps} 
           showSkip={false}
           showClose={false}
-        />
-      )
+        /> <span>)
 
       expect(screen.queryByRole('button', { name: /skip/i })).not.toBeInTheDocument()
       expect(screen.queryByRole('button', { name: /close/i })).not.toBeInTheDocument()
     })
 
     it('should apply custom CSS classes', () => {
-      render(<TourControls {...defaultProps} className="custom-controls" />)
+      render(</span><TourControls {...defaultProps} className="custom-controls" />)
 
       const controlsContainer = screen.getByTestId('tour-controls')
       expect(controlsContainer).toHaveClass('custom-controls')
@@ -271,7 +269,7 @@ describe('TourControls', () => {
 
   describe('Loading States', () => {
     it('should show loading state on buttons when specified', () => {
-      render(<TourControls {...defaultProps} isLoading={true} />)
+      render(<TourControls {...defaultProps} isLoading={true} /> <span>)
 
       const nextButton = screen.getByRole('button', { name: /next/i })
       expect(nextButton).toBeDisabled()
@@ -279,7 +277,7 @@ describe('TourControls', () => {
     })
 
     it('should disable all buttons during loading', () => {
-      render(<TourControls {...defaultProps} isLoading={true} />)
+      render(</span><TourControls {...defaultProps} isLoading={true} /> <span>)
 
       const buttons = screen.getAllByRole('button')
       buttons.forEach(button => {
@@ -291,7 +289,7 @@ describe('TourControls', () => {
   describe('Error Handling', () => {
     it('should handle invalid step numbers gracefully', () => {
       expect(() => {
-        render(<TourControls {...defaultProps} currentStep={-1} />)
+        render(</span><TourControls {...defaultProps} currentStep={-1} />)
       }).not.toThrow()
 
       expect(() => {

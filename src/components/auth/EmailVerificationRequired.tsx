@@ -42,9 +42,9 @@ export default function EmailVerificationRequired() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-yellow-100">
+        <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-warning-100">
           <svg
-            className="h-6 w-6 text-yellow-600"
+            className="h-6 w-6 text-warning-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -81,13 +81,13 @@ export default function EmailVerificationRequired() {
             </div>
 
             {message && (
-              <div className="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+              <div className="mb-4 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                 {message}
               </div>
             )}
 
             {error && (
-              <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="mb-4 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                 {error}
               </div>
             )}
@@ -96,7 +96,7 @@ export default function EmailVerificationRequired() {
               <button
                 onClick={handleResendVerification}
                 disabled={isResending}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isResending ? (
                   <>
@@ -114,7 +114,7 @@ export default function EmailVerificationRequired() {
               <div className="text-center">
                 <a
                   href="/api/auth/signout"
-                  className="text-sm text-blue-600 hover:text-blue-500"
+                  className="text-sm text-info-600 hover:text-info-600"
                 >
                   Sign out and use a different account
                 </a>
@@ -124,7 +124,7 @@ export default function EmailVerificationRequired() {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-muted-foreground">
             Didn't receive the email? Check your spam folder or try resending.
           </p>
         </div>

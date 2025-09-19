@@ -90,9 +90,7 @@ export default function ModalDemoPage() {
             {modalSizes.map((size) => (
               <Modal key={size}>
                 <ModalTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    {size.toUpperCase()}
-                  </Button>
+                  <Button variant="outline" size="sm"> <span>{size.toUpperCase()}</span></Button>
                 </ModalTrigger>
                 <ModalContent size={size}>
                   <ModalHeader>
@@ -108,8 +106,8 @@ export default function ModalDemoPage() {
                     </p>
                   </ModalBody>
                   <ModalFooter>
-                    <Button variant="outline">Cancel</Button>
-                    <Button>Confirm</Button>
+                    <Button variant="outline"> <span>Cancel</span></Button>
+                    <Button> <span>Confirm</span></Button>
                   </ModalFooter>
                 </ModalContent>
               </Modal>
@@ -141,9 +139,7 @@ export default function ModalDemoPage() {
                       type === "info" ? "border-info-300 text-info-700 hover:bg-info-50" :
                       ""
                     }
-                  >
-                    {type}
-                  </Button>
+                  > <span>{type}</span></Button>
                 </ModalTrigger>
                 <ModalContent type={type}>
                   <ModalHeader type={type}>
@@ -159,15 +155,13 @@ export default function ModalDemoPage() {
                     </p>
                   </ModalBody>
                   <ModalFooter>
-                    <Button variant="outline">Cancel</Button>
+                    <Button variant="outline"> <span>Cancel</span></Button>
                     <Button 
                       variant={type === "destructive" ? "destructive" : "default"}
                       className={
                         type === "warning" ? "bg-warning-600 hover:bg-warning-700 text-white" : ""
                       }
-                    >
-                      Confirm
-                    </Button>
+                    > <span>Confirm</span></Button>
                   </ModalFooter>
                 </ModalContent>
               </Modal>
@@ -188,18 +182,16 @@ export default function ModalDemoPage() {
           <div className="flex flex-wrap gap-2">
             <Button 
               variant="outline"
-              onClick={() => setConfirmationModalOpen(true)}
+              onClick={() => <span>setConfirmationModalOpen(true)}
             >
-              Info Confirmation
-            </Button>
+              Info Confirmation</span></Button>
             
             <Button 
               variant="outline"
               className="border-warning-300 text-warning-700 hover:bg-warning-50"
-              onClick={() => setDestructiveModalOpen(true)}
+              onClick={() => <span>setDestructiveModalOpen(true)}
             >
-              Destructive Action
-            </Button>
+              Destructive Action</span></Button>
           </div>
 
           {/* Info Confirmation Modal */}
@@ -217,8 +209,7 @@ export default function ModalDemoPage() {
             }}
           />
 
-          {/* Destructive Confirmation Modal */}
-          <ConfirmationModal
+          {/* Destructive Confirmation Modal */}</span><ConfirmationModal
             open={destructiveModalOpen}
             onOpenChange={setDestructiveModalOpen}
             type="destructive"
@@ -241,9 +232,8 @@ export default function ModalDemoPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => setFormModalOpen(true)}>
-            Open Form Modal
-          </Button>
+          <Button onClick={() => <span>setFormModalOpen(true)}>
+            Open Form Modal</span></Button>
 
           <Modal open={formModalOpen} onOpenChange={setFormModalOpen}>
             <ModalContent size="lg">
@@ -303,13 +293,11 @@ export default function ModalDemoPage() {
               <ModalFooter>
                 <Button 
                   variant="outline" 
-                  onClick={() => setFormModalOpen(false)}
+                  onClick={() => <span>setFormModalOpen(false)}
                 >
-                  Cancel
-                </Button>
-                <Button onClick={() => setFormModalOpen(false)}>
-                  Create Campaign
-                </Button>
+                  Cancel</span></Button>
+                <Button onClick={() => <span>setFormModalOpen(false)}>
+                  Create Campaign</span></Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
@@ -325,9 +313,8 @@ export default function ModalDemoPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => setResponsiveModalOpen(true)}>
-            Open Responsive Modal
-          </Button>
+          <Button onClick={() => <span>setResponsiveModalOpen(true)}>
+            Open Responsive Modal</span></Button>
 
           <ResponsiveModal 
             open={responsiveModalOpen} 
@@ -380,10 +367,9 @@ export default function ModalDemoPage() {
               <ModalFooter>
                 <Button 
                   variant="outline" 
-                  onClick={() => setResponsiveModalOpen(false)}
+                  onClick={() => <span>setResponsiveModalOpen(false)}
                 >
-                  Close
-                </Button>
+                  Close</span></Button>
               </ModalFooter>
             </ModalContent>
           </ResponsiveModal>
@@ -413,9 +399,7 @@ export default function ModalDemoPage() {
                       type === "info" ? "border-info-300 text-info-700 hover:bg-info-50" :
                       ""
                     }
-                  >
-                    {type}
-                  </Button>
+                  > <span>{type}</span></Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent type={type}>
                   <AlertDialogHeader type={type}>
@@ -449,8 +433,7 @@ export default function ModalDemoPage() {
                   setQuickAlertOpen(true)
                 }}
               >
-                Success Alert
-              </Button>
+                Success Alert</Button>
               
               <Button 
                 variant="outline"
@@ -460,8 +443,7 @@ export default function ModalDemoPage() {
                   setQuickAlertOpen(true)
                 }}
               >
-                Warning Alert
-              </Button>
+                Warning Alert</Button>
               
               <Button 
                 variant="outline"
@@ -471,8 +453,7 @@ export default function ModalDemoPage() {
                   setQuickAlertOpen(true)
                 }}
               >
-                Error Alert
-              </Button>
+                Error Alert</span></Button>
             </div>
           </div>
 
@@ -499,8 +480,7 @@ export default function ModalDemoPage() {
               console.log(`${quickAlertType} action confirmed`)
               setQuickAlertOpen(false)
             }}
-          />
-        </CardContent>
+          /></span></CardContent>
       </Card>
 
       {/* Modal Hook Example */}
@@ -512,9 +492,8 @@ export default function ModalDemoPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button onClick={() => deleteModal.openModal({ itemName: "Campaign #1" })}>
-            Delete Item (Hook Example)
-          </Button>
+          <Button onClick={() => <span>deleteModal.openModal({ itemName: "Campaign #1" })}>
+            Delete Item (Hook Example)</span></Button>
 
           <ConfirmationModal
             open={deleteModal.open}
@@ -533,8 +512,7 @@ export default function ModalDemoPage() {
               deleteModal.closeModal()
               console.log("Item deleted:", deleteModal.data?.itemName)
             }}
-          />
-        </CardContent>
+          /></span></CardContent>
       </Card>
 
       {/* Features Overview */}

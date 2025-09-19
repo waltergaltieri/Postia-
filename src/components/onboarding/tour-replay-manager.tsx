@@ -128,20 +128,20 @@ export default function TourReplayManager({ className, onClose }: TourReplayMana
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />
+        return <CheckCircle className="w-4 h-4 text-success-600" />
       case 'skipped':
-        return <AlertCircle className="w-4 h-4 text-yellow-500" />
+        return <AlertCircle className="w-4 h-4 text-warning-600" />
       default:
-        return <Info className="w-4 h-4 text-gray-500" />
+        return <Info className="w-4 h-4 text-muted-foreground" />
     }
   }
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge className="bg-green-100 text-green-800">Completed</Badge>
+        return <Badge className="bg-success-100 text-success-800">Completed</Badge>
       case 'skipped':
-        return <Badge className="bg-yellow-100 text-yellow-800">Skipped</Badge>
+        return <Badge className="bg-warning-100 text-warning-800">Skipped</Badge>
       default:
         return <Badge variant="outline">Unknown</Badge>
     }
@@ -233,7 +233,7 @@ export default function TourReplayManager({ className, onClose }: TourReplayMana
       {/* Replayable Tours List */}
       {replayableTours.length === 0 ? (
         <Card className="p-8 text-center">
-          <RotateCcw className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <RotateCcw className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No tours to replay</h3>
           <p className="text-muted-foreground">
             Complete some tours first to see them here for replay

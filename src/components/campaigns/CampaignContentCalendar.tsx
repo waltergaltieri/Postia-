@@ -81,9 +81,9 @@ const contentTypeIcons = {
 
 const statusColors = {
   draft: 'bg-gray-100 text-gray-800',
-  approved: 'bg-blue-100 text-blue-800',
-  scheduled: 'bg-yellow-100 text-yellow-800',
-  published: 'bg-green-100 text-green-800',
+  approved: 'bg-info-100 text-info-800',
+  scheduled: 'bg-warning-100 text-warning-800',
+  published: 'bg-success-100 text-success-800',
 };
 
 export default function CampaignContentCalendar({ campaignId }: { campaignId: string }) {
@@ -198,7 +198,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
       <div className="space-y-6">
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
-            <Calendar className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+            <Calendar className="h-8 w-8 mx-auto text-muted-foreground mb-4" />
             <p className="text-gray-600">Loading campaign content...</p>
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <FileText className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-info-600" />
               <div>
                 <p className="text-sm font-medium">Total Posts</p>
                 <p className="text-2xl font-bold">{summary?.total || 0}</p>
@@ -225,7 +225,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-success-600" />
               <div>
                 <p className="text-sm font-medium">Published</p>
                 <p className="text-2xl font-bold">{summary?.byStatus.published || 0}</p>
@@ -237,7 +237,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Clock className="h-5 w-5 text-yellow-500" />
+              <Clock className="h-5 w-5 text-warning-600" />
               <div>
                 <p className="text-sm font-medium">Scheduled</p>
                 <p className="text-2xl font-bold">{summary?.byStatus.scheduled || 0}</p>
@@ -249,7 +249,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
-              <Edit className="h-5 w-5 text-gray-500" />
+              <Edit className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium">Drafts</p>
                 <p className="text-2xl font-bold">{summary?.byStatus.draft || 0}</p>
@@ -324,13 +324,11 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
               </SelectContent>
             </Select>
 
-            <Button variant="outline" onClick={() => setFilters({ platform: '', contentType: '', status: '' })}>
-              Clear Filters
-            </Button>
+            <Button variant="outline" onClick={() => <span>setFilters({ platform: '', contentType: '', status: '' })}>
+              Clear Filters</span></Button>
           </div>
 
-          <Tabs value={viewMode} onValueChange={(value: string) => setViewMode(value as 'calendar' | 'list')}>
-            <TabsList>
+          <Tabs value={viewMode} onValueChange={(value: string) => <span>setViewMode(value as 'calendar' | 'list')}></span><TabsList>
               <TabsTrigger value="calendar">Calendar View</TabsTrigger>
               <TabsTrigger value="list">List View</TabsTrigger>
             </TabsList>
@@ -338,22 +336,20 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
             <TabsContent value="calendar" className="space-y-4">
               {/* Calendar Navigation */}
               <div className="flex items-center justify-between">
-                <Button variant="outline" onClick={() => navigateMonth('prev')}>
-                  ← Previous
-                </Button>
+                <Button variant="outline" onClick={() => <span>navigateMonth('prev')}>
+                  ← Previous</span></Button>
                 <h3 className="text-lg font-semibold">
                   {currentMonth.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
                 </h3>
-                <Button variant="outline" onClick={() => navigateMonth('next')}>
-                  Next →
-                </Button>
+                <Button variant="outline" onClick={() => <span>navigateMonth('next')}>
+                  Next →</span></Button>
               </div>
 
               {/* Calendar Grid */}
               <div className="grid grid-cols-7 gap-1">
                 {/* Day headers */}
                 {['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].map(day => (
-                  <div key={day} className="p-2 text-center text-sm font-medium text-gray-500 bg-gray-50">
+                  <div key={day} className="p-2 text-center text-sm font-medium text-muted-foreground bg-gray-50">
                     {day}
                   </div>
                 ))}
@@ -364,14 +360,14 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
                     key={index}
                     className={`min-h-24 p-1 border border-gray-200 ${
                       day.isCurrentMonth ? 'bg-white' : 'bg-gray-50'
-                    } ${day.publications.length > 0 ? 'cursor-pointer hover:bg-blue-50' : ''}`}
+                    } ${day.publications.length > 0 ? 'cursor-pointer hover:bg-info-50' : ''}`}
                     onClick={() => {
                       if (day.publications.length > 0) {
                         setSelectedDate(day.dateKey);
                       }
                     }}
                   >
-                    <div className={`text-sm ${day.isCurrentMonth ? 'text-gray-900' : 'text-gray-400'}`}>
+                    <div className={`text-sm ${day.isCurrentMonth ? 'text-gray-900' : 'text-muted-foreground'}`}>
                       {day.date.getDate()}
                     </div>
                     
@@ -387,7 +383,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
                       ))}
                       
                       {day.publications.length > 3 && (
-                        <div className="text-xs text-gray-500 text-center">
+                        <div className="text-xs text-muted-foreground text-center">
                           +{day.publications.length - 3} more
                         </div>
                       )}
@@ -410,7 +406,7 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
                             <Badge className={statusColors[publication.status]}>
                               {publication.status}
                             </Badge>
-                            <span className="text-sm text-gray-500">
+                            <span className="text-sm text-muted-foreground">
                               {publication.scheduledDate ? formatDate(new Date(publication.scheduledDate)) : 'No date'}
                             </span>
                           </div>
@@ -445,9 +441,8 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => setSelectedPublication(publication)}
-                          >
-                            <Eye className="h-4 w-4" />
+                            onClick={() => <span>setSelectedPublication(publication)}
+                          ></span><Eye className="h-4 w-4" />
                           </Button>
                           <Button variant="outline" size="sm">
                             <Edit className="h-4 w-4" />
@@ -519,17 +514,11 @@ export default function CampaignContentCalendar({ campaignId }: { campaignId: st
 
               <div className="flex justify-end space-x-2">
                 <Button variant="outline">
-                  <Edit className="h-4 w-4 mr-2" />
-                  Edit
-                </Button>
+                  <Edit className="h-4 w-4 mr-2" /> <span>Edit</span></Button>
                 <Button variant="outline">
-                  <Download className="h-4 w-4 mr-2" />
-                  Download
-                </Button>
+                  <Download className="h-4 w-4 mr-2" /> <span>Download</span></Button>
                 <Button>
-                  <Share className="h-4 w-4 mr-2" />
-                  Schedule
-                </Button>
+                  <Share className="h-4 w-4 mr-2" /> <span>Schedule</span></Button>
               </div>
             </div>
           )}

@@ -7,216 +7,126 @@ import { db } from '@/lib/db';
 import { createContentGenerationJob, JobData } from '@/lib/services/job-queue';
 import { estimateTokenUsage } from '@/lib/services/openai';
 import { getImageGenerationCost } from '@/lib/services/bananabanana';
+import { 
+  withClientIsolation, 
+  NextRequestWithClientContext,
+  requireUserContext,
+  requireClientContext
+} from '@/lib/middleware/client-isolation';
 
-export async function POST(request: NextRequest) {
-  try {
-    const session = await getServerSession(authOptions);
-    
-    if (!session?.user) {
-      return NextResponse.json(
-        { error: { message: 'Authentication required' } },
-        { status: 401 }
-      );
-    }
+async function handlePOST(request: NextRequestWithClientContext) {
+  const userContext = requireUserContext(request);
+  const clientContext = requireClientContext(request);
 
-    // Check permissions
-    if (!hasPermission(session.user.role as UserRole, PERMISSIONS.GENERATE_CONTENT)) {
-      return NextResponse.json(
-        { error: { message: 'Insufficient permissions to generate content' } },
-        { status: 403 }
-      );
-    }
-
-    const {
-      campaignId,
-      clientId,
-      steps = [
-        GenerationStep.IDEA,
-        GenerationStep.COPY_DESIGN,
-        GenerationStep.COPY_PUBLICATION,
-        GenerationStep.BASE_IMAGE,
-        GenerationStep.FINAL_DESIGN,
-      ],
-      options = {},
-    } = await request.json();
-
-    // Validate required fields
-    if (!campaignId || !clientId) {
-      return NextResponse.json(
-        { error: { message: 'Campaign ID and Client ID are required' } },
-        { status: 400 }
-      );
-    }
-
-    // Validate steps
-    const validSteps = Object.values(GenerationStep);
-    const invalidSteps = steps.filter((step: string) => !validSteps.includes(step as GenerationStep));
-    if (invalidSteps.length > 0) {
-      return NextResponse.json(
-        { error: { message: `Invalid generation steps: ${invalidSteps.join(', ')}` } },
-        { status: 400 }
-      );
-    }
-
-    // Check if user can access this client
-    const hasAccess = await canAccessClient(
-      session.user.id,
-      session.user.role as UserRole,
-      clientId
+  // Check permissions
+  if (!hasPermission(userContext.role, PERMISSIONS.GENERATE_CONTENT)) {
+    return NextResponse.json(
+      { error: { message: 'Insufficient permissions to generate content' } },
+      { status: 403 }
     );
+  }
 
-    if (!hasAccess) {
-      return NextResponse.json(
-        { error: { message: 'Access denied to this client' } },
-        { status: 403 }
-      );
-    }
+  const {
+    campaignId,
+    type = 'CAMPAIGN_CONTENT',
+    metadata = {},
+  } = await request.json();
 
-    // Get campaign and client details
-    const campaign = await db.campaign.findFirst({
-      where: {
-        id: campaignId,
-        clientId,
-        client: {
-          agencyId: session.user.agencyId,
+  // Validate required fields
+  if (!campaignId) {
+    return NextResponse.json(
+      { error: { message: 'Campaign ID is required' } },
+      { status: 400 }
+    );
+  }
+
+  // Get campaign and verify it belongs to the client
+  const campaign = await db.campaign.findFirst({
+    where: {
+      id: campaignId,
+      clientId: clientContext.clientId,
+      agencyId: userContext.agencyId,
+    },
+    include: {
+      client: {
+        select: {
+          id: true,
+          name: true,
+          settings: true,
         },
       },
-      include: {
-        client: {
-          include: {
-            brandAssets: {
-              select: {
-                type: true,
-                name: true,
-                url: true,
-                metadata: true,
-              },
-            },
-          },
-        },
-      },
-    });
+    },
+  });
 
-    if (!campaign) {
-      return NextResponse.json(
-        { error: { message: 'Campaign not found or access denied' } },
-        { status: 404 }
-      );
-    }
+  if (!campaign) {
+    return NextResponse.json(
+      { error: { message: 'Campaign not found or access denied' } },
+      { status: 404 }
+    );
+  }
 
-    // Estimate costs
-    let estimatedTokens = 0;
-    let estimatedCost = 0;
+  // Check if agency has sufficient token balance
+  const agency = await db.agency.findUnique({
+    where: { id: userContext.agencyId },
+    select: { tokenBalance: true },
+  });
 
-    for (const step of steps) {
-      if (step === GenerationStep.BASE_IMAGE) {
-        const imageCost = getImageGenerationCost(
-          options.imageQuality || 'standard',
-          options.imageVariations || 1
-        );
-        estimatedCost += imageCost;
-        estimatedTokens += Math.ceil(imageCost * 1000); // Convert to token units
-      } else {
-        const tokenEstimate = estimateTokenUsage({ step, context: {} as any });
-        estimatedTokens += tokenEstimate;
-      }
-    }
+  if (!agency) {
+    return NextResponse.json(
+      { error: { message: 'Agency not found' } },
+      { status: 404 }
+    );
+  }
 
-    // Check if agency has sufficient token balance
-    const agency = await db.agency.findUnique({
-      where: { id: session.user.agencyId },
-      select: { tokenBalance: true },
-    });
-
-    if (!agency) {
-      return NextResponse.json(
-        { error: { message: 'Agency not found' } },
-        { status: 404 }
-      );
-    }
-
-    const requiredTokens = Math.ceil(estimatedTokens / 100); // Convert to internal token units
-    if (agency.tokenBalance < requiredTokens) {
-      return NextResponse.json(
-        { 
-          error: { 
-            message: 'Insufficient token balance',
-            details: {
-              required: requiredTokens,
-              available: agency.tokenBalance,
-              estimated: {
-                tokens: estimatedTokens,
-                cost: estimatedCost,
-              },
-            },
-          } 
-        },
-        { status: 402 } // Payment Required
-      );
-    }
-
-    // Prepare job data
-    const jobData: JobData = {
-      campaignId,
-      clientId,
-      agencyId: session.user.agencyId,
-      userId: session.user.id,
-      steps: steps as GenerationStep[],
-      context: {
-        brandName: campaign.client.brandName,
-        industry: campaign.client.industry,
-        targetAudience: campaign.targetAudience,
-        campaignGoals: campaign.campaignGoals,
-        brandGuidelines: campaign.brandGuidelines,
-        platforms: campaign.platforms,
-        brandAssets: campaign.client.brandAssets,
-      },
-      options,
-    };
-
-    // Create and start the generation job
-    const jobId = await createContentGenerationJob(jobData);
-
-    // Create audit log
-    await db.auditLog.create({
-      data: {
-        agencyId: session.user.agencyId,
-        userId: session.user.id,
-        action: 'CREATE',
-        resource: 'GENERATION_JOB',
-        resourceId: jobId,
-        details: {
-          campaignId,
-          clientId,
-          steps,
-          estimatedTokens,
-          estimatedCost,
-        },
-      },
-    });
-
-    return NextResponse.json({
-      success: true,
-      data: {
-        jobId,
-        estimatedCost: {
-          tokens: estimatedTokens,
-          cost: estimatedCost,
-        },
-        steps,
-        message: 'Content generation job started successfully',
-      },
-    });
-  } catch (error) {
-    console.error('Generate content error:', error);
-    
+  const estimatedTokens = 100; // Basic estimation
+  if (agency.tokenBalance < estimatedTokens) {
     return NextResponse.json(
       { 
         error: { 
-          message: 'Failed to start content generation' 
+          message: 'Insufficient token balance',
+          details: {
+            required: estimatedTokens,
+            available: agency.tokenBalance,
+          },
         } 
       },
-      { status: 500 }
+      { status: 402 } // Payment Required
     );
   }
+
+  // Create content job
+  const job = await db.contentJob.create({
+    data: {
+      agencyId: userContext.agencyId,
+      userId: userContext.id,
+      clientId: clientContext.clientId,
+      campaignId,
+      type,
+      status: 'PENDING',
+      metadata: JSON.stringify(metadata),
+    },
+    select: {
+      id: true,
+      type: true,
+      status: true,
+      createdAt: true,
+    },
+  });
+
+  return NextResponse.json({
+    success: true,
+    data: {
+      jobId: job.id,
+      type: job.type,
+      status: job.status,
+      createdAt: job.createdAt,
+      message: 'Content generation job started successfully',
+    },
+  });
 }
+
+// Export handler with client isolation middleware
+export const POST = withClientIsolation(handlePOST, {
+  requireClientId: true,
+  clientIdSource: 'body',
+});

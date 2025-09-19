@@ -1,0 +1,295 @@
+/* Client Theme CSS Custom Properties */
+
+:root {
+  /* Default theme flag */
+  --client-theme-active: 0;
+  
+  /* Client theme colors (will be set dynamically) */
+  --client-primary: hsl(222.2 84% 4.9%);
+  --client-secondary: hsl(210 40% 96%);
+  --client-accent: hsl(210 40% 96%);
+  --client-background: hsl(0 0% 100%);
+  --client-foreground: hsl(222.2 84% 4.9%);
+  --client-muted: hsl(210 40% 96%);
+  --client-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --client-border: hsl(214.3 31.8% 91.4%);
+  --client-input: hsl(214.3 31.8% 91.4%);
+  --client-ring: hsl(222.2 84% 4.9%);
+  
+  /* Brand-specific colors */
+  --client-brand-primary: hsl(222.2 84% 4.9%);
+  --client-brand-secondary: hsl(210 40% 96%);
+  --client-brand-accent: hsl(210 40% 96%);
+  
+  /* Client theme gradients */
+  --client-gradient-primary: linear-gradient(135deg, var(--client-brand-primary), var(--client-brand-secondary));
+  --client-gradient-accent: linear-gradient(135deg, var(--client-brand-accent), var(--client-brand-primary));
+  --client-gradient-muted: linear-gradient(135deg, var(--client-muted), var(--client-secondary));
+}
+
+/* Client Theme Utility Classes */
+
+/* Background colors */
+.client-bg-primary {
+  background-color: var(--client-brand-primary);
+}
+
+.client-bg-secondary {
+  background-color: var(--client-brand-secondary);
+}
+
+.client-bg-accent {
+  background-color: var(--client-brand-accent);
+}
+
+.client-bg-gradient-primary {
+  background: var(--client-gradient-primary);
+}
+
+.client-bg-gradient-accent {
+  background: var(--client-gradient-accent);
+}
+
+/* Text colors */
+.client-text-primary {
+  color: var(--client-brand-primary);
+}
+
+.client-text-secondary {
+  color: var(--client-brand-secondary);
+}
+
+.client-text-accent {
+  color: var(--client-brand-accent);
+}
+
+/* Border colors */
+.client-border-primary {
+  border-color: var(--client-brand-primary);
+}
+
+.client-border-secondary {
+  border-color: var(--client-brand-secondary);
+}
+
+.client-border-accent {
+  border-color: var(--client-brand-accent);
+}
+
+/* Client-themed components */
+.client-themed-button {
+  background-color: var(--client-brand-primary);
+  color: white;
+  border: 1px solid var(--client-brand-primary);
+  transition: all 0.2s ease;
+}
+
+.client-themed-button:hover {
+  background-color: var(--client-brand-secondary);
+  border-color: var(--client-brand-secondary);
+}
+
+.client-themed-button.outline {
+  background-color: transparent;
+  color: var(--client-brand-primary);
+  border: 1px solid var(--client-brand-primary);
+}
+
+.client-themed-button.outline:hover {
+  background-color: var(--client-brand-primary);
+  color: white;
+}
+
+.client-themed-badge {
+  background-color: var(--client-brand-primary);
+  color: white;
+}
+
+.client-themed-badge.outline {
+  background-color: transparent;
+  color: var(--client-brand-primary);
+  border: 1px solid var(--client-brand-primary);
+}
+
+.client-themed-badge.secondary {
+  background-color: var(--client-brand-secondary);
+  color: var(--client-brand-primary);
+}
+
+/* Client workspace specific styles */
+.client-workspace {
+  --primary: var(--client-brand-primary);
+  --secondary: var(--client-brand-secondary);
+  --accent: var(--client-brand-accent);
+}
+
+.client-workspace .client-header {
+  background: var(--client-gradient-primary);
+  color: white;
+}
+
+.client-workspace .client-nav-item.active {
+  background-color: var(--client-brand-primary);
+  color: white;
+}
+
+.client-workspace .client-nav-item:hover {
+  background-color: var(--client-brand-secondary);
+  color: var(--client-brand-primary);
+}
+
+/* Client branding elements */
+.client-brand-indicator {
+  position: relative;
+}
+
+.client-brand-indicator::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--client-gradient-primary);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.client-brand-colors {
+  display: flex;
+  gap: 2px;
+}
+
+.client-brand-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Client logo integration */
+.client-logo {
+  max-height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.client-logo.small {
+  max-height: 20px;
+}
+
+.client-logo.large {
+  max-height: 48px;
+}
+
+/* Client theme animations */
+@keyframes client-theme-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.client-theme-pulse {
+  animation: client-theme-pulse 2s ease-in-out infinite;
+}
+
+/* Client workspace layout adjustments */
+.client-workspace-layout {
+  --sidebar-bg: var(--client-muted);
+  --header-bg: var(--client-background);
+  --content-bg: var(--client-background);
+}
+
+.client-workspace-layout .sidebar {
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--client-border);
+}
+
+.client-workspace-layout .header {
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--client-border);
+}
+
+.client-workspace-layout .content {
+  background-color: var(--content-bg);
+}
+
+/* Responsive client theme adjustments */
+@media (max-width: 768px) {
+  .client-workspace-layout {
+    --sidebar-width: 100%;
+  }
+  
+  .client-brand-indicator {
+    scale: 0.9;
+  }
+  
+  .client-logo {
+    max-height: 24px;
+  }
+}
+
+/* Dark mode client theme support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --client-background: hsl(222.2 84% 4.9%);
+    --client-foreground: hsl(210 40% 98%);
+    --client-muted: hsl(217.2 32.6% 17.5%);
+    --client-muted-foreground: hsl(215 20.2% 65.1%);
+    --client-border: hsl(217.2 32.6% 17.5%);
+    --client-input: hsl(217.2 32.6% 17.5%);
+  }
+  
+  .client-themed-button {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .client-workspace-layout .sidebar {
+    background-color: hsl(222.2 84% 4.9%);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .client-themed-button {
+    border-width: 2px;
+  }
+  
+  .client-brand-indicator::before {
+    opacity: 0.2;
+  }
+  
+  .client-brand-color {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .client-theme-pulse {
+    animation: none;
+  }
+  
+  .client-themed-button {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .client-workspace-layout {
+    --sidebar-bg: white;
+    --header-bg: white;
+    --content-bg: white;
+  }
+  
+  .client-themed-button {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+}

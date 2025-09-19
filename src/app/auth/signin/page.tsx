@@ -75,9 +75,9 @@ export default function SignInPage() {
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Demo Credentials Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-900 mb-2">Demo Credentials</h3>
-            <div className="text-sm text-blue-800 space-y-1">
+          <div className="bg-info-50 border border-info-200 rounded-lg p-4">
+            <h3 className="font-semibold text-info-900 mb-2">Demo Credentials</h3>
+            <div className="text-sm text-info-800 space-y-1">
               <p><strong>Admin:</strong> admin@demo.com / password123</p>
               <p><strong>Manager:</strong> manager@demo.com / password123</p>
               <p><strong>User:</strong> user@demo.com / password123</p>
@@ -109,16 +109,14 @@ export default function SignInPage() {
               />
             </div>
             {error && (
-              <div className="text-red-600 text-sm">{error}</div>
+              <div className="text-error-600 text-sm">{error}</div>
             )}
             <Button
               type="submit"
               disabled={credentialsLoading}
               className="w-full"
               size="lg"
-            >
-              {credentialsLoading ? (
-                <>
+            > <span>{credentialsLoading ? (</span><>
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                   Signing in...
                 </>
@@ -133,7 +131,7 @@ export default function SignInPage() {
               <Separator className="w-full" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-gray-500">Or continue with</span>
+              <span className="bg-white px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
 
@@ -144,9 +142,7 @@ export default function SignInPage() {
             variant="outline"
             className="w-full"
             size="lg"
-          >
-            {loading ? (
-              <>
+          > <span>{loading ? (</span><>
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 mr-2"></div>
                 Signing in...
               </>
@@ -163,7 +159,7 @@ export default function SignInPage() {
             )}
           </Button>
           
-          <div className="text-center text-sm text-gray-500">
+          <div className="text-center text-sm text-muted-foreground">
             By signing in, you agree to our Terms of Service and Privacy Policy
           </div>
         </CardContent>

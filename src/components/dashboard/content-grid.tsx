@@ -230,9 +230,7 @@ function ContentFilters({
                       isMobile && "w-full touch-target justify-center",
                       filters.status.includes(option.value) && option.color
                     )}
-                  >
-                    {option.label}
-                  </Button>
+                  > <span>{option.label}</span></Button>
                 </TouchFeedback>
               ))}
             </div>
@@ -258,9 +256,7 @@ function ContentFilters({
                       "text-xs",
                       isMobile && "w-full touch-target justify-center"
                     )}
-                  >
-                    {option.label}
-                  </Button>
+                  > <span>{option.label}</span></Button>
                 </TouchFeedback>
               ))}
             </div>
@@ -286,9 +282,7 @@ function ContentFilters({
                       "text-xs",
                       isMobile && "w-full touch-target justify-center"
                     )}
-                  >
-                    {option.label}
-                  </Button>
+                  > <span>{option.label}</span></Button>
                 </TouchFeedback>
               ))}
             </div>
@@ -300,7 +294,7 @@ function ContentFilters({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onFiltersChange({
+                onClick={() => <span>onFiltersChange({
                   search: filters.search,
                   status: [],
                   contentType: [],
@@ -309,8 +303,7 @@ function ContentFilters({
                 })}
                 className="text-xs text-muted-foreground hover:text-foreground"
               >
-                Limpiar filtros
-              </Button>
+                Limpiar filtros</span></Button>
             </div>
           )}
         </div>
@@ -449,7 +442,7 @@ export function ContentGrid({
   }
   
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("stack-spacing-lg", className)}>
       {/* Filters */}
       {onFiltersChange && (
         <ContentFilters filters={filters} onFiltersChange={onFiltersChange} />
@@ -481,9 +474,7 @@ export function ContentGrid({
               size="sm"
               onClick={handleSelectAll}
               className="text-xs"
-            >
-              {selectedItems.length === visibleItems.length ? 'Deseleccionar todo' : 'Seleccionar todo'}
-            </Button>
+            > <span>{selectedItems.length === visibleItems.length ? 'Deseleccionar todo' : 'Seleccionar todo'}</span></Button>
           )}
         </div>
         
@@ -493,26 +484,23 @@ export function ContentGrid({
             <Button
               variant={currentLayout === 'masonry' ? 'default' : 'ghost'}
               size="icon-sm"
-              onClick={() => setCurrentLayout('masonry')}
+              onClick={() => <span>setCurrentLayout('masonry')}
               className="w-8 h-8"
-            >
-              <Grid3X3 className="w-4 h-4" />
+            ></span><Grid3X3 className="w-4 h-4" />
             </Button>
             <Button
               variant={currentLayout === 'grid' ? 'default' : 'ghost'}
               size="icon-sm"
-              onClick={() => setCurrentLayout('grid')}
+              onClick={() => <span>setCurrentLayout('grid')}
               className="w-8 h-8"
-            >
-              <Grid2X2 className="w-4 h-4" />
+            ></span><Grid2X2 className="w-4 h-4" />
             </Button>
             <Button
               variant={currentLayout === 'list' ? 'default' : 'ghost'}
               size="icon-sm"
-              onClick={() => setCurrentLayout('list')}
+              onClick={() => <span>setCurrentLayout('list')}
               className="w-8 h-8"
-            >
-              <List className="w-4 h-4" />
+            ></span><List className="w-4 h-4" />
             </Button>
           </div>
         )}
@@ -520,8 +508,7 @@ export function ContentGrid({
         {/* Mobile layout switcher */}
         {isMobile && (
           <div className="flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-            <TouchFeedback onTap={() => setCurrentLayout('grid')} hapticFeedback>
-              <Button
+            <TouchFeedback onTap={() => <span>setCurrentLayout('grid')} hapticFeedback></span><Button
                 variant={currentLayout === 'grid' ? 'default' : 'ghost'}
                 size="icon-sm"
                 className="w-10 h-10 touch-target"
@@ -529,8 +516,7 @@ export function ContentGrid({
                 <Grid2X2 className="w-4 h-4" />
               </Button>
             </TouchFeedback>
-            <TouchFeedback onTap={() => setCurrentLayout('list')} hapticFeedback>
-              <Button
+            <TouchFeedback onTap={() => <span>setCurrentLayout('list')} hapticFeedback></span><Button
                 variant={currentLayout === 'list' ? 'default' : 'ghost'}
                 size="icon-sm"
                 className="w-10 h-10 touch-target"
@@ -576,7 +562,7 @@ export function ContentGrid({
             {onFiltersChange && (
               <Button
                 variant="outline"
-                onClick={() => onFiltersChange({
+                onClick={() => <span>onFiltersChange({
                   search: '',
                   status: [],
                   contentType: [],
@@ -584,8 +570,7 @@ export function ContentGrid({
                   dateRange: {}
                 })}
               >
-                Limpiar filtros
-              </Button>
+                Limpiar filtros</span></Button>
             )}
           </div>
         ) : (
@@ -626,7 +611,7 @@ export function ContentGrid({
             {/* Grid layout */}
             {currentLayout === 'grid' && (
               <div className={cn(
-                "grid gap-4",
+                "grid grid-spacing-standard",
                 isMobile ? "mobile-content-grid" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
               )}>
                 {visibleItems.map((item) => {
@@ -747,9 +732,8 @@ export function ContentGrid({
                         <Button
                           variant="ghost"
                           size="icon-sm"
-                          onClick={() => onItemAction?.(item.id, 'menu')}
-                        >
-                          <MoreHorizontal className="w-4 h-4" />
+                          onClick={() => <span>onItemAction?.(item.id, 'menu')}
+                        ></span><MoreHorizontal className="w-4 h-4" />
                         </Button>
                       )}
                     </div>
@@ -804,9 +788,7 @@ export function ContentGrid({
                     variant="outline"
                     onClick={loadMore}
                     className="text-sm"
-                  >
-                    Cargar más contenido
-                  </Button>
+                  > <span>Cargar más contenido</span></Button>
                 )}
               </div>
             )}

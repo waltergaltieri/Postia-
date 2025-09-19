@@ -1,16 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { NavigationProvider, useNavigation } from '@/components/navigation/navigation-context'
 import NavigationSidebar from '@/components/navigation/navigation-sidebar'
 import MobileHeader from '@/components/navigation/mobile-header'
 import MobileBottomNav from '@/components/navigation/mobile-bottom-nav'
 import Breadcrumbs from '@/components/navigation/breadcrumbs'
+import ClientSelector from '@/components/navigation/client-selector'
 import MainFlowIntegration from '@/components/integration/main-flow-integration'
 import PageTransitions from '@/components/integration/page-transitions'
 import { motion } from 'framer-motion'
 import { useMobile } from '@/hooks/use-mobile'
+import { cn } from '@/lib/utils'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -19,6 +21,7 @@ interface DashboardLayoutProps {
 function DashboardLayoutContent({ children }: DashboardLayoutProps) {
   const pathname = usePathname()
   const isMobile = useMobile()
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const {
     currentClient,
     setCurrentClient,
@@ -27,7 +30,13 @@ function DashboardLayoutContent({ children }: DashboardLayoutProps) {
     clients,
     loading,
     workflowStep,
-    totalSteps
+    totalSteps,
+    // Enhanced client management features
+    selectedClientId,
+    clientWorkspaceMode,
+    switchToClient,
+    switchToAdminDashboard,
+    isClientDataIsolated
   } = useNavigation()
 
   // Extract client/campaign from URL if present
@@ -58,8 +67,14 @@ function DashboardLayoutContent({ children }: DashboardLayoutProps) {
     }
   }, [pathname, clients, currentClient?.id, currentCampaign?.id, setCurrentClient, setCurrentCampaign])
 
-  const handleClientChange = (client: any) => {
-    setCurrentClient(client)
+  const handleClientChange = async (client: any) => {
+    try {
+      await switchToClient(client.id)
+    } catch (error) {
+      console.error('Error switching client:', error)
+      // Fallback to legacy method if enhanced switching fails
+      setCurrentClient(client)
+    }
   }
 
   // Determine if we're in a workflow that should show progress
@@ -105,6 +120,7 @@ function DashboardLayoutContent({ children }: DashboardLayoutProps) {
         currentClient={currentClient}
         clients={clients}
         onClientChange={handleClientChange}
+        onCollapseChange={setSidebarCollapsed}
       />
 
       {/* Main Content Area */}

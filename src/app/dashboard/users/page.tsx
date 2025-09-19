@@ -187,11 +187,11 @@ export default function UsersPage() {
   const getRoleColor = (role: UserRole) => {
     switch (role) {
       case UserRole.OWNER:
-        return 'bg-red-100 text-red-800';
+        return 'bg-error-100 text-error-800';
       case UserRole.MANAGER:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       case UserRole.COLLABORATOR:
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -199,19 +199,19 @@ export default function UsersPage() {
 
   const getInvitationStatus = (invitation: Invitation) => {
     if (invitation.usedAt) {
-      return { text: 'Accepted', color: 'bg-green-100 text-green-800' };
+      return { text: 'Accepted', color: 'bg-success-100 text-success-800' };
     }
     if (new Date(invitation.expiresAt) < new Date()) {
-      return { text: 'Expired', color: 'bg-red-100 text-red-800' };
+      return { text: 'Expired', color: 'bg-error-100 text-error-800' };
     }
-    return { text: 'Pending', color: 'bg-yellow-100 text-yellow-800' };
+    return { text: 'Pending', color: 'bg-warning-100 text-warning-800' };
   };
 
   if (isLoading) {
     return (
       <ProtectedRoute allowedRoles={[UserRole.OWNER, UserRole.MANAGER]}>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
         </div>
       </ProtectedRoute>
     );
@@ -233,7 +233,7 @@ export default function UsersPage() {
               {checkPermission(PERMISSIONS.INVITE_USERS) && (
                 <button
                   onClick={() => setShowInviteModal(true)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Invite User
                 </button>
@@ -241,13 +241,13 @@ export default function UsersPage() {
             </div>
 
             {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                 {error}
               </div>
             )}
 
             {success && (
-              <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                 {success}
               </div>
             )}
@@ -260,8 +260,8 @@ export default function UsersPage() {
                     onClick={() => setActiveTab('users')}
                     className={`py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === 'users'
-                        ? 'border-blue-500 text-blue-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        ? 'border-info-500 text-info-600'
+                        : 'border-transparent text-muted-foreground hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
                     Team Members ({users.length})
@@ -270,8 +270,8 @@ export default function UsersPage() {
                     onClick={() => setActiveTab('invitations')}
                     className={`py-2 px-1 border-b-2 font-medium text-sm ${
                       activeTab === 'invitations'
-                        ? 'border-blue-500 text-blue-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        ? 'border-info-500 text-info-600'
+                        : 'border-transparent text-muted-foreground hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
                     Invitations ({invitations.length})
@@ -287,22 +287,22 @@ export default function UsersPage() {
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           User
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Role
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Status
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Joined
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Assigned Clients
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
@@ -315,7 +315,7 @@ export default function UsersPage() {
                               <div className="text-sm font-medium text-gray-900">
                                 {teamUser.name}
                               </div>
-                              <div className="text-sm text-gray-500">
+                              <div className="text-sm text-muted-foreground">
                                 {teamUser.email}
                               </div>
                             </div>
@@ -327,15 +327,15 @@ export default function UsersPage() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                              teamUser.emailVerified ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                              teamUser.emailVerified ? 'bg-success-100 text-success-800' : 'bg-warning-100 text-warning-800'
                             }`}>
                               {teamUser.emailVerified ? 'Verified' : 'Unverified'}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                             {new Date(teamUser.createdAt).toLocaleDateString()}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                             {teamUser.assignedClients.length > 0 ? (
                               <div className="space-y-1">
                                 {teamUser.assignedClients.slice(0, 2).map((client) => (
@@ -344,20 +344,20 @@ export default function UsersPage() {
                                   </div>
                                 ))}
                                 {teamUser.assignedClients.length > 2 && (
-                                  <div className="text-xs text-gray-400">
+                                  <div className="text-xs text-muted-foreground">
                                     +{teamUser.assignedClients.length - 2} more
                                   </div>
                                 )}
                               </div>
                             ) : (
-                              <span className="text-gray-400">No clients assigned</span>
+                              <span className="text-muted-foreground">No clients assigned</span>
                             )}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             {teamUser.id !== user?.id && checkPermission(PERMISSIONS.MANAGE_USERS) && (
                               <button
                                 onClick={() => handleDeleteUser(teamUser.id)}
-                                className="text-red-600 hover:text-red-900"
+                                className="text-error-600 hover:text-error-900"
                               >
                                 Remove
                               </button>
@@ -378,22 +378,22 @@ export default function UsersPage() {
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Email
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Role
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Status
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Sent By
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Expires
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                           Actions
                         </th>
                       </tr>
@@ -416,17 +416,17 @@ export default function UsersPage() {
                                 {status.text}
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                               {invitation.sender.name}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                               {new Date(invitation.expiresAt).toLocaleDateString()}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                               {!invitation.usedAt && new Date(invitation.expiresAt) > new Date() && (
                                 <button
                                   onClick={() => handleResendInvitation(invitation.id)}
-                                  className="text-blue-600 hover:text-blue-900"
+                                  className="text-info-600 hover:text-info-900"
                                 >
                                   Resend
                                 </button>
@@ -434,7 +434,7 @@ export default function UsersPage() {
                               {!invitation.usedAt && (
                                 <button
                                   onClick={() => handleCancelInvitation(invitation.id)}
-                                  className="text-red-600 hover:text-red-900"
+                                  className="text-error-600 hover:text-error-900"
                                 >
                                   Cancel
                                 </button>
@@ -468,7 +468,7 @@ export default function UsersPage() {
                           required
                           value={inviteForm.email}
                           onChange={(e) => setInviteForm({ ...inviteForm, email: e.target.value })}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           placeholder="Enter email address"
                         />
                       </div>
@@ -480,7 +480,7 @@ export default function UsersPage() {
                         <select
                           value={inviteForm.role}
                           onChange={(e) => setInviteForm({ ...inviteForm, role: e.target.value as UserRole })}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                         >
                           <option value={UserRole.COLLABORATOR}>Collaborator</option>
                           <option value={UserRole.MANAGER}>Manager</option>
@@ -500,7 +500,7 @@ export default function UsersPage() {
                         </button>
                         <button
                           type="submit"
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                          className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
                         >
                           Send Invitation
                         </button>

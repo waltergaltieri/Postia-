@@ -91,7 +91,7 @@ export default function AgencySettingsPage() {
     return (
       <ProtectedRoute allowedRoles={[UserRole.OWNER]}>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
         </div>
       </ProtectedRoute>
     );
@@ -110,13 +110,13 @@ export default function AgencySettingsPage() {
             </div>
 
             {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                 {error}
               </div>
             )}
 
             {success && (
-              <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                 {success}
               </div>
             )}
@@ -137,12 +137,12 @@ export default function AgencySettingsPage() {
                         type="text"
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
-                        className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                         placeholder="Enter agency name"
                       />
                       <button
                         onClick={handleSave}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         Save
                       </button>
@@ -159,7 +159,7 @@ export default function AgencySettingsPage() {
                       {checkPermission(PERMISSIONS.MANAGE_AGENCY) && (
                         <button
                           onClick={() => setIsEditing(true)}
-                          className="text-blue-600 hover:text-blue-800 text-sm"
+                          className="text-info-600 hover:text-info-800 text-sm"
                         >
                           Edit
                         </button>
@@ -173,7 +173,7 @@ export default function AgencySettingsPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Subscription Plan
                     </label>
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-info-100 text-info-800">
                       {agency?.subscriptionPlan}
                     </span>
                   </div>
@@ -200,7 +200,7 @@ export default function AgencySettingsPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Agency ID
                     </label>
-                    <span className="text-gray-500 font-mono text-sm">{agency?.id}</span>
+                    <span className="text-muted-foreground font-mono text-sm">{agency?.id}</span>
                   </div>
                 </div>
               </div>
@@ -214,24 +214,24 @@ export default function AgencySettingsPage() {
               <div className="px-6 py-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">
+                    <div className="text-3xl font-bold text-info-600">
                       {agency?._count.users || 0}
                     </div>
-                    <div className="text-sm text-gray-500">Team Members</div>
+                    <div className="text-sm text-muted-foreground">Team Members</div>
                   </div>
 
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">
+                    <div className="text-3xl font-bold text-success-600">
                       {agency?._count.clients || 0}
                     </div>
-                    <div className="text-sm text-gray-500">Clients</div>
+                    <div className="text-sm text-muted-foreground">Clients</div>
                   </div>
 
                   <div className="text-center">
                     <div className="text-3xl font-bold text-purple-600">
                       0
                     </div>
-                    <div className="text-sm text-gray-500">Campaigns</div>
+                    <div className="text-sm text-muted-foreground">Campaigns</div>
                   </div>
                 </div>
               </div>

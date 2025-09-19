@@ -158,7 +158,7 @@ export function UsabilityTestingInterface({
               <Card className="h-full cursor-pointer hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-blue-600" />
+                    <Target className="h-5 w-5 text-info-600" />
                     {scenario.name}
                   </CardTitle>
                   <CardDescription>{scenario.description}</CardDescription>
@@ -177,12 +177,9 @@ export function UsabilityTestingInterface({
                     {scenario.tasks.length} tasks
                   </div>
                   <Button 
-                    onClick={() => startSession(scenario)}
+                    onClick={() => <span>startSession(scenario)}
                     className="w-full"
-                  >
-                    <Play className="h-4 w-4 mr-2" />
-                    Start Testing
-                  </Button>
+                  ></span><Play className="h-4 w-4 mr-2" /> <span>Start Testing</span></Button>
                 </CardContent>
               </Card>
             </motion.div>
@@ -192,7 +189,7 @@ export function UsabilityTestingInterface({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-green-600" />
+              <TrendingUp className="h-5 w-5 text-success-600" />
               Testing Guidelines
             </CardTitle>
           </CardHeader>
@@ -231,7 +228,7 @@ export function UsabilityTestingInterface({
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <Play className="h-5 w-5 text-green-600" />
+                <Play className="h-5 w-5 text-success-600" />
                 {selectedScenario?.name}
               </CardTitle>
               <CardDescription>
@@ -239,9 +236,7 @@ export function UsabilityTestingInterface({
               </CardDescription>
             </div>
             <Button variant="outline" onClick={endSession}>
-              <Square className="h-4 w-4 mr-2" />
-              End Session
-            </Button>
+              <Square className="h-4 w-4 mr-2" /> <span>End Session</span></Button>
           </div>
           <Progress value={progress} className="mt-4" />
         </CardHeader>
@@ -258,15 +253,15 @@ export function UsabilityTestingInterface({
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Target className="h-5 w-5 text-blue-600" />
+                <Target className="h-5 w-5 text-info-600" />
                 {currentTask.title}
               </CardTitle>
               <CardDescription>{currentTask.description}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-blue-900 mb-2">Expected Outcome:</h4>
-                <p className="text-blue-800">{currentTask.expectedOutcome}</p>
+              <div className="bg-info-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-info-900 mb-2">Expected Outcome:</h4>
+                <p className="text-info-800">{currentTask.expectedOutcome}</p>
               </div>
 
               {taskStartTime && (
@@ -278,40 +273,35 @@ export function UsabilityTestingInterface({
 
               <div className="flex gap-2 flex-wrap">
                 <Button
-                  onClick={() => completeCurrentTask(1)}
+                  onClick={() => <span>completeCurrentTask(1)}
                   variant="outline"
-                  className="text-red-600 border-red-200 hover:bg-red-50"
+                  className="text-error-600 border-error-200 hover:bg-error-50"
                 >
-                  Very Difficult (1/5)
-                </Button>
+                  Very Difficult (1/5)</span></Button>
                 <Button
-                  onClick={() => completeCurrentTask(2)}
+                  onClick={() => <span>completeCurrentTask(2)}
                   variant="outline"
                   className="text-orange-600 border-orange-200 hover:bg-orange-50"
                 >
-                  Difficult (2/5)
-                </Button>
+                  Difficult (2/5)</span></Button>
                 <Button
-                  onClick={() => completeCurrentTask(3)}
+                  onClick={() => <span>completeCurrentTask(3)}
                   variant="outline"
-                  className="text-yellow-600 border-yellow-200 hover:bg-yellow-50"
+                  className="text-warning-600 border-warning-200 hover:bg-warning-50"
                 >
-                  Moderate (3/5)
-                </Button>
+                  Moderate (3/5)</span></Button>
                 <Button
-                  onClick={() => completeCurrentTask(4)}
+                  onClick={() => <span>completeCurrentTask(4)}
                   variant="outline"
-                  className="text-blue-600 border-blue-200 hover:bg-blue-50"
+                  className="text-info-600 border-info-200 hover:bg-info-50"
                 >
-                  Easy (4/5)
-                </Button>
+                  Easy (4/5)</span></Button>
                 <Button
-                  onClick={() => completeCurrentTask(5)}
+                  onClick={() => <span>completeCurrentTask(5)}
                   variant="outline"
-                  className="text-green-600 border-green-200 hover:bg-green-50"
+                  className="text-success-600 border-success-200 hover:bg-success-50"
                 >
-                  Very Easy (5/5)
-                </Button>
+                  Very Easy (5/5)</span></Button>
               </div>
             </CardContent>
           </Card>
@@ -329,12 +319,11 @@ export function UsabilityTestingInterface({
           </CardHeader>
           <CardContent>
             <Button
-              onClick={() => setShowFeedbackForm(true)}
+              onClick={() => <span>setShowFeedbackForm(true)}
               className="w-full"
               variant="outline"
             >
-              Provide Feedback
-            </Button>
+              Provide Feedback</span></Button>
           </CardContent>
         </Card>
 
@@ -347,21 +336,19 @@ export function UsabilityTestingInterface({
           </CardHeader>
           <CardContent className="space-y-2">
             <Button
-              onClick={() => recordError('Navigation was confusing', 'navigation')}
+              onClick={() => <span>recordError('Navigation was confusing', 'navigation')}
               variant="outline"
               size="sm"
               className="w-full"
             >
-              Navigation Issue
-            </Button>
+              Navigation Issue</span></Button>
             <Button
-              onClick={() => recordError('Button/link did not work as expected', 'interaction')}
+              onClick={() => <span>recordError('Button/link did not work as expected', 'interaction')}
               variant="outline"
               size="sm"
               className="w-full"
             >
-              Interaction Issue
-            </Button>
+              Interaction Issue</span></Button>
           </CardContent>
         </Card>
       </div>
@@ -420,7 +407,7 @@ export function UsabilityTestingInterface({
                       <button
                         key={rating}
                         onClick={() => setFeedbackForm(prev => ({ ...prev, rating }))}
-                        className={`p-1 ${feedbackForm.rating >= rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                        className={`p-1 ${feedbackForm.rating >= rating ? 'text-warning-600' : 'text-gray-300'}`}
                       >
                         <Star className="h-5 w-5 fill-current" />
                       </button>
@@ -451,12 +438,9 @@ export function UsabilityTestingInterface({
               </div>
 
               <div className="flex gap-2 justify-end">
-                <Button variant="outline" onClick={() => setShowFeedbackForm(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={submitFeedback}>
-                  Submit Feedback
-                </Button>
+                <Button variant="outline" onClick={() => <span>setShowFeedbackForm(false)}>
+                  Cancel</span></Button>
+                <Button onClick={submitFeedback}> <span>Submit Feedback</span></Button>
               </div>
             </motion.div>
           </motion.div>

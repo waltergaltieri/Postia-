@@ -94,14 +94,14 @@ describe('TourHelpMenu', () => {
   })
 
   it('renders help menu trigger button', () => {
-    render(<TourHelpMenu />)
+    render(<TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     expect(button).toBeInTheDocument()
   })
 
   it('opens tour library when clicked', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -112,7 +112,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('displays available tours when opened', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -124,7 +124,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('filters tours by search query', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -143,7 +143,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('filters tours by category', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -162,7 +162,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('starts tour when start button is clicked', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -188,7 +188,7 @@ describe('TourHelpMenu', () => {
       return { status: 'not_started' }
     })
 
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -200,7 +200,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('closes modal when backdrop is clicked', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -221,7 +221,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('closes modal when X button is clicked', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -239,7 +239,7 @@ describe('TourHelpMenu', () => {
   })
 
   it('displays tour duration correctly', async () => {
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -254,7 +254,7 @@ describe('TourHelpMenu', () => {
     // Make loadTour return a pending promise
     mockRegistry.loadTour.mockReturnValue(new Promise(() => {}))
 
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -267,7 +267,7 @@ describe('TourHelpMenu', () => {
   it('handles tour loading errors gracefully', async () => {
     mockRegistry.loadTour.mockRejectedValue(new Error('Failed to load tour'))
 
-    render(<TourHelpMenu />)
+    render(</span><TourHelpMenu /> <span>)
     
     const button = screen.getByRole('button', { name: /open tour help menu/i })
     fireEvent.click(button)
@@ -277,4 +277,4 @@ describe('TourHelpMenu', () => {
       expect(screen.queryByText('Loading tours...')).not.toBeInTheDocument()
     })
   })
-})
+})</span>

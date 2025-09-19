@@ -68,17 +68,17 @@ export const ColorPalette: Story = {
               <p className="text-xs text-muted-foreground">--destructive</p>
             </div>
             <div className="space-y-2">
-              <div className="w-full h-16 bg-green-500 rounded-lg"></div>
+              <div className="w-full h-16 bg-success-500 rounded-lg"></div>
               <p className="text-sm font-medium">Success</p>
               <p className="text-xs text-muted-foreground">Green 500</p>
             </div>
             <div className="space-y-2">
-              <div className="w-full h-16 bg-yellow-500 rounded-lg"></div>
+              <div className="w-full h-16 bg-warning-500 rounded-lg"></div>
               <p className="text-sm font-medium">Warning</p>
               <p className="text-xs text-muted-foreground">Yellow 500</p>
             </div>
             <div className="space-y-2">
-              <div className="w-full h-16 bg-blue-500 rounded-lg"></div>
+              <div className="w-full h-16 bg-info-500 rounded-lg"></div>
               <p className="text-sm font-medium">Info</p>
               <p className="text-xs text-muted-foreground">Blue 500</p>
             </div>
@@ -219,13 +219,13 @@ export const ComponentShowcase: Story = {
         <div className="mb-8">
           <h3 className="text-lg font-semibold mb-4">Botones</h3>
           <div className="flex flex-wrap gap-4">
-            <Button>Default</Button>
-            <Button variant="premium">Premium</Button>
-            <Button variant="gradient">Gradient</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
+            <Button> <span>Default</span></Button>
+            <Button variant="premium"> <span>Premium</span></Button>
+            <Button variant="gradient"> <span>Gradient</span></Button>
+            <Button variant="outline"> <span>Outline</span></Button>
+            <Button variant="secondary"> <span>Secondary</span></Button>
+            <Button variant="ghost"> <span>Ghost</span></Button>
+            <Button variant="destructive"> <span>Destructive</span></Button>
           </div>
         </div>
 

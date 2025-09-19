@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import '@/styles/client-theme.css'
 import SessionProvider from '@/components/providers/SessionProvider'
 import { Toaster } from '@/components/ui/toast'
 import { TourProvider } from '@/components/onboarding/tour-provider'
 import { NavigationProvider } from '@/components/navigation/navigation-context'
+import { ClientThemeProvider } from '@/components/providers/client-theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +25,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <SessionProvider>
           <NavigationProvider>
-            <TourProvider>
-              {children}
-              <Toaster />
-            </TourProvider>
+            <ClientThemeProvider>
+              <TourProvider>
+                {children}
+                <Toaster />
+              </TourProvider>
+            </ClientThemeProvider>
           </NavigationProvider>
         </SessionProvider>
       </body>

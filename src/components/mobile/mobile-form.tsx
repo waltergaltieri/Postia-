@@ -52,7 +52,7 @@ export const MobileInput = forwardRef<HTMLInputElement, MobileInputProps>(
               "mobile-form-input",
               Icon && "pl-10",
               showPasswordToggle && "pr-10",
-              error && "border-red-500 focus:border-red-500 focus:ring-red-500",
+              error && "border-error-500 focus:border-error-500 focus:ring-red-500",
               className
             )}
             {...props}
@@ -69,13 +69,9 @@ export const MobileInput = forwardRef<HTMLInputElement, MobileInputProps>(
                 variant="ghost"
                 size="sm"
                 className="h-auto p-0 hover:bg-transparent"
-              >
-                {showPassword ? (
-                  <EyeOff className="w-5 h-5 text-muted-foreground" />
+              > <span>{showPassword ? (</span><EyeOff className="w-5 h-5 text-muted-foreground" />
                 ) : (
-                  <Eye className="w-5 h-5 text-muted-foreground" />
-                )}
-              </Button>
+                  <Eye className="w-5 h-5 text-muted-foreground" /> <span>)}</span></Button>
             </TouchFeedback>
           )}
         </div>
@@ -84,7 +80,7 @@ export const MobileInput = forwardRef<HTMLInputElement, MobileInputProps>(
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm text-red-600"
+            className="text-sm text-error-600"
           >
             {error}
           </motion.p>
@@ -130,7 +126,7 @@ export const MobileTextarea = forwardRef<HTMLTextAreaElement, MobileTextareaProp
           className={cn(
             "mobile-form-input resize-none",
             autoResize && "min-h-[100px]",
-            error && "border-red-500 focus:border-red-500 focus:ring-red-500",
+            error && "border-error-500 focus:border-error-500 focus:ring-red-500",
             className
           )}
           {...props}
@@ -140,7 +136,7 @@ export const MobileTextarea = forwardRef<HTMLTextAreaElement, MobileTextareaProp
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm text-red-600"
+            className="text-sm text-error-600"
           >
             {error}
           </motion.p>
@@ -205,7 +201,7 @@ export function MobileSelect({
             variant="outline"
             className={cn(
               "w-full justify-between mobile-form-input",
-              error && "border-red-500",
+              error && "border-error-500",
               className
             )}
           >
@@ -255,7 +251,7 @@ export function MobileSelect({
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-red-600"
+          className="text-sm text-error-600"
         >
           {error}
         </motion.p>
@@ -341,9 +337,7 @@ export function MobileSubmitButton({
         isMobile && "w-full touch-target-large",
         className
       )}
-    >
-      {loading && (
-        <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
+    > <span>{loading && (</span><div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
       )}
       {children}
     </Button>

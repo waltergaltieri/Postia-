@@ -5,6 +5,7 @@ import { useAuth, usePermissions } from '@/hooks/useAuth';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import { PERMISSIONS } from '@/lib/permissions';
 import { CampaignStatus } from '@/generated/prisma';
+import { useNavigation, useClientManagement } from '@/components/navigation/navigation-context';
 import Link from 'next/link';
 
 interface Campaign {
@@ -32,8 +33,10 @@ interface Client {
 export default function CampaignsPage() {
   const { user } = useAuth();
   const { checkPermission } = usePermissions();
+  const { currentClient, clients } = useNavigation();
+  const { selectedClientId, clientWorkspaceMode, isClientDataIsolated } = useClientManagement();
+
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-  const [clients, setClients] = useState<Client[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -58,19 +61,37 @@ export default function CampaignsPage() {
 
   useEffect(() => {
     fetchCampaigns();
-    if (checkPermission(PERMISSIONS.CREATE_CAMPAIGNS)) {
-      fetchClients();
+  }, [searchTerm, selectedClient, selectedStatus, selectedClientId, isClientDataIsolated]);
+
+  // Auto-select current client when in client workspace mode
+  useEffect(() => {
+    if (isClientDataIsolated && selectedClientId && selectedClient !== selectedClientId) {
+      setSelectedClient(selectedClientId);
+    } else if (!isClientDataIsolated && selectedClient) {
+      setSelectedClient('');
     }
-  }, [searchTerm, selectedClient, selectedStatus]);
+  }, [selectedClientId, isClientDataIsolated]);
 
   const fetchCampaigns = async () => {
     try {
       const params = new URLSearchParams();
       if (searchTerm) params.append('search', searchTerm);
-      if (selectedClient) params.append('client', selectedClient);
+
+      // Use client context for filtering
+      if (isClientDataIsolated && selectedClientId) {
+        params.append('client', selectedClientId);
+      } else if (selectedClient) {
+        params.append('client', selectedClient);
+      }
+
       if (selectedStatus) params.append('status', selectedStatus);
 
-      const response = await fetch(`/api/campaigns?${params.toString()}`);
+      const response = await fetch(`/api/campaigns?${params.toString()}`, {
+        headers: {
+          // Add client context header for API isolation
+          ...(selectedClientId && { 'x-client-id': selectedClientId })
+        }
+      });
       const data = await response.json();
 
       if (!response.ok) {
@@ -85,30 +106,27 @@ export default function CampaignsPage() {
     }
   };
 
-  const fetchClients = async () => {
-    try {
-      const response = await fetch('/api/clients');
-      const data = await response.json();
 
-      if (response.ok) {
-        setClients(data.data.clients);
-      }
-    } catch (err) {
-      console.error('Failed to load clients:', err);
-    }
-  };
 
   const handleCreateCampaign = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    // Auto-set client if in client workspace mode
+    const formData = {
+      ...createForm,
+      clientId: isClientDataIsolated && selectedClientId ? selectedClientId : createForm.clientId
+    };
 
     try {
       const response = await fetch('/api/campaigns', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          // Add client context header for API isolation
+          ...(selectedClientId && { 'x-client-id': selectedClientId })
         },
-        body: JSON.stringify(createForm),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
@@ -174,9 +192,9 @@ export default function CampaignsPage() {
   const getStatusColor = (status: CampaignStatus) => {
     switch (status) {
       case CampaignStatus.ACTIVE:
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       case CampaignStatus.PAUSED:
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning-100 text-warning-800';
       case CampaignStatus.COMPLETED:
         return 'bg-gray-100 text-gray-800';
       default:
@@ -200,7 +218,7 @@ export default function CampaignsPage() {
     return (
       <ProtectedRoute>
         <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
         </div>
       </ProtectedRoute>
     );
@@ -213,16 +231,24 @@ export default function CampaignsPage() {
           <div className="px-4 py-6 sm:px-0">
             <div className="mb-6 flex justify-between items-center">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Campaigns</h1>
+                <h1 className="text-3xl font-bold text-gray-900">
+                  {isClientDataIsolated && currentClient
+                    ? `${currentClient.brandName} - Campaigns`
+                    : 'Campaigns'
+                  }
+                </h1>
                 <p className="mt-2 text-gray-600">
-                  Manage your social media campaigns and content calendar
+                  {isClientDataIsolated && currentClient
+                    ? `Manage campaigns for ${currentClient.brandName}`
+                    : 'Manage your social media campaigns and content calendar'
+                  }
                 </p>
               </div>
-              
+
               {checkPermission(PERMISSIONS.CREATE_CAMPAIGNS) && (
                 <button
                   onClick={() => setShowCreateModal(true)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Create Campaign
                 </button>
@@ -230,13 +256,13 @@ export default function CampaignsPage() {
             </div>
 
             {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
                 {error}
               </div>
             )}
 
             {success && (
-              <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+              <div className="mb-6 bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
                 {success}
               </div>
             )}
@@ -249,30 +275,37 @@ export default function CampaignsPage() {
                   placeholder="Search campaigns..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                 />
               </div>
-              
-              <div>
-                <select
-                  value={selectedClient}
-                  onChange={(e) => setSelectedClient(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="">All Clients</option>
-                  {clients.map((client) => (
-                    <option key={client.id} value={client.id}>
-                      {client.brandName}
-                    </option>
-                  ))}
-                </select>
-              </div>
+
+              {/* Only show client selector in admin mode */}
+              {!isClientDataIsolated && (
+                <div>
+                  <select
+                    value={selectedClient}
+                    onChange={(e) => setSelectedClient(e.target.value)}
+                    title="Filter campaigns by client"
+                    aria-label="Filter campaigns by client"
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
+                  >
+                    <option value="">All Clients</option>
+                    {clients.map((client) => (
+                      <option key={client.id} value={client.id}>
+                        {client.brandName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <div>
                 <select
                   value={selectedStatus}
                   onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  title="Filter campaigns by status"
+                  aria-label="Filter campaigns by status"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                 >
                   <option value="">All Statuses</option>
                   {Object.values(CampaignStatus).map((status) => (
@@ -287,7 +320,9 @@ export default function CampaignsPage() {
                 <button
                   onClick={() => {
                     setSearchTerm('');
-                    setSelectedClient('');
+                    if (!isClientDataIsolated) {
+                      setSelectedClient('');
+                    }
                     setSelectedStatus('');
                   }}
                   className="w-full bg-gray-200 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-300"
@@ -300,22 +335,22 @@ export default function CampaignsPage() {
             {/* Campaigns Grid */}
             {campaigns.length === 0 ? (
               <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
+                <div className="text-muted-foreground mb-4">
                   <svg className="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No campaigns found</h3>
-                <p className="text-gray-500 mb-4">
-                  {searchTerm || selectedClient || selectedStatus 
-                    ? 'Try adjusting your filters.' 
+                <p className="text-muted-foreground mb-4">
+                  {searchTerm || selectedClient || selectedStatus
+                    ? 'Try adjusting your filters.'
                     : 'Get started by creating your first campaign.'
                   }
                 </p>
                 {checkPermission(PERMISSIONS.CREATE_CAMPAIGNS) && !searchTerm && !selectedClient && !selectedStatus && (
                   <button
                     onClick={() => setShowCreateModal(true)}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                    className="bg-info-600 text-white px-4 py-2 rounded-md hover:bg-info-700"
                   >
                     Create Your First Campaign
                   </button>
@@ -325,7 +360,7 @@ export default function CampaignsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {campaigns.map((campaign) => {
                   const daysRemaining = getDaysRemaining(campaign.endDate);
-                  
+
                   return (
                     <div key={campaign.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                       <div className="p-6">
@@ -338,12 +373,12 @@ export default function CampaignsPage() {
                               {campaign.client.brandName}
                             </p>
                             {campaign.description && (
-                              <p className="text-sm text-gray-500 line-clamp-2">
+                              <p className="text-sm text-muted-foreground line-clamp-2">
                                 {campaign.description}
                               </p>
                             )}
                           </div>
-                          
+
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(campaign.status)}`}>
                             {campaign.status}
                           </span>
@@ -351,21 +386,21 @@ export default function CampaignsPage() {
 
                         <div className="mb-4 space-y-2">
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Start:</span>
+                            <span className="text-muted-foreground">Start:</span>
                             <span className="text-gray-900">{formatDate(campaign.startDate)}</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">End:</span>
+                            <span className="text-muted-foreground">End:</span>
                             <span className="text-gray-900">{formatDate(campaign.endDate)}</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Posts:</span>
+                            <span className="text-muted-foreground">Posts:</span>
                             <span className="text-gray-900">{campaign._count.posts}</span>
                           </div>
                           {daysRemaining > 0 && campaign.status === CampaignStatus.ACTIVE && (
                             <div className="flex justify-between text-sm">
-                              <span className="text-gray-500">Days left:</span>
-                              <span className="text-blue-600 font-medium">{daysRemaining}</span>
+                              <span className="text-muted-foreground">Days left:</span>
+                              <span className="text-info-600 font-medium">{daysRemaining}</span>
                             </div>
                           )}
                         </div>
@@ -373,22 +408,22 @@ export default function CampaignsPage() {
                         <div className="flex space-x-2">
                           <Link
                             href={`/dashboard/campaigns/${campaign.id}`}
-                            className="flex-1 bg-blue-600 text-white text-center py-2 px-3 rounded-md text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="flex-1 bg-info-600 text-white text-center py-2 px-3 rounded-md text-sm hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           >
                             View Details
                           </Link>
-                          
+
                           <Link
                             href={`/dashboard/campaigns/${campaign.id}/calendar`}
-                            className="bg-green-600 text-white py-2 px-3 rounded-md text-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            className="bg-success-600 text-white py-2 px-3 rounded-md text-sm hover:bg-success-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                           >
                             Calendar
                           </Link>
-                          
+
                           {checkPermission(PERMISSIONS.DELETE_CAMPAIGNS) && (
                             <button
                               onClick={() => handleDeleteCampaign(campaign.id, campaign.name)}
-                              className="bg-red-600 text-white py-2 px-3 rounded-md text-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                              className="bg-error-600 text-white py-2 px-3 rounded-md text-sm hover:bg-error-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                             >
                               Delete
                             </button>
@@ -409,92 +444,125 @@ export default function CampaignsPage() {
                     <h3 className="text-lg font-medium text-gray-900 mb-4">
                       Create New Campaign
                     </h3>
-                    
+
                     <form onSubmit={handleCreateCampaign} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="campaign-name" className="block text-sm font-medium text-gray-700 mb-2">
                             Campaign Name *
                           </label>
                           <input
+                            id="campaign-name"
                             type="text"
                             required
                             value={createForm.name}
                             onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="Enter campaign name"
+                            aria-label="Campaign name"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                             placeholder="Enter campaign name"
                           />
                         </div>
 
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Client *
-                          </label>
-                          <select
-                            required
-                            value={createForm.clientId}
-                            onChange={(e) => setCreateForm({ ...createForm, clientId: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                          >
-                            <option value="">Select a client</option>
-                            {clients.map((client) => (
-                              <option key={client.id} value={client.id}>
-                                {client.brandName}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                        {/* Only show client selector in admin mode */}
+                        {!isClientDataIsolated && (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Client *
+                            </label>
+                            <select
+                              required
+                              value={createForm.clientId}
+                              onChange={(e) => setCreateForm({ ...createForm, clientId: e.target.value })}
+                              title="Select client for campaign"
+                              aria-label="Select client for campaign"
+                              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
+                            >
+                              <option value="">Select a client</option>
+                              {clients.map((client) => (
+                                <option key={client.id} value={client.id}>
+                                  {client.brandName}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* Show selected client in client mode */}
+                        {isClientDataIsolated && currentClient && (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                              Client
+                            </label>
+                            <div className="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-50 text-gray-700">
+                              {currentClient.brandName}
+                            </div>
+                          </div>
+                        )}
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="campaign-start-date" className="block text-sm font-medium text-gray-700 mb-2">
                             Start Date *
                           </label>
                           <input
+                            id="campaign-start-date"
                             type="date"
                             required
                             value={createForm.startDate}
                             onChange={(e) => setCreateForm({ ...createForm, startDate: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="Select campaign start date"
+                            aria-label="Campaign start date"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="campaign-end-date" className="block text-sm font-medium text-gray-700 mb-2">
                             End Date *
                           </label>
                           <input
+                            id="campaign-end-date"
                             type="date"
                             required
                             value={createForm.endDate}
                             onChange={(e) => setCreateForm({ ...createForm, endDate: e.target.value })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="Select campaign end date"
+                            aria-label="Campaign end date"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="posts-per-week" className="block text-sm font-medium text-gray-700 mb-2">
                             Posts per Week
                           </label>
                           <input
+                            id="posts-per-week"
                             type="number"
                             min="1"
                             max="21"
                             value={createForm.postsPerWeek}
                             onChange={(e) => setCreateForm({ ...createForm, postsPerWeek: parseInt(e.target.value) })}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="Number of posts per week (1-21)"
+                            aria-label="Posts per week"
+                            placeholder="3"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="campaign-description" className="block text-sm font-medium text-gray-700 mb-2">
                           Description
                         </label>
                         <textarea
+                          id="campaign-description"
                           value={createForm.description}
                           onChange={(e) => setCreateForm({ ...createForm, description: e.target.value })}
                           rows={3}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          title="Brief description of the campaign"
+                          aria-label="Campaign description"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           placeholder="Brief description of the campaign"
                         />
                       </div>
@@ -510,7 +578,7 @@ export default function CampaignsPage() {
                                 type="checkbox"
                                 checked={createForm.platforms.includes(platform)}
                                 onChange={() => handlePlatformToggle(platform)}
-                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                className="rounded border-gray-300 text-info-600 focus:ring-blue-500"
                               />
                               <span className="text-sm text-gray-700">{platform}</span>
                             </label>
@@ -520,41 +588,50 @@ export default function CampaignsPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="target-audience" className="block text-sm font-medium text-gray-700 mb-2">
                             Target Audience
                           </label>
                           <textarea
+                            id="target-audience"
                             value={createForm.targetAudience}
                             onChange={(e) => setCreateForm({ ...createForm, targetAudience: e.target.value })}
                             rows={3}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="Describe the target audience"
+                            aria-label="Target audience"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                             placeholder="Describe the target audience"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label htmlFor="campaign-goals" className="block text-sm font-medium text-gray-700 mb-2">
                             Campaign Goals
                           </label>
                           <textarea
+                            id="campaign-goals"
                             value={createForm.campaignGoals}
                             onChange={(e) => setCreateForm({ ...createForm, campaignGoals: e.target.value })}
                             rows={3}
-                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            title="What are the main goals of this campaign?"
+                            aria-label="Campaign goals"
+                            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                             placeholder="What are the main goals of this campaign?"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="brand-guidelines" className="block text-sm font-medium text-gray-700 mb-2">
                           Brand Guidelines
                         </label>
                         <textarea
+                          id="brand-guidelines"
                           value={createForm.brandGuidelines}
                           onChange={(e) => setCreateForm({ ...createForm, brandGuidelines: e.target.value })}
                           rows={3}
-                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                          title="Any specific brand guidelines or requirements"
+                          aria-label="Brand guidelines"
+                          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-blue-500 focus:border-info-500"
                           placeholder="Any specific brand guidelines or requirements"
                         />
                       </div>
@@ -569,7 +646,7 @@ export default function CampaignsPage() {
                         </button>
                         <button
                           type="submit"
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                          className="px-4 py-2 bg-info-600 text-white rounded-md hover:bg-info-700"
                         >
                           Create Campaign
                         </button>

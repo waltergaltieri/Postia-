@@ -208,9 +208,7 @@ export default function AIGenerationWorkflow({
               </Badge>
               {job.status === 'IN_PROGRESS' && onPauseGeneration && (
                 <Button variant="outline" size="sm" onClick={onPauseGeneration}>
-                  <Pause className="h-3 w-3 mr-1" />
-                  Pause
-                </Button>
+                  <Pause className="h-3 w-3 mr-1" /> <span>Pause</span></Button>
               )}
             </div>
           </div>
@@ -371,18 +369,15 @@ export default function AIGenerationWorkflow({
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => onRegenerateStep(step.step)}
+                              onClick={() => <span>onRegenerateStep(step.step)}
                               className="text-error-600 border-error-200 hover:bg-error-50"
-                            >
-                              <RotateCcw className="h-3 w-3 mr-1" />
+                            ></span><RotateCcw className="h-3 w-3 mr-1" />
                               Retry
                             </Button>
                           )}
                           {step.status === 'COMPLETED' && step.output && (
                             <Button variant="outline" size="sm">
-                              <Eye className="h-3 w-3 mr-1" />
-                              View
-                            </Button>
+                              <Eye className="h-3 w-3 mr-1" /> <span>View</span></Button>
                           )}
                         </div>
                       </div>

@@ -181,13 +181,13 @@ export default function PublicationScheduler() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'SCHEDULED':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-info-100 text-info-800';
       case 'PUBLISHING':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-warning-100 text-warning-800';
       case 'PUBLISHED':
-        return 'bg-green-100 text-green-800';
+        return 'bg-success-100 text-success-800';
       case 'FAILED':
-        return 'bg-red-100 text-red-800';
+        return 'bg-error-100 text-error-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -279,7 +279,7 @@ export default function PublicationScheduler() {
               <CheckCircle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-green-600">{metrics.published}</div>
+              <div className="text-2xl font-bold text-success-600">{metrics.published}</div>
               <p className="text-xs text-muted-foreground">
                 {metrics.successRate}% success rate
               </p>
@@ -292,7 +292,7 @@ export default function PublicationScheduler() {
               <XCircle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-red-600">{metrics.failed}</div>
+              <div className="text-2xl font-bold text-error-600">{metrics.failed}</div>
               <p className="text-xs text-muted-foreground">
                 Require attention
               </p>
@@ -332,8 +332,7 @@ export default function PublicationScheduler() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Calendar
-                  mode="single"
+                <Calendar className="h-5 w-5" mode="single"
                   selected={selectedDate}
                   onSelect={(date) => date && setSelectedDate(date)}
                   className="rounded-md border"
@@ -422,9 +421,8 @@ export default function PublicationScheduler() {
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  onClick={() => handleRetryFailed(post.id, platform.platform)}
-                                >
-                                  <RotateCcw className="h-3 w-3 mr-1" />
+                                  onClick={() => <span>handleRetryFailed(post.id, platform.platform)}
+                                ></span><RotateCcw className="h-3 w-3 mr-1" />
                                   Retry
                                 </Button>
                               )}
@@ -439,26 +437,22 @@ export default function PublicationScheduler() {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handlePublishNow(post.id)}
-                              >
-                                <Play className="h-3 w-3 mr-1" />
+                                onClick={() => <span>handlePublishNow(post.id)}
+                              ></span><Play className="h-3 w-3 mr-1" />
                                 Publish Now
                               </Button>
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => handleCancelSchedule(post.id)}
-                              >
-                                <Pause className="h-3 w-3 mr-1" />
+                                onClick={() => <span>handleCancelSchedule(post.id)}
+                              ></span><Pause className="h-3 w-3 mr-1" />
                                 Cancel
                               </Button>
                             </>
                           )}
                           
                           <Button variant="ghost" size="sm">
-                            <Eye className="h-3 w-3 mr-1" />
-                            View Details
-                          </Button>
+                            <Eye className="h-3 w-3 mr-1" /> <span>View Details</span></Button>
                         </div>
                       </div>
                     ))}
@@ -555,7 +549,7 @@ export default function PublicationScheduler() {
                       <div className="flex items-center space-x-2">
                         <div className="w-24 bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-green-500 h-2 rounded-full" 
+                            className="bg-success-500 h-2 rounded-full" 
                             style={{ width: `${Math.random() * 100}%` }}
                           ></div>
                         </div>
@@ -580,7 +574,7 @@ export default function PublicationScheduler() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <Heart className="h-4 w-4 text-red-500" />
+                      <Heart className="h-4 w-4 text-error-600" />
                       <span>Likes</span>
                     </div>
                     <span className="font-medium">{Math.floor(Math.random() * 1000)}</span>
@@ -588,7 +582,7 @@ export default function PublicationScheduler() {
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <MessageCircle className="h-4 w-4 text-blue-500" />
+                      <MessageCircle className="h-4 w-4 text-info-600" />
                       <span>Comments</span>
                     </div>
                     <span className="font-medium">{Math.floor(Math.random() * 100)}</span>
@@ -596,7 +590,7 @@ export default function PublicationScheduler() {
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <Repeat2 className="h-4 w-4 text-green-500" />
+                      <Repeat2 className="h-4 w-4 text-success-600" />
                       <span>Shares</span>
                     </div>
                     <span className="font-medium">{Math.floor(Math.random() * 50)}</span>

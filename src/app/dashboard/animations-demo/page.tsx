@@ -150,29 +150,23 @@ export default function AnimationsDemo() {
         
         <FadeIn delay={0.2}>
           <div className="flex flex-wrap gap-4">
-            <Button variant="default">
-              Animated Button
-            </Button>
+            <Button variant="default"> <span>Animated Button</span></Button>
             
-            <Button variant="premium" icon={<Heart className="h-4 w-4" />}>
-              Premium Style
-            </Button>
+            <Button variant="premium" icon={<Heart className="h-4 w-4" /> <span>}>
+              Premium Style</span></Button>
             
             <Button 
               variant="success" 
               loading={loading}
               loadingText="Processing..."
               onClick={handleLoadingDemo}
-            >
-              {loading ? 'Loading...' : 'Test Loading'}
-            </Button>
+            > <span>{loading ? 'Loading...' : 'Test Loading'}</span></Button>
             
             <RippleButton 
               className="px-4 py-2 bg-primary-500 text-white rounded-lg font-medium"
-              onClick={() => console.log('Ripple clicked!')}
+              onClick={() => <span>console.log('Ripple clicked!')}
             >
-              Ripple Effect
-            </RippleButton>
+              Ripple Effect</span></RippleButton>
           </div>
         </FadeIn>
       </section>
@@ -182,16 +176,12 @@ export default function AnimationsDemo() {
         <SlideIn variant="slideInFromLeft">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold">Stagger Animations</h2>
-            <Button onClick={toggleCards} variant="outline">
-              Toggle Cards
-            </Button>
+            <Button onClick={toggleCards} variant="outline"> <span>Toggle Cards</span></Button>
           </div>
         </SlideIn>
         
         {showCards && (
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }, (_, i) => (
-              <StaggerItem key={i}>
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"> <span>{Array.from({ length: 8 }, (_, i) => (</span><StaggerItem key={i}>
                 <Card variant="elevated" className="h-32">
                   <CardContent className="flex items-center justify-center h-full">
                     <div className="text-center">
@@ -235,7 +225,7 @@ export default function AnimationsDemo() {
                 <CardTitle>
                   <PulseIndicator>
                     <Badge variant="secondary" className="flex items-center gap-2">
-                      <div className="h-2 w-2 bg-green-500 rounded-full" />
+                      <div className="h-2 w-2 bg-success-500 rounded-full" />
                       Live Status
                     </Badge>
                   </PulseIndicator>
@@ -275,9 +265,7 @@ export default function AnimationsDemo() {
         <SlideIn variant="slideInFromLeft">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold">Skeleton Screens</h2>
-            <Button onClick={toggleSkeletons} variant="outline">
-              {showSkeletons ? 'Show Content' : 'Show Skeletons'}
-            </Button>
+            <Button onClick={toggleSkeletons} variant="outline"> <span>{showSkeletons ? 'Show Content' : 'Show Skeletons'}</span></Button>
           </div>
         </SlideIn>
         
@@ -363,9 +351,7 @@ export default function AnimationsDemo() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <ProgressBar progress={progress} showLabel />
-                <Button onClick={simulateProgress} variant="outline" className="w-full">
-                  Simulate Progress
-                </Button>
+                <Button onClick={simulateProgress} variant="outline" className="w-full"> <span>Simulate Progress</span></Button>
               </CardContent>
             </Card>
           </div>
@@ -382,9 +368,7 @@ export default function AnimationsDemo() {
                 steps={['Planning', 'Creating', 'Reviewing', 'Publishing']}
                 currentStep={currentStep}
               />
-              <Button onClick={simulateSteps} variant="outline" className="w-full">
-                Simulate Steps
-              </Button>
+              <Button onClick={simulateSteps} variant="outline" className="w-full"> <span>Simulate Steps</span></Button>
             </CardContent>
           </Card>
         </FadeIn>
@@ -402,9 +386,7 @@ export default function AnimationsDemo() {
               <EmptyContentState 
                 action={
                   <Button variant="premium">
-                    <Zap className="h-4 w-4 mr-2" />
-                    Create Content
-                  </Button>
+                    <Zap className="h-4 w-4 mr-2" /> <span>Create Content</span></Button>
                 }
               />
             </Card>
@@ -412,9 +394,7 @@ export default function AnimationsDemo() {
             <Card>
               <EmptyCalendarState 
                 action={
-                  <Button variant="outline">
-                    Schedule Post
-                  </Button>
+                  <Button variant="outline"> <span>Schedule Post</span></Button>
                 }
               />
             </Card>
@@ -444,9 +424,7 @@ export default function AnimationsDemo() {
                   onClick={handleLoadingDemo} 
                   className="mt-4"
                   disabled={loading}
-                >
-                  {loading ? 'Loading...' : 'Trigger Loading Overlay'}
-                </Button>
+                > <span>{loading ? 'Loading...' : 'Trigger Loading Overlay'}</span></Button>
               </CardContent>
             </Card>
           </LoadingOverlay>

@@ -1,0 +1,132 @@
+{
+  "timestamp": "2025-09-19T00:50:56.058Z",
+  "colorTests": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "results": [
+      {
+        "fg": "#6b7280",
+        "bg": "#ffffff",
+        "context": "Fixed input placeholder",
+        "expected": "PASS",
+        "ratio": "4.83",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#57534e",
+        "bg": "#ffffff",
+        "context": "Fixed muted text on white",
+        "expected": "PASS",
+        "ratio": "7.63",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#ffffff",
+        "bg": "#1d4ed8",
+        "context": "Fixed primary button",
+        "expected": "PASS",
+        "ratio": "6.70",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#166534",
+        "bg": "#dcfce7",
+        "context": "Success status",
+        "expected": "PASS",
+        "ratio": "6.49",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#92400e",
+        "bg": "#fef3c7",
+        "context": "Warning status",
+        "expected": "PASS",
+        "ratio": "6.37",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#991b1b",
+        "bg": "#fee2e2",
+        "context": "Error status",
+        "expected": "PASS",
+        "ratio": "6.80",
+        "result": "PASS",
+        "success": true
+      },
+      {
+        "fg": "#1e40af",
+        "bg": "#dbeafe",
+        "context": "Info status",
+        "expected": "PASS",
+        "ratio": "7.15",
+        "result": "PASS",
+        "success": true
+      }
+    ]
+  },
+  "cssValidation": {
+    "files": 3,
+    "averageCoverage": 33.333333333333336,
+    "results": [
+      {
+        "file": "src/styles/contrast-fixes.css",
+        "exists": true,
+        "foundFixes": [
+          "contrast-safe",
+          "status-success-contrast-safe",
+          "status-warning-contrast-safe",
+          "status-error-contrast-safe"
+        ],
+        "missingFixes": [
+          "placeholder:text-muted-foreground",
+          "focus-visible:ring-2",
+          "high-contrast-border"
+        ],
+        "coverage": 57.14285714285714
+      },
+      {
+        "file": "src/styles/themes.css",
+        "exists": true,
+        "foundFixes": [],
+        "missingFixes": [
+          "placeholder:text-muted-foreground",
+          "focus-visible:ring-2",
+          "contrast-safe",
+          "status-success-contrast-safe",
+          "status-warning-contrast-safe",
+          "status-error-contrast-safe",
+          "high-contrast-border"
+        ],
+        "coverage": 0
+      },
+      {
+        "file": "src/app/globals.css",
+        "exists": true,
+        "foundFixes": [
+          "focus-visible:ring-2",
+          "contrast-safe",
+          "high-contrast-border"
+        ],
+        "missingFixes": [
+          "placeholder:text-muted-foreground",
+          "status-success-contrast-safe",
+          "status-warning-contrast-safe",
+          "status-error-contrast-safe"
+        ],
+        "coverage": 42.857142857142854
+      }
+    ]
+  },
+  "summary": {
+    "overallSuccess": false,
+    "recommendations": [
+      "CSS fix coverage is below 90%. Ensure all fixes are properly implemented."
+    ]
+  }
+}

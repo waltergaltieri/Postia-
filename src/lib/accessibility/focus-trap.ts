@@ -311,7 +311,7 @@ export function trapFocus(element: HTMLElement): () => void {
   const focusableElements = element.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   ) as NodeListOf<HTMLElement>
-
+  
   const firstElement = focusableElements[0]
   const lastElement = focusableElements[focusableElements.length - 1]
 

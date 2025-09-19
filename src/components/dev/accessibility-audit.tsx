@@ -110,14 +110,11 @@ export function AccessibilityAudit({
     return (
       <div className="fixed bottom-4 right-4 z-50">
         <Button
-          onClick={() => setIsVisible(true)}
+          onClick={() => <span>setIsVisible(true)}
           variant="outline"
           size="sm"
           className="bg-background/80 backdrop-blur-sm"
-        >
-          <Info className="w-4 h-4 mr-2" />
-          A11y Audit
-        </Button>
+        ></span><Info className="w-4 h-4 mr-2" /> <span>A11y Audit</span></Button>
       </div>
     )
   }
@@ -140,9 +137,8 @@ export function AccessibilityAudit({
           <Button
             variant="ghost"
             size="icon-sm"
-            onClick={() => setIsVisible(false)}
-          >
-            <X className="w-4 h-4" />
+            onClick={() => <span>setIsVisible(false)}
+          ></span><X className="w-4 h-4" />
           </Button>
         </div>
 
@@ -248,13 +244,11 @@ export function AccessibilityAudit({
               size="sm"
               onClick={runAudit}
               className="text-xs"
-            >
-              Re-run Audit
-            </Button>
+            > <span>Re-run Audit</span></Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() => {
+              onClick={() => <span>{
                 if (auditResults) {
                   console.log('Accessibility Audit Results:', auditResults)
                   console.log('Color Audit Results:', colorAudit)
@@ -262,8 +256,7 @@ export function AccessibilityAudit({
               }}
               className="text-xs"
             >
-              Log Results
-            </Button>
+              Log Results</span></Button>
           </div>
 
           {/* Accessibility Tips */}

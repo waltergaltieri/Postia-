@@ -33,7 +33,7 @@ export const Default: Story = {
         <p>This is the card content area where you can place any content.</p>
       </CardContent>
       <CardFooter>
-        <Button>Action</Button>
+        <Button> <span>Action</span></Button>
       </CardFooter>
     </Card>
   ),
@@ -88,19 +88,13 @@ export const ContentCard: Story = {
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Button size="sm" variant="ghost">
-            <Heart className="h-4 w-4 mr-1" />
-            Like
-          </Button>
+            <Heart className="h-4 w-4 mr-1" /> <span>Like</span></Button>
           <Button size="sm" variant="ghost">
-            <MessageCircle className="h-4 w-4 mr-1" />
-            Comment
-          </Button>
+            <MessageCircle className="h-4 w-4 mr-1" /> <span>Comment</span></Button>
           <Button size="sm" variant="ghost">
-            <Share2 className="h-4 w-4 mr-1" />
-            Share
-          </Button>
+            <Share2 className="h-4 w-4 mr-1" /> <span>Share</span></Button>
         </div>
-        <Button size="sm">Publish</Button>
+        <Button size="sm"> <span>Publish</span></Button>
       </CardFooter>
     </Card>
   ),
@@ -152,9 +146,7 @@ export const ClientCard: Story = {
         </div>
       </CardContent>
       <CardFooter className="pt-4">
-        <Button variant="outline" className="w-full">
-          Switch to Client
-        </Button>
+        <Button variant="outline" className="w-full"> <span>Switch to Client</span></Button>
       </CardFooter>
     </Card>
   ),
@@ -182,12 +174,8 @@ export const NotificationCard: Story = {
         </p>
       </CardContent>
       <CardFooter className="pt-3 flex gap-2">
-        <Button size="sm" variant="outline">
-          Dismiss
-        </Button>
-        <Button size="sm">
-          Review Content
-        </Button>
+        <Button size="sm" variant="outline"> <span>Dismiss</span></Button>
+        <Button size="sm"> <span>Review Content</span></Button>
       </CardFooter>
     </Card>
   ),
@@ -214,7 +202,7 @@ export const CardGrid: Story = {
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="outline" className="w-full">View Details</Button>
+          <Button variant="outline" className="w-full"> <span>View Details</span></Button>
         </CardFooter>
       </Card>
 
@@ -235,7 +223,7 @@ export const CardGrid: Story = {
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="outline" className="w-full">View Details</Button>
+          <Button variant="outline" className="w-full"> <span>View Details</span></Button>
         </CardFooter>
       </Card>
 
@@ -256,7 +244,7 @@ export const CardGrid: Story = {
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="outline" className="w-full">View Details</Button>
+          <Button variant="outline" className="w-full"> <span>View Details</span></Button>
         </CardFooter>
       </Card>
     </div>

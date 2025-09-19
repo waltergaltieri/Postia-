@@ -250,9 +250,7 @@ export default function ClientBrandDemo() {
                             borderColor: selectedClient.brandColors.primary 
                           }}
                           className="text-white hover:opacity-90"
-                        >
-                          Primary Button
-                        </Button>
+                        > <span>Primary Button</span></Button>
                         <Button 
                           variant="outline"
                           style={{ 
@@ -260,9 +258,7 @@ export default function ClientBrandDemo() {
                             color: selectedClient.brandColors.primary 
                           }}
                           className="hover:bg-opacity-10"
-                        >
-                          Secondary Button
-                        </Button>
+                        > <span>Secondary Button</span></Button>
                       </div>
 
                       {/* Sample Card */}

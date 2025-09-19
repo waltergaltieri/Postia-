@@ -1,6 +1,15 @@
 /* Import design tokens and themes */
 @import '../styles/tokens.css';
 @import '../styles/themes.css';
+@import '../styles/contrast-fixes.css';
+@import '../styles/sidebar-layout-fixes.css';
+@import '../styles/spacing-system.css';
+@import '../styles/form-system.css';
+@import '../styles/interaction-states.css';
+@import '../styles/responsive-fixes.css';
+@import '../styles/modal-responsive-fixes.css';
+@import '../styles/icon-system.css';
+@import '../styles/message-system.css';
 
 @tailwind base;
 @tailwind components;
@@ -37,6 +46,24 @@
   /* Improve focus visibility */
   :focus-visible {
     @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Enhanced focus for interactive elements */
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+  
+  /* Ensure focus is visible even on elements with custom styling */
+  .focus-visible-force:focus-visible {
+    outline: 2px solid hsl(var(--ring)) !important;
+    outline-offset: 2px !important;
   }
   
   /* Improve button and interactive element accessibility */
@@ -437,6 +464,28 @@
   .bg-high-contrast {
     background: var(--foreground);
     color: var(--background);
+  }
+
+  /* Contrast-safe placeholder colors */
+  .placeholder-contrast-safe::placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+
+  /* Fix for white text on white background issues */
+  .text-contrast-safe {
+    color: hsl(var(--foreground));
+  }
+
+  .bg-contrast-safe {
+    background-color: hsl(var(--background));
+  }
+
+  /* Enhanced focus indicators for better visibility */
+  .focus-contrast-enhanced:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
   }
 
   /* ARIA Live Regions */

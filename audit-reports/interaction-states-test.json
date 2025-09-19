@@ -1,0 +1,64 @@
+{
+  "timestamp": "2025-09-19T01:30:28.939Z",
+  "summary": {
+    "testsRun": 66,
+    "testsPassed": 60,
+    "testsFailed": 6,
+    "successRate": "90.9"
+  },
+  "issues": [
+    {
+      "type": "Missing State Prop",
+      "message": "Button missing selected prop",
+      "severity": "medium",
+      "component": "Button"
+    },
+    {
+      "type": "Missing Accessibility Attribute",
+      "message": "Button missing aria-selected attribute",
+      "severity": "medium",
+      "component": "Button"
+    },
+    {
+      "type": "Missing State Class",
+      "message": "Button missing selected class usage",
+      "severity": "low",
+      "component": "Button"
+    },
+    {
+      "type": "Missing State Class",
+      "message": "Card missing disabled-enhanced class usage",
+      "severity": "low",
+      "component": "Card"
+    },
+    {
+      "type": "Missing State Prop",
+      "message": "Badge missing loading prop",
+      "severity": "medium",
+      "component": "Badge"
+    },
+    {
+      "type": "Missing Accessibility Attribute",
+      "message": "Badge missing aria-busy attribute",
+      "severity": "medium",
+      "component": "Badge"
+    }
+  ],
+  "recommendations": [
+    {
+      "title": "Enhance Component Integration",
+      "description": "Improve component integration with state management.",
+      "action": "Add missing props, attributes, and classes to components"
+    },
+    {
+      "title": "Improve Accessibility",
+      "description": "Enhance accessibility features for better inclusive design.",
+      "action": "Implement missing accessibility features and attributes"
+    },
+    {
+      "title": "Comprehensive Testing",
+      "description": "Test all interaction states across different devices and scenarios.",
+      "action": "Perform manual testing on desktop, tablet, and mobile devices"
+    }
+  ]
+}

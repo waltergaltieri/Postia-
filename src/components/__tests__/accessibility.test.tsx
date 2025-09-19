@@ -210,7 +210,7 @@ describe('Accessibility Tests', () => {
   describe('Button Accessibility', () => {
     it('should not have accessibility violations', async () => {
       const { container } = render(
-        <Button>Test Button</Button>
+        <Button> <span>Test Button</span></Button>
       )
 
       const results = await axe(container)
@@ -218,7 +218,7 @@ describe('Accessibility Tests', () => {
     })
 
     it('should meet minimum touch target size', () => {
-      render(<Button size="sm">Small Button</Button>)
+      render(<Button size="sm"> <span>Small Button</span></Button>)
       
       const button = screen.getByRole('button')
       const styles = window.getComputedStyle(button)
@@ -234,7 +234,7 @@ describe('Accessibility Tests', () => {
     it('should have proper focus indicators', async () => {
       const user = userEvent.setup()
       
-      render(<Button>Focusable Button</Button>)
+      render(<Button> <span>Focusable Button</span></Button>)
       
       const button = screen.getByRole('button')
       await user.tab()
@@ -250,7 +250,7 @@ describe('Accessibility Tests', () => {
       const user = userEvent.setup()
       const mockOnClick = jest.fn()
       
-      render(<Button onClick={mockOnClick}>Keyboard Button</Button>)
+      render(<Button onClick={mockOnClick}> <span>Keyboard Button</span></Button>)
       
       const button = screen.getByRole('button')
       button.focus()
@@ -266,9 +266,7 @@ describe('Accessibility Tests', () => {
 
     it('should announce loading state', () => {
       render(
-        <Button loading loadingText="Saving...">
-          Save
-        </Button>
+        <Button loading loadingText="Saving..."> <span>Save</span></Button>
       )
 
       // Should have aria-busy attribute
@@ -347,7 +345,7 @@ describe('Accessibility Tests', () => {
         })),
       })
 
-      render(<Button animate>Animated Button</Button>)
+      render(<Button animate> <span>Animated Button</span></Button>)
       
       // Should disable animations when prefers-reduced-motion is set
       const button = screen.getByRole('button')

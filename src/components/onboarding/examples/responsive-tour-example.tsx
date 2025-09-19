@@ -169,17 +169,13 @@ export function ResponsiveTourExample() {
             <Button 
               onClick={handleStartManualTour}
               disabled={responsiveTour.isActive}
-            >
-              Iniciar Tour Responsivo
-            </Button>
+            > <span>Iniciar Tour Responsivo</span></Button>
             
             {responsiveTour.isActive && (
               <Button 
                 variant="outline"
                 onClick={handleStopManualTour}
-              >
-                Detener Tour
-              </Button>
+              > <span>Detener Tour</span></Button>
             )}
           </div>
         </CardContent>

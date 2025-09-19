@@ -16,13 +16,9 @@ export default function HomePage() {
           </p>
           <div className="flex justify-center space-x-4">
             <Link href="/dashboard">
-              <Button size="lg" className="text-lg px-8 py-4">
-                🚀 Access Dashboard
-              </Button>
+              <Button size="lg" className="text-lg px-8 py-4"> <span>🚀 Access Dashboard</span></Button>
             </Link>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4">
-              📖 Ver Documentación
-            </Button>
+            <Button variant="outline" size="lg" className="text-lg px-8 py-4"> <span>📖 Ver Documentación</span></Button>
           </div>
         </div>
 
@@ -96,7 +92,7 @@ export default function HomePage() {
             <CardContent className="text-left">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h4 className="text-xl font-semibold mb-4 text-red-600">❌ Agencia Tradicional</h4>
+                  <h4 className="text-xl font-semibold mb-4 text-error-600">❌ Agencia Tradicional</h4>
                   <ul className="space-y-2">
                     <li>• 1 diseñador = máximo 5-8 clientes</li>
                     <li>• $200-400 por post de calidad</li>
@@ -107,7 +103,7 @@ export default function HomePage() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-xl font-semibold mb-4 text-green-600">✅ Con Postia SaaS</h4>
+                  <h4 className="text-xl font-semibold mb-4 text-success-600">✅ Con Postia SaaS</h4>
                   <ul className="space-y-2">
                     <li>• 1 manager = 100+ clientes</li>
                     <li>• $0.08 por post profesional</li>

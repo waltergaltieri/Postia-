@@ -243,19 +243,16 @@ function ConfirmationDialog({
           <Button
             variant="outline"
             onClick={onClose}
-          >
-            {cancelLabel}
-          </Button>
+          > <span>{cancelLabel}</span></Button>
           
           <Button
             variant={variant === "destructive" ? "destructive" : "default"}
-            onClick={() => {
+            onClick={() => <span>{
               onConfirm()
               onClose()
             }}
           >
-            {confirmLabel}
-          </Button>
+            {confirmLabel}</span></Button>
         </div>
       </div>
     </div>
@@ -405,15 +402,14 @@ export function BulkSelectionSystem({
                 key={action.id}
                 size="sm"
                 variant={action.variant || "outline"}
-                onClick={() => handleBulkAction(action.id, selectedItems)}
+                onClick={() => <span>handleBulkAction(action.id, selectedItems)}
                 disabled={action.disabled}
                 className={cn(
                   "text-xs gap-2 transition-all duration-200 hover:scale-105",
                   action.variant === "destructive" && "hover:shadow-error/20 hover:shadow-md"
                 )}
                 title={action.shortcut ? `${action.label} (${action.shortcut})` : action.label}
-              >
-                <ActionIcon className="w-3.5 h-3.5" />
+              ></span><ActionIcon className="w-3.5 h-3.5" />
                 {action.label}
                 {action.shortcut && showKeyboardShortcuts && (
                   <Badge variant="secondary" className="px-1.5 py-0.5 text-xs ml-1">
@@ -441,18 +437,15 @@ export function BulkSelectionSystem({
         <Button
           size="sm"
           variant="ghost"
-          onClick={() => onSelectionChange([])}
+          onClick={() => <span>onSelectionChange([])}
           className="text-xs text-muted-foreground hover:text-foreground ml-auto"
-        >
-          <X className="w-3.5 h-3.5 mr-1" />
-          Cancelar
-        </Button>
+        ></span><X className="w-3.5 h-3.5 mr-1" /> <span>Cancelar</span></Button>
       </div>
       
       {/* Confirmation dialog */}
       <ConfirmationDialog
         isOpen={confirmationDialog.isOpen}
-        onClose={() => setConfirmationDialog({ isOpen: false })}
+        onClose={() => <span>setConfirmationDialog({ isOpen: false })}
         onConfirm={handleConfirmedAction}
         title={`${confirmationDialog.action?.label} elementos`}
         message={
@@ -461,8 +454,7 @@ export function BulkSelectionSystem({
         }
         variant={confirmationDialog.action?.variant === "destructive" ? "destructive" : "default"}
         confirmLabel={confirmationDialog.action?.label || "Confirmar"}
-      />
-    </>
+      /></span></>
   )
 }
 

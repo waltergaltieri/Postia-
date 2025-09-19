@@ -134,7 +134,7 @@ export function OptimizedImage({
           "flex items-center justify-center bg-neutral-100 dark:bg-neutral-800",
           fill ? "w-full h-full" : "w-full aspect-square"
         )}>
-          <ImageIcon className="w-8 h-8 text-neutral-400" />
+          <ImageIcon className="w-8 h-8 text-neutral-400 responsive-image" />
         </div>
       ) : hasError ? (
         // Error fallback
@@ -143,9 +143,9 @@ export function OptimizedImage({
             "flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 text-neutral-500",
             fill ? "w-full h-full" : "w-full aspect-square"
           )}>
-            <div className="text-center">
-              <ImageIcon className="w-8 h-8 mx-auto mb-2" />
-              <p className="text-sm">Error al cargar imagen</p>
+            <div className="text-center responsive-image">
+              <ImageIcon className="w-8 h-8 mx-auto mb-2 responsive-image" />
+              <p className="text-sm responsive-image">Error al cargar imagen</p>
             </div>
           </div>
         )
@@ -157,7 +157,7 @@ export function OptimizedImage({
               "absolute inset-0 z-10 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800",
               "animate-pulse"
             )}>
-              <Loader2 className="w-6 h-6 animate-spin text-neutral-400" />
+              <Loader2 className="w-6 h-6 animate-spin text-neutral-400 responsive-image" />
             </div>
           )}
 

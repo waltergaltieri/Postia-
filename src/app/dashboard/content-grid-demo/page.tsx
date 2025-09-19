@@ -228,17 +228,15 @@ export default function ContentGridDemoPage() {
           onClick={keyboardHelp.show}
           className="gap-2"
         >
-          <Keyboard className="w-4 h-4" />
-          Atajos de Teclado
-        </Button>
+          <Keyboard className="w-4 h-4" /> <span>Atajos de Teclado</span></Button>
       </div>
       
       {/* Instructions */}
-      <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+      <div className="bg-info-50 dark:bg-info-950/20 border border-info-200 dark:border-info-800 rounded-lg p-4">
+        <h3 className="font-semibold text-info-900 dark:text-info-100 mb-2">
           💡 Instrucciones del Sistema de Selección Múltiple
         </h3>
-        <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+        <ul className="text-sm text-info-800 dark:text-info-200 space-y-1">
           <li>• <strong>Selecciona elementos</strong> haciendo clic en los checkboxes de las tarjetas</li>
           <li>• <strong>Usa atajos de teclado</strong>: Ctrl+A (aprobar), Ctrl+S (programar), Ctrl+D (duplicar), Delete (eliminar)</li>
           <li>• <strong>Selección masiva</strong>: Usa el checkbox principal para seleccionar/deseleccionar todo</li>

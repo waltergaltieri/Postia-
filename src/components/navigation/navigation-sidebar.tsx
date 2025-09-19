@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  ChevronLeft, 
+import {
+  ChevronLeft,
   ChevronRight,
   Home,
   Users,
@@ -18,18 +18,18 @@ import {
   Image,
   Sparkles,
   ChevronDown,
-  Search,
-  Bell,
   User,
-  HelpCircle
 } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import TourManagementHub from '@/components/onboarding/tour-management-hub'
 import TourProgressIndicator from './tour-progress-indicator'
+import ClientSelector from './client-selector'
 import { useTourNavigation } from '@/hooks/use-tour-navigation'
+import '@/styles/sidebar-layout-fixes.css'
 
 interface NavigationItem {
   id: string
@@ -51,6 +51,7 @@ interface NavigationSidebarProps {
   currentClient?: Client | null
   clients?: Client[]
   onClientChange?: (client: Client) => void
+  onCollapseChange?: (collapsed: boolean) => void
   className?: string
 }
 
@@ -128,24 +129,73 @@ const navigationItems: NavigationItem[] = [
   }
 ]
 
-export default function NavigationSidebar({ 
-  currentClient, 
-  clients = [], 
+export default function NavigationSidebar({
+  currentClient,
+  clients = [],
   onClientChange,
-  className 
+  onCollapseChange,
+  className
 }: NavigationSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [expandedItems, setExpandedItems] = useState<string[]>(['content', 'campaigns'])
-  const [showClientSwitcher, setShowClientSwitcher] = useState(false)
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
-  
+
   // Tour navigation integration
   const { tourNavState, handleNavigationAttempt } = useTourNavigation({
     showProgressIndicator: true,
     lockNavigationDuringTour: true,
     addTourBreadcrumbs: true
   })
+
+  // Mobile detection and responsive behavior
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Close mobile sidebar on route change
+  useEffect(() => {
+    if (isMobile) {
+      setIsMobileOpen(false)
+    }
+  }, [pathname, isMobile])
+
+  // Handle escape key to close mobile sidebar
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobile && isMobileOpen) {
+        setIsMobileOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isMobile, isMobileOpen])
+
+  // Update CSS custom property for main content margin and notify parent
+  useEffect(() => {
+    const root = document.documentElement
+    if (isMobile) {
+      root.style.setProperty('--current-sidebar-width', '0px')
+    } else if (isCollapsed) {
+      root.style.setProperty('--current-sidebar-width', 'var(--sidebar-collapsed-width)')
+    } else {
+      root.style.setProperty('--current-sidebar-width', 'var(--sidebar-width)')
+    }
+    
+    // Notify parent component about collapse state
+    onCollapseChange?.(isCollapsed)
+  }, [isCollapsed, isMobile, onCollapseChange])
 
   // Auto-expand parent items based on current path
   useEffect(() => {
@@ -160,8 +210,8 @@ export default function NavigationSidebar({
   }, [pathname])
 
   const toggleExpanded = (itemId: string) => {
-    setExpandedItems(prev => 
-      prev.includes(itemId) 
+    setExpandedItems(prev =>
+      prev.includes(itemId)
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     )
@@ -182,31 +232,31 @@ export default function NavigationSidebar({
   }
 
   const ClientBrandIndicator = ({ client }: { client: Client }) => (
-    <div className="flex items-center space-x-2">
+    <div className="sidebar-client-indicator">
       {client.logoUrl ? (
-        <img 
-          src={client.logoUrl} 
+        <img
+          src={client.logoUrl}
           alt={client.brandName}
-          className="w-6 h-6 rounded object-cover"
+          className="sidebar-client-logo"
         />
       ) : (
-        <div 
-          className="w-6 h-6 rounded flex items-center justify-center text-xs font-bold text-white"
+        <div
+          className="sidebar-client-avatar"
           style={{ backgroundColor: client.brandColors?.[0] || '#3b82f6' }}
         >
           {client.brandName.charAt(0).toUpperCase()}
         </div>
       )}
       {!isCollapsed && (
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-foreground truncate">
+        <div className="sidebar-client-info">
+          <p className="sidebar-client-name">
             {client.brandName}
           </p>
-          <div className="flex space-x-1 mt-1">
+          <div className="sidebar-client-colors">
             {client.brandColors?.slice(0, 3).map((color, index) => (
               <div
                 key={index}
-                className="w-2 h-2 rounded-full"
+                className="sidebar-client-color"
                 style={{ backgroundColor: color }}
               />
             ))}
@@ -217,270 +267,226 @@ export default function NavigationSidebar({
   )
 
   return (
-    <motion.div
-      initial={false}
-      animate={{ 
-        width: isCollapsed ? 80 : 280 
-      }}
-      transition={{ 
-        duration: 0.3, 
-        ease: [0.4, 0, 0.2, 1] 
-      }}
-      className={cn(
-        "relative h-screen bg-card border-r border-border flex flex-col",
-        "shadow-sm",
-        className
+    <>
+      {/* Mobile overlay */}
+      {isMobile && (
+        <div
+          className={cn(
+            "sidebar-mobile-overlay",
+            isMobileOpen && "active"
+          )}
+          onClick={() => setIsMobileOpen(false)}
+        />
       )}
-    >
-      {/* Header with Brand/Client Switcher */}
-      <div className="p-4 border-b border-border">
-        <div className="flex items-center justify-between">
-          {!isCollapsed && (
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center">
-                <Building2 className="w-4 h-4 text-primary-foreground" />
+
+      <div
+        className={cn(
+          "sidebar-container",
+          isCollapsed && !isMobile && "sidebar-collapsed",
+          isMobile && isMobileOpen && "mobile-open",
+          className
+        )}
+      >
+        {/* Header with Brand/Client Switcher */}
+        <div className="sidebar-header">
+          <div className="sidebar-header-top">
+            {!isCollapsed && (
+              <div className="sidebar-brand">
+                <div className="sidebar-brand-icon">
+                  <Building2 className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="sidebar-brand-text">
+                  <h2 className="sidebar-brand-title">Postia</h2>
+                  <p className="sidebar-brand-subtitle">Marketing Suite</p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-sm font-semibold text-foreground">Postia</h2>
-                <p className="text-xs text-muted-foreground">Marketing Suite</p>
-              </div>
+            )}
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                if (isMobile) {
+                  setIsMobileOpen(false)
+                } else {
+                  setIsCollapsed(!isCollapsed)
+                }
+              }}
+              className="sidebar-collapse-btn hover:bg-muted icon-btn-hover interactive-element touch-button"
+            >
+              {isMobile ? (
+                <ChevronLeft className="h-4 w-4" />
+              ) : isCollapsed ? (
+                <ChevronRight className="h-4 w-4" />
+              ) : (
+                <ChevronLeft className="h-4 w-4" />
+              )}</Button>
+          </div>
+
+          {/* Tour Progress Indicator */}
+          {tourNavState.showProgressInNav && tourNavState.activeTourId && (
+            <div className={cn(
+              "sidebar-tour-progress",
+              isCollapsed && "compact"
+            )}>
+              <TourProgressIndicator
+                compact={isCollapsed}
+                showControls={!isCollapsed}
+              />
             </div>
           )}
-          
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="h-8 w-8 p-0 hover:bg-muted"
-          >
-            {isCollapsed ? (
-              <ChevronRight className="h-4 w-4" />
-            ) : (
-              <ChevronLeft className="h-4 w-4" />
-            )}
-          </Button>
-        </div>
 
-        {/* Tour Progress Indicator */}
-        {tourNavState.showProgressInNav && tourNavState.activeTourId && (
-          <div className="mt-3">
-            <TourProgressIndicator 
+          {/* Enhanced Client Selector */}
+          <div className="sidebar-client-selector">
+            <ClientSelector
               compact={isCollapsed}
-              showControls={!isCollapsed}
-              className={cn(
-                isCollapsed && "px-2"
-              )}
+              showAdminToggle={true}
+              onManageClients={() => handleNavigation('/dashboard/clients')}
+              onAddClient={() => handleNavigation('/dashboard/clients/new')}
+              onAdminDashboard={() => handleNavigation('/dashboard/admin')}
+              className="w-full"
             />
           </div>
-        )}
+        </div>
 
-        {/* Client Switcher */}
-        {currentClient && (
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1 }}
-            className="mt-4"
-          >
-            <Button
-              variant="outline"
-              className={cn(
-                "w-full justify-start h-auto p-3",
-                "hover:bg-muted/50 transition-colors",
-                isCollapsed && "px-2"
-              )}
-              onClick={() => setShowClientSwitcher(!showClientSwitcher)}
-            >
-              <ClientBrandIndicator client={currentClient} />
-              {!isCollapsed && (
-                <ChevronDown className={cn(
-                  "ml-auto h-4 w-4 transition-transform",
-                  showClientSwitcher && "rotate-180"
-                )} />
-              )}
-            </Button>
+        {/* Navigation Items */}
+        <div className="sidebar-nav">
+          <nav className="sidebar-nav-list">
+            {navigationItems.map((item) => (
+              <div key={item.id}>
+                <Button
+                  variant={isActive(item.href) ? "secondary" : "ghost"}
+                  className={cn(
+                    "sidebar-nav-item nav-item-hover interactive-element",
+                    isActive(item.href) && "active nav-item-active"
+                  )}
+                  onClick={() => {
+                    if (item.children) {
+                      toggleExpanded(item.id)
+                    } else {
+                      handleNavigation(item.href)
+                    }
+                  }}
+                ><div className="sidebar-nav-item-icon">
+                    <item.icon className="h-4 w-4" />
+                  </div>
 
-            <AnimatePresence>
-              {showClientSwitcher && !isCollapsed && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="mt-2 space-y-1 max-h-48 overflow-y-auto"
-                >
-                  {clients.map((client) => (
-                    <Button
-                      key={client.id}
-                      variant="ghost"
-                      className="w-full justify-start h-auto p-2 text-left"
-                      onClick={() => {
-                        onClientChange?.(client)
-                        setShowClientSwitcher(false)
-                      }}
-                    >
-                      <ClientBrandIndicator client={client} />
-                    </Button>
-                  ))}
-                  
-                  <Separator className="my-2" />
-                  
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-muted-foreground"
-                    onClick={() => handleNavigation('/dashboard/clients')}
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    Manage Clients
-                  </Button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </div>
+                  {!isCollapsed && (
+                    <>
+                      <span className="sidebar-nav-item-label">{item.label}</span>
 
-      {/* Navigation Items */}
-      <div className="flex-1 overflow-y-auto py-4">
-        <nav className="space-y-1 px-3">
-          {navigationItems.map((item) => (
-            <div key={item.id}>
-              <Button
-                variant={isActive(item.href) ? "secondary" : "ghost"}
-                className={cn(
-                  "w-full justify-start h-10",
-                  "hover:bg-muted/50 transition-all duration-200",
-                  isActive(item.href) && "bg-secondary text-secondary-foreground shadow-sm",
-                  isCollapsed && "px-2"
-                )}
-                onClick={() => {
-                  if (item.children) {
-                    toggleExpanded(item.id)
-                  } else {
-                    handleNavigation(item.href)
-                  }
-                }}
-              >
-                <item.icon className={cn(
-                  "h-4 w-4",
-                  !isCollapsed && "mr-3"
-                )} />
-                
-                {!isCollapsed && (
-                  <>
-                    <span className="flex-1 text-left">{item.label}</span>
-                    
-                    {item.badge && (
-                      <Badge variant="secondary" className="ml-auto text-xs">
-                        {item.badge}
-                      </Badge>
-                    )}
-                    
-                    {item.children && (
-                      <ChevronDown className={cn(
-                        "ml-2 h-4 w-4 transition-transform",
-                        expandedItems.includes(item.id) && "rotate-180"
-                      )} />
-                    )}
-                  </>
-                )}
-              </Button>
+                      {item.badge && (
+                        <Badge variant="secondary" className="sidebar-nav-item-badge responsive-text-xs">
+                          {item.badge}
+                        </Badge>
+                      )}
 
-              {/* Submenu */}
-              <AnimatePresence>
-                {item.children && expandedItems.includes(item.id) && !isCollapsed && (
-                  <motion.div
+                      {item.children && (
+                        <ChevronDown className={cn(
+                          "h-5 w-5 sidebar-nav-item-chevron",
+                          expandedItems.includes(item.id) && "expanded"
+                        )} />
+                      )}
+                    </>
+                  )}
+                </Button>
+
+                {/* Submenu */}
+                <AnimatePresence>
+                  {item.children && expandedItems.includes(item.id) && !isCollapsed && (<motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="ml-4 mt-1 space-y-1"
+                    className="sidebar-submenu"
                   >
                     {item.children.map((child) => (
                       <Button
                         key={child.id}
                         variant={isActive(child.href) ? "secondary" : "ghost"}
                         className={cn(
-                          "w-full justify-start h-9 text-sm",
-                          "hover:bg-muted/50 transition-colors",
-                          isActive(child.href) && "bg-secondary/50 text-secondary-foreground"
+                          "sidebar-submenu-item nav-item-hover interactive-element",
+                          isActive(child.href) && "active nav-item-active"
                         )}
                         onClick={() => handleNavigation(child.href)}
-                      >
-                        <child.icon className="h-3 w-3 mr-3" />
-                        <span>{child.label}</span>
+                      ><div className="sidebar-submenu-item-icon">
+                          <child.icon className="h-3 w-3" />
+                        </div>
+                        <span className="sidebar-submenu-item-label">{child.label}</span>
                         {child.badge && (
-                          <Badge variant="outline" className="ml-auto text-xs">
+                          <Badge variant="outline" className="sidebar-submenu-item-badge responsive-text-xs">
                             {child.badge}
                           </Badge>
                         )}
                       </Button>
                     ))}
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </nav>
-      </div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </nav>
+        </div>
 
-      {/* Footer with User Info */}
-      <div className="p-3 border-t border-border">
-        {!isCollapsed ? (
-          <div className="space-y-3">
-            {/* Tour Management Hub */}
-            <div className="flex items-center justify-center">
-              <TourManagementHub />
-            </div>
-            
-            <Separator />
-            
-            {/* User Info */}
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-primary-foreground" />
+        {/* Footer with User Info */}
+        <div className="sidebar-footer">
+          {!isCollapsed ? (
+            <>
+              {/* Tour Management Hub */}
+              <div className="flex items-center justify-center">
+                <TourManagementHub />
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">
-                  Agency User
-                </p>
-                <p className="text-xs text-muted-foreground truncate">
-                  Premium Plan
-                </p>
+
+              <Separator />
+
+              {/* User Info */}
+              <div className="sidebar-user-info">
+                <div className="sidebar-user-avatar">
+                  <User className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="sidebar-user-details">
+                  <p className="sidebar-user-name">
+                    Agency User
+                  </p>
+                  <p className="sidebar-user-plan">
+                    Premium Plan
+                  </p>
+                </div>
+                <Button variant="ghost" size="sm" className="sidebar-user-settings">
+                  <Settings className="h-4 w-4" />
+                </Button>
               </div>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <Settings className="h-4 w-4" />
+            </>
+          ) : (
+            <div className="space-y-2">
+              <TourManagementHub className="w-full" />
+              <Button variant="ghost" size="sm" className="w-full h-10 p-0">
+                <User className="h-4 w-4" />
               </Button>
             </div>
-          </div>
-        ) : (
-          <div className="space-y-2">
-            <TourManagementHub className="w-full" />
-            <Button variant="ghost" size="sm" className="w-full h-10 p-0">
-              <User className="h-4 w-4" />
-            </Button>
-          </div>
+          )}
+        </div>
+
+        {/* Collapse/Expand Handle - Desktop only */}
+        {!isMobile && (
+          <motion.div
+            className="sidebar-external-handle"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? (
+                <ChevronRight className="h-3 w-3" />
+              ) : (
+                <ChevronLeft className="h-3 w-3" />
+              )}</Button>
+          </motion.div>
         )}
       </div>
-
-      {/* Collapse/Expand Handle */}
-      <motion.div
-        className="absolute -right-3 top-20 z-10"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-6 w-6 p-0 rounded-full bg-background shadow-md border"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-        >
-          {isCollapsed ? (
-            <ChevronRight className="h-3 w-3" />
-          ) : (
-            <ChevronLeft className="h-3 w-3" />
-          )}
-        </Button>
-      </motion.div>
-    </motion.div>
+    </>
   )
 }

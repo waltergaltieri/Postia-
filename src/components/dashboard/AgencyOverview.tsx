@@ -103,9 +103,7 @@ export default function AgencyOverview() {
     return (
       <div className="text-center py-8">
         <p className="text-muted-foreground">Failed to load dashboard data</p>
-        <Button onClick={fetchDashboardStats} className="mt-4">
-          Retry
-        </Button>
+        <Button onClick={fetchDashboardStats} className="mt-4"> <span>Retry</span></Button>
       </div>
     );
   }
@@ -194,15 +192,11 @@ export default function AgencyOverview() {
             <CardTitle className="flex items-center justify-between">
               Publishing Pipeline
               <Link href="/dashboard/campaigns">
-                <Button variant="outline" size="sm">
-                  View All
-                  <ArrowUpRight className="h-4 w-4 ml-1" />
+                <Button variant="outline" size="sm"> <span>View All</span><ArrowUpRight className="h-4 w-4 ml-1" />
                 </Button>
               </Link>
             </CardTitle>
-            <CardDescription>
-              Content scheduled for publication
-            </CardDescription>
+            <CardDescription> <span>Content scheduled for publication</span></CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -234,9 +228,7 @@ export default function AgencyOverview() {
                   <p>No upcoming posts scheduled</p>
                   <Link href="/dashboard/campaigns">
                     <Button variant="outline" size="sm" className="mt-2">
-                      <Plus className="h-4 w-4 mr-1" />
-                      Create Campaign
-                    </Button>
+                      <Plus className="h-4 w-4 mr-1" /> <span>Create Campaign</span></Button>
                   </Link>
                 </div>
               )}
@@ -258,10 +250,10 @@ export default function AgencyOverview() {
                 <div key={activity.id} className="flex items-start space-x-3">
                   <div className="flex-shrink-0 mt-1">
                     {activity.type === 'content_generated' && (
-                      <CheckCircle className="h-4 w-4 text-green-500" />
+                      <CheckCircle className="h-4 w-4 text-success-600" />
                     )}
                     {activity.type === 'campaign_created' && (
-                      <Plus className="h-4 w-4 text-blue-500" />
+                      <Plus className="h-4 w-4 text-info-600" />
                     )}
                     {activity.type === 'post_published' && (
                       <TrendingUp className="h-4 w-4 text-purple-500" />
@@ -270,7 +262,7 @@ export default function AgencyOverview() {
                       <Users className="h-4 w-4 text-orange-500" />
                     )}
                     {!['content_generated', 'campaign_created', 'post_published', 'user_invited'].includes(activity.type) && (
-                      <Clock className="h-4 w-4 text-gray-500" />
+                      <Clock className="h-4 w-4 text-muted-foreground" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -309,7 +301,7 @@ export default function AgencyOverview() {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
+              <div className="text-2xl font-bold text-success-600">
                 {stats.contentGeneration.successRate}%
               </div>
               <p className="text-sm text-muted-foreground">Content Success Rate</p>
@@ -319,7 +311,7 @@ export default function AgencyOverview() {
             </div>
             
             <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
+              <div className="text-2xl font-bold text-info-600">
                 {Math.round(stats.contentGeneration.averageCompletionTime / 60)}m
               </div>
               <p className="text-sm text-muted-foreground">Avg. Generation Time</p>
@@ -353,30 +345,22 @@ export default function AgencyOverview() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/dashboard/campaigns/new">
               <Button variant="outline" className="w-full justify-start">
-                <Plus className="h-4 w-4 mr-2" />
-                New Campaign
-              </Button>
+                <Plus className="h-4 w-4 mr-2" /> <span>New Campaign</span></Button>
             </Link>
             
             <Link href="/dashboard/clients/new">
               <Button variant="outline" className="w-full justify-start">
-                <Building2 className="h-4 w-4 mr-2" />
-                Add Client
-              </Button>
+                <Building2 className="h-4 w-4 mr-2" /> <span>Add Client</span></Button>
             </Link>
             
             <Link href="/dashboard/content/generate">
               <Button variant="outline" className="w-full justify-start">
-                <Zap className="h-4 w-4 mr-2" />
-                Generate Content
-              </Button>
+                <Zap className="h-4 w-4 mr-2" /> <span>Generate Content</span></Button>
             </Link>
             
             <Link href="/dashboard/team">
               <Button variant="outline" className="w-full justify-start">
-                <Users className="h-4 w-4 mr-2" />
-                Invite Team
-              </Button>
+                <Users className="h-4 w-4 mr-2" /> <span>Invite Team</span></Button>
             </Link>
           </div>
         </CardContent>

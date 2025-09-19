@@ -136,11 +136,11 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
   const getPlatformColor = (platform: SocialPlatform) => {
     switch (platform) {
       case SocialPlatform.FACEBOOK:
-        return 'bg-blue-600 hover:bg-blue-700';
+        return 'bg-info-600 hover:bg-info-700';
       case SocialPlatform.INSTAGRAM:
         return 'bg-pink-600 hover:bg-pink-700';
       case SocialPlatform.LINKEDIN:
-        return 'bg-blue-700 hover:bg-blue-800';
+        return 'bg-info-700 hover:bg-info-800';
       default:
         return 'bg-gray-600 hover:bg-gray-700';
     }
@@ -157,7 +157,7 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-info-600"></div>
       </div>
     );
   }
@@ -169,13 +169,13 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+        <div className="bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded">
           {error}
         </div>
       )}
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded">
+        <div className="bg-success-50 border border-success-200 text-success-700 px-4 py-3 rounded">
           {success}
         </div>
       )}
@@ -192,9 +192,9 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
                     <span className="text-2xl">{getPlatformIcon(account.platform)}</span>
                     <div>
                       <h5 className="font-medium text-gray-900">{account.accountName}</h5>
-                      <p className="text-sm text-gray-500">{account.platform}</p>
+                      <p className="text-sm text-muted-foreground">{account.platform}</p>
                       {account.metadata.accountType && (
-                        <p className="text-xs text-gray-400 capitalize">
+                        <p className="text-xs text-muted-foreground capitalize">
                           {account.metadata.accountType} account
                         </p>
                       )}
@@ -219,7 +219,7 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
                 {account.expiresAt && (
                   <div className="mt-3">
                     <p className={`text-xs ${
-                      isTokenExpiring(account.expiresAt) ? 'text-orange-600' : 'text-gray-500'
+                      isTokenExpiring(account.expiresAt) ? 'text-orange-600' : 'text-muted-foreground'
                     }`}>
                       Token expires: {new Date(account.expiresAt).toLocaleDateString()}
                       {isTokenExpiring(account.expiresAt) && ' (Expiring soon!)'}
@@ -238,7 +238,7 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
                   )}
                   <button
                     onClick={() => handleDisconnect(account.id, account.accountName)}
-                    className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded hover:bg-red-200"
+                    className="text-xs bg-error-100 text-error-800 px-2 py-1 rounded hover:bg-error-200"
                   >
                     Disconnect
                   </button>
@@ -279,7 +279,7 @@ export default function SocialAccountManager({ clientId, onAccountsChange }: Soc
       </div>
 
       {accounts.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-muted-foreground">
           <div className="text-4xl mb-4">🔗</div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No social accounts connected</h3>
           <p className="text-gray-600">

@@ -498,29 +498,21 @@ export default function AssetLibrary({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setShowFilters(!showFilters)}
+            onClick={() => <span>setShowFilters(!showFilters)}
             className={cn(showFilters && "bg-muted")}
-          >
-            <Filter className="w-4 h-4 mr-2" />
-            Filters
-          </Button>
+          ></span><Filter className="w-4 h-4 mr-2" /> <span>Filters</span></Button>
 
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+            onClick={() => <span>setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
           >
-            {viewMode === 'grid' ? (
-              <List className="w-4 h-4" />
+            {viewMode === 'grid' ? (</span><List className="w-4 h-4" />
             ) : (
-              <Grid3X3 className="w-4 h-4" />
-            )}
-          </Button>
+              <Grid3X3 className="w-4 h-4" /> <span>)}</span></Button>
 
           <Button onClick={handleFileSelect}>
-            <Upload className="w-4 h-4 mr-2" />
-            Upload Assets
-          </Button>
+            <Upload className="w-4 h-4 mr-2" /> <span>Upload Assets</span></Button>
         </div>
       </div>
 
@@ -556,10 +548,9 @@ export default function AssetLibrary({
                       key={category}
                       variant={selectedCategory === category ? "default" : "outline"}
                       size="sm"
-                      onClick={() => setSelectedCategory(category)}
+                      onClick={() => <span>setSelectedCategory(category)}
                     >
-                      {category}
-                    </Button>
+                      {category}</span></Button>
                   ))}
                 </div>
               </div>
@@ -573,14 +564,11 @@ export default function AssetLibrary({
                       key={tag}
                       variant={selectedTags.includes(tag) ? "default" : "outline"}
                       size="sm"
-                      onClick={() => toggleTag(tag)}
-                    >
-                      <Tag className="w-3 h-3 mr-1" />
+                      onClick={() => <span>toggleTag(tag)}
+                    ></span><Tag className="w-3 h-3 mr-1" />
                       {tag}
                       {selectedTags.includes(tag) && (
-                        <X className="w-3 h-3 ml-1" />
-                      )}
-                    </Button>
+                        <X className="w-3 h-3 ml-1" /> <span>)}</span></Button>
                   ))}
                 </div>
               </div>
@@ -594,9 +582,8 @@ export default function AssetLibrary({
                       key={option.value}
                       variant={sortBy === option.value ? "default" : "outline"}
                       size="sm"
-                      onClick={() => setSortBy(option.value)}
-                    >
-                      <option.icon className="w-3 h-3 mr-1" />
+                      onClick={() => <span>setSortBy(option.value)}
+                    ></span><option.icon className="w-3 h-3 mr-1" />
                       {option.label}
                     </Button>
                   ))}
@@ -619,7 +606,7 @@ export default function AssetLibrary({
         onDrop={handleDrop}
         onClick={handleFileSelect}
       >
-        <FolderOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+        <FolderOpen className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-lg font-medium text-foreground mb-2">
           Drop files here or click to upload
         </h3>
@@ -653,15 +640,13 @@ export default function AssetLibrary({
           )
         ) : (
           <div className="text-center py-12">
-            <Image className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+            <Image className="w-8 h-8 mx-auto mb-4 text-muted-foreground opacity-50" />
             <h3 className="text-lg font-medium text-foreground mb-2">No assets found</h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search or filters, or upload some assets to get started.
             </p>
             <Button onClick={handleFileSelect}>
-              <Plus className="w-4 h-4 mr-2" />
-              Upload First Asset
-            </Button>
+              <Plus className="w-4 h-4 mr-2" /> <span>Upload First Asset</span></Button>
           </div>
         )}
       </div>

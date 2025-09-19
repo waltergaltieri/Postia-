@@ -86,6 +86,9 @@ export default function Breadcrumbs({
   className
 }: BreadcrumbsProps) {
   const pathname = usePathname()
+  
+  // Check if we're in admin mode
+  const isAdminMode = pathname.startsWith('/dashboard/admin')
 
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     if (customItems) {
@@ -112,16 +115,29 @@ export default function Breadcrumbs({
       }
     })
 
-    // Add client context if available
-    if (currentClient && items.length > 1) {
+    // Add client context if available and not in admin mode
+    if (currentClient && items.length > 1 && !isAdminMode) {
       const clientItem: BreadcrumbItem = {
         label: currentClient.brandName,
-        href: `/dashboard/clients/${currentClient.id}`,
+        href: `/dashboard/client/${currentClient.id}`,
         metadata: { clientName: currentClient.brandName }
       }
       
       // Insert client context after dashboard
       items.splice(1, 0, clientItem)
+    }
+    
+    // Add admin context if in admin mode
+    if (isAdminMode && items.length > 1) {
+      const adminItem: BreadcrumbItem = {
+        label: 'Admin Dashboard',
+        href: '/dashboard/admin',
+        icon: Settings,
+        metadata: { status: 'Admin Mode' }
+      }
+      
+      // Insert admin context after dashboard
+      items.splice(1, 0, adminItem)
     }
 
     // Add campaign context if available
@@ -199,13 +215,24 @@ export default function Breadcrumbs({
       "border-b border-border/50 sticky top-0 z-40",
       className
     )}>
-      {/* Client Context */}
-      {currentClient && (
+      {/* Mode Indicator */}
+      {isAdminMode ? (
+        <>
+          <div className="flex items-center space-x-2 px-2 py-1 bg-primary/10 rounded-md">
+            <Settings className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Admin Mode</span>
+            <Badge variant="secondary" className="text-xs">
+              All Clients
+            </Badge>
+          </div>
+          <ArrowRight className="h-3 w-3 text-muted-foreground" />
+        </>
+      ) : currentClient ? (
         <>
           <ClientIndicator client={currentClient} />
           <ArrowRight className="h-3 w-3 text-muted-foreground" />
         </>
-      )}
+      ) : null}
 
       {/* Breadcrumb Navigation */}
       <nav className="flex items-center space-x-1 flex-1">

@@ -1,0 +1,698 @@
+{
+  "score": 100,
+  "timestamp": "2025-09-19T02:03:00.591Z",
+  "results": {
+    "iconSystemImplemented": false,
+    "iconComponentCreated": true,
+    "cssSystemIncluded": true,
+    "standardSizesUsed": 594,
+    "nonStandardSizesFound": 0,
+    "missingIconSizes": 25,
+    "colorStandardization": 167,
+    "alignmentIssues": 0,
+    "totalIconsAnalyzed": 619,
+    "files": [
+      {
+        "path": "app\\dashboard\\accessibility-demo\\page.tsx",
+        "icons": 9,
+        "standardSizes": 9,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\ai-generation-demo\\page.tsx",
+        "icons": 12,
+        "standardSizes": 12,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 2,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\animations-demo\\page.tsx",
+        "icons": 4,
+        "standardSizes": 4,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\asset-library-demo\\page.tsx",
+        "icons": 10,
+        "standardSizes": 10,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 7,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\calendar-demo\\page.tsx",
+        "icons": 2,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\client-brand-demo\\page.tsx",
+        "icons": 6,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\content-grid-demo\\page.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\integration-demo\\page.tsx",
+        "icons": 12,
+        "standardSizes": 12,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 8,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\toast-demo\\page.tsx",
+        "icons": 9,
+        "standardSizes": 9,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "app\\dashboard\\usability-testing\\page.tsx",
+        "icons": 23,
+        "standardSizes": 23,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 12,
+        "issues": []
+      },
+      {
+        "path": "components\\admin\\ErrorMonitoringDashboard.tsx",
+        "icons": 6,
+        "standardSizes": 5,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 5,
+        "issues": [
+          "Missing size specification for RefreshCw"
+        ]
+      },
+      {
+        "path": "components\\billing\\BillingDashboard.tsx",
+        "icons": 8,
+        "standardSizes": 8,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 6,
+        "issues": []
+      },
+      {
+        "path": "components\\calendar\\calendar-view.tsx",
+        "icons": 6,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\calendar\\context-menu.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\calendar\\inline-editor.tsx",
+        "icons": 2,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\campaigns\\CampaignContentCalendar.tsx",
+        "icons": 11,
+        "standardSizes": 11,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "components\\client\\asset-library.tsx",
+        "icons": 15,
+        "standardSizes": 15,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\client\\client-brand-switcher.tsx",
+        "icons": 11,
+        "standardSizes": 9,
+        "nonStandardSizes": 0,
+        "missingSizes": 2,
+        "standardColors": 5,
+        "issues": [
+          "Missing size specification for ChevronDown",
+          "Missing size specification for ChevronDown"
+        ]
+      },
+      {
+        "path": "components\\clients\\ClientManagementInterface.tsx",
+        "icons": 16,
+        "standardSizes": 16,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\AIContentGenerationInterface.tsx",
+        "icons": 20,
+        "standardSizes": 20,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\AIGenerationWorkflow.tsx",
+        "icons": 12,
+        "standardSizes": 12,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\ContentVersionComparator.tsx",
+        "icons": 29,
+        "standardSizes": 29,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 6,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\ContentVersionHistory.tsx",
+        "icons": 13,
+        "standardSizes": 13,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\PostApprovalWorkflow.tsx",
+        "icons": 21,
+        "standardSizes": 21,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\content\\PublicationScheduler.tsx",
+        "icons": 21,
+        "standardSizes": 21,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 6,
+        "issues": []
+      },
+      {
+        "path": "components\\dashboard\\AgencyOverview.tsx",
+        "icons": 15,
+        "standardSizes": 15,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 6,
+        "issues": []
+      },
+      {
+        "path": "components\\dashboard\\bulk-selection-system.tsx",
+        "icons": 6,
+        "standardSizes": 4,
+        "nonStandardSizes": 0,
+        "missingSizes": 2,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for Check",
+          "Missing size specification for Minus"
+        ]
+      },
+      {
+        "path": "components\\dashboard\\content-grid.tsx",
+        "icons": 7,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 2,
+        "issues": [
+          "Missing size specification for ChevronDown"
+        ]
+      },
+      {
+        "path": "components\\dashboard\\keyboard-shortcuts-help.tsx",
+        "icons": 3,
+        "standardSizes": 3,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\design\\AdvancedDesignGenerator.tsx",
+        "icons": 7,
+        "standardSizes": 7,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 3,
+        "issues": []
+      },
+      {
+        "path": "components\\dev\\accessibility-audit.tsx",
+        "icons": 5,
+        "standardSizes": 5,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\integration\\main-flow-integration.tsx",
+        "icons": 6,
+        "standardSizes": 5,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for ChevronRight"
+        ]
+      },
+      {
+        "path": "components\\integration\\workflow-integration.tsx",
+        "icons": 4,
+        "standardSizes": 3,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 1,
+        "issues": [
+          "Missing size specification for ArrowRight"
+        ]
+      },
+      {
+        "path": "components\\mobile\\mobile-form.tsx",
+        "icons": 3,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 2,
+        "issues": [
+          "Missing size specification for ChevronDown"
+        ]
+      },
+      {
+        "path": "components\\mobile\\mobile-modal.tsx",
+        "icons": 2,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\navigation\\breadcrumbs.tsx",
+        "icons": 3,
+        "standardSizes": 3,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\navigation\\mobile-header.tsx",
+        "icons": 7,
+        "standardSizes": 7,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\navigation\\navigation-sidebar.tsx",
+        "icons": 11,
+        "standardSizes": 10,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for ChevronDown"
+        ]
+      },
+      {
+        "path": "components\\navigation\\tour-progress-indicator.tsx",
+        "icons": 7,
+        "standardSizes": 7,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\analytics\\ab-testing-dashboard.tsx",
+        "icons": 10,
+        "standardSizes": 10,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 4,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\analytics\\real-time-analytics.tsx",
+        "icons": 13,
+        "standardSizes": 13,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 8,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\analytics\\tour-metrics-dashboard.tsx",
+        "icons": 6,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\branded-tour-demo.tsx",
+        "icons": 5,
+        "standardSizes": 5,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\feature-discovery-panel.tsx",
+        "icons": 19,
+        "standardSizes": 19,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 4,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\mobile\\mobile-tour-controls.tsx",
+        "icons": 16,
+        "standardSizes": 16,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\mobile\\mobile-tour-popover.tsx",
+        "icons": 4,
+        "standardSizes": 4,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-accessibility-test.tsx",
+        "icons": 8,
+        "standardSizes": 8,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 2,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-controls.tsx",
+        "icons": 8,
+        "standardSizes": 0,
+        "nonStandardSizes": 0,
+        "missingSizes": 8,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for RotateCcw",
+          "Missing size specification for Pause",
+          "Missing size specification for Play",
+          "Missing size specification for ChevronLeft",
+          "Missing size specification for ChevronRight",
+          "Missing size specification for SkipForward",
+          "Missing size specification for HelpCircle",
+          "Missing size specification for X"
+        ]
+      },
+      {
+        "path": "components\\onboarding\\tour-help-menu.tsx",
+        "icons": 11,
+        "standardSizes": 11,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-library.tsx",
+        "icons": 13,
+        "standardSizes": 13,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-management-hub.tsx",
+        "icons": 6,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 1,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-popover.tsx",
+        "icons": 4,
+        "standardSizes": 4,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-replay-manager.tsx",
+        "icons": 15,
+        "standardSizes": 15,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 4,
+        "issues": []
+      },
+      {
+        "path": "components\\onboarding\\tour-settings.tsx",
+        "icons": 27,
+        "standardSizes": 27,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 6,
+        "issues": []
+      },
+      {
+        "path": "components\\testing\\ab-testing.tsx",
+        "icons": 11,
+        "standardSizes": 11,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 5,
+        "issues": []
+      },
+      {
+        "path": "components\\testing\\feedback-dashboard.tsx",
+        "icons": 27,
+        "standardSizes": 24,
+        "nonStandardSizes": 0,
+        "missingSizes": 3,
+        "standardColors": 14,
+        "issues": [
+          "Missing size specification for Star",
+          "Missing size specification for Star",
+          "Missing size specification for Star"
+        ]
+      },
+      {
+        "path": "components\\testing\\usability-testing-interface.tsx",
+        "icons": 13,
+        "standardSizes": 13,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 4,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\alert-dialog.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\button.stories.tsx",
+        "icons": 7,
+        "standardSizes": 7,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\calendar.tsx",
+        "icons": 2,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\card.stories.tsx",
+        "icons": 3,
+        "standardSizes": 3,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\content-card.tsx",
+        "icons": 5,
+        "standardSizes": 5,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\dialog.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\mobile-modal.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\modal.tsx",
+        "icons": 1,
+        "standardSizes": 1,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\optimized-image.tsx",
+        "icons": 2,
+        "standardSizes": 2,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\responsive-dropdown.tsx",
+        "icons": 3,
+        "standardSizes": 0,
+        "nonStandardSizes": 0,
+        "missingSizes": 3,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for Check",
+          "Missing size specification for Circle",
+          "Missing size specification for ChevronRight"
+        ]
+      },
+      {
+        "path": "components\\ui\\responsive-modal.tsx",
+        "icons": 1,
+        "standardSizes": 0,
+        "nonStandardSizes": 0,
+        "missingSizes": 1,
+        "standardColors": 0,
+        "issues": [
+          "Missing size specification for X"
+        ]
+      },
+      {
+        "path": "components\\ui\\select.tsx",
+        "icons": 4,
+        "standardSizes": 4,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      },
+      {
+        "path": "components\\ui\\toast.tsx",
+        "icons": 6,
+        "standardSizes": 6,
+        "nonStandardSizes": 0,
+        "missingSizes": 0,
+        "standardColors": 0,
+        "issues": []
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "sizing",
+      "description": "Add missing size specifications",
+      "action": "Add explicit size classes to 25 icons"
+    },
+    {
+      "priority": "low",
+      "category": "enhancement",
+      "description": "Implement semantic icon usage",
+      "action": "Use semantic icon names and context-aware sizing for better maintainability"
+    }
+  ]
+}

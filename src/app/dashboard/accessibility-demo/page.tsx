@@ -224,9 +224,7 @@ export default function AccessibilityDemoPage() {
                 variant="default"
                 announceOnClick="Acción principal ejecutada"
                 aria-describedby="primary-btn-desc"
-              >
-                Botón Principal
-              </Button>
+              > <span>Botón Principal</span></Button>
               <p id="primary-btn-desc" className="sr-only">
                 Ejecuta la acción principal del formulario
               </p>
@@ -236,9 +234,7 @@ export default function AccessibilityDemoPage() {
                 loading
                 loadingText="Guardando..."
                 aria-describedby="loading-btn-desc"
-              >
-                Guardar
-              </Button>
+              > <span>Guardar</span></Button>
               <p id="loading-btn-desc" className="sr-only">
                 Guarda los cambios actuales
               </p>
@@ -248,9 +244,7 @@ export default function AccessibilityDemoPage() {
                 size="sm"
                 aria-label="Eliminar elemento seleccionado"
                 announceOnClick="Elemento eliminado"
-              >
-                Eliminar
-              </Button>
+              > <span>Eliminar</span></Button>
 
               <Button
                 variant="ghost"
@@ -373,12 +367,11 @@ export default function AccessibilityDemoPage() {
             <h3 className="text-lg font-medium">Auditoría de Accesibilidad</h3>
             <Button
               variant="outline"
-              onClick={() => setShowAudit(!showAudit)}
+              onClick={() => <span>setShowAudit(!showAudit)}
               aria-expanded={showAudit}
               aria-controls="accessibility-audit"
             >
-              {showAudit ? 'Ocultar' : 'Mostrar'} Auditoría
-            </Button>
+              {showAudit ? 'Ocultar' : 'Mostrar'} Auditoría</span></Button>
           </div>
 
           <p className="text-sm text-muted-foreground mb-4">

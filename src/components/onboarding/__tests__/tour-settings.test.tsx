@@ -140,7 +140,7 @@ describe('TourSettings', () => {
   })
 
   it('saves preferences when save button is clicked', async () => {
-    render(<TourSettings />)
+    render(<TourSettings /> <span>)
     
     await waitFor(() => {
       expect(screen.getByText('Save Preferences')).toBeInTheDocument()
@@ -158,7 +158,7 @@ describe('TourSettings', () => {
   })
 
   it('displays tour history', async () => {
-    render(<TourSettings />)
+    render(</span><TourSettings />)
     
     // Switch to history tab
     const historyTab = screen.getByText('History')

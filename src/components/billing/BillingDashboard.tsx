@@ -288,7 +288,7 @@ export default function BillingDashboard() {
                     <ul className="space-y-2 text-sm">
                       {plan.features.map((feature: string, index: number) => (
                         <li key={index} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-success-600" />
                           {feature}
                         </li>
                       ))}
@@ -298,20 +298,17 @@ export default function BillingDashboard() {
                       <Button
                         className="w-full"
                         variant={isCurrentPlan ? "outline" : "default"}
-                        onClick={() => handleSubscriptionChange(planKey)}
+                        onClick={() => <span>handleSubscriptionChange(planKey)}
                         disabled={isCurrentPlan || actionLoading === `subscription-${planKey}`}
                       >
                         {actionLoading === `subscription-${planKey}` ? 
                           'Processing...' : 
                           isCurrentPlan ? 'Current Plan' : 'Upgrade'
-                        }
-                      </Button>
+                        }</span></Button>
                     )}
 
                     {isCustom && (
-                      <Button className="w-full" variant="outline">
-                        Contact Sales
-                      </Button>
+                      <Button className="w-full" variant="outline"> <span>Contact Sales</span></Button>
                     )}
                   </CardContent>
                 </Card>
@@ -339,9 +336,7 @@ export default function BillingDashboard() {
                     variant="destructive"
                     onClick={handleCancelSubscription}
                     disabled={actionLoading === 'cancel'}
-                  >
-                    {actionLoading === 'cancel' ? 'Cancelling...' : 'Cancel Subscription'}
-                  </Button>
+                  > <span>{actionLoading === 'cancel' ? 'Cancelling...' : 'Cancel Subscription'}</span></Button>
                 </div>
               </CardContent>
             </Card>
@@ -370,14 +365,13 @@ export default function BillingDashboard() {
 
                   <Button
                     className="w-full"
-                    onClick={() => handleTokenPurchase(packageKey)}
+                    onClick={() => <span>handleTokenPurchase(packageKey)}
                     disabled={actionLoading === `tokens-${packageKey}`}
                   >
                     {actionLoading === `tokens-${packageKey}` ? 
                       'Processing...' : 
                       'Purchase'
-                    }
-                  </Button>
+                    }</span></Button>
                 </CardContent>
               </Card>
             ))}
@@ -393,11 +387,11 @@ export default function BillingDashboard() {
             <CardContent className="space-y-3">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                  <AlertTriangle className="h-4 w-4 text-warning-600" />
                   <span>Idea Generation: ~50 tokens</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4 text-blue-500" />
+                  <AlertTriangle className="h-4 w-4 text-info-600" />
                   <span>Copy Creation: ~100 tokens</span>
                 </div>
                 <div className="flex items-center gap-2">

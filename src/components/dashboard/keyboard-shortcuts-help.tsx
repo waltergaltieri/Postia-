@@ -48,9 +48,9 @@ export function KeyboardShortcutsHelp({ actions, isOpen, onClose }: KeyboardShor
         </div>
         
         {/* Info */}
-        <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg mb-4">
-          <Info className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-          <p className="text-sm text-blue-800 dark:text-blue-200">
+        <div className="flex items-start gap-2 p-3 bg-info-50 dark:bg-info-950/20 border border-info-200 dark:border-info-800 rounded-lg mb-4">
+          <Info className="w-4 h-4 text-info-600 mt-0.5 flex-shrink-0" />
+          <p className="text-sm text-info-800 dark:text-info-200">
             Los atajos solo funcionan cuando tienes elementos seleccionados
           </p>
         </div>
@@ -112,9 +112,7 @@ export function KeyboardShortcutsHelp({ actions, isOpen, onClose }: KeyboardShor
           <Button
             onClick={onClose}
             className="w-full"
-          >
-            Entendido
-          </Button>
+          > <span>Entendido</span></Button>
         </div>
       </div>
     </div>

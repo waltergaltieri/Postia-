@@ -24,7 +24,7 @@ export default function AuthErrorPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 text-center">
         <div>
-          <div className="mx-auto h-12 w-12 text-red-600">
+          <div className="mx-auto h-12 w-12 text-error-600">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
@@ -44,7 +44,7 @@ export default function AuthErrorPage() {
 
         <div className="space-y-4">
           {error === 'AccountNotFound' && (
-            <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded text-sm">
+            <div className="bg-info-50 border border-info-200 text-info-700 px-4 py-3 rounded text-sm">
               <p>
                 If you're trying to join an agency, you need to be invited by an agency owner or manager.
                 Please contact them to send you an invitation.
@@ -53,7 +53,7 @@ export default function AuthErrorPage() {
           )}
 
           {error === 'EmailNotVerified' && (
-            <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded text-sm">
+            <div className="bg-warning-50 border border-warning-200 text-warning-700 px-4 py-3 rounded text-sm">
               <p>
                 Please check your email for a verification link. If you didn't receive it,
                 you can request a new one.
@@ -64,7 +64,7 @@ export default function AuthErrorPage() {
           <div className="flex flex-col space-y-2">
             <Link
               href="/auth/signin"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
               Try Again
             </Link>

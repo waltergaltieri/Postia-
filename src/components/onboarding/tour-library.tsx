@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
+import {
   Search,
   Filter,
   SortAsc,
@@ -54,8 +54,8 @@ const categoryIcons = {
 }
 
 const categoryColors = {
-  [TOUR_CATEGORIES.ONBOARDING]: 'bg-blue-500',
-  [TOUR_CATEGORIES.FEATURE]: 'bg-green-500',
+  [TOUR_CATEGORIES.ONBOARDING]: 'bg-info-500',
+  [TOUR_CATEGORIES.FEATURE]: 'bg-success-500',
   [TOUR_CATEGORIES.CONTEXTUAL]: 'bg-purple-500',
   [TOUR_CATEGORIES.HELP]: 'bg-orange-500',
 }
@@ -81,7 +81,12 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
   const [showFilters, setShowFilters] = useState(false)
 
   const { startTour } = useTour()
-  const { getTourProgress } = useTourProgress()
+  const { loadProgress, progressData } = useTourProgress()
+
+  // Helper function to get tour progress
+  const getTourProgress = (tourId: string) => {
+    return progressData.find(progress => progress.tourId === tourId)
+  }
 
   // Load tours
   useEffect(() => {
@@ -186,9 +191,9 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="w-4 h-4 text-green-500" />
+        return <CheckCircle className="w-4 h-4 text-success-600" />
       case 'in_progress':
-        return <Play className="w-4 h-4 text-blue-500" />
+        return <Play className="w-4 h-4 text-info-600" />
       default:
         return <Play className="w-4 h-4 text-muted-foreground" />
     }
@@ -197,9 +202,9 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
-        return <Badge variant="secondary" className="text-green-700 bg-green-100">Completed</Badge>
+        return <Badge variant="secondary" className="text-success-700 bg-success-100">Completed</Badge>
       case 'in_progress':
-        return <Badge variant="secondary" className="text-blue-700 bg-blue-100">In Progress</Badge>
+        return <Badge variant="secondary" className="text-info-700 bg-info-100">In Progress</Badge>
       case 'skipped':
         return <Badge variant="secondary" className="text-gray-700 bg-gray-100">Skipped</Badge>
       default:
@@ -311,6 +316,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
               <select
                 value={filters.category || ''}
                 onChange={(e) => setFilters(prev => ({ ...prev, category: e.target.value || null }))}
+                aria-label="Filter tours by category"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="">All Categories</option>
@@ -324,6 +330,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
               <select
                 value={filters.status || ''}
                 onChange={(e) => setFilters(prev => ({ ...prev, status: e.target.value || null }))}
+                aria-label="Filter tours by completion status"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="">All Status</option>
@@ -338,6 +345,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
+                aria-label="Sort tours by criteria"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <option value="name">Sort by Name</option>
@@ -368,10 +376,10 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
       {/* Tours Display */}
       {filteredAndSortedTours.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-64 text-center">
-          <BookOpen className="w-12 h-12 text-muted-foreground mb-4" />
+          <BookOpen className="w-8 h-8 text-muted-foreground mb-4" />
           <h3 className="text-lg font-medium text-foreground mb-2">No tours found</h3>
           <p className="text-muted-foreground mb-4">
-            {hasActiveFilters 
+            {hasActiveFilters
               ? 'Try adjusting your filters to see more tours'
               : 'No tours are currently available'
             }
@@ -384,15 +392,15 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
         </div>
       ) : (
         <div className={cn(
-          viewMode === 'grid' 
-            ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3' 
+          viewMode === 'grid'
+            ? 'grid gap-6 md:grid-cols-2 lg:grid-cols-3'
             : 'space-y-4'
         )}>
           {filteredAndSortedTours.map((tour) => {
             const status = getTourStatus(tour.id)
             const CategoryIcon = categoryIcons[tour.category as keyof typeof categoryIcons]
             const categoryColor = categoryColors[tour.category as keyof typeof categoryColors]
-            
+
             return viewMode === 'grid' ? (
               <Card key={tour.id} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between mb-4">
@@ -414,11 +422,11 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
                   </div>
                   {getStatusBadge(status)}
                 </div>
-                
+
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
                   {tour.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4 text-xs text-muted-foreground">
                     <div className="flex items-center space-x-1">
@@ -430,7 +438,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
                       <span className="capitalize">{status.replace('_', ' ')}</span>
                     </div>
                   </div>
-                  
+
                   <Button
                     size="sm"
                     onClick={() => handleTourStart(tour.id)}
@@ -451,7 +459,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
                         <CategoryIcon className="w-5 h-5 text-white" />
                       </div>
                     )}
-                    
+
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2 mb-1">
                         <h3 className="font-medium text-foreground truncate">{tour.name}</h3>
@@ -473,7 +481,7 @@ export default function TourLibrary({ className, onTourStart }: TourLibraryProps
                       </div>
                     </div>
                   </div>
-                  
+
                   <Button
                     size="sm"
                     onClick={() => handleTourStart(tour.id)}

@@ -34,7 +34,7 @@ export default function ProtectedRoute({
     return (
       fallback || (
         <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-info-600"></div>
         </div>
       )
     );
@@ -54,7 +54,7 @@ export default function ProtectedRoute({
             </p>
             <a
               href="/auth/signin"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700"
             >
               Sign In
             </a>
@@ -78,7 +78,7 @@ export default function ProtectedRoute({
             </p>
             <a
               href="/dashboard"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700"
             >
               Go to Dashboard
             </a>
@@ -102,7 +102,7 @@ export default function ProtectedRoute({
             </p>
             <a
               href="/dashboard"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700"
             >
               Go to Dashboard
             </a>

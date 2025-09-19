@@ -71,7 +71,7 @@ export default function CompleteRegistrationPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-info-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Cargando...</p>
         </div>
       </div>
@@ -96,8 +96,8 @@ export default function CompleteRegistrationPage() {
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="text-sm text-red-700">{error}</div>
+            <div className="rounded-md bg-error-50 p-4">
+              <div className="text-sm text-error-700">{error}</div>
             </div>
           )}
           
@@ -113,7 +113,7 @@ export default function CompleteRegistrationPage() {
                 required
                 value={formData.agencyName}
                 onChange={handleInputChange}
-                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-info-500 focus:z-10 sm:text-sm"
                 placeholder="Ej: Mi Agencia Digital"
               />
             </div>
@@ -130,7 +130,7 @@ export default function CompleteRegistrationPage() {
                     value="OWNER"
                     checked={formData.role === 'OWNER'}
                     onChange={handleInputChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-info-600 focus:ring-blue-500 border-gray-300"
                   />
                   <span className="ml-3 text-sm text-gray-900">Propietario - Control total de la agencia</span>
                 </label>
@@ -141,7 +141,7 @@ export default function CompleteRegistrationPage() {
                     value="MANAGER"
                     checked={formData.role === 'MANAGER'}
                     onChange={handleInputChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-info-600 focus:ring-blue-500 border-gray-300"
                   />
                   <span className="ml-3 text-sm text-gray-900">Gerente - Gestión de equipos y proyectos</span>
                 </label>
@@ -152,7 +152,7 @@ export default function CompleteRegistrationPage() {
                     value="EDITOR"
                     checked={formData.role === 'EDITOR'}
                     onChange={handleInputChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-info-600 focus:ring-blue-500 border-gray-300"
                   />
                   <span className="ml-3 text-sm text-gray-900">Editor - Creación y edición de contenido</span>
                 </label>
@@ -163,7 +163,7 @@ export default function CompleteRegistrationPage() {
                     value="VIEWER"
                     checked={formData.role === 'VIEWER'}
                     onChange={handleInputChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-info-600 focus:ring-blue-500 border-gray-300"
                   />
                   <span className="ml-3 text-sm text-gray-900">Visualizador - Solo lectura y revisión</span>
                 </label>
@@ -175,7 +175,7 @@ export default function CompleteRegistrationPage() {
             <button
               type="submit"
               disabled={isLoading || !formData.agencyName.trim()}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-info-600 hover:bg-info-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -189,9 +189,7 @@ export default function CompleteRegistrationPage() {
           </div>
           
           <div className="text-center">
-            <Link href="/auth/signin" className="text-sm text-blue-600 hover:text-blue-500">
-              Volver al inicio de sesión
-            </Link>
+            <Link href="/auth/signin" className="text-sm text-info-600 hover:text-info-600"> <span>Volver al inicio de sesión</span></Link>
           </div>
         </form>
       </div>

@@ -248,12 +248,12 @@ const VariantResultCard: React.FC<{
   return (
     <Card className={cn(
       'relative',
-      isWinner && 'ring-2 ring-green-500 bg-green-50/50',
-      variant.isControl && 'border-blue-200'
+      isWinner && 'ring-2 ring-green-500 bg-success-50/50',
+      variant.isControl && 'border-info-200'
     )}>
       {isWinner && (
         <div className="absolute -top-2 -right-2">
-          <Badge className="bg-green-600 text-white">
+          <Badge className="bg-success-600 text-white">
             <Target className="h-3 w-3 mr-1" />
             Ganador
           </Badge>
@@ -305,12 +305,12 @@ const VariantResultCard: React.FC<{
         </div>
         
         {result.isStatisticallySignificant ? (
-          <div className="flex items-center gap-2 text-green-700 text-sm">
+          <div className="flex items-center gap-2 text-success-700 text-sm">
             <CheckCircle className="h-4 w-4" />
             Estadísticamente significativo ({result.confidenceLevel}%)
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-yellow-700 text-sm">
+          <div className="flex items-center gap-2 text-warning-700 text-sm">
             <AlertCircle className="h-4 w-4" />
             Necesita más datos para significancia
           </div>
@@ -424,9 +424,7 @@ export const ABTestingDashboard: React.FC<ABTestingDashboardProps> = ({
           </p>
         </div>
         <Button>
-          <FlaskConical className="h-4 w-4 mr-2" />
-          Nuevo Test A/B
-        </Button>
+          <FlaskConical className="h-4 w-4 mr-2" /> <span>Nuevo Test A/B</span></Button>
       </div>
 
       {/* Overview Stats */}
@@ -434,7 +432,7 @@ export const ABTestingDashboard: React.FC<ABTestingDashboardProps> = ({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
-              <FlaskConical className="h-4 w-4 text-blue-600" />
+              <FlaskConical className="h-4 w-4 text-info-600" />
               <div>
                 <div className="text-2xl font-bold">{filteredTests.length}</div>
                 <div className="text-xs text-muted-foreground">Tests totales</div>
@@ -446,7 +444,7 @@ export const ABTestingDashboard: React.FC<ABTestingDashboardProps> = ({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
-              <Play className="h-4 w-4 text-green-600" />
+              <Play className="h-4 w-4 text-success-600" />
               <div>
                 <div className="text-2xl font-bold">{runningTests.length}</div>
                 <div className="text-xs text-muted-foreground">Ejecutándose</div>
@@ -458,7 +456,7 @@ export const ABTestingDashboard: React.FC<ABTestingDashboardProps> = ({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-emerald-600" />
+              <CheckCircle className="h-4 w-4 text-success-600" />
               <div>
                 <div className="text-2xl font-bold">{completedTests.length}</div>
                 <div className="text-xs text-muted-foreground">Completados</div>
@@ -501,7 +499,7 @@ export const ABTestingDashboard: React.FC<ABTestingDashboardProps> = ({
           {runningTests.length === 0 ? (
             <Card>
               <CardContent className="text-center py-8">
-                <FlaskConical className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <FlaskConical className="h-8 w-8 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-muted-foreground">
                   No hay tests A/B ejecutándose
                 </h3>

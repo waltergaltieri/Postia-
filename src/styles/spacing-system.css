@@ -1,0 +1,336 @@
+/* ===== CONSISTENT SPACING SYSTEM ===== */
+/* Based on 4px grid system from design tokens */
+
+/* ===== SPACING UTILITY CLASSES ===== */
+/* These classes provide consistent spacing throughout the application */
+
+/* Padding utilities using design tokens */
+.spacing-p-xs { padding: var(--space-1); }      /* 4px */
+.spacing-p-sm { padding: var(--space-2); }      /* 8px */
+.spacing-p-md { padding: var(--space-4); }      /* 16px */
+.spacing-p-lg { padding: var(--space-6); }      /* 24px */
+.spacing-p-xl { padding: var(--space-8); }      /* 32px */
+.spacing-p-2xl { padding: var(--space-12); }    /* 48px */
+
+/* Horizontal padding */
+.spacing-px-xs { padding-left: var(--space-1); padding-right: var(--space-1); }
+.spacing-px-sm { padding-left: var(--space-2); padding-right: var(--space-2); }
+.spacing-px-md { padding-left: var(--space-4); padding-right: var(--space-4); }
+.spacing-px-lg { padding-left: var(--space-6); padding-right: var(--space-6); }
+.spacing-px-xl { padding-left: var(--space-8); padding-right: var(--space-8); }
+
+/* Vertical padding */
+.spacing-py-xs { padding-top: var(--space-1); padding-bottom: var(--space-1); }
+.spacing-py-sm { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+.spacing-py-md { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.spacing-py-lg { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+.spacing-py-xl { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+
+/* Margin utilities using design tokens */
+.spacing-m-xs { margin: var(--space-1); }       /* 4px */
+.spacing-m-sm { margin: var(--space-2); }       /* 8px */
+.spacing-m-md { margin: var(--space-4); }       /* 16px */
+.spacing-m-lg { margin: var(--space-6); }       /* 24px */
+.spacing-m-xl { margin: var(--space-8); }       /* 32px */
+.spacing-m-2xl { margin: var(--space-12); }     /* 48px */
+
+/* Horizontal margin */
+.spacing-mx-xs { margin-left: var(--space-1); margin-right: var(--space-1); }
+.spacing-mx-sm { margin-left: var(--space-2); margin-right: var(--space-2); }
+.spacing-mx-md { margin-left: var(--space-4); margin-right: var(--space-4); }
+.spacing-mx-lg { margin-left: var(--space-6); margin-right: var(--space-6); }
+.spacing-mx-xl { margin-left: var(--space-8); margin-right: var(--space-8); }
+.spacing-mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Vertical margin */
+.spacing-my-xs { margin-top: var(--space-1); margin-bottom: var(--space-1); }
+.spacing-my-sm { margin-top: var(--space-2); margin-bottom: var(--space-2); }
+.spacing-my-md { margin-top: var(--space-4); margin-bottom: var(--space-4); }
+.spacing-my-lg { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+.spacing-my-xl { margin-top: var(--space-8); margin-bottom: var(--space-8); }
+
+/* Bottom margin for consistent section spacing */
+.spacing-mb-xs { margin-bottom: var(--space-1); }
+.spacing-mb-sm { margin-bottom: var(--space-2); }
+.spacing-mb-md { margin-bottom: var(--space-4); }
+.spacing-mb-lg { margin-bottom: var(--space-6); }
+.spacing-mb-xl { margin-bottom: var(--space-8); }
+.spacing-mb-2xl { margin-bottom: var(--space-12); }
+
+/* Top margin */
+.spacing-mt-xs { margin-top: var(--space-1); }
+.spacing-mt-sm { margin-top: var(--space-2); }
+.spacing-mt-md { margin-top: var(--space-4); }
+.spacing-mt-lg { margin-top: var(--space-6); }
+.spacing-mt-xl { margin-top: var(--space-8); }
+.spacing-mt-2xl { margin-top: var(--space-12); }
+
+/* Gap utilities for flexbox and grid */
+.spacing-gap-xs { gap: var(--space-1); }
+.spacing-gap-sm { gap: var(--space-2); }
+.spacing-gap-md { gap: var(--space-4); }
+.spacing-gap-lg { gap: var(--space-6); }
+.spacing-gap-xl { gap: var(--space-8); }
+
+/* ===== COMPONENT-SPECIFIC SPACING STANDARDS ===== */
+
+/* Card spacing standardization */
+.card-spacing-standard {
+  padding: var(--space-6); /* 24px - consistent with design tokens */
+}
+
+.card-spacing-compact {
+  padding: var(--space-4); /* 16px - for smaller cards */
+}
+
+.card-spacing-comfortable {
+  padding: var(--space-8); /* 32px - for larger cards */
+}
+
+/* Card header spacing */
+.card-header-spacing {
+  margin-bottom: var(--space-4); /* 16px between header and content */
+}
+
+.card-header-spacing > * + * {
+  margin-top: var(--space-2); /* 8px between header elements */
+}
+
+/* Card content spacing */
+.card-content-spacing {
+  padding-top: var(--space-4); /* 16px from header */
+}
+
+.card-content-spacing > * + * {
+  margin-top: var(--space-3); /* 12px between content elements */
+}
+
+/* Card footer spacing */
+.card-footer-spacing {
+  padding-top: var(--space-4); /* 16px from content */
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+/* Container spacing standardization */
+.container-spacing-standard {
+  padding: var(--space-6); /* 24px */
+  margin-bottom: var(--space-8); /* 32px between sections */
+}
+
+.container-spacing-compact {
+  padding: var(--space-4); /* 16px */
+  margin-bottom: var(--space-6); /* 24px between sections */
+}
+
+.container-spacing-comfortable {
+  padding: var(--space-8); /* 32px */
+  margin-bottom: var(--space-12); /* 48px between sections */
+}
+
+/* Section spacing */
+.section-spacing-standard {
+  margin-bottom: var(--space-8); /* 32px between major sections */
+}
+
+.section-spacing-large {
+  margin-bottom: var(--space-12); /* 48px between major sections */
+}
+
+/* List spacing standardization */
+.list-spacing-standard > * + * {
+  margin-top: var(--space-3); /* 12px between list items */
+}
+
+.list-spacing-compact > * + * {
+  margin-top: var(--space-2); /* 8px between list items */
+}
+
+.list-spacing-comfortable > * + * {
+  margin-top: var(--space-4); /* 16px between list items */
+}
+
+/* Navigation spacing */
+.nav-item-spacing {
+  padding: var(--space-3) var(--space-4); /* 12px vertical, 16px horizontal */
+  margin-bottom: var(--space-1); /* 4px between nav items */
+}
+
+.nav-section-spacing {
+  margin-bottom: var(--space-6); /* 24px between nav sections */
+}
+
+/* Form spacing standardization */
+.form-spacing-standard .form-group {
+  margin-bottom: var(--space-4); /* 16px between form groups */
+}
+
+.form-spacing-standard .form-group label {
+  margin-bottom: var(--space-2); /* 8px between label and input */
+  display: block;
+}
+
+.form-spacing-standard .form-actions {
+  margin-top: var(--space-6); /* 24px before form actions */
+  padding-top: var(--space-4); /* 16px padding above actions */
+  border-top: 1px solid var(--border);
+}
+
+.form-spacing-standard .form-actions > * + * {
+  margin-left: var(--space-3); /* 12px between form buttons */
+}
+
+/* Grid spacing standardization */
+.grid-spacing-standard {
+  gap: var(--space-4); /* 16px gap in grids */
+}
+
+.grid-spacing-compact {
+  gap: var(--space-3); /* 12px gap in grids */
+}
+
+.grid-spacing-comfortable {
+  gap: var(--space-6); /* 24px gap in grids */
+}
+
+/* ===== RESPONSIVE SPACING ADJUSTMENTS ===== */
+
+/* Mobile spacing adjustments */
+@media (max-width: 768px) {
+  .card-spacing-standard {
+    padding: var(--space-4); /* Reduce to 16px on mobile */
+  }
+  
+  .container-spacing-standard {
+    padding: var(--space-4); /* Reduce to 16px on mobile */
+    margin-bottom: var(--space-6); /* Reduce to 24px on mobile */
+  }
+  
+  .section-spacing-standard {
+    margin-bottom: var(--space-6); /* Reduce to 24px on mobile */
+  }
+  
+  .form-spacing-standard .form-actions {
+    margin-top: var(--space-4); /* Reduce to 16px on mobile */
+  }
+  
+  .grid-spacing-standard {
+    gap: var(--space-3); /* Reduce to 12px on mobile */
+  }
+}
+
+/* Tablet spacing adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container-spacing-comfortable {
+    padding: var(--space-6); /* Reduce comfortable padding on tablet */
+  }
+}
+
+/* ===== SPACING CONSISTENCY HELPERS ===== */
+
+/* Stack spacing - for vertical layouts */
+.stack-spacing-xs > * + * { margin-top: var(--space-1); }
+.stack-spacing-sm > * + * { margin-top: var(--space-2); }
+.stack-spacing-md > * + * { margin-top: var(--space-4); }
+.stack-spacing-lg > * + * { margin-top: var(--space-6); }
+.stack-spacing-xl > * + * { margin-top: var(--space-8); }
+
+/* Inline spacing - for horizontal layouts */
+.inline-spacing-xs > * + * { margin-left: var(--space-1); }
+.inline-spacing-sm > * + * { margin-left: var(--space-2); }
+.inline-spacing-md > * + * { margin-left: var(--space-4); }
+.inline-spacing-lg > * + * { margin-left: var(--space-6); }
+.inline-spacing-xl > * + * { margin-left: var(--space-8); }
+
+/* Content spacing - for text content */
+.content-spacing-standard p + p { margin-top: var(--space-4); }
+.content-spacing-standard h1 + *, 
+.content-spacing-standard h2 + *, 
+.content-spacing-standard h3 + * { margin-top: var(--space-4); }
+.content-spacing-standard * + h1,
+.content-spacing-standard * + h2,
+.content-spacing-standard * + h3 { margin-top: var(--space-6); }
+
+/* ===== COMPONENT SPACING OVERRIDES ===== */
+
+/* Ensure consistent spacing in existing components */
+.btn-premium,
+.btn-premium-primary,
+.btn-premium-secondary {
+  padding: var(--space-2) var(--space-4); /* 8px vertical, 16px horizontal */
+}
+
+.btn-premium.size-sm {
+  padding: var(--space-1-5) var(--space-3); /* 6px vertical, 12px horizontal */
+}
+
+.btn-premium.size-lg {
+  padding: var(--space-3) var(--space-6); /* 12px vertical, 24px horizontal */
+}
+
+/* Card premium spacing consistency */
+.card-premium {
+  padding: var(--space-6); /* 24px consistent padding */
+}
+
+.card-premium .card-header {
+  margin-bottom: var(--space-4); /* 16px between header and content */
+}
+
+.card-premium .card-content {
+  padding-top: var(--space-4); /* 16px from header */
+}
+
+.card-premium .card-footer {
+  padding-top: var(--space-4); /* 16px from content */
+  margin-top: var(--space-4);
+}
+
+/* Navigation item spacing consistency */
+.nav-item {
+  padding: var(--space-3) var(--space-4); /* 12px vertical, 16px horizontal */
+  margin-bottom: var(--space-1); /* 4px between items */
+}
+
+/* Content grid spacing consistency */
+.content-grid {
+  gap: var(--space-4); /* 16px gap */
+}
+
+.content-masonry {
+  column-gap: var(--space-6); /* 24px column gap */
+}
+
+/* Mobile content grid spacing */
+.mobile-content-grid {
+  gap: var(--space-3); /* 12px gap on mobile */
+}
+
+@media (max-width: 640px) {
+  .mobile-content-grid {
+    gap: var(--space-2); /* 8px gap on small mobile */
+  }
+}
+
+/* ===== DEBUGGING HELPERS ===== */
+/* These classes can be used during development to visualize spacing */
+
+.debug-spacing * {
+  outline: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+.debug-spacing .spacing-p-xs,
+.debug-spacing .spacing-p-sm,
+.debug-spacing .spacing-p-md,
+.debug-spacing .spacing-p-lg,
+.debug-spacing .spacing-p-xl {
+  background-color: rgba(0, 255, 0, 0.1) !important;
+}
+
+.debug-spacing .spacing-m-xs,
+.debug-spacing .spacing-m-sm,
+.debug-spacing .spacing-m-md,
+.debug-spacing .spacing-m-lg,
+.debug-spacing .spacing-m-xl {
+  background-color: rgba(0, 0, 255, 0.1) !important;
+}

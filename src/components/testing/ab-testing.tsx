@@ -150,7 +150,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <TestTube className="h-5 w-5 text-blue-600" />
+                <TestTube className="h-5 w-5 text-info-600" />
                 {testConfig.name}
               </CardTitle>
               <CardDescription>{testConfig.description}</CardDescription>
@@ -158,14 +158,10 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
             <div className="flex gap-2">
               {!isRunning && testResults.length === 0 && (
                 <Button onClick={startTest}>
-                  <Shuffle className="h-4 w-4 mr-2" />
-                  Start A/B Test
-                </Button>
+                  <Shuffle className="h-4 w-4 mr-2" /> <span>Start A/B Test</span></Button>
               )}
               {isRunning && (
-                <Button variant="outline" onClick={stopTest}>
-                  Stop Test
-                </Button>
+                <Button variant="outline" onClick={stopTest}> <span>Stop Test</span></Button>
               )}
             </div>
           </div>
@@ -190,7 +186,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <Target className="h-4 w-4 text-blue-600" />
+              <Target className="h-4 w-4 text-info-600" />
               <span className="capitalize">{testConfig.targetMetric}</span>
             </div>
           </CardContent>
@@ -202,7 +198,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <Shuffle className="h-4 w-4 text-green-600" />
+              <Shuffle className="h-4 w-4 text-success-600" />
               <span>{testConfig.variants.length} variants</span>
             </div>
           </CardContent>
@@ -248,7 +244,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg">{variant.name}</CardTitle>
                   {winningVariant?.variantId === variant.id && (
-                    <Badge className="bg-green-100 text-green-800">
+                    <Badge className="bg-success-100 text-success-800">
                       <CheckCircle className="h-3 w-3 mr-1" />
                       Winner
                     </Badge>
@@ -259,7 +255,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
               <CardContent>
                 <div className="border rounded-lg p-4 bg-gray-50 min-h-[200px] flex items-center justify-center">
                   {variant.component || (
-                    <div className="text-center text-gray-500">
+                    <div className="text-center text-muted-foreground">
                       <Eye className="h-8 w-8 mx-auto mb-2" />
                       <p>Variant Preview</p>
                     </div>
@@ -269,12 +265,11 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                 <Button
                   variant="outline"
                   className="w-full mt-4"
-                  onClick={() => setSelectedVariant(
+                  onClick={() => <span>setSelectedVariant(
                     selectedVariant === variant.id ? null : variant.id
                   )}
                 >
-                  {selectedVariant === variant.id ? 'Hide Preview' : 'Preview Variant'}
-                </Button>
+                  {selectedVariant === variant.id ? 'Hide Preview' : 'Preview Variant'}</span></Button>
               </CardContent>
             </Card>
           </motion.div>
@@ -292,7 +287,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-green-600" />
+                  <BarChart3 className="h-5 w-5 text-success-600" />
                   Test Results
                 </CardTitle>
                 <CardDescription>
@@ -310,14 +305,14 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                       <div
                         key={result.variantId}
                         className={`p-4 rounded-lg border ${
-                          isWinner ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200'
+                          isWinner ? 'bg-success-50 border-success-200' : 'bg-gray-50 border-gray-200'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-4">
                           <h4 className="font-semibold flex items-center gap-2">
                             {variant?.name}
                             {isWinner && (
-                              <Badge className="bg-green-100 text-green-800">
+                              <Badge className="bg-success-100 text-success-800">
                                 <CheckCircle className="h-3 w-3 mr-1" />
                                 Winner
                               </Badge>
@@ -330,14 +325,14 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                         
                         <div className="grid gap-4 md:grid-cols-5">
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-blue-600">
+                            <div className="text-2xl font-bold text-info-600">
                               {result.views}
                             </div>
                             <div className="text-sm text-gray-600">Views</div>
                           </div>
                           
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-green-600">
+                            <div className="text-2xl font-bold text-success-600">
                               {(result.conversionRate * 100).toFixed(1)}%
                             </div>
                             <div className="text-sm text-gray-600">Conversion</div>
@@ -348,7 +343,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                               <span className="text-2xl font-bold text-purple-600">
                                 {result.aestheticRating.toFixed(1)}
                               </span>
-                              <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                              <Star className="h-4 w-4 text-warning-600 fill-current" />
                             </div>
                             <div className="text-sm text-gray-600">Aesthetic</div>
                           </div>
@@ -358,13 +353,13 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                               <span className="text-2xl font-bold text-orange-600">
                                 {result.userSatisfaction.toFixed(1)}
                               </span>
-                              <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                              <Star className="h-4 w-4 text-warning-600 fill-current" />
                             </div>
                             <div className="text-sm text-gray-600">Satisfaction</div>
                           </div>
                           
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-red-600">
+                            <div className="text-2xl font-bold text-error-600">
                               {(result.bounceRate * 100).toFixed(1)}%
                             </div>
                             <div className="text-sm text-gray-600">Bounce Rate</div>
@@ -378,7 +373,7 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                           </div>
                           <Progress 
                             value={significance * 100} 
-                            className={significance > 0.95 ? 'bg-green-200' : 'bg-gray-200'}
+                            className={significance > 0.95 ? 'bg-success-200' : 'bg-gray-200'}
                           />
                         </div>
                       </div>
@@ -387,11 +382,11 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                 </div>
                 
                 {winningVariant && (
-                  <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <h4 className="font-semibold text-green-800 mb-2">
+                  <div className="mt-6 p-4 bg-success-50 border border-success-200 rounded-lg">
+                    <h4 className="font-semibold text-success-800 mb-2">
                       Recommendation
                     </h4>
-                    <p className="text-green-700">
+                    <p className="text-success-700">
                       Implement variant "{testConfig.variants.find(v => v.id === winningVariant.variantId)?.name}" 
                       as it shows the best performance for {testConfig.targetMetric} with 
                       {(getStatisticalSignificance(winningVariant) * 100).toFixed(1)}% confidence.
@@ -422,16 +417,15 @@ export function ABTesting({ testConfig, onTestComplete, className }: ABTestingPr
                 <h3 className="text-xl font-semibold">
                   {testConfig.variants.find(v => v.id === selectedVariant)?.name}
                 </h3>
-                <Button variant="outline" onClick={() => setSelectedVariant(null)}>
-                  Close
-                </Button>
+                <Button variant="outline" onClick={() => <span>setSelectedVariant(null)}>
+                  Close</span></Button>
               </div>
               
               <div className="border rounded-lg p-6 bg-gray-50 min-h-[400px]">
                 {testConfig.variants.find(v => v.id === selectedVariant)?.component || (
-                  <div className="text-center text-gray-500 flex items-center justify-center h-full">
+                  <div className="text-center text-muted-foreground flex items-center justify-center h-full">
                     <div>
-                      <Eye className="h-12 w-12 mx-auto mb-4" />
+                      <Eye className="h-8 w-8 mx-auto mb-4" />
                       <p>Full Variant Preview</p>
                     </div>
                   </div>
@@ -461,9 +455,7 @@ export const POSTIA_AB_TESTS: ABTestConfig[] = [
         name: 'Gradient Button',
         description: 'Premium gradient button with subtle animation',
         component: (
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            Generate Content
-          </Button>
+          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"> <span>Generate Content</span></Button>
         )
       },
       {
@@ -471,9 +463,7 @@ export const POSTIA_AB_TESTS: ABTestConfig[] = [
         name: 'Solid Button',
         description: 'Clean solid color button with hover effects',
         component: (
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            Generate Content
-          </Button>
+          <Button className="bg-info-600 hover:bg-info-700"> <span>Generate Content</span></Button>
         )
       }
     ]
@@ -507,7 +497,7 @@ export const POSTIA_AB_TESTS: ABTestConfig[] = [
         name: 'Flat Card',
         description: 'Minimal flat card with border',
         component: (
-          <Card className="border-2 hover:border-blue-300 transition-colors">
+          <Card className="border-2 hover:border-info-300 transition-colors">
             <CardContent className="pt-6">
               <div className="space-y-2">
                 <div className="h-4 bg-gray-200 rounded w-3/4"></div>

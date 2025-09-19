@@ -86,38 +86,26 @@ export default function ToastDemoPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Button
-              onClick={() => showSuccess("¡Éxito!", "Operación completada correctamente")}
+              onClick={() => <span>showSuccess("¡Éxito!", "Operación completada correctamente")}
               className="flex items-center gap-2 bg-success hover:bg-success/90"
-            >
-              <CheckCircle className="h-4 w-4" />
-              Success
-            </Button>
+            ></span><CheckCircle className="h-4 w-4" /> <span>Success</span></Button>
             
             <Button
-              onClick={() => showError("Error", "Algo salió mal, intenta nuevamente")}
+              onClick={() => <span>showError("Error", "Algo salió mal, intenta nuevamente")}
               variant="destructive"
               className="flex items-center gap-2"
-            >
-              <XCircle className="h-4 w-4" />
-              Error
-            </Button>
+            ></span><XCircle className="h-4 w-4" /> <span>Error</span></Button>
             
             <Button
-              onClick={() => showWarning("Advertencia", "Revisa esta información importante")}
+              onClick={() => <span>showWarning("Advertencia", "Revisa esta información importante")}
               className="flex items-center gap-2 bg-warning hover:bg-warning/90 text-white"
-            >
-              <AlertTriangle className="h-4 w-4" />
-              Warning
-            </Button>
+            ></span><AlertTriangle className="h-4 w-4" /> <span>Warning</span></Button>
             
             <Button
-              onClick={() => showInfo("Información", "Aquí tienes algunos datos útiles")}
+              onClick={() => <span>showInfo("Información", "Aquí tienes algunos datos útiles")}
               variant="outline"
               className="flex items-center gap-2"
-            >
-              <Info className="h-4 w-4" />
-              Info
-            </Button>
+            ></span><Info className="h-4 w-4" /> <span>Info</span></Button>
           </div>
         </Card>
 
@@ -126,7 +114,7 @@ export default function ToastDemoPage() {
           <h2 className="text-xl font-semibold mb-4">Toasts con Acciones</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Button
-              onClick={() => toast.success("Archivo descargado", {
+              onClick={() => <span>toast.success("Archivo descargado", {
                 description: "El archivo se guardó en tu carpeta de descargas",
                 action: {
                   label: "Abrir carpeta",
@@ -134,13 +122,10 @@ export default function ToastDemoPage() {
                 }
               })}
               className="flex items-center gap-2"
-            >
-              <Download className="h-4 w-4" />
-              Descarga con Acción
-            </Button>
+            ></span><Download className="h-4 w-4" /> <span>Descarga con Acción</span></Button>
             
             <Button
-              onClick={() => toast.info("Contenido compartido", {
+              onClick={() => <span>toast.info("Contenido compartido", {
                 description: "Se copió el enlace al portapapeles",
                 action: {
                   label: "Ver enlace",
@@ -153,10 +138,7 @@ export default function ToastDemoPage() {
               })}
               variant="outline"
               className="flex items-center gap-2"
-            >
-              <Share2 className="h-4 w-4" />
-              Compartir con Cancelar
-            </Button>
+            ></span><Share2 className="h-4 w-4" /> <span>Compartir con Cancelar</span></Button>
           </div>
         </Card>
 
@@ -168,9 +150,7 @@ export default function ToastDemoPage() {
               onClick={simulateContentGeneration}
               disabled={isGenerating}
               className="flex items-center gap-2"
-            >
-              {isGenerating ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+            > <span>{isGenerating ? (</span><Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <Sparkles className="h-4 w-4" />
               )}
@@ -178,52 +158,38 @@ export default function ToastDemoPage() {
             </Button>
             
             <Button
-              onClick={() => showContentPublished()}
+              onClick={() => <span>showContentPublished()}
               className="flex items-center gap-2 bg-success hover:bg-success/90"
-            >
-              <Share2 className="h-4 w-4" />
-              Publicar Contenido
-            </Button>
+            ></span><Share2 className="h-4 w-4" /> <span>Publicar Contenido</span></Button>
             
             <Button
-              onClick={() => showBulkActionComplete(15, "Programación en lote")}
+              onClick={() => <span>showBulkActionComplete(15, "Programación en lote")}
               variant="outline"
               className="flex items-center gap-2"
-            >
-              <CheckCircle className="h-4 w-4" />
-              Acción en Lote
-            </Button>
+            ></span><CheckCircle className="h-4 w-4" /> <span>Acción en Lote</span></Button>
             
             <Button
-              onClick={() => showTokensConsumed(250)}
+              onClick={() => <span>showTokensConsumed(250)}
               variant="outline"
               className="flex items-center gap-2"
-            >
-              <Info className="h-4 w-4" />
-              Tokens Consumidos
-            </Button>
+            ></span><Info className="h-4 w-4" /> <span>Tokens Consumidos</span></Button>
             
             <Button
-              onClick={() => confirmDestructiveAction(
+              onClick={() => <span>confirmDestructiveAction(
                 "¿Eliminar campaña?",
                 "Esta acción no se puede deshacer. Se eliminarán todos los contenidos asociados.",
                 () => console.log("Campaign deleted")
               )}
               variant="destructive"
               className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Acción Destructiva
-            </Button>
+            ></span><Trash2 className="h-4 w-4" /> <span>Acción Destructiva</span></Button>
             
             <Button
               onClick={simulatePromiseToast}
               variant="outline"
               className="flex items-center gap-2"
             >
-              <Loader2 className="h-4 w-4" />
-              Promise Toast
-            </Button>
+              <Loader2 className="h-4 w-4" /> <span>Promise Toast</span></Button>
           </div>
         </Card>
 
@@ -233,7 +199,7 @@ export default function ToastDemoPage() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Button
-                onClick={() => {
+                onClick={() => <span>{
                   const id = toast.info("Toast persistente", {
                     description: "Este toast no se cierra automáticamente",
                     duration: Infinity,
@@ -245,11 +211,10 @@ export default function ToastDemoPage() {
                 }}
                 variant="outline"
               >
-                Toast Persistente
-              </Button>
+                Toast Persistente</span></Button>
               
               <Button
-                onClick={() => {
+                onClick={() => <span>{
                   // Create multiple toasts
                   toast.success("Toast 1")
                   setTimeout(() => toast.info("Toast 2"), 500)
@@ -257,15 +222,13 @@ export default function ToastDemoPage() {
                 }}
                 variant="outline"
               >
-                Múltiples Toasts
-              </Button>
+                Múltiples Toasts</span></Button>
               
               <Button
-                onClick={() => toast.dismissAll()}
+                onClick={() => <span>toast.dismissAll()}
                 variant="destructive"
               >
-                Cerrar Todos
-              </Button>
+                Cerrar Todos</span></Button>
             </div>
             
             <Separator />

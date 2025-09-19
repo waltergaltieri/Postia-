@@ -52,8 +52,8 @@ const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
   const getTrendColor = () => {
     switch (trend) {
-      case 'up': return 'text-green-600'
-      case 'down': return 'text-red-600'
+      case 'up': return 'text-success-600'
+      case 'down': return 'text-error-600'
       default: return 'text-muted-foreground'
     }
   }
@@ -149,8 +149,8 @@ const StepMetricsChart: React.FC<StepMetricsChartProps> = ({ stepMetrics }) => {
                   {dropoffRate > 0 && (
                     <>
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-red-600">Abandono</span>
-                        <span className="text-red-600">{dropoffRate.toFixed(1)}%</span>
+                        <span className="text-error-600">Abandono</span>
+                        <span className="text-error-600">{dropoffRate.toFixed(1)}%</span>
                       </div>
                       <Progress 
                         value={dropoffRate} 
@@ -183,7 +183,7 @@ const CompletionAnalysisCard: React.FC<CompletionAnalysisCardProps> = ({ analysi
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-2xl font-bold text-green-600">
+            <div className="text-2xl font-bold text-success-600">
               {analysis.overallCompletionRate.toFixed(1)}%
             </div>
             <div className="text-sm text-muted-foreground">
@@ -191,7 +191,7 @@ const CompletionAnalysisCard: React.FC<CompletionAnalysisCardProps> = ({ analysi
             </div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-info-600">
               {Math.round(analysis.timeToComplete.averageCompletionTime / 1000)}s
             </div>
             <div className="text-sm text-muted-foreground">
@@ -201,12 +201,12 @@ const CompletionAnalysisCard: React.FC<CompletionAnalysisCardProps> = ({ analysi
         </div>
 
         {analysis.dropoffAnalysis.criticalDropoffPoints.length > 0 && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-            <div className="flex items-center gap-2 text-red-800 font-medium text-sm">
+          <div className="p-3 bg-error-50 border border-error-200 rounded-lg">
+            <div className="flex items-center gap-2 text-error-800 font-medium text-sm">
               <AlertTriangle className="h-4 w-4" />
               Puntos críticos de abandono
             </div>
-            <div className="text-sm text-red-700 mt-1">
+            <div className="text-sm text-error-700 mt-1">
               Pasos: {analysis.dropoffAnalysis.criticalDropoffPoints.map(p => p + 1).join(', ')}
             </div>
           </div>
@@ -278,12 +278,12 @@ const BehaviorAnalysisCard: React.FC<BehaviorAnalysisCardProps> = ({ analysis })
         </div>
 
         {analysis.engagementMetrics.rushingIndicators.fastClickRate > 30 && (
-          <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <div className="flex items-center gap-2 text-yellow-800 font-medium text-sm">
+          <div className="p-3 bg-warning-50 border border-warning-200 rounded-lg">
+            <div className="flex items-center gap-2 text-warning-800 font-medium text-sm">
               <AlertTriangle className="h-4 w-4" />
               Comportamiento apresurado detectado
             </div>
-            <div className="text-sm text-yellow-700 mt-1">
+            <div className="text-sm text-warning-700 mt-1">
               {analysis.engagementMetrics.rushingIndicators.fastClickRate.toFixed(1)}% de clics rápidos
             </div>
           </div>
@@ -469,15 +469,15 @@ export const TourMetricsDashboard: React.FC<TourMetricsDashboardProps> = ({
           <CardContent>
             <div className="space-y-2">
               {CompletionAnalyzer.generateRecommendations(completionAnalysis).map((rec, index) => (
-                <div key={index} className="flex items-start gap-2 p-2 bg-blue-50 border border-blue-200 rounded-lg">
-                  <TrendingUp className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
-                  <span className="text-sm text-blue-800">{rec}</span>
+                <div key={index} className="flex items-start gap-2 p-2 bg-info-50 border border-info-200 rounded-lg">
+                  <TrendingUp className="h-4 w-4 text-info-600 mt-0.5 shrink-0" />
+                  <span className="text-sm text-info-800">{rec}</span>
                 </div>
               ))}
               {BehaviorAnalyzer.generateBehaviorRecommendations(behaviorAnalysis).map((rec, index) => (
-                <div key={`behavior-${index}`} className="flex items-start gap-2 p-2 bg-green-50 border border-green-200 rounded-lg">
-                  <Users className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                  <span className="text-sm text-green-800">{rec}</span>
+                <div key={`behavior-${index}`} className="flex items-start gap-2 p-2 bg-success-50 border border-success-200 rounded-lg">
+                  <Users className="h-4 w-4 text-success-600 mt-0.5 shrink-0" />
+                  <span className="text-sm text-success-800">{rec}</span>
                 </div>
               ))}
             </div>

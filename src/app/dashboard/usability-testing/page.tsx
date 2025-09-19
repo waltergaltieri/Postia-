@@ -57,7 +57,7 @@ export default function UsabilityTestingPage() {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-center gap-3"
         >
-          <TestTube className="h-8 w-8 text-blue-600" />
+          <TestTube className="h-8 w-8 text-info-600" />
           <h1 className="text-4xl font-bold text-gray-900">Usability Testing Center</h1>
         </motion.div>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -73,10 +73,10 @@ export default function UsabilityTestingPage() {
           animate={{ opacity: 1, scale: 1 }}
           className="fixed top-4 right-4 z-50"
         >
-          <Card className="bg-red-50 border-red-200">
+          <Card className="bg-error-50 border-error-200">
             <CardContent className="pt-4">
-              <div className="flex items-center gap-2 text-red-800">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              <div className="flex items-center gap-2 text-error-800">
+                <div className="w-2 h-2 bg-error-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium">Recording Session</span>
               </div>
             </CardContent>
@@ -101,7 +101,7 @@ export default function UsabilityTestingPage() {
             <CardTitle className="text-sm font-medium">Active Recording</CardTitle>
             <div className="flex items-center gap-1">
               {recorder.isRecording ? (
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-error-500 rounded-full animate-pulse" />
               ) : (
                 <div className="w-2 h-2 bg-gray-300 rounded-full" />
               )}
@@ -162,7 +162,7 @@ export default function UsabilityTestingPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Play className="h-5 w-5 text-green-600" />
+                <Play className="h-5 w-5 text-success-600" />
                 User Testing Interface
               </CardTitle>
               <CardDescription>
@@ -186,7 +186,7 @@ export default function UsabilityTestingPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-blue-600" />
+                <Clock className="h-5 w-5 text-info-600" />
                 Session History
               </CardTitle>
               <CardDescription>
@@ -196,17 +196,14 @@ export default function UsabilityTestingPage() {
             <CardContent>
               {completedSessions.length === 0 ? (
                 <div className="text-center py-12">
-                  <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <Users className="h-8 w-8 text-muted-foreground mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     No completed sessions yet
                   </h3>
                   <p className="text-gray-600 mb-4">
                     Start a testing session to see results here
                   </p>
-                  <Button onClick={() => setActiveTab('testing')}>
-                    <Play className="h-4 w-4 mr-2" />
-                    Start Testing
-                  </Button>
+                  <Button onClick={() => <span>setActiveTab('testing')}></span><Play className="h-4 w-4 mr-2" /> <span>Start Testing</span></Button>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -232,13 +229,13 @@ export default function UsabilityTestingPage() {
 
                           <div className="grid gap-4 md:grid-cols-4 mb-4">
                             <div className="text-center">
-                              <div className="text-2xl font-bold text-blue-600">
+                              <div className="text-2xl font-bold text-info-600">
                                 {session.metrics.taskCompletionRate.toFixed(0)}%
                               </div>
                               <div className="text-sm text-gray-600">Completion Rate</div>
                             </div>
                             <div className="text-center">
-                              <div className="text-2xl font-bold text-green-600">
+                              <div className="text-2xl font-bold text-success-600">
                                 {session.metrics.userSatisfactionScore.toFixed(1)}/5
                               </div>
                               <div className="text-sm text-gray-600">Satisfaction</div>
@@ -329,15 +326,15 @@ export default function UsabilityTestingPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-yellow-500" />
+                  <Star className="h-4 w-4 text-warning-600" />
                   <span>Visual Design & Aesthetics</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-blue-500" />
+                  <Users className="h-4 w-4 text-info-600" />
                   <span>User Interface Usability</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Target className="h-4 w-4 text-green-500" />
+                  <Target className="h-4 w-4 text-success-600" />
                   <span>Workflow Efficiency</span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -354,7 +351,7 @@ export default function UsabilityTestingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Lightbulb className="h-5 w-5 text-yellow-600" />
+                  <Lightbulb className="h-5 w-5 text-warning-600" />
                   Testing Guidelines
                 </CardTitle>
               </CardHeader>
@@ -370,7 +367,7 @@ export default function UsabilityTestingPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <CheckCircle className="h-5 w-5 text-success-600" />
                   Success Metrics
                 </CardTitle>
               </CardHeader>

@@ -805,11 +805,11 @@ class JavaScriptElementFinder {
                 if (!DOMTypeGuards.isValidElement(button)) {
                     return
                 }
-                const spans = DOMTypeGuards.safeCallMethod<NodeListOf<Element>>(button, 'querySelectorAll', 'span')
+                const spans = DOMTypeGuards.safeCallMethod<NodeListOf<Element> <span>>(button, 'querySelectorAll', 'span')
                 if (!spans) return
 
                 const hasMatchingText = Array.from(spans).some(span => {
-                    const spanText = DOMTypeGuards.safeGetProperty<string>(span as HTMLElement, 'textContent')?.trim()
+                    const spanText = DOMTypeGuards.safeGetProperty</span><string>(span as HTMLElement, 'textContent')?.trim()
                     return spanText?.includes(text) || false
                 })
 

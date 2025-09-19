@@ -13,21 +13,21 @@ const cardVariants = cva(
       variant: {
         // Default card with subtle elevation
         default: [
-          "border-border shadow-elevation-1",
+          "border-border shadow-elevation-1 hover-subtle",
           "hover:shadow-elevation-2 hover:scale-[1.01] hover:-translate-y-1",
           "active:shadow-elevation-1 active:scale-[0.99] active:translate-y-0"
         ],
         
         // Elevated card with more prominent shadow
         elevated: [
-          "border-border shadow-elevation-2",
+          "border-border shadow-elevation-2 hover-normal",
           "hover:shadow-elevation-3 hover:scale-[1.02] hover:-translate-y-1",
           "active:shadow-elevation-2 active:scale-[0.99] active:translate-y-0"
         ],
         
         // Interactive card with glow effect
         interactive: [
-          "border-border shadow-elevation-1 cursor-pointer",
+          "border-border shadow-elevation-1 cursor-pointer card-hover-interactive interactive-element",
           "hover:shadow-elevation-3 hover:scale-[1.02] hover:border-primary-300 hover:-translate-y-1",
           "hover:shadow-primary/10",
           "active:shadow-elevation-2 active:scale-[0.99] active:translate-y-0",
@@ -36,14 +36,14 @@ const cardVariants = cva(
         
         // Glass morphism card
         glass: [
-          "glass border-glass-border shadow-glass-shadow backdrop-blur-xl",
+          "glass border-glass-border shadow-glass-shadow backdrop-blur-xl hover-lift",
           "hover:shadow-elevation-3 hover:scale-[1.01] hover:-translate-y-1",
           "active:shadow-elevation-2 active:scale-[0.99] active:translate-y-0"
         ],
         
         // Flat card without shadow
         flat: [
-          "border-border",
+          "border-border hover-subtle",
           "hover:bg-accent/50 hover:border-primary-200",
           "active:bg-accent/80"
         ],
@@ -51,17 +51,17 @@ const cardVariants = cva(
         // Premium card with gradient border
         premium: [
           "border-2 border-transparent bg-gradient-to-r from-primary-500/20 via-transparent to-primary-500/20 p-[1px]",
-          "shadow-elevation-2",
+          "shadow-elevation-2 card-hover-glow hover-prominent",
           "hover:shadow-elevation-3 hover:scale-[1.01] hover:from-primary-500/30 hover:to-primary-500/30 hover:-translate-y-1",
           "active:shadow-elevation-2 active:scale-[0.99] active:translate-y-0",
           "before:absolute before:inset-[1px] before:rounded-[11px] before:bg-card before:z-[-1]"
         ]
       },
       size: {
-        sm: "p-4",
-        default: "p-6",
-        lg: "p-8",
-        xl: "p-10"
+        sm: "card-spacing-compact",
+        default: "card-spacing-standard", 
+        lg: "card-spacing-comfortable",
+        xl: "spacing-p-2xl"
       }
     },
     defaultVariants: {
@@ -76,16 +76,43 @@ export interface CardProps
     VariantProps<typeof cardVariants> {
   interactive?: boolean
   animate?: boolean
+  selected?: boolean
+  disabled?: boolean
+  loading?: boolean
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, size, interactive, animate = true, children, ...props }, ref) => {
+  ({ className, variant, size, interactive, animate = true, selected, disabled, loading, children, ...props }, ref) => {
+    // Enhanced className with state classes
+    const enhancedClassName = cn(
+      cardVariants({ variant, size, className }),
+      {
+        'card-selected': selected,
+        'card-disabled': disabled,
+        'disabled-enhanced': disabled,
+        'card-loading': loading,
+        'interactive-selected': selected && interactive,
+        'interactive-disabled': disabled && interactive,
+        'interactive-loading': loading && interactive
+      }
+    )
+
+    // Enhanced accessibility props
+    const accessibilityProps = {
+      'aria-selected': selected,
+      'aria-disabled': disabled,
+      'aria-busy': loading,
+      tabIndex: interactive && !disabled ? 0 : undefined,
+      role: interactive ? 'button' : undefined,
+      ...props
+    }
+
     if (!animate) {
       return (
         <div
           ref={ref}
-          className={cn(cardVariants({ variant, size, className }))}
-          {...props}
+          className={enhancedClassName}
+          {...accessibilityProps}
         >
           {children}
         </div>
@@ -95,8 +122,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={cn(cardVariants({ variant, size, className }))}
-        {...props}
+        className={enhancedClassName}
+        {...accessibilityProps}
       >
         {children}
       </div>
@@ -111,7 +138,7 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div 
     ref={ref} 
-    className={cn("flex flex-col space-y-2", className)} 
+    className={cn("flex flex-col card-header-spacing", className)} 
     {...props} 
   />
 ))
@@ -150,7 +177,7 @@ const CardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div 
     ref={ref} 
-    className={cn("pt-4", className)} 
+    className={cn("card-content-spacing", className)} 
     {...props} 
   />
 ))
@@ -162,7 +189,7 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center pt-4", className)}
+    className={cn("flex items-center card-footer-spacing", className)}
     {...props}
   />
 ))

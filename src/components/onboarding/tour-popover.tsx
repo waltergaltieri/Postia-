@@ -263,9 +263,7 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
                           onClick={handleNext}
                           className="flex items-center gap-1.5"
                           aria-label="Siguiente paso"
-                        >
-                          Siguiente
-                          <ChevronRight className="h-3.5 w-3.5" />
+                        > <span>Siguiente</span><ChevronRight className="h-3.5 w-3.5" />
                         </Button>
                       )}
 
@@ -275,9 +273,7 @@ export const TourPopover = React.forwardRef<HTMLDivElement, TourPopoverProps>(
                           size="sm"
                           onClick={handleClose}
                           aria-label="Finalizar tour"
-                        >
-                          Finalizar
-                        </Button>
+                        > <span>Finalizar</span></Button>
                       )}
                     </div>
 

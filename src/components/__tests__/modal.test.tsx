@@ -40,7 +40,7 @@ describe('Modal Components', () => {
       render(
         <Modal>
           <ModalTrigger asChild>
-            <Button>Open Modal</Button>
+            <Button> <span>Open Modal</span></Button>
           </ModalTrigger>
           <ModalContent>
             <ModalHeader>
@@ -61,7 +61,7 @@ describe('Modal Components', () => {
       render(
         <Modal>
           <ModalTrigger asChild>
-            <Button>Open Modal</Button>
+            <Button> <span>Open Modal</span></Button>
           </ModalTrigger>
           <ModalContent>
             <ModalHeader>
@@ -173,7 +173,7 @@ describe('Modal Components', () => {
       render(
         <ConfirmationModal
           open={true}
-          onOpenChange={() => {}}
+          onOpenChange={() => <span>{}}
           title="Confirm Action"
           description="Are you sure?"
           onConfirm={onConfirm}
@@ -185,8 +185,7 @@ describe('Modal Components', () => {
     })
 
     it('shows loading state', () => {
-      render(
-        <ConfirmationModal
+      render(</span><ConfirmationModal
           open={true}
           onOpenChange={() => {}}
           title="Confirm Action"
@@ -223,7 +222,7 @@ describe('Alert Dialog Components', () => {
       render(
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button>Open Alert</Button>
+            <Button> <span>Open Alert</span></Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -287,7 +286,7 @@ describe('Alert Dialog Components', () => {
       render(
         <QuickAlert
           open={true}
-          onOpenChange={() => {}}
+          onOpenChange={() => <span>{}}
           type="info"
           title="Information"
           description="This is an info alert"
@@ -300,8 +299,7 @@ describe('Alert Dialog Components', () => {
     })
 
     it('shows loading state', () => {
-      render(
-        <QuickAlert
+      render(</span><QuickAlert
           open={true}
           onOpenChange={() => {}}
           type="info"

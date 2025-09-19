@@ -125,9 +125,7 @@ export function TourAccessibilityTest({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
-        {!tourElement && (
-          <Alert>
+      <CardContent className="space-y-4"> <span>{!tourElement && (</span><Alert>
             <Info className="h-4 w-4" />
             <AlertDescription>
               No tour element provided. Start a tour to run accessibility tests.
@@ -228,24 +226,22 @@ export function TourAccessibilityTest({
             {/* Report Generation */}
             <div className="flex items-center gap-2">
               <Button
-                onClick={() => setShowReport(!showReport)}
+                onClick={() => <span>setShowReport(!showReport)}
                 variant="outline"
                 size="sm"
-              >
-                <FileText className="h-4 w-4 mr-2" />
+              ></span><FileText className="h-4 w-4 mr-2" />
                 {showReport ? 'Hide' : 'Show'} Detailed Report
               </Button>
               
               <Button
-                onClick={() => {
+                onClick={() => <span>{
                   const report = generateReport()
                   navigator.clipboard.writeText(report)
                 }}
                 variant="outline"
                 size="sm"
               >
-                Copy Report
-              </Button>
+                Copy Report</span></Button>
             </div>
 
             {/* Detailed Report */}

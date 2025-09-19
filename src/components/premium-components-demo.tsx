@@ -96,15 +96,11 @@ export function PremiumComponentsDemo() {
                 <CardDescription>Con gradientes y efectos de brillo</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button variant="default" icon={<Zap />}>
-                  Generar Contenido
-                </Button>
-                <Button variant="premium" icon={<Sparkles />}>
-                  Premium Action
-                </Button>
-                <Button variant="default" loading loadingText="Generando...">
-                  Loading State
-                </Button>
+                <Button variant="default" icon={<Zap /> <span>}>
+                  Generar Contenido</span></Button>
+                <Button variant="premium" icon={<Sparkles /> <span>}>
+                  Premium Action</span></Button>
+                <Button variant="default" loading loadingText="Generando..."> <span>Loading State</span></Button>
               </CardContent>
             </Card>
 
@@ -115,15 +111,11 @@ export function PremiumComponentsDemo() {
                 <CardDescription>Variantes sutiles y elegantes</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button variant="secondary" icon={<Download />}>
-                  Descargar
-                </Button>
-                <Button variant="outline" rightIcon={<Heart />}>
-                  Me Gusta
-                </Button>
-                <Button variant="ghost" size="sm">
-                  Cancelar
-                </Button>
+                <Button variant="secondary" icon={<Download /> <span>}>
+                  Descargar</span></Button>
+                <Button variant="outline" rightIcon={<Heart /> <span>}>
+                  Me Gusta</span></Button>
+                <Button variant="ghost" size="sm"> <span>Cancelar</span></Button>
               </CardContent>
             </Card>
 
@@ -134,15 +126,10 @@ export function PremiumComponentsDemo() {
                 <CardDescription>Estados y variantes especiales</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button variant="success" icon={<Star />}>
-                  Aprobar
-                </Button>
-                <Button variant="destructive" size="lg">
-                  Eliminar
-                </Button>
-                <Button variant="link">
-                  Ver más detalles
-                </Button>
+                <Button variant="success" icon={<Star /> <span>}>
+                  Aprobar</span></Button>
+                <Button variant="destructive" size="lg"> <span>Eliminar</span></Button>
+                <Button variant="link"> <span>Ver más detalles</span></Button>
               </CardContent>
             </Card>
           </div>
@@ -217,9 +204,7 @@ export function PremiumComponentsDemo() {
                 <span className="text-sm text-muted-foreground">
                   {selectedCards.size} seleccionadas
                 </span>
-                <Button variant="secondary" size="sm">
-                  Acciones en lote
-                </Button>
+                <Button variant="secondary" size="sm"> <span>Acciones en lote</span></Button>
               </div>
             )}
           </div>
@@ -264,12 +249,10 @@ export function PremiumComponentsDemo() {
             </CardHeader>
             <CardContent className="text-center space-y-6">
               <div className="flex flex-wrap justify-center gap-4">
-                <Button variant="premium" size="lg" icon={<Sparkles />}>
-                  Crear Campaña Premium
-                </Button>
-                <Button variant="default" size="lg" rightIcon={<Zap />}>
-                  Generar con IA
-                </Button>
+                <Button variant="premium" size="lg" icon={<Sparkles /> <span>}>
+                  Crear Campaña Premium</span></Button>
+                <Button variant="default" size="lg" rightIcon={<Zap /> <span>}>
+                  Generar con IA</span></Button>
               </div>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Cada interacción está cuidadosamente diseñada para proporcionar feedback 
@@ -277,9 +260,7 @@ export function PremiumComponentsDemo() {
               </p>
             </CardContent>
             <CardFooter className="justify-center">
-              <Button variant="outline">
-                Explorar más componentes
-              </Button>
+              <Button variant="outline"> <span>Explorar más componentes</span></Button>
             </CardFooter>
           </Card>
         </section>

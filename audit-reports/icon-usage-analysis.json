@@ -1,0 +1,2009 @@
+{
+  "summary": {
+    "totalIcons": 101,
+    "totalUsages": 703,
+    "uniqueSizes": 7,
+    "uniqueColors": 35,
+    "contexts": 1,
+    "inconsistencies": 38
+  },
+  "iconInventory": [
+    {
+      "name": "CheckCircle",
+      "usageCount": 44,
+      "sizes": [
+        "h-3",
+        "h-6",
+        "h-5",
+        "h-4",
+        "h-12"
+      ],
+      "colors": [
+        "text-success-600",
+        "text-muted-foreground",
+        "text-green-600",
+        "text-green-500",
+        "text-emerald-600",
+        "text-primary",
+        "text-white",
+        "text-success"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Eye",
+      "usageCount": 31,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-3",
+        "h-12",
+        "h-8",
+        "h-6"
+      ],
+      "colors": [
+        "text-primary-600",
+        "text-purple-600",
+        "text-muted-foreground",
+        "text-blue-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "X",
+      "usageCount": 31,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-error"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Users",
+      "usageCount": 27,
+      "sizes": [
+        "h-5",
+        "h-8",
+        "h-4",
+        "h-12"
+      ],
+      "colors": [
+        "text-primary",
+        "text-primary-600",
+        "text-muted-foreground",
+        "text-gray-400",
+        "text-blue-500",
+        "text-purple-500",
+        "text-orange-500",
+        "text-purple-600",
+        "text-blue-600",
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Clock",
+      "usageCount": 27,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-8",
+        "h-3",
+        "h-12"
+      ],
+      "colors": [
+        "text-primary-600",
+        "text-blue-600",
+        "text-yellow-500",
+        "text-muted-foreground",
+        "text-blue-500",
+        "text-gray-400",
+        "text-gray-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Play",
+      "usageCount": 23,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-3"
+      ],
+      "colors": [
+        "text-green-600",
+        "text-primary-600",
+        "text-blue-500",
+        "text-muted-foreground",
+        "text-primary-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Sparkles",
+      "usageCount": 21,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5",
+        "h-8",
+        "h-12"
+      ],
+      "colors": [
+        "text-primary-500",
+        "text-primary",
+        "text-primary-600",
+        "text-gray-300",
+        "text-green-600",
+        "text-gray-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Zap",
+      "usageCount": 20,
+      "sizes": [
+        "h-5",
+        "h-3",
+        "h-4",
+        "h-8"
+      ],
+      "colors": [
+        "text-primary-600",
+        "text-primary-500",
+        "text-white",
+        "text-blue-500",
+        "text-muted-foreground",
+        "text-green-600",
+        "text-orange-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "RotateCcw",
+      "usageCount": 20,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-12"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ChevronRight",
+      "usageCount": 20,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-5"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "AlertTriangle",
+      "usageCount": 18,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-muted-foreground",
+        "text-yellow-500",
+        "text-blue-500",
+        "text-purple-500",
+        "text-warning-600",
+        "text-warning",
+        "text-yellow-600",
+        "text-red-600",
+        "text-orange-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Calendar",
+      "usageCount": 18,
+      "sizes": [
+        "h-12",
+        "h-4",
+        "h-8",
+        "h-6",
+        "h-3"
+      ],
+      "colors": [
+        "text-muted-foreground",
+        "text-gray-400",
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "TrendingUp",
+      "usageCount": 16,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-3"
+      ],
+      "colors": [
+        "text-primary-600",
+        "text-purple-500",
+        "text-muted-foreground",
+        "text-blue-600",
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Download",
+      "usageCount": 16,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Star",
+      "usageCount": 15,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-3"
+      ],
+      "colors": [
+        "text-primary-500",
+        "text-yellow-500",
+        "text-primary-foreground",
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Plus",
+      "usageCount": 13,
+      "sizes": [
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-blue-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Info",
+      "usageCount": 11,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-blue-600",
+        "text-muted-foreground",
+        "text-gray-500",
+        "text-info"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Search",
+      "usageCount": 11,
+      "sizes": [
+        "h-8",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary",
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ChevronLeft",
+      "usageCount": 11,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Building2",
+      "usageCount": 10,
+      "sizes": [
+        "h-5",
+        "h-8",
+        "h-4",
+        "h-12"
+      ],
+      "colors": [
+        "text-primary",
+        "text-muted-foreground",
+        "text-primary-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "MessageSquare",
+      "usageCount": 10,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-8",
+        "h-12",
+        "h-5"
+      ],
+      "colors": [
+        "text-orange-500",
+        "text-gray-400",
+        "text-purple-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "User",
+      "usageCount": 9,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [
+        "text-success-600",
+        "text-green-500",
+        "text-primary-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Target",
+      "usageCount": 9,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-5"
+      ],
+      "colors": [
+        "text-muted-foreground",
+        "text-green-500",
+        "text-blue-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Lightbulb",
+      "usageCount": 9,
+      "sizes": [
+        "h-5",
+        "h-4",
+        "h-6",
+        "h-12"
+      ],
+      "colors": [
+        "text-yellow-600",
+        "text-blue-600",
+        "text-gray-300"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ChevronDown",
+      "usageCount": 9,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "AlertCircle",
+      "usageCount": 9,
+      "sizes": [
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-red-500",
+        "text-neutral-400",
+        "text-yellow-500",
+        "text-warning"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Image",
+      "usageCount": 8,
+      "sizes": [
+        "h-5",
+        "h-12",
+        "h-16",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary",
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Upload",
+      "usageCount": 8,
+      "sizes": [
+        "h-4",
+        "h-8"
+      ],
+      "colors": [
+        "text-primary"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "XCircle",
+      "usageCount": 8,
+      "sizes": [
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-error-600",
+        "text-muted-foreground",
+        "text-red-600",
+        "text-destructive",
+        "text-error"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "SkipForward",
+      "usageCount": 8,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "HelpCircle",
+      "usageCount": 8,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-5"
+      ],
+      "colors": [
+        "text-orange-600",
+        "text-primary"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ArrowLeftRight",
+      "usageCount": 7,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5",
+        "h-8"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Trash2",
+      "usageCount": 7,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "FileText",
+      "usageCount": 7,
+      "sizes": [
+        "h-12",
+        "h-5",
+        "h-4"
+      ],
+      "colors": [
+        "text-blue-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "MoreHorizontal",
+      "usageCount": 7,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Edit",
+      "usageCount": 7,
+      "sizes": [
+        "h-5",
+        "h-4"
+      ],
+      "colors": [
+        "text-gray-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Filter",
+      "usageCount": 7,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Heart",
+      "usageCount": 6,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [
+        "text-red-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Palette",
+      "usageCount": 6,
+      "sizes": [
+        "h-5",
+        "h-8",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary",
+        "text-amber-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Loader2",
+      "usageCount": 6,
+      "sizes": [
+        "h-4",
+        "h-8",
+        "h-6"
+      ],
+      "colors": [
+        "text-primary-500",
+        "text-neutral-400"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Check",
+      "usageCount": 6,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-primary"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Pause",
+      "usageCount": 6,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "EyeOff",
+      "usageCount": 6,
+      "sizes": [
+        "h-5",
+        "h-4"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Copy",
+      "usageCount": 5,
+      "sizes": [
+        "h-3",
+        "h-4",
+        "h-6"
+      ],
+      "colors": [
+        "text-warning-600",
+        "text-purple-500",
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Grid3X3",
+      "usageCount": 5,
+      "sizes": [
+        "h-8",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Settings",
+      "usageCount": 5,
+      "sizes": [
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-gray-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "BarChart3",
+      "usageCount": 5,
+      "sizes": [
+        "h-4",
+        "h-3",
+        "h-12",
+        "h-5"
+      ],
+      "colors": [
+        "text-muted-foreground",
+        "text-orange-600",
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Activity",
+      "usageCount": 5,
+      "sizes": [
+        "h-4",
+        "h-5",
+        "h-8"
+      ],
+      "colors": [
+        "text-muted-foreground",
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "RefreshCw",
+      "usageCount": 5,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "List",
+      "usageCount": 5,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Keyboard",
+      "usageCount": 4,
+      "sizes": [
+        "h-5",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Share2",
+      "usageCount": 4,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "GitBranch",
+      "usageCount": 4,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [
+        "text-neutral-500",
+        "text-gray-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Maximize2",
+      "usageCount": 4,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Volume2",
+      "usageCount": 3,
+      "sizes": [
+        "h-5",
+        "h-4"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "TestTube",
+      "usageCount": 3,
+      "sizes": [
+        "h-8",
+        "h-4",
+        "h-5"
+      ],
+      "colors": [
+        "text-blue-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ExternalLink",
+      "usageCount": 3,
+      "sizes": [
+        "h-4",
+        "h-8",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Coins",
+      "usageCount": 3,
+      "sizes": [
+        "h-4",
+        "h-5",
+        "h-3"
+      ],
+      "colors": [
+        "text-warning-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Minimize2",
+      "usageCount": 3,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "MessageCircle",
+      "usageCount": 3,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [
+        "text-blue-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ArrowRight",
+      "usageCount": 3,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Bell",
+      "usageCount": 3,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "FlaskConical",
+      "usageCount": 3,
+      "sizes": [
+        "h-4",
+        "h-12"
+      ],
+      "colors": [
+        "text-blue-600",
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Square",
+      "usageCount": 3,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "FolderOpen",
+      "usageCount": 2,
+      "sizes": [
+        "h-5",
+        "h-12"
+      ],
+      "colors": [
+        "text-primary",
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Tag",
+      "usageCount": 2,
+      "sizes": [
+        "h-4",
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Edit3",
+      "usageCount": 2,
+      "sizes": [
+        "h-3",
+        "h-6"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "History",
+      "usageCount": 2,
+      "sizes": [
+        "h-8"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Repeat2",
+      "usageCount": 2,
+      "sizes": [
+        "h-3",
+        "h-4"
+      ],
+      "colors": [
+        "text-green-500"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Grid2X2",
+      "usageCount": 2,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "BookOpen",
+      "usageCount": 2,
+      "sizes": [
+        "h-8",
+        "h-12"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Shuffle",
+      "usageCount": 2,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ImageIcon",
+      "usageCount": 2,
+      "sizes": [
+        "h-8"
+      ],
+      "colors": [
+        "text-neutral-400"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "MousePointer",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Contrast",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "CreditCard",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [
+        "text-muted-foreground"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Package",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Share",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Timer",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [
+        "text-info-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Hash",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ArrowUpRight",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Minus",
+      "usageCount": 1,
+      "sizes": [],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "CheckCircle2",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Wand2",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Template",
+      "usageCount": 1,
+      "sizes": [
+        "h-12"
+      ],
+      "colors": [
+        "text-gray-400"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ArrowLeft",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Home",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [
+        "text-primary-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Menu",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "TrendingDown",
+      "usageCount": 1,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "SortAsc",
+      "usageCount": 1,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "SortDesc",
+      "usageCount": 1,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Grid",
+      "usageCount": 1,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "BellOff",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "VolumeX",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Accessibility",
+      "usageCount": 1,
+      "sizes": [
+        "h-5"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Save",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ThumbsUp",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [
+        "text-green-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ThumbsDown",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [
+        "text-red-600"
+      ],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Circle",
+      "usageCount": 1,
+      "sizes": [],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "ChevronUp",
+      "usageCount": 1,
+      "sizes": [
+        "h-4"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    },
+    {
+      "name": "Undo2",
+      "usageCount": 1,
+      "sizes": [
+        "h-3"
+      ],
+      "colors": [],
+      "contexts": [
+        "other"
+      ]
+    }
+  ],
+  "sizeAnalysis": {
+    "allSizes": [
+      "h-12",
+      "h-16",
+      "h-3",
+      "h-4",
+      "h-5",
+      "h-6",
+      "h-8"
+    ],
+    "recommendedSizes": [
+      "h-3",
+      "h-4",
+      "h-5",
+      "h-6",
+      "h-8"
+    ],
+    "nonStandardSizes": [
+      "h-12",
+      "h-16"
+    ]
+  },
+  "colorAnalysis": {
+    "allColors": [
+      "text-amber-600",
+      "text-blue-500",
+      "text-blue-600",
+      "text-destructive",
+      "text-emerald-600",
+      "text-error",
+      "text-error-600",
+      "text-gray-300",
+      "text-gray-400",
+      "text-gray-500",
+      "text-gray-600",
+      "text-green-500",
+      "text-green-600",
+      "text-info",
+      "text-info-600",
+      "text-muted-foreground",
+      "text-neutral-400",
+      "text-neutral-500",
+      "text-orange-500",
+      "text-orange-600",
+      "text-primary",
+      "text-primary-500",
+      "text-primary-600",
+      "text-primary-foreground",
+      "text-purple-500",
+      "text-purple-600",
+      "text-red-500",
+      "text-red-600",
+      "text-success",
+      "text-success-600",
+      "text-warning",
+      "text-warning-600",
+      "text-white",
+      "text-yellow-500",
+      "text-yellow-600"
+    ],
+    "commonColors": [
+      "text-primary",
+      "text-muted-foreground",
+      "text-white"
+    ]
+  },
+  "contextAnalysis": [
+    {
+      "context": "other",
+      "iconCount": 101,
+      "icons": [
+        "Accessibility",
+        "Activity",
+        "AlertCircle",
+        "AlertTriangle",
+        "ArrowLeft",
+        "ArrowLeftRight",
+        "ArrowRight",
+        "ArrowUpRight",
+        "BarChart3",
+        "Bell",
+        "BellOff",
+        "BookOpen",
+        "Building2",
+        "Calendar",
+        "Check",
+        "CheckCircle",
+        "CheckCircle2",
+        "ChevronDown",
+        "ChevronLeft",
+        "ChevronRight",
+        "ChevronUp",
+        "Circle",
+        "Clock",
+        "Coins",
+        "Contrast",
+        "Copy",
+        "CreditCard",
+        "Download",
+        "Edit",
+        "Edit3",
+        "ExternalLink",
+        "Eye",
+        "EyeOff",
+        "FileText",
+        "Filter",
+        "FlaskConical",
+        "FolderOpen",
+        "GitBranch",
+        "Grid",
+        "Grid2X2",
+        "Grid3X3",
+        "Hash",
+        "Heart",
+        "HelpCircle",
+        "History",
+        "Home",
+        "Image",
+        "ImageIcon",
+        "Info",
+        "Keyboard",
+        "Lightbulb",
+        "List",
+        "Loader2",
+        "Maximize2",
+        "Menu",
+        "MessageCircle",
+        "MessageSquare",
+        "Minimize2",
+        "Minus",
+        "MoreHorizontal",
+        "MousePointer",
+        "Package",
+        "Palette",
+        "Pause",
+        "Play",
+        "Plus",
+        "RefreshCw",
+        "Repeat2",
+        "RotateCcw",
+        "Save",
+        "Search",
+        "Settings",
+        "Share",
+        "Share2",
+        "Shuffle",
+        "SkipForward",
+        "SortAsc",
+        "SortDesc",
+        "Sparkles",
+        "Square",
+        "Star",
+        "Tag",
+        "Target",
+        "Template",
+        "TestTube",
+        "ThumbsDown",
+        "ThumbsUp",
+        "Timer",
+        "Trash2",
+        "TrendingDown",
+        "TrendingUp",
+        "Undo2",
+        "Upload",
+        "User",
+        "Users",
+        "Volume2",
+        "VolumeX",
+        "Wand2",
+        "X",
+        "XCircle",
+        "Zap"
+      ]
+    }
+  ],
+  "inconsistencies": [
+    {
+      "type": "size-inconsistency",
+      "icon": "Eye",
+      "issue": "Icon Eye used with 6 different sizes: h-5, h-4, h-3, h-12, h-8, h-6",
+      "usages": 31
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Zap",
+      "issue": "Icon Zap used with 4 different sizes: h-5, h-3, h-4, h-8",
+      "usages": 20
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "CheckCircle",
+      "issue": "Icon CheckCircle used with 5 different sizes: h-3, h-6, h-5, h-4, h-12",
+      "usages": 44
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Sparkles",
+      "issue": "Icon Sparkles used with 5 different sizes: h-3, h-4, h-5, h-8, h-12",
+      "usages": 21
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "ArrowLeftRight",
+      "issue": "Icon ArrowLeftRight used with 4 different sizes: h-3, h-4, h-5, h-8",
+      "usages": 7
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Image",
+      "issue": "Icon Image used with 4 different sizes: h-5, h-12, h-16, h-4",
+      "usages": 8
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Users",
+      "issue": "Icon Users used with 4 different sizes: h-5, h-8, h-4, h-12",
+      "usages": 27
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Building2",
+      "issue": "Icon Building2 used with 4 different sizes: h-5, h-8, h-4, h-12",
+      "usages": 10
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Calendar",
+      "issue": "Icon Calendar used with 5 different sizes: h-12, h-4, h-8, h-6, h-3",
+      "usages": 18
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Clock",
+      "issue": "Icon Clock used with 5 different sizes: h-5, h-4, h-8, h-3, h-12",
+      "usages": 27
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "BarChart3",
+      "issue": "Icon BarChart3 used with 4 different sizes: h-4, h-3, h-12, h-5",
+      "usages": 5
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "Lightbulb",
+      "issue": "Icon Lightbulb used with 4 different sizes: h-5, h-4, h-6, h-12",
+      "usages": 9
+    },
+    {
+      "type": "size-inconsistency",
+      "icon": "MessageSquare",
+      "issue": "Icon MessageSquare used with 5 different sizes: h-4, h-3, h-8, h-12, h-5",
+      "usages": 10
+    },
+    {
+      "type": "missing-size",
+      "icon": "Keyboard",
+      "issue": "Icon Keyboard missing size specification in 1 places",
+      "examples": [
+        "app\\dashboard\\content-grid-demo\\page.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Zap",
+      "issue": "Icon Zap missing size specification in 2 places",
+      "examples": [
+        "components\\premium-components-demo.tsx",
+        "components\\premium-components-demo.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Sparkles",
+      "issue": "Icon Sparkles missing size specification in 2 places",
+      "examples": [
+        "components\\premium-components-demo.tsx",
+        "components\\premium-components-demo.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Play",
+      "issue": "Icon Play missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "RotateCcw",
+      "issue": "Icon RotateCcw missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Heart",
+      "issue": "Icon Heart missing size specification in 1 places",
+      "examples": [
+        "components\\premium-components-demo.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Star",
+      "issue": "Icon Star missing size specification in 4 places",
+      "examples": [
+        "components\\premium-components-demo.tsx",
+        "components\\testing\\feedback-dashboard.tsx",
+        "components\\testing\\feedback-dashboard.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Grid3X3",
+      "issue": "Icon Grid3X3 missing size specification in 1 places",
+      "examples": [
+        "components\\dashboard\\content-grid.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Calendar",
+      "issue": "Icon Calendar missing size specification in 8 places",
+      "examples": [
+        "app\\dashboard\\integration-demo\\page.tsx",
+        "components\\calendar\\calendar-view.tsx",
+        "components\\calendar\\calendar-view.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Download",
+      "issue": "Icon Download missing size specification in 1 places",
+      "examples": [
+        "components\\premium-components-demo.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Activity",
+      "issue": "Icon Activity missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\analytics\\real-time-analytics.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "RefreshCw",
+      "issue": "Icon RefreshCw missing size specification in 1 places",
+      "examples": [
+        "components\\admin\\ErrorMonitoringDashboard.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "ChevronLeft",
+      "issue": "Icon ChevronLeft missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "ChevronRight",
+      "issue": "Icon ChevronRight missing size specification in 3 places",
+      "examples": [
+        "components\\integration\\main-flow-integration.tsx",
+        "components\\onboarding\\tour-controls.tsx",
+        "components\\ui\\responsive-dropdown.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Check",
+      "issue": "Icon Check missing size specification in 2 places",
+      "examples": [
+        "components\\dashboard\\bulk-selection-system.tsx",
+        "components\\ui\\responsive-dropdown.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "X",
+      "issue": "Icon X missing size specification in 2 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx",
+        "components\\ui\\responsive-modal.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Filter",
+      "issue": "Icon Filter missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-library.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "ChevronDown",
+      "issue": "Icon ChevronDown missing size specification in 6 places",
+      "examples": [
+        "components\\client\\client-brand-switcher.tsx",
+        "components\\client\\client-brand-switcher.tsx",
+        "components\\dashboard\\content-grid.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Pause",
+      "issue": "Icon Pause missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Minus",
+      "issue": "Icon Minus missing size specification in 1 places",
+      "examples": [
+        "components\\dashboard\\bulk-selection-system.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "ArrowRight",
+      "issue": "Icon ArrowRight missing size specification in 1 places",
+      "examples": [
+        "components\\integration\\workflow-integration.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "SkipForward",
+      "issue": "Icon SkipForward missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "HelpCircle",
+      "issue": "Icon HelpCircle missing size specification in 1 places",
+      "examples": [
+        "components\\onboarding\\tour-controls.tsx"
+      ]
+    },
+    {
+      "type": "missing-size",
+      "icon": "Circle",
+      "issue": "Icon Circle missing size specification in 1 places",
+      "examples": [
+        "components\\ui\\responsive-dropdown.tsx"
+      ]
+    },
+    {
+      "type": "context-inconsistency",
+      "context": "other",
+      "issue": "Icons in other context have inconsistent sizes",
+      "details": [
+        "Eye: h-5, h-4, h-3, h-12, h-8, h-6",
+        "Keyboard: h-5, h-4",
+        "Volume2: h-5, h-4",
+        "Zap: h-5, h-3, h-4, h-8",
+        "CheckCircle: h-3, h-6, h-5, h-4, h-12",
+        "AlertTriangle: h-3, h-4, h-5",
+        "Info: h-3, h-4, h-5",
+        "Sparkles: h-3, h-4, h-5, h-8, h-12",
+        "ArrowLeftRight: h-3, h-4, h-5, h-8",
+        "Play: h-5, h-4, h-3",
+        "RotateCcw: h-4, h-3, h-12",
+        "User: h-3, h-4",
+        "Copy: h-3, h-4, h-6",
+        "Heart: h-4, h-3",
+        "Star: h-5, h-4, h-3",
+        "Image: h-5, h-12, h-16, h-4",
+        "Upload: h-4, h-8",
+        "Grid3X3: h-8, h-4",
+        "Search: h-8, h-4",
+        "FolderOpen: h-5, h-12",
+        "Tag: h-4, h-3",
+        "Users: h-5, h-8, h-4, h-12",
+        "Plus: h-4, h-5",
+        "Settings: h-4, h-5",
+        "Palette: h-5, h-8, h-4",
+        "Building2: h-5, h-8, h-4, h-12",
+        "Calendar: h-12, h-4, h-8, h-6, h-3",
+        "Clock: h-5, h-4, h-8, h-3, h-12",
+        "TrendingUp: h-5, h-4, h-3",
+        "XCircle: h-4, h-5",
+        "Loader2: h-4, h-8, h-6",
+        "Trash2: h-4, h-3",
+        "Download: h-4, h-3",
+        "TestTube: h-8, h-4, h-5",
+        "BarChart3: h-4, h-3, h-12, h-5",
+        "Target: h-4, h-3, h-5",
+        "Lightbulb: h-5, h-4, h-6, h-12",
+        "MessageSquare: h-4, h-3, h-8, h-12, h-5",
+        "Activity: h-4, h-5, h-8",
+        "RefreshCw: h-4, h-3",
+        "FileText: h-12, h-5, h-4",
+        "ChevronLeft: h-4, h-3, h-5",
+        "ChevronRight: h-4, h-3, h-5",
+        "List: h-4, h-3",
+        "MoreHorizontal: h-3, h-4",
+        "Check: h-3, h-4, h-5",
+        "X: h-3, h-4, h-5",
+        "Edit3: h-3, h-6",
+        "Edit: h-5, h-4",
+        "Filter: h-4, h-3, h-5",
+        "ChevronDown: h-3, h-4",
+        "ExternalLink: h-4, h-8, h-3",
+        "AlertCircle: h-4, h-5",
+        "Pause: h-3, h-4",
+        "Coins: h-4, h-5, h-3",
+        "GitBranch: h-4, h-3",
+        "Maximize2: h-3, h-4",
+        "Minimize2: h-3, h-4",
+        "MessageCircle: h-3, h-4",
+        "Repeat2: h-3, h-4",
+        "EyeOff: h-5, h-4",
+        "SkipForward: h-3, h-4",
+        "FlaskConical: h-4, h-12",
+        "HelpCircle: h-4, h-3, h-5",
+        "BookOpen: h-8, h-12"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "size-standardization",
+      "priority": "high",
+      "description": "Standardize icon sizes to a consistent scale",
+      "action": "Create icon size system with h-3, h-4, h-5, h-6, h-8 as standard sizes"
+    },
+    {
+      "type": "color-standardization",
+      "priority": "medium",
+      "description": "Reduce color variations for better consistency",
+      "action": "Define semantic color classes for icons (primary, secondary, muted, etc.)"
+    },
+    {
+      "type": "context-standards",
+      "priority": "medium",
+      "description": "Standardize icon sizes within other context",
+      "action": "Define consistent icon size for other components"
+    },
+    {
+      "type": "missing-specifications",
+      "priority": "high",
+      "description": "24 icons missing size specifications",
+      "action": "Add explicit size classes to all icon usages"
+    }
+  ]
+}

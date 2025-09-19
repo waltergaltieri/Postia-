@@ -20,6 +20,7 @@ import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import TourManagementHub from '@/components/onboarding/tour-management-hub'
 import { FloatingTourProgress } from './tour-progress-indicator'
+import ClientSelector from './client-selector'
 import { useTourNavigation } from '@/hooks/use-tour-navigation'
 
 interface Client {
@@ -43,7 +44,6 @@ export default function MobileHeader({
   className 
 }: MobileHeaderProps) {
   const [showMenu, setShowMenu] = useState(false)
-  const [showClientSwitcher, setShowClientSwitcher] = useState(false)
   const router = useRouter()
   
   // Tour navigation integration
@@ -133,18 +133,29 @@ export default function MobileHeader({
             </div>
           </div>
 
-          {/* Center: Client Switcher (if available) */}
-          {currentClient && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex-1 max-w-[200px] mx-4 h-9 justify-start"
-              onClick={() => setShowClientSwitcher(true)}
-            >
-              <ClientBrandIndicator client={currentClient} compact />
-              <ChevronDown className="ml-auto h-3 w-3" />
-            </Button>
-          )}
+          {/* Center: Enhanced Client Selector */}
+          <div className="flex-1 max-w-[200px] mx-4">
+            <ClientSelector
+              compact={true}
+              showAdminToggle={true}
+              onManageClients={() => {
+                if (handleNavigationAttempt('/dashboard/clients')) {
+                  router.push('/dashboard/clients')
+                }
+              }}
+              onAddClient={() => {
+                if (handleNavigationAttempt('/dashboard/clients/new')) {
+                  router.push('/dashboard/clients/new')
+                }
+              }}
+              onAdminDashboard={() => {
+                if (handleNavigationAttempt('/dashboard/admin')) {
+                  router.push('/dashboard/admin')
+                }
+              }}
+              className="w-full"
+            />
+          </div>
 
           {/* Right: Actions */}
           <div className="flex items-center space-x-1">
@@ -295,71 +306,7 @@ export default function MobileHeader({
         )}
       </AnimatePresence>
 
-      {/* Client Switcher Modal */}
-      <AnimatePresence>
-        {showClientSwitcher && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-              onClick={() => setShowClientSwitcher(false)}
-            />
-            
-            {/* Client Switcher Panel */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ 
-                duration: 0.2,
-                ease: [0.4, 0, 0.2, 1]
-              }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-80 max-w-[90vw] bg-background border border-border rounded-xl shadow-xl"
-            >
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-foreground mb-4">
-                  Switch Client
-                </h3>
-                
-                <div className="space-y-2 max-h-60 overflow-y-auto">
-                  {clients.map((client) => (
-                    <Button
-                      key={client.id}
-                      variant="ghost"
-                      className="w-full justify-start h-auto p-3 text-left"
-                      onClick={() => {
-                        onClientChange?.(client)
-                        setShowClientSwitcher(false)
-                      }}
-                    >
-                      <ClientBrandIndicator client={client} />
-                    </Button>
-                  ))}
-                  
-                  <Separator className="my-2" />
-                  
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-muted-foreground"
-                    onClick={() => {
-                      if (handleNavigationAttempt('/dashboard/clients')) {
-                        router.push('/dashboard/clients')
-                        setShowClientSwitcher(false)
-                      }
-                    }}
-                  >
-                    Manage Clients
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+
 
       {/* Floating Tour Progress for Mobile */}
       <FloatingTourProgress />

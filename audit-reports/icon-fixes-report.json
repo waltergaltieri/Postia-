@@ -1,0 +1,502 @@
+{
+  "summary": {
+    "filesProcessed": 97,
+    "filesFixed": 97,
+    "errors": 0
+  },
+  "fixes": [
+    {
+      "file": "app\\auth\\accept-invitation\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\complete-registration\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\error\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\forgot-password\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\reset-password\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\signin\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\signup\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\auth\\verify-email\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\accessibility-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\agency\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\ai-generation-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\animations-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\asset-library-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\calendar-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\campaigns\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\campaigns\\[campaignId]\\calendar\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\client-brand-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\clients\\[clientId]\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\content-grid-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\modal-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\test-navigation\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\toast-demo\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\unauthorized\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\usability-testing\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\dashboard\\users\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "app\\page.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\admin\\ErrorMonitoringDashboard.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\auth\\EmailVerificationRequired.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\billing\\BillingDashboard.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\calendar\\calendar-view.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\calendar\\context-menu.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\calendar\\inline-editor.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\campaigns\\CalendarView.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\campaigns\\CampaignContentCalendar.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\campaigns\\CampaignGenerator.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\client\\asset-library.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\client\\client-brand-switcher.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\clients\\ClientManagementInterface.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\AIContentGenerationInterface.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\AIGenerationWorkflow.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\ContentVersionComparator.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\ContentVersionHistory.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\PostApprovalWorkflow.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\content\\PublicationScheduler.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dashboard\\AgencyOverview.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dashboard\\bulk-selection-system.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dashboard\\content-grid.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dashboard\\DashboardOverview.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dashboard\\keyboard-shortcuts-help.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\design\\AdvancedDesignGenerator.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\dev\\accessibility-audit.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\integration\\main-flow-integration.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\mobile\\mobile-form.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\navigation\\breadcrumbs.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\navigation\\mobile-header.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\navigation\\navigation-sidebar.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\analytics\\ab-testing-dashboard.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\analytics\\real-time-analytics.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\analytics\\tour-metrics-dashboard.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\branded-tour-demo.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\examples\\responsive-tour-example.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\feature-discovery-panel.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\mobile\\mobile-tour-controls.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\mobile\\mobile-tour-popover.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-accessibility-test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-controls.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-help-menu.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-library.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-management-hub.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-popover.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-replay-manager.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-settings.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\tour-ui-demo.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\__tests__\\tour-controls.test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\__tests__\\tour-help-menu.test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\onboarding\\__tests__\\tour-settings.test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\premium-components-demo.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\social\\SocialAccountManager.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\testing\\ab-testing.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\testing\\feedback-dashboard.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\testing\\usability-testing-interface.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\alert-dialog.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\button.stories.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\button.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\card.stories.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\content-card.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\icon.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\modal-manager.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\modal.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\responsive-modal.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\select.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\ui\\toast.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\__tests__\\accessibility.test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "components\\__tests__\\modal.test.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "lib\\accessibility\\focus-trap.ts",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "lib\\tour\\element-validator.ts",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    },
+    {
+      "file": "stories\\design-system.stories.tsx",
+      "type": "icon-standardization",
+      "description": "Fixed icon sizes, alignment, and colors"
+    }
+  ],
+  "errors": [],
+  "recommendations": [
+    "Import the new Icon component from @/components/ui/icon",
+    "Use semantic icon names from SEMANTIC_ICONS when possible",
+    "Apply context-specific sizing using the context prop",
+    "Use StatusIcon for status indicators",
+    "Include icon-system.css in your global styles"
+  ]
+}

@@ -91,9 +91,9 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
 
   const getPriorityColor = (priority: UserFeedback['priority']) => {
     switch (priority) {
-      case 'critical': return 'bg-red-100 text-red-800 border-red-200'
+      case 'critical': return 'bg-error-100 text-error-800 border-error-200'
       case 'high': return 'bg-orange-100 text-orange-800 border-orange-200'
-      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-200'
+      case 'medium': return 'bg-warning-100 text-warning-800 border-warning-200'
       case 'low': return 'bg-gray-100 text-gray-800 border-gray-200'
       default: return 'bg-gray-100 text-gray-800 border-gray-200'
     }
@@ -111,9 +111,9 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
 
   const getCategoryIcon = (category: UserFeedback['category']) => {
     switch (category) {
-      case 'positive': return <ThumbsUp className="h-4 w-4 text-green-600" />
-      case 'negative': return <ThumbsDown className="h-4 w-4 text-red-600" />
-      case 'suggestion': return <Lightbulb className="h-4 w-4 text-blue-600" />
+      case 'positive': return <ThumbsUp className="h-4 w-4 text-success-600" />
+      case 'negative': return <ThumbsDown className="h-4 w-4 text-error-600" />
+      case 'suggestion': return <Lightbulb className="h-4 w-4 text-info-600" />
       default: return <MessageSquare className="h-4 w-4" />
     }
   }
@@ -150,13 +150,9 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={refreshReport}>
-            <TrendingUp className="h-4 w-4 mr-2" />
-            Refresh
-          </Button>
+            <TrendingUp className="h-4 w-4 mr-2" /> <span>Refresh</span></Button>
           <Button onClick={exportReport}>
-            <Download className="h-4 w-4 mr-2" />
-            Export Report
-          </Button>
+            <Download className="h-4 w-4 mr-2" /> <span>Export Report</span></Button>
         </div>
       </div>
 
@@ -189,7 +185,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                 <Star
                   key={star}
                   className={`h-4 w-4 ${star <= report.overallMetrics.userSatisfactionScore
-                      ? 'text-yellow-500 fill-current'
+                      ? 'text-warning-600 fill-current'
                       : 'text-gray-300'
                     }`}
                 />
@@ -370,7 +366,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
             {filteredFeedback.length === 0 ? (
               <Card>
                 <CardContent className="text-center py-8">
-                  <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <MessageSquare className="h-8 w-8 text-muted-foreground mx-auto mb-4" />
                   <p className="text-gray-600">No feedback matches the selected filters</p>
                 </CardContent>
               </Card>
@@ -406,7 +402,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                             <Star
                               key={star}
                               className={`h-4 w-4 ${star <= feedback.rating
-                                  ? 'text-yellow-500 fill-current'
+                                  ? 'text-warning-600 fill-current'
                                   : 'text-gray-300'
                                 }`}
                             />
@@ -414,7 +410,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                         </div>
                       </div>
                       <p className="text-gray-800 mb-2">{feedback.comment}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         {feedback.timestamp.toLocaleString()}
                         {feedback.page && ` • ${feedback.page}`}
                       </p>
@@ -430,7 +426,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Lightbulb className="h-5 w-5 text-yellow-600" />
+                <Lightbulb className="h-5 w-5 text-warning-600" />
                 Improvement Recommendations
               </CardTitle>
               <CardDescription>
@@ -440,7 +436,7 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
             <CardContent className="space-y-4">
               {report.recommendations.length === 0 ? (
                 <div className="text-center py-8">
-                  <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
+                  <CheckCircle className="h-8 w-8 text-success-600 mx-auto mb-4" />
                   <p className="text-gray-600">
                     Great job! No critical recommendations at this time.
                   </p>
@@ -452,10 +448,10 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg"
+                    className="flex items-start gap-3 p-4 bg-warning-50 border border-warning-200 rounded-lg"
                   >
-                    <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-yellow-800">{recommendation}</p>
+                    <AlertTriangle className="h-5 w-5 text-warning-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-warning-800">{recommendation}</p>
                   </motion.div>
                 ))
               )}
@@ -477,25 +473,25 @@ export function FeedbackDashboard({ className }: FeedbackDashboardProps) {
                 </div>
               )}
               {report.overallMetrics.taskCompletionRate < 80 && (
-                <div className="flex items-center gap-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                  <Target className="h-5 w-5 text-blue-600" />
-                  <span className="text-blue-800">
+                <div className="flex items-center gap-3 p-3 bg-info-50 border border-info-200 rounded-lg">
+                  <Target className="h-5 w-5 text-info-600" />
+                  <span className="text-info-800">
                     Simplify user workflows - task completion rate needs improvement
                   </span>
                 </div>
               )}
               {report.overallMetrics.errorRate > 20 && (
-                <div className="flex items-center gap-3 p-3 bg-red-50 border border-red-200 rounded-lg">
-                  <AlertTriangle className="h-5 w-5 text-red-600" />
-                  <span className="text-red-800">
+                <div className="flex items-center gap-3 p-3 bg-error-50 border border-error-200 rounded-lg">
+                  <AlertTriangle className="h-5 w-5 text-error-600" />
+                  <span className="text-error-800">
                     Address usability issues - error rate is above acceptable threshold
                   </span>
                 </div>
               )}
               {report.overallMetrics.userSatisfactionScore < 4 && (
-                <div className="flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                  <Users className="h-5 w-5 text-green-600" />
-                  <span className="text-green-800">
+                <div className="flex items-center gap-3 p-3 bg-success-50 border border-success-200 rounded-lg">
+                  <Users className="h-5 w-5 text-success-600" />
+                  <span className="text-success-800">
                     Focus on user experience improvements - satisfaction score needs attention
                   </span>
                 </div>

@@ -176,7 +176,7 @@ export default function ClientBrandSwitcher({
           </div>
         )}
         {client.isActive && (
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-success-500 rounded-full border-2 border-background" />
         )}
       </div>
 
@@ -262,10 +262,9 @@ export default function ClientBrandSwitcher({
         <Button
           variant="outline"
           className="w-full justify-start h-auto p-3 hover:bg-muted/50"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => <span>setIsOpen(!isOpen)}
         >
-          {currentClient ? (
-            <CompactClientPreview client={currentClient} />
+          {currentClient ? (</span><CompactClientPreview client={currentClient} />
           ) : (
             <div className="flex items-center space-x-2">
               <Users className="w-4 h-4" />
@@ -278,9 +277,7 @@ export default function ClientBrandSwitcher({
           )} />
         </Button>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
+        <AnimatePresence> <span>{isOpen && (</span><motion.div
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -293,12 +290,11 @@ export default function ClientBrandSwitcher({
                     key={client.id}
                     variant="ghost"
                     className="w-full justify-start h-auto p-2"
-                    onClick={() => {
+                    onClick={() => <span>{
                       onClientChange?.(client)
                       setIsOpen(false)
                     }}
-                  >
-                    <CompactClientPreview client={client} />
+                  ></span><CompactClientPreview client={client} />
                   </Button>
                 ))}
               </div>
@@ -318,10 +314,9 @@ export default function ClientBrandSwitcher({
           "hover:bg-muted/50 transition-all duration-200",
           "border-2 hover:border-primary/20"
         )}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => <span>setIsOpen(!isOpen)}
       >
-        {currentClient ? (
-          <ClientPreview client={currentClient} isSelected />
+        {currentClient ? (</span><ClientPreview client={currentClient} isSelected />
         ) : (
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
@@ -340,9 +335,7 @@ export default function ClientBrandSwitcher({
         )} />
       </Button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
+      <AnimatePresence> <span>{isOpen && (</span><motion.div
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -377,13 +370,12 @@ export default function ClientBrandSwitcher({
                         key={client.id}
                         variant="ghost"
                         className="w-full justify-start h-auto p-3 hover:bg-muted/50"
-                        onClick={() => {
+                        onClick={() => <span>{
                           onClientChange?.(client)
                           setIsOpen(false)
                           setSearchQuery('')
                         }}
-                      >
-                        <ClientPreview 
+                      ></span><ClientPreview 
                           client={client} 
                           isSelected={currentClient?.id === client.id}
                         />
@@ -412,13 +404,12 @@ export default function ClientBrandSwitcher({
                           key={client.id}
                           variant="ghost"
                           className="w-full justify-start h-auto p-3 hover:bg-muted/50"
-                          onClick={() => {
+                          onClick={() => <span>{
                             onClientChange?.(client)
                             setIsOpen(false)
                             setSearchQuery('')
                           }}
-                        >
-                          <ClientPreview 
+                        ></span><ClientPreview 
                             client={client} 
                             isSelected={currentClient?.id === client.id}
                           />
@@ -443,28 +434,22 @@ export default function ClientBrandSwitcher({
                   variant="outline"
                   size="sm"
                   className="flex-1"
-                  onClick={() => {
+                  onClick={() => <span>{
                     onManageClients?.()
                     setIsOpen(false)
                     setSearchQuery('')
                   }}
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Manage Clients
-                </Button>
+                ></span><Users className="w-4 h-4 mr-2" /> <span>Manage Clients</span></Button>
                 <Button
                   variant="outline"
                   size="sm"
                   className="flex-1"
-                  onClick={() => {
+                  onClick={() => <span>{
                     // Handle add new client
                     setIsOpen(false)
                     setSearchQuery('')
                   }}
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Client
-                </Button>
+                ></span><Plus className="w-4 h-4 mr-2" /> <span>Add Client</span></Button>
               </div>
             </div>
           </motion.div>

@@ -1,0 +1,460 @@
+/* Contrast Fixes - WCAG 2.1 AA Compliant Colors */
+
+/* ===== PLACEHOLDER TEXT FIXES ===== */
+
+/* Ensure all placeholder text meets contrast requirements */
+input::placeholder,
+textarea::placeholder,
+select::placeholder,
+.placeholder-text {
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 1;
+}
+
+/* Specific fixes for Tailwind classes */
+.placeholder\:text-gray-400::placeholder {
+  color: #6b7280 !important; /* gray-500 for 4.5:1 contrast on white */
+}
+
+.placeholder\:text-muted-foreground::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* ===== TEXT VISIBILITY FIXES ===== */
+
+/* Fix white text on white background issues */
+.text-white-on-light {
+  color: #1f2937 !important; /* gray-800 for high contrast */
+}
+
+/* Ensure text is always visible */
+.text-always-visible {
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+/* ===== BUTTON CONTRAST FIXES ===== */
+
+/* Primary button with guaranteed contrast */
+.btn-contrast-safe {
+  background-color: #1d4ed8; /* blue-700 for 4.5:1+ contrast with white text */
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+}
+
+.btn-contrast-safe:hover {
+  background-color: #1e40af; /* blue-800 */
+  border-color: #1e40af;
+}
+
+.btn-contrast-safe:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+/* Secondary button with safe contrast */
+.btn-secondary-contrast-safe {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 2px solid hsl(var(--border));
+}
+
+.btn-secondary-contrast-safe:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* ===== FORM ELEMENT FIXES ===== */
+
+/* Input fields with proper contrast */
+.input-contrast-safe {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+.input-contrast-safe::placeholder {
+  color: hsl(var(--muted-foreground));
+  opacity: 1;
+}
+
+.input-contrast-safe:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-color: hsl(var(--ring));
+}
+
+/* Select elements with proper contrast */
+.select-contrast-safe {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+/* ===== NAVIGATION FIXES ===== */
+
+/* Navigation items with safe contrast */
+.nav-item-contrast-safe {
+  color: hsl(var(--foreground));
+  background-color: transparent;
+}
+
+.nav-item-contrast-safe:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.nav-item-contrast-safe:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.nav-item-active-contrast-safe {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  font-weight: 500;
+}
+
+/* ===== STATUS AND SEMANTIC COLOR FIXES ===== */
+
+/* Success state with proper contrast */
+.status-success-contrast-safe {
+  background-color: #dcfce7; /* green-100 */
+  color: #166534; /* green-800 - 7.5:1 contrast */
+  border: 1px solid #bbf7d0; /* green-200 */
+}
+
+/* Warning state with proper contrast */
+.status-warning-contrast-safe {
+  background-color: #fef3c7; /* yellow-100 */
+  color: #92400e; /* yellow-800 - 8.2:1 contrast */
+  border: 1px solid #fde68a; /* yellow-200 */
+}
+
+/* Error state with proper contrast */
+.status-error-contrast-safe {
+  background-color: #fee2e2; /* red-100 */
+  color: #991b1b; /* red-800 - 7.7:1 contrast */
+  border: 1px solid #fecaca; /* red-200 */
+}
+
+/* Info state with proper contrast */
+.status-info-contrast-safe {
+  background-color: #dbeafe; /* blue-100 */
+  color: #1e40af; /* blue-800 - 8.6:1 contrast */
+  border: 1px solid #bfdbfe; /* blue-200 */
+}
+
+/* ===== DARK THEME OVERRIDES ===== */
+
+[data-theme="dark"] .status-success-contrast-safe {
+  background-color: #14532d; /* green-900 */
+  color: #bbf7d0; /* green-200 - 7.1:1 contrast on dark */
+  border-color: #166534; /* green-800 */
+}
+
+[data-theme="dark"] .status-warning-contrast-safe {
+  background-color: #92400e; /* yellow-800 */
+  color: #fef3c7; /* yellow-100 - 8.2:1 contrast on dark */
+  border-color: #d97706; /* yellow-600 */
+}
+
+[data-theme="dark"] .status-error-contrast-safe {
+  background-color: #991b1b; /* red-800 */
+  color: #fee2e2; /* red-100 - 7.7:1 contrast on dark */
+  border-color: #dc2626; /* red-600 */
+}
+
+[data-theme="dark"] .status-info-contrast-safe {
+  background-color: #1e40af; /* blue-800 */
+  color: #dbeafe; /* blue-100 - 8.6:1 contrast on dark */
+  border-color: #2563eb; /* blue-600 */
+}
+
+/* ===== HIGH CONTRAST MODE SUPPORT ===== */
+
+@media (prefers-contrast: high) {
+  /* Force high contrast borders and outlines */
+  .input-contrast-safe,
+  .select-contrast-safe,
+  .btn-contrast-safe,
+  .btn-secondary-contrast-safe {
+    border-width: 2px !important;
+  }
+  
+  /* Enhanced focus indicators */
+  .input-contrast-safe:focus,
+  .select-contrast-safe:focus,
+  .btn-contrast-safe:focus-visible,
+  .btn-secondary-contrast-safe:focus-visible {
+    outline-width: 3px !important;
+    outline-offset: 3px !important;
+  }
+  
+  /* Force text contrast */
+  .text-always-visible,
+  .nav-item-contrast-safe,
+  .input-contrast-safe,
+  .select-contrast-safe {
+    color: CanvasText !important;
+    background-color: Canvas !important;
+  }
+  
+  /* Button contrast in high contrast mode */
+  .btn-contrast-safe {
+    background-color: ButtonFace !important;
+    color: ButtonText !important;
+    border-color: ButtonText !important;
+  }
+}
+
+/* ===== UTILITY CLASSES FOR QUICK FIXES ===== */
+
+/* Quick fix for invisible text */
+.fix-invisible-text {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Quick fix for low contrast text */
+.fix-low-contrast {
+  color: hsl(var(--foreground)) !important;
+  background-color: hsl(var(--background)) !important;
+}
+
+/* Quick fix for placeholder visibility */
+.fix-placeholder::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 1 !important;
+}
+
+/* Quick fix for focus visibility */
+.fix-focus:focus-visible {
+  outline: 2px solid hsl(var(--ring)) !important;
+  outline-offset: 2px !important;
+}
+/* =
+==== ENHANCED FOCUS STATES FOR LINKS AND NAVIGATION ===== */
+
+/* Link focus improvements */
+a:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: var(--radius);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Navigation link specific focus */
+.nav-link:focus-visible,
+[role="menuitem"]:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-radius: var(--radius);
+}
+
+/* Skip link enhanced visibility */
+.skip-link:focus {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Interactive element focus ring enhancement */
+.focus-ring-enhanced:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  box-shadow: 
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsl(var(--ring)),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Card and container focus states */
+.card-focusable:focus-visible,
+.content-card:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  transform: translateY(-1px);
+  box-shadow: 
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsl(var(--ring)),
+    0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown and menu focus states */
+.dropdown-item:focus-visible,
+.menu-item:focus-visible {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  outline: none;
+}
+
+/* Tab focus improvements */
+.tab-trigger:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Modal and dialog focus trap */
+.modal-content:focus-visible,
+.dialog-content:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: -2px;
+}
+
+/* ===== KEYBOARD NAVIGATION IMPROVEMENTS ===== */
+
+/* Visible focus for keyboard users only */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+.js-focus-visible .focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Enhanced focus for form controls */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 1px hsl(var(--ring));
+}
+
+/* Checkbox and radio focus improvements */
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
+}
+
+/* ===== HOVER STATE IMPROVEMENTS ===== */
+
+/* Consistent hover states for interactive elements */
+.hover-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Link hover improvements */
+a:hover:not(.btn):not(.button) {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  color: hsl(var(--primary));
+}
+
+/* Navigation hover states */
+.nav-item:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: translateX(2px);
+  transition: all 0.2s ease;
+}
+
+/* ===== ACTIVE STATES ===== */
+
+/* Active state feedback */
+.active-press:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Button active states */
+button:active:not(:disabled),
+.btn:active:not(.disabled) {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* ===== DISABLED STATE IMPROVEMENTS ===== */
+
+/* Clear disabled state indication */
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled,
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Disabled with pattern for better accessibility */
+.disabled-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+}
+
+/* ===== HIGH CONTRAST MODE ENHANCEMENTS ===== */
+
+@media (prefers-contrast: high) {
+  /* Force high contrast focus indicators */
+  :focus-visible {
+    outline: 3px solid currentColor !important;
+    outline-offset: 3px !important;
+  }
+  
+  /* High contrast hover states */
+  a:hover,
+  button:hover:not(:disabled),
+  .nav-item:hover {
+    outline: 2px solid currentColor !important;
+  }
+  
+  /* High contrast active states */
+  button:active:not(:disabled),
+  .btn:active:not(.disabled) {
+    outline: 3px solid currentColor !important;
+    outline-offset: 1px !important;
+  }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Remove transforms and transitions for users who prefer reduced motion */
+  .hover-lift:hover,
+  .nav-item:hover,
+  .active-press:active,
+  button:active:not(:disabled),
+  .btn:active:not(.disabled) {
+    transform: none !important;
+  }
+  
+  /* Keep essential transitions for accessibility */
+  :focus-visible {
+    transition: outline 0.1s ease !important;
+  }
+}

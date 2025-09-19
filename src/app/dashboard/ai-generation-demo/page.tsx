@@ -234,13 +234,8 @@ export default function AIGenerationDemoPage() {
             <CardContent>
               <div className="flex space-x-4">
                 <Button onClick={simulateJobProgress}>
-                  <Play className="h-4 w-4 mr-2" />
-                  Complete Generation
-                </Button>
-                <Button variant="outline" onClick={() => setCurrentJob(mockJob)}>
-                  <RotateCcw className="h-4 w-4 mr-2" />
-                  Reset Demo
-                </Button>
+                  <Play className="h-4 w-4 mr-2" /> <span>Complete Generation</span></Button>
+                <Button variant="outline" onClick={() => <span>setCurrentJob(mockJob)}></span><RotateCcw className="h-4 w-4 mr-2" /> <span>Reset Demo</span></Button>
               </div>
             </CardContent>
           </Card>

@@ -58,3 +58,77 @@ jest.mock('next-auth/react', () => ({
 process.env.NEXTAUTH_SECRET = 'test-secret';
 process.env.NEXTAUTH_URL = 'http://localhost:3000';
 process.env.DATABASE_URL = 'postgresql://test:test@localhost:5432/test';
+
+// Polyfill for Next.js Request/Response objects
+import { TextEncoder, TextDecoder } from 'util';
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
+// Mock fetch for Node.js environment
+global.fetch = jest.fn();
+
+// Mock Request and Response for Next.js API routes
+global.Request = class Request {
+  constructor(input, init = {}) {
+    this.url = typeof input === 'string' ? input : input.url;
+    this.method = init.method || 'GET';
+    this.headers = new Map(Object.entries(init.headers || {}));
+    this.body = init.body;
+    this._bodyText = init.body;
+  }
+
+  async json() {
+    return JSON.parse(this._bodyText || '{}');
+  }
+
+  async text() {
+    return this._bodyText || '';
+  }
+};
+
+global.Response = class Response {
+  constructor(body, init = {}) {
+    this.body = body;
+    this.status = init.status || 200;
+    this.statusText = init.statusText || 'OK';
+    this.headers = new Map(Object.entries(init.headers || {}));
+  }
+
+  async json() {
+    return JSON.parse(this.body);
+  }
+
+  async text() {
+    return this.body;
+  }
+};
+
+// Mock Headers
+global.Headers = class Headers extends Map {
+  constructor(init) {
+    super();
+    if (init) {
+      if (Array.isArray(init)) {
+        init.forEach(([key, value]) => this.set(key, value));
+      } else if (typeof init === 'object') {
+        Object.entries(init).forEach(([key, value]) => this.set(key, value));
+      }
+    }
+  }
+
+  get(name) {
+    return super.get(name.toLowerCase());
+  }
+
+  set(name, value) {
+    return super.set(name.toLowerCase(), value);
+  }
+
+  has(name) {
+    return super.has(name.toLowerCase());
+  }
+
+  delete(name) {
+    return super.delete(name.toLowerCase());
+  }
+};

@@ -172,13 +172,9 @@ export default function CalendarDemoPage() {
             
             <div className="flex items-center gap-3">
               <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
-                Configurar
-              </Button>
+                <Settings className="h-4 w-4 mr-2" /> <span>Configurar</span></Button>
               <Button size="sm">
-                <Plus className="h-4 w-4 mr-2" />
-                Nuevo Evento
-              </Button>
+                <Plus className="h-4 w-4 mr-2" /> <span>Nuevo Evento</span></Button>
             </div>
           </div>
         </div>
@@ -193,11 +189,8 @@ export default function CalendarDemoPage() {
           onEventDelete={handleEventDelete}
           onDateClick={handleDateClick}
           className="mb-8"
-        />
-
-        {/* Event Details Panel */}
-        {selectedEvent && (
-          <div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+        /> <span>{/* Event Details Panel */}
+        {selectedEvent && (</span><div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
             <h3 className="text-lg font-semibold text-neutral-900 mb-4">
               Detalles del Evento
             </h3>
@@ -264,15 +257,10 @@ export default function CalendarDemoPage() {
             </div>
             
             <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-neutral-200">
-              <Button variant="outline" onClick={() => setSelectedEvent(null)}>
-                Cerrar
-              </Button>
-              <Button variant="outline">
-                Editar
-              </Button>
-              <Button>
-                Publicar Ahora
-              </Button>
+              <Button variant="outline" onClick={() => <span>setSelectedEvent(null)}>
+                Cerrar</span></Button>
+              <Button variant="outline"> <span>Editar</span></Button>
+              <Button> <span>Publicar Ahora</span></Button>
             </div>
           </div>
         )}

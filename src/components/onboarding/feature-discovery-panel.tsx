@@ -124,11 +124,11 @@ export function FeatureDiscoveryPanel({
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'critical':
-        return 'bg-red-100 text-red-800 border-red-200'
+        return 'bg-error-100 text-error-800 border-error-200'
       case 'high':
         return 'bg-orange-100 text-orange-800 border-orange-200'
       case 'medium':
-        return 'bg-blue-100 text-blue-800 border-blue-200'
+        return 'bg-info-100 text-info-800 border-info-200'
       case 'low':
         return 'bg-gray-100 text-gray-800 border-gray-200'
       default:
@@ -162,7 +162,7 @@ export function FeatureDiscoveryPanel({
             >
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <Lightbulb className="w-6 h-6 text-blue-600" />
+                  <Lightbulb className="w-6 h-6 text-info-600" />
                   {notificationCount > 0 && (
                     <Badge 
                       variant="destructive" 
@@ -188,16 +188,15 @@ export function FeatureDiscoveryPanel({
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <Lightbulb className="w-5 h-5 text-blue-600" />
+                  <Lightbulb className="w-5 h-5 text-info-600" />
                   <h3 className="font-semibold text-gray-900">Descubrimiento</h3>
                 </div>
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setIsExpanded(false)}
+                  onClick={() => <span>setIsExpanded(false)}
                   className="h-8 w-8 p-0"
-                >
-                  <X className="w-4 h-4" />
+                ></span><X className="w-4 h-4" />
                 </Button>
               </div>
 
@@ -261,10 +260,10 @@ export function FeatureDiscoveryPanel({
                       ))}
                       
                       {recommendations.length === 0 && (
-                        <div className="text-center py-8 text-gray-500">
-                          <Lightbulb className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                        <div className="text-center py-8 text-muted-foreground">
+                          <Lightbulb className="w-8 h-8 mx-auto mb-3 text-gray-300" />
                           <p className="text-sm">No hay recomendaciones nuevas</p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-muted-foreground mt-1">
                             Sigue usando la plataforma para recibir sugerencias personalizadas
                           </p>
                         </div>
@@ -289,10 +288,10 @@ export function FeatureDiscoveryPanel({
                       ))}
                       
                       {whatsNewItems.length === 0 && (
-                        <div className="text-center py-8 text-gray-500">
-                          <Sparkles className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                        <div className="text-center py-8 text-muted-foreground">
+                          <Sparkles className="w-8 h-8 mx-auto mb-3 text-gray-300" />
                           <p className="text-sm">No hay novedades recientes</p>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-muted-foreground mt-1">
                             Te notificaremos cuando haya nuevas funciones
                           </p>
                         </div>
@@ -375,7 +374,7 @@ function RecommendationCard({
           )}
           
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 text-xs text-gray-500">
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Clock className="w-3 h-3" />
               <span>Confianza: {Math.round(recommendation.confidence * 100)}%</span>
             </div>
@@ -386,18 +385,15 @@ function RecommendationCard({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => setShowDismissOptions(true)}
+                    onClick={() => <span>setShowDismissOptions(true)}
                     className="h-7 px-2 text-xs"
                   >
-                    Descartar
-                  </Button>
+                    Descartar</span></Button>
                   <Button
                     size="sm"
                     onClick={onAccept}
                     className="h-7 px-3 text-xs"
-                  >
-                    Ver tour
-                    <ChevronRight className="w-3 h-3 ml-1" />
+                  > <span>Ver tour</span><ChevronRight className="w-3 h-3 ml-1" />
                   </Button>
                 </>
               ) : (
@@ -413,7 +409,7 @@ function RecommendationCard({
                   ))}
                   <button
                     onClick={() => setShowDismissOptions(false)}
-                    className="text-xs text-blue-600 hover:text-blue-800 text-left"
+                    className="text-xs text-info-600 hover:text-info-800 text-left"
                   >
                     Cancelar
                   </button>
@@ -440,9 +436,9 @@ function WhatsNewCard({ item, isRead, onMarkAsRead }: WhatsNewCardProps) {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'feature':
-        return <Sparkles className="w-4 h-4 text-green-600" />
+        return <Sparkles className="w-4 h-4 text-success-600" />
       case 'improvement':
-        return <TrendingUp className="w-4 h-4 text-blue-600" />
+        return <TrendingUp className="w-4 h-4 text-info-600" />
       case 'fix':
         return <Zap className="w-4 h-4 text-orange-600" />
       case 'announcement':
@@ -455,9 +451,9 @@ function WhatsNewCard({ item, isRead, onMarkAsRead }: WhatsNewCardProps) {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'feature':
-        return 'bg-green-100 text-green-800 border-green-200'
+        return 'bg-success-100 text-success-800 border-success-200'
       case 'improvement':
-        return 'bg-blue-100 text-blue-800 border-blue-200'
+        return 'bg-info-100 text-info-800 border-info-200'
       case 'fix':
         return 'bg-orange-100 text-orange-800 border-orange-200'
       case 'announcement':
@@ -470,7 +466,7 @@ function WhatsNewCard({ item, isRead, onMarkAsRead }: WhatsNewCardProps) {
   return (
     <Card 
       className={`p-3 cursor-pointer hover:shadow-md transition-shadow ${
-        !isRead ? 'border-blue-200 bg-blue-50/50' : ''
+        !isRead ? 'border-info-200 bg-info-50/50' : ''
       }`}
       onClick={onMarkAsRead}
     >
@@ -491,7 +487,7 @@ function WhatsNewCard({ item, isRead, onMarkAsRead }: WhatsNewCardProps) {
               {item.type}
             </Badge>
             {!isRead && (
-              <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
+              <div className="w-2 h-2 bg-info-600 rounded-full flex-shrink-0" />
             )}
           </div>
           
@@ -500,7 +496,7 @@ function WhatsNewCard({ item, isRead, onMarkAsRead }: WhatsNewCardProps) {
           </p>
           
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 text-xs text-gray-500">
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Clock className="w-3 h-3" />
               <span>{new Date(item.publishDate).toLocaleDateString()}</span>
             </div>

@@ -109,7 +109,7 @@ export const Large: Story = {
 export const Icon: Story = {
   args: {
     size: 'icon',
-    children: <Plus className="h-4 w-4" />,
+    children: <Plus className="h-4 w-4" /> <span>,
   },
 }
 
@@ -124,8 +124,7 @@ export const Disabled: Story = {
 export const Loading: Story = {
   args: {
     disabled: true,
-    children: (
-      <>
+    children: (</span><>
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         Loading...
       </>
@@ -194,14 +193,14 @@ export const GradientWithIcon: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4 p-4">
-      <Button variant="default">Default</Button>
-      <Button variant="premium">Premium</Button>
-      <Button variant="gradient">Gradient</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
+      <Button variant="default"> <span>Default</span></Button>
+      <Button variant="premium"> <span>Premium</span></Button>
+      <Button variant="gradient"> <span>Gradient</span></Button>
+      <Button variant="destructive"> <span>Destructive</span></Button>
+      <Button variant="outline"> <span>Outline</span></Button>
+      <Button variant="secondary"> <span>Secondary</span></Button>
+      <Button variant="ghost"> <span>Ghost</span></Button>
+      <Button variant="link"> <span>Link</span></Button>
     </div>
   ),
   parameters: {
@@ -216,9 +215,9 @@ export const AllVariants: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div className="flex items-center gap-4 p-4">
-      <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
-      <Button size="lg">Large</Button>
+      <Button size="sm"> <span>Small</span></Button>
+      <Button size="default"> <span>Default</span></Button>
+      <Button size="lg"> <span>Large</span></Button>
       <Button size="icon">
         <Plus className="h-4 w-4" />
       </Button>

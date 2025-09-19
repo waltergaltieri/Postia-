@@ -373,9 +373,7 @@ const QuickAlert: React.FC<QuickAlertProps> = ({
             className={cn(
               type === "warning" && "bg-warning-600 hover:bg-warning-700 text-white"
             )}
-          >
-            {loading ? "Loading..." : actionText}
-          </AlertDialogAction>
+          > <span>{loading ? "Loading..." : actionText}</span></AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

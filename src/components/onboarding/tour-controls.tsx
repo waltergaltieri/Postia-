@@ -330,9 +330,7 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
                 onClick={handlePlayPause}
                 aria-label={isPlaying ? 'Pausar tour' : 'Reproducir tour'}
                 title={isPlaying ? 'Pausar tour (Espacio)' : 'Reproducir tour (Espacio)'}
-              >
-                {isPlaying ? (
-                  <Pause className={cn(
+              > <span>{isPlaying ? (</span><Pause className={cn(
                     variant === 'minimal' ? 'h-3 w-3' : 'h-4 w-4'
                   )} />
                 ) : (
@@ -421,9 +419,7 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
                 className="flex items-center gap-1.5"
                 aria-label="Siguiente paso"
                 title="Siguiente paso (Flecha derecha)"
-              >
-                {variant !== 'minimal' && 'Siguiente'}
-                <ChevronRight className={cn(
+              > <span>{variant !== 'minimal' && 'Siguiente'}</span><ChevronRight className={cn(
                   variant === 'minimal' ? 'h-3 w-3' : 'h-4 w-4'
                 )} />
               </Button>
@@ -437,9 +433,7 @@ export const TourControls = React.forwardRef<HTMLDivElement, TourControlsProps>(
                 onClick={handleClose}
                 aria-label="Finalizar tour"
                 title="Finalizar tour"
-              >
-                Finalizar
-              </Button>
+              > <span>Finalizar</span></Button>
             )}
 
             {/* Skip button */}

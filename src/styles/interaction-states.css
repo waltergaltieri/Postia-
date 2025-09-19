@@ -1,0 +1,929 @@
+/* ===== INTERACTION STATES SYSTEM ===== */
+/* Consistent hover, focus, active, and disabled states across the application */
+
+/* ===== CSS CUSTOM PROPERTIES FOR INTERACTION STATES ===== */
+:root {
+  /* Hover state properties */
+  --hover-scale-subtle: 1.01;
+  --hover-scale-normal: 1.02;
+  --hover-scale-prominent: 1.05;
+  --hover-translate-y: -1px;
+  --hover-translate-x: 2px;
+  
+  /* Transition properties */
+  --transition-hover: all 0.2s ease;
+  --transition-focus: all 0.15s ease;
+  --transition-active: all 0.1s ease;
+  
+  /* Shadow properties for hover states */
+  --hover-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --hover-shadow-normal: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --hover-shadow-prominent: 0 8px 25px rgba(0, 0, 0, 0.15);
+  
+  /* Glow effects */
+  --hover-glow-primary: 0 0 20px hsl(var(--primary) / 0.3);
+  --hover-glow-success: 0 0 20px hsl(var(--success-500) / 0.3);
+  --hover-glow-warning: 0 0 20px hsl(var(--warning-500) / 0.3);
+  --hover-glow-error: 0 0 20px hsl(var(--destructive) / 0.3);
+  
+  /* Active state properties */
+  --active-scale: 0.98;
+  --active-translate-y: 0px;
+  
+  /* Disabled state properties */
+  --disabled-opacity: 0.5;
+  --disabled-cursor: not-allowed;
+}
+
+/* ===== BASE INTERACTIVE ELEMENT STYLES ===== */
+
+/* Universal interactive element base */
+.interactive-element {
+  transition: var(--transition-hover);
+  cursor: pointer;
+  position: relative;
+  transform-origin: center;
+  will-change: transform, box-shadow, background-color;
+}
+
+.interactive-element:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  transition: var(--transition-focus);
+}
+
+.interactive-element:disabled,
+.interactive-element[aria-disabled="true"] {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  pointer-events: none;
+}
+
+/* ===== HOVER STATE VARIANTS ===== */
+
+/* Subtle hover - for secondary elements */
+.hover-subtle {
+  transition: var(--transition-hover);
+}
+
+.hover-subtle:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-subtle));
+  box-shadow: var(--hover-shadow-subtle);
+}
+
+.hover-subtle:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--active-scale));
+  transition: var(--transition-active);
+}
+
+/* Normal hover - for primary interactive elements */
+.hover-normal {
+  transition: var(--transition-hover);
+}
+
+.hover-normal:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-normal)) translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-shadow-normal);
+}
+
+.hover-normal:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--active-scale)) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Prominent hover - for important call-to-action elements */
+.hover-prominent {
+  transition: var(--transition-hover);
+}
+
+.hover-prominent:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-prominent)) translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-shadow-prominent);
+}
+
+.hover-prominent:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--active-scale)) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Lift hover - vertical movement only */
+.hover-lift {
+  transition: var(--transition-hover);
+}
+
+.hover-lift:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-shadow-normal);
+}
+
+.hover-lift:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Slide hover - horizontal movement for navigation */
+.hover-slide {
+  transition: var(--transition-hover);
+}
+
+.hover-slide:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateX(var(--hover-translate-x));
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.hover-slide:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateX(0);
+  transition: var(--transition-active);
+}
+
+/* Glow hover - with colored glow effects */
+.hover-glow-primary {
+  transition: var(--transition-hover);
+}
+
+.hover-glow-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(--hover-glow-primary), var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-normal));
+}
+
+.hover-glow-success {
+  transition: var(--transition-hover);
+}
+
+.hover-glow-success:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(--hover-glow-success), var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-normal));
+}
+
+.hover-glow-warning {
+  transition: var(--transition-hover);
+}
+
+.hover-glow-warning:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(--hover-glow-warning), var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-normal));
+}
+
+.hover-glow-error {
+  transition: var(--transition-hover);
+}
+
+.hover-glow-error:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(--hover-glow-error), var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-normal));
+}
+
+/* ===== BUTTON SPECIFIC HOVER STATES ===== */
+
+/* Enhanced button hover states */
+.btn-hover-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-hover);
+}
+
+.btn-hover-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn-hover-enhanced:hover:not(:disabled):not([aria-disabled="true"])::before {
+  transform: translateX(100%);
+}
+
+.btn-hover-enhanced:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-normal)) translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-shadow-normal);
+}
+
+.btn-hover-enhanced:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--active-scale)) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Primary button hover */
+.btn-primary-hover {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-600)) 100%);
+  transition: var(--transition-hover);
+}
+
+.btn-primary-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: linear-gradient(135deg, hsl(var(--primary-600)) 0%, hsl(var(--primary-700)) 100%);
+  box-shadow: var(--hover-glow-primary), var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-normal)) translateY(var(--hover-translate-y));
+}
+
+.btn-primary-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background: linear-gradient(135deg, hsl(var(--primary-700)) 0%, hsl(var(--primary-800)) 100%);
+  transform: scale(var(--active-scale)) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Secondary button hover */
+.btn-secondary-hover {
+  background-color: hsl(var(--secondary));
+  border: 1px solid hsl(var(--border));
+  transition: var(--transition-hover);
+}
+
+.btn-secondary-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-color: hsl(var(--primary-300));
+  box-shadow: var(--hover-shadow-normal);
+  transform: scale(var(--hover-scale-subtle)) translateY(var(--hover-translate-y));
+}
+
+.btn-secondary-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent) / 0.8);
+  transform: scale(var(--active-scale)) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Ghost button hover */
+.btn-ghost-hover {
+  background-color: transparent;
+  transition: var(--transition-hover);
+}
+
+.btn-ghost-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: scale(var(--hover-scale-subtle));
+}
+
+.btn-ghost-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent) / 0.8);
+  transform: scale(var(--active-scale));
+  transition: var(--transition-active);
+}
+
+/* ===== CARD HOVER STATES ===== */
+
+/* Interactive card hover */
+.card-hover-interactive {
+  transition: var(--transition-hover);
+  cursor: pointer;
+}
+
+.card-hover-interactive:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-subtle)) translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-shadow-normal);
+  border-color: hsl(var(--primary-300));
+}
+
+.card-hover-interactive:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(0.99) translateY(var(--active-translate-y));
+  transition: var(--transition-active);
+}
+
+/* Card with glow hover */
+.card-hover-glow {
+  transition: var(--transition-hover);
+}
+
+.card-hover-glow:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(var(--hover-translate-y));
+  box-shadow: var(--hover-glow-primary), var(--hover-shadow-normal);
+}
+
+/* ===== NAVIGATION HOVER STATES ===== */
+
+/* Navigation item hover */
+.nav-item-hover {
+  transition: var(--transition-hover);
+  border-radius: var(--radius-md);
+}
+
+.nav-item-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: translateX(var(--hover-translate-x));
+}
+
+.nav-item-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent) / 0.8);
+  transform: translateX(0);
+  transition: var(--transition-active);
+}
+
+/* Active navigation item */
+.nav-item-active {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  font-weight: 500;
+  border-left: 3px solid hsl(var(--primary));
+}
+
+.nav-item-active:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--primary) / 0.15);
+  transform: translateX(var(--hover-translate-x));
+}
+
+/* ===== FORM ELEMENT HOVER STATES ===== */
+
+/* Input hover states */
+.input-hover {
+  transition: var(--transition-hover);
+}
+
+.input-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: hsl(var(--primary-300));
+  box-shadow: 0 0 0 1px hsl(var(--primary-300));
+}
+
+.input-hover:focus:not(:disabled):not([aria-disabled="true"]) {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+  outline: none;
+}
+
+/* Select hover states */
+.select-hover {
+  transition: var(--transition-hover);
+}
+
+.select-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: hsl(var(--primary-300));
+  box-shadow: var(--hover-shadow-subtle);
+}
+
+/* Checkbox and radio hover states */
+.checkbox-hover,
+.radio-hover {
+  transition: var(--transition-hover);
+}
+
+.checkbox-hover:hover:not(:disabled):not([aria-disabled="true"]),
+.radio-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+  transform: scale(1.1);
+}
+
+.checkbox-hover:active:not(:disabled):not([aria-disabled="true"]),
+.radio-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(0.95);
+  transition: var(--transition-active);
+}
+
+/* ===== LINK HOVER STATES ===== */
+
+/* Standard link hover */
+.link-hover {
+  transition: var(--transition-hover);
+  text-decoration: none;
+  position: relative;
+}
+
+.link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width var(--transition-hover);
+}
+
+.link-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: hsl(var(--primary));
+}
+
+.link-hover:hover:not(:disabled):not([aria-disabled="true"])::after {
+  width: 100%;
+}
+
+/* Link with background hover */
+.link-bg-hover {
+  transition: var(--transition-hover);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.link-bg-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: scale(var(--hover-scale-subtle));
+}
+
+/* ===== BADGE AND TAG HOVER STATES ===== */
+
+/* Interactive badge hover */
+.badge-hover {
+  transition: var(--transition-hover);
+  cursor: pointer;
+}
+
+.badge-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--hover-scale-subtle));
+  box-shadow: var(--hover-shadow-subtle);
+}
+
+.badge-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: scale(var(--active-scale));
+  transition: var(--transition-active);
+}
+
+/* ===== ICON BUTTON HOVER STATES ===== */
+
+/* Icon button hover */
+.icon-btn-hover {
+  transition: var(--transition-hover);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+.icon-btn-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: scale(var(--hover-scale-subtle));
+}
+
+.icon-btn-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent) / 0.8);
+  transform: scale(var(--active-scale));
+  transition: var(--transition-active);
+}
+
+/* ===== DROPDOWN AND MENU HOVER STATES ===== */
+
+/* Dropdown item hover */
+.dropdown-item-hover {
+  transition: var(--transition-hover);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+}
+
+.dropdown-item-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.dropdown-item-hover:active:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent) / 0.8);
+  transition: var(--transition-active);
+}
+
+/* ===== TAB HOVER STATES ===== */
+
+/* Tab trigger hover */
+.tab-hover {
+  transition: var(--transition-hover);
+  border-radius: var(--radius-md);
+}
+
+.tab-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  transform: scale(var(--hover-scale-subtle));
+}
+
+.tab-hover[data-state="active"] {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-bottom: 2px solid hsl(var(--primary));
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .interactive-element:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-subtle:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-normal:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-prominent:hover:not(:disabled):not([aria-disabled="true"]) {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+  
+  .interactive-element:active:not(:disabled):not([aria-disabled="true"]) {
+    outline: 3px solid currentColor;
+    outline-offset: 1px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-element,
+  .hover-subtle,
+  .hover-normal,
+  .hover-prominent,
+  .hover-lift,
+  .hover-slide,
+  .btn-hover-enhanced,
+  .card-hover-interactive,
+  .nav-item-hover,
+  .input-hover,
+  .link-hover,
+  .badge-hover,
+  .icon-btn-hover,
+  .dropdown-item-hover,
+  .tab-hover {
+    transition: none !important;
+  }
+  
+  .interactive-element:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-subtle:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-normal:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-prominent:hover:not(:disabled):not([aria-disabled="true"]),
+  .hover-lift:hover:not(:disabled):not([aria-disabled="true"]),
+  .card-hover-interactive:hover:not(:disabled):not([aria-disabled="true"]),
+  .badge-hover:hover:not(:disabled):not([aria-disabled="true"]),
+  .icon-btn-hover:hover:not(:disabled):not([aria-disabled="true"]) {
+    transform: none !important;
+  }
+  
+  /* Keep essential focus indicators */
+  .interactive-element:focus-visible {
+    transition: outline 0.1s ease !important;
+  }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover-subtle:hover,
+  .hover-normal:hover,
+  .hover-prominent:hover,
+  .hover-lift:hover,
+  .hover-slide:hover,
+  .btn-hover-enhanced:hover,
+  .card-hover-interactive:hover,
+  .nav-item-hover:hover,
+  .input-hover:hover,
+  .link-hover:hover,
+  .badge-hover:hover,
+  .icon-btn-hover:hover,
+  .dropdown-item-hover:hover,
+  .tab-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Enhanced active states for touch feedback */
+  .interactive-element:active:not(:disabled):not([aria-disabled="true"]),
+  .hover-subtle:active:not(:disabled):not([aria-disabled="true"]),
+  .hover-normal:active:not(:disabled):not([aria-disabled="true"]),
+  .hover-prominent:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* ===== UTILITY CLASSES FOR QUICK APPLICATION ===== */
+
+/* Quick hover state application */
+.apply-hover-subtle { @apply hover-subtle; }
+.apply-hover-normal { @apply hover-normal; }
+.apply-hover-prominent { @apply hover-prominent; }
+.apply-hover-lift { @apply hover-lift; }
+.apply-hover-slide { @apply hover-slide; }
+
+/* Quick button hover application */
+.apply-btn-primary-hover { @apply btn-primary-hover; }
+.apply-btn-secondary-hover { @apply btn-secondary-hover; }
+.apply-btn-ghost-hover { @apply btn-ghost-hover; }
+
+/* Quick navigation hover application */
+.apply-nav-hover { @apply nav-item-hover; }
+
+/* Quick form element hover application */
+.apply-input-hover { @apply input-hover; }
+.apply-select-hover { @apply select-hover; }
+
+/* Quick link hover application */
+.apply-link-hover { @apply link-hover; }
+.apply-link-bg-hover { @apply link-bg-hover; }
+
+/* ===== ENHANCED DISABLED STATES ===== */
+
+/* Clear disabled state indication */
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled,
+.disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  pointer-events: none;
+}
+
+/* Enhanced disabled state with visual indicators */
+.disabled-enhanced {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  pointer-events: none;
+  position: relative;
+  filter: grayscale(0.5);
+}
+
+.disabled-enhanced::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: hsl(var(--muted) / 0.3);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Disabled with pattern for better accessibility */
+.disabled-pattern {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+}
+
+/* Disabled state for different component types */
+.btn-disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  pointer-events: none;
+  filter: grayscale(0.3);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.input-disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  border-color: hsl(var(--border));
+}
+
+.card-disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  pointer-events: none;
+  filter: grayscale(0.2);
+}
+
+/* ===== SELECTION STATES ===== */
+
+/* Base selection state */
+.selected {
+  background-color: hsl(var(--primary) / 0.1);
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+  position: relative;
+}
+
+.selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: hsl(var(--primary));
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Selection state with checkmark */
+.selected-with-check {
+  background-color: hsl(var(--primary) / 0.1);
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+  position: relative;
+}
+
+.selected-with-check::after {
+  content: '✓';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: hsl(var(--primary));
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+/* Multiple selection state */
+.multi-selected {
+  background-color: hsl(var(--primary) / 0.15);
+  border: 2px solid hsl(var(--primary));
+  color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+}
+
+/* Selection state for cards */
+.card-selected {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+  background-color: hsl(var(--primary) / 0.05);
+}
+
+.card-selected::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: hsl(var(--primary));
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-selected::after {
+  content: '✓';
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Selection state for navigation items */
+.nav-selected {
+  background-color: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  font-weight: 600;
+  border-left: 3px solid hsl(var(--primary));
+}
+
+/* Selection state for tabs */
+.tab-selected {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-bottom: 2px solid hsl(var(--primary));
+  font-weight: 500;
+}
+
+/* Selection state for badges */
+.badge-selected {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 2px solid hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+}
+
+/* ===== LOADING STATES ===== */
+
+/* Base loading state */
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--muted) / 0.3),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+  border-radius: inherit;
+}
+
+@keyframes loading-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Loading state for buttons */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: var(--radius-full);
+  animation: loading-spin 1s linear infinite;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes loading-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Loading state for cards */
+.card-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.card-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--muted) / 0.2),
+    transparent
+  );
+  animation: loading-shimmer 2s infinite;
+  border-radius: inherit;
+}
+
+/* Loading state for inputs */
+.input-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.input-loading::after {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid hsl(var(--muted-foreground));
+  border-top: 2px solid hsl(var(--primary));
+  border-radius: var(--radius-full);
+  animation: loading-spin 1s linear infinite;
+}
+
+/* ===== FOCUS STATES FOR SELECTION ===== */
+
+/* Enhanced focus for selected elements */
+.selected:focus-visible,
+.card-selected:focus-visible,
+.nav-selected:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  box-shadow: 
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsl(var(--primary)),
+    0 0 0 6px hsl(var(--primary) / 0.2);
+}
+
+/* Focus state for multi-selected elements */
+.multi-selected:focus-visible {
+  outline: 3px solid hsl(var(--primary));
+  outline-offset: 3px;
+  box-shadow: 
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 5px hsl(var(--primary)),
+    0 0 0 8px hsl(var(--primary) / 0.3);
+}
+
+/* ===== UTILITY CLASSES FOR STATES ===== */
+
+/* Quick state application */
+.apply-disabled { @apply disabled-enhanced; }
+.apply-selected { @apply selected; }
+.apply-loading { @apply loading; }
+
+/* State combinations */
+.interactive-disabled {
+  @apply disabled-enhanced;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.interactive-selected {
+  @apply selected;
+}
+
+.interactive-loading {
+  @apply loading;
+  transform: none !important;
+}

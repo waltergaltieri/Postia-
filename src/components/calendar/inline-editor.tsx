@@ -68,12 +68,11 @@ export function InlineEditor({
           variant="ghost"
           size="sm"
           className="absolute -right-1 -top-1 opacity-0 group-hover:opacity-100 transition-opacity h-6 w-6 p-0"
-          onClick={(e) => {
+          onClick={(e) => <span>{
             e.stopPropagation()
             // This will be handled by parent component
           }}
-        >
-          <Edit3 className="h-3 w-3" />
+        ></span><Edit3 className="h-3 w-3" />
         </Button>
       </div>
     )
